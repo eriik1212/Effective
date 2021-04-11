@@ -44,6 +44,8 @@ public:
 
 	// A set of animations
 	Animation idleAnim;
+	Animation leftAnim;
+	Animation rightAnim;
 	Animation upAnim;
 	Animation downAnim;
 };

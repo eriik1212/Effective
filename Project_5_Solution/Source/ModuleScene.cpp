@@ -23,14 +23,14 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/background.png");
+	bgTexture = App->textures->Load("Assets/Tilesets/TileMapSetStage1.png");
 
 	return ret;
 }
 
 update_status ModuleScene::Update()
 {
-	App->render->camera.x += 3;
+	App->render->camera.x;
 
 	return update_status::UPDATE_CONTINUE;
 }

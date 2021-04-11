@@ -11,23 +11,73 @@
 
 ModulePlayer::ModulePlayer()
 {
-	position.x = 150;
-	position.y = 120;
+	position.x = 50;
+	position.y = 200;
 
-	// idle animation - just one sprite
-	idleAnim.PushBack({ 66, 1, 32, 14 });
+	// idle animation
+	idleAnim.PushBack({ 21, 24, 53, 60 });
+	idleAnim.PushBack({ 115, 24, 53, 60 });
+	idleAnim.PushBack({ 303, 24, 53, 60 });
+	idleAnim.PushBack({ 115, 24, 53, 60 });
+	idleAnim.PushBack({ 21, 24, 53, 60 });
+	idleAnim.PushBack({ 491, 24, 53, 60 });
+	idleAnim.PushBack({ 21, 24, 53, 60 });
+	idleAnim.PushBack({ 115, 24, 53, 60 });
+	idleAnim.PushBack({ 209, 24, 53, 60 });
+	idleAnim.PushBack({ 115, 24, 53, 60 });
+	idleAnim.PushBack({ 303, 24, 53, 60 });
+	idleAnim.PushBack({ 115, 24, 53, 60 });
+	idleAnim.PushBack({ 21, 24, 53, 60 });
+	idleAnim.loop = false;
+	idleAnim.speed = 0.02f;
+
+	// move right
+	rightAnim.PushBack({ 30, 964, 47, 62 });
+	rightAnim.PushBack({ 124, 964, 47, 62 });
+	rightAnim.PushBack({ 223, 964, 47, 62 });
+	rightAnim.PushBack({ 317, 964, 47, 62 });
+	rightAnim.PushBack({ 412, 964, 47, 62 });
+	rightAnim.PushBack({ 503, 964, 47, 62 });
+	rightAnim.PushBack({ 598, 964, 47, 62 });
+	rightAnim.PushBack({ 691, 964, 47, 62 });
+	rightAnim.loop = true;
+	rightAnim.speed = 0.25f;
+
+	// move left
+	leftAnim.PushBack({ 30, 964, 47, 62 });
+	leftAnim.PushBack({ 124, 964, 47, 62 });
+	leftAnim.PushBack({ 223, 964, 47, 62 });
+	leftAnim.PushBack({ 317, 964, 47, 62 });
+	leftAnim.PushBack({ 412, 964, 47, 62 });
+	leftAnim.PushBack({ 503, 964, 47, 62 });
+	leftAnim.PushBack({ 598, 964, 47, 62 });
+	leftAnim.PushBack({ 691, 964, 47, 62 });
+	leftAnim.loop = true;
+	leftAnim.speed = 0.25f;
 
 	// move upwards
-	upAnim.PushBack({ 100, 1, 32, 14 });
-	upAnim.PushBack({ 132, 0, 32, 14 });
-	upAnim.loop = false;
-	upAnim.speed = 0.1f;
+	upAnim.PushBack({ 32, 1051, 47, 62 });
+	upAnim.PushBack({ 128, 1051, 47, 62 });
+	upAnim.PushBack({ 224, 1051, 47, 62 });
+	upAnim.PushBack({ 318, 1051, 47, 62 });
+	upAnim.PushBack({ 408, 1051, 47, 62 });
+	upAnim.PushBack({ 500, 1051, 47, 62 });
+	upAnim.PushBack({ 590, 1051, 48, 62 });
+	upAnim.PushBack({ 683, 1051, 51, 62 });
+	upAnim.loop = true;
+	upAnim.speed = 0.25f;
 
 	// Move down
-	downAnim.PushBack({ 33, 1, 32, 14 });
-	downAnim.PushBack({ 0, 1, 32, 14 });
-	downAnim.loop = false;
-	downAnim.speed = 0.1f;
+	downAnim.PushBack({ 30, 964, 47, 62 });
+	downAnim.PushBack({ 124, 964, 47, 62 });
+	downAnim.PushBack({ 223, 964, 47, 62 });
+	downAnim.PushBack({ 317, 964, 47, 62 });
+	downAnim.PushBack({ 412, 964, 47, 62 });
+	downAnim.PushBack({ 503, 964, 47, 62 });
+	downAnim.PushBack({ 598, 964, 47, 62 });
+	downAnim.PushBack({ 691, 964, 47, 62 });
+	downAnim.loop = true;
+	downAnim.speed = 0.25f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -41,7 +91,7 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
-	texture = App->textures->Load("Assets/ship.png"); // arcade version
+	texture = App->textures->Load("Assets/Characters/Leonardo.png"); // arcade version
 	currentAnimation = &idleAnim;
 
 	return ret;
@@ -49,17 +99,26 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
-	// Moving the player with the camera scroll
-	App->player->position.x += 1;
+	// Moving the player
 
 	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
+		if (currentAnimation != &leftAnim)
+		{
+			leftAnim.Reset();
+			currentAnimation = &leftAnim;
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
+		if (currentAnimation != &rightAnim)
+		{
+			rightAnim.Reset();
+			currentAnimation = &rightAnim;
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
@@ -82,6 +141,17 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT &&
+		App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	{
+		if (currentAnimation != &upAnim)
+		{
+			upAnim.Reset();
+			currentAnimation = &upAnim;
+		}
+
+	}
+
 	// TODO 3: Shoot lasers when the player hits SPACE
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
@@ -98,10 +168,20 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->explosion, position.x + 25, position.y, 90);
 	}
 
-	// If no up/down movement detected, set the current animation back to idle
+	// If no up/down/left/right movement detected, set the current animation back to idle
+
 	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE)
-		currentAnimation = &idleAnim;
+		&& App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
+	{
+		if (currentAnimation != &idleAnim)
+		{
+			idleAnim.Reset();
+			currentAnimation = &idleAnim;
+		}
+
+	}
 
 	currentAnimation->Update();
 
