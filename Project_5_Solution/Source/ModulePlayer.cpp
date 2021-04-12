@@ -141,7 +141,6 @@ update_status ModulePlayer::Update()
 				currentAnimation = &hitAirAnim2;
 			}
 		}
-
 	}
 
 	// Moving the player
@@ -149,7 +148,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
-		if (position.x < App->render->camera.x + 20) position.x = App->render->camera.x + 20;
+		if (position.x < 50) position.x = 50;
 		if (currentAnimation != &leftAnim)
 		{
 			leftAnim.Reset();
@@ -160,6 +159,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
+		if (position.x > 1300) position.x = 1300;
 		if (currentAnimation != &rightAnim)
 		{
 			rightAnim.Reset();
@@ -170,7 +170,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
-		if (position.y < 0) position.y = 0;
+		if (position.y > 224) position.y = 224;
 		if (currentAnimation != &downAnim)
 		{
 			downAnim.Reset();
@@ -181,6 +181,7 @@ update_status ModulePlayer::Update()
 	if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
+		if (position.y < 142) position.y = 142;
 		if (currentAnimation != &upAnim)
 		{
 			upAnim.Reset();
@@ -207,7 +208,7 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->explosion, position.x + 25, position.y, 90);
 	}
 
-	// If no up/down/left/right movement detected, set the current animation back to idle
+	// If no movement detected, set the current animation back to idle
 
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE
@@ -215,7 +216,7 @@ update_status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_IDLE)
 	{
-		if (currentAnimation != &idleAnim)
+		if (currentAnimation != &idleAnim && currentAnimation != &hitAirAnim1 && currentAnimation != &hitAirAnim2)
 		{
 			idleAnim.Reset();
 			currentAnimation = &idleAnim;
