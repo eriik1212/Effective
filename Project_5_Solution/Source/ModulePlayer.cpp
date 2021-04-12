@@ -11,7 +11,9 @@
 
 ModulePlayer::ModulePlayer()
 {
-	position.x = 50;
+	srand(time(NULL));
+
+	position.x = 100;
 	position.y = 200;
 
 	// idle animation
@@ -78,6 +80,26 @@ ModulePlayer::ModulePlayer()
 	downAnim.PushBack({ 691, 964, 47, 62 });
 	downAnim.loop = true;
 	downAnim.speed = 0.25f;
+
+	// Hit Air Animation 1
+	hitAirAnim1.PushBack({ 19, 179, 62, 84 });
+	hitAirAnim1.PushBack({ 110, 179, 62, 84 });
+	hitAirAnim1.PushBack({ 215, 179, 62, 84 });
+	hitAirAnim1.PushBack({ 299, 179, 62, 84 });
+	hitAirAnim1.PushBack({ 394, 179, 62, 84 });
+	hitAirAnim1.PushBack({ 493, 179, 62, 84 });
+	hitAirAnim1.loop = false;
+	hitAirAnim1.speed = 0.4f;
+
+	// Hit Air Animation 2
+	hitAirAnim2.PushBack({ 18, 356, 62, 84 });
+	hitAirAnim2.PushBack({ 114, 356, 62, 84 });
+	hitAirAnim2.PushBack({ 192, 356, 87, 84 });
+	hitAirAnim2.PushBack({ 288, 356, 87, 84 });
+	hitAirAnim2.PushBack({ 402, 356, 62, 84 });
+	hitAirAnim2.PushBack({ 479, 356, 87, 84 });
+	hitAirAnim2.loop = false;
+	hitAirAnim2.speed = 0.4f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -99,11 +121,35 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
+	// Hits
+
+	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN)
+	{
+		int x = (rand() % 2);
+		if (x == 0) {
+			if (currentAnimation != &hitAirAnim1)
+			{
+			hitAirAnim1.Reset();
+			currentAnimation = &hitAirAnim1;
+			}
+		}
+
+		if (x == 1) {
+			if (currentAnimation != &hitAirAnim2)
+			{
+				hitAirAnim2.Reset();
+				currentAnimation = &hitAirAnim2;
+			}
+		}
+
+	}
+
 	// Moving the player
 
-	if (App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x -= speed;
+		if (position.x < App->render->camera.x + 20) position.x = App->render->camera.x + 20;
 		if (currentAnimation != &leftAnim)
 		{
 			leftAnim.Reset();
@@ -111,7 +157,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
 	{
 		position.x += speed;
 		if (currentAnimation != &rightAnim)
@@ -121,9 +167,10 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y += speed;
+		if (position.y < 0) position.y = 0;
 		if (currentAnimation != &downAnim)
 		{
 			downAnim.Reset();
@@ -131,7 +178,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT)
+	if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
 	{
 		position.y -= speed;
 		if (currentAnimation != &upAnim)
@@ -141,22 +188,14 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_REPEAT &&
-		App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_REPEAT)
-	{
-		if (currentAnimation != &upAnim)
-		{
-			upAnim.Reset();
-			currentAnimation = &upAnim;
-		}
-
-	}
-
 	// TODO 3: Shoot lasers when the player hits SPACE
 	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
-		App->particles->AddParticle(App->particles->laser, position.x + 10, position.y - 25, 0);
-		App->particles->AddParticle(App->particles->laser, position.x + 10, position.y - 5, 0);
+		if (currentAnimation != &hitAirAnim1)
+		{
+			hitAirAnim1.Reset();
+			currentAnimation = &hitAirAnim1;
+		}
 	}
 
 	// Spawn explosion particles when pressing B
@@ -170,10 +209,11 @@ update_status ModulePlayer::Update()
 
 	// If no up/down/left/right movement detected, set the current animation back to idle
 
-	if (App->input->keys[SDL_SCANCODE_S] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_W] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_D] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_A] == KEY_STATE::KEY_IDLE)
+	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_IDLE)
 	{
 		if (currentAnimation != &idleAnim)
 		{

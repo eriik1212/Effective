@@ -48,6 +48,8 @@ public:
 	Animation rightAnim;
 	Animation upAnim;
 	Animation downAnim;
+	Animation hitAirAnim1;
+	Animation hitAirAnim2;
 };
 
 #endif //!__MODULE_PLAYER_H__
