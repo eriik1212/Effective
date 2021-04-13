@@ -43,13 +43,18 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnim;
+	Animation idleAnimR;
+	Animation idleAnimL;
 	Animation leftAnim;
 	Animation rightAnim;
-	Animation upAnim;
-	Animation downAnim;
-	Animation hitAirAnim1;
-	Animation hitAirAnim2;
+	Animation upAnimR;
+	Animation upAnimL;
+	Animation downAnimR;
+	Animation downAnimL;
+	Animation hitAirAnim1R;
+	Animation hitAirAnim2R;
+	Animation hitAirAnim1L;
+	Animation hitAirAnim2L;
 };
 
 #endif //!__MODULE_PLAYER_H__
