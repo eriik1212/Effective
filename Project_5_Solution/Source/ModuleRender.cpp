@@ -55,14 +55,12 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	//Handle negative vertical movement
-
-	if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_REPEAT)
-		camera.x -= cameraSpeed;
-	if (camera.x < 4) camera.x = 4;
-
-	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_REPEAT)
+	//Handle Camera Limits
+		// Camera Movement
+	if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
+	{
 		camera.x += cameraSpeed;
+	}
 	if (camera.x > 2965) camera.x = 2965;
 
 

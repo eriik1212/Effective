@@ -194,6 +194,7 @@ update_status ModulePlayer::Update()
 	if (position.y < 142) position.y = 142;
 	if (position.y > 224) position.y = 224;
 
+
 	// Hits
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN)
 	{

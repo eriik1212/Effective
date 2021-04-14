@@ -30,7 +30,6 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
-	App->render->camera.x;
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -39,7 +38,7 @@ update_status ModuleScene::Update()
 update_status ModuleScene::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	App->render->Blit(bgTexture, 0, 0, NULL);
+	App->render->Blit(bgTexture, -1, -1, NULL);
 
 	return update_status::UPDATE_CONTINUE;
 }
