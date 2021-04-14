@@ -55,6 +55,8 @@ public:
 	Animation hitAirAnim2R;
 	Animation hitAirAnim1L;
 	Animation hitAirAnim2L;
+	Animation hitCollideAnim1R;
+	Animation hitCollideAnim1L;
 };
 
 #endif //!__MODULE_PLAYER_H__
