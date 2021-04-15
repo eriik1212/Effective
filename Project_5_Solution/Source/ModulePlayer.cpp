@@ -184,11 +184,12 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
+
 	// Position Players Limits
 	if (position.x < App->render->playerLimitL) position.x = App->render->playerLimitL;
 	if (position.x > 1280) position.x = 1280;
 	if (position.y < 142) position.y = 142;
-	if (position.y > 224) position.y = 224;
+	if (position.y > 220) position.y = 220;
 
 	// Camera Movement
 	if (position.x > (App->render->playerLimitR))
@@ -236,11 +237,12 @@ update_status ModulePlayer::Update()
 		{
 			hitCollideAnim1R.Reset();
 			currentAnimation = &hitCollideAnim1R;
+
 		}
 	}
 
 	// Moving the player
-
+	
 	// ALL MOVEMENT KEYS PRESSED
 	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
@@ -255,28 +257,53 @@ update_status ModulePlayer::Update()
 		else currentAnimation = &idleAnimR;
 	}
 
+	// THREE KEYS PRESSED
 	else if ( App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
-		if (currentAnimation != &idleAnimR)
+		position.y -= speed;
+		if (currentAnimation != &upAnimR)
 		{
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
+			upAnimR.Reset();
+			currentAnimation = &upAnimR;
 		}
-		else currentAnimation = &idleAnimR;
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
 	{
-		if (currentAnimation != &idleAnimR)
+		position.y += speed;
+		if (currentAnimation != &downAnimR)
 		{
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
+			downAnimR.Reset();
+			currentAnimation = &downAnimR;
 		}
-		else currentAnimation = &idleAnimR;
+	}
+
+	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
+		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
+		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
+	{
+		position.x -= speed;
+		if (currentAnimation != &leftAnim)
+		{
+			leftAnim.Reset();
+			currentAnimation = &leftAnim;
+		}
+	}
+
+	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
+		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
+		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT)
+	{
+		position.x += speed;
+		if (currentAnimation != &rightAnim)
+		{
+			rightAnim.Reset();
+			currentAnimation = &rightAnim;
+		}
 	}
 
 	// UP & RIGHT MOVEMENT
@@ -391,6 +418,21 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_IDLE)
+	{
+		if (currentAnimation != &idleAnimR
+			&& currentAnimation != &hitCollideAnim1R)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+	}
+
 
 	// Spawn explosion particles when pressing B
 	/*if (App->input->keys[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
@@ -402,24 +444,6 @@ update_status ModulePlayer::Update()
 	}*/
 
 	// If no movement detected, set the current animation back to idle
-
-	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_IDLE)
-	{
-		if (currentAnimation != &idleAnimR
-			&& currentAnimation != &hitAirAnim1R
-			&& currentAnimation != &hitAirAnim2R
-			&& currentAnimation != &hitCollideAnim1R)
-		{
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
-		}
-	}
-
 
 	currentAnimation->Update();
 
