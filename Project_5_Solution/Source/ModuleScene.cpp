@@ -23,7 +23,7 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
-	bgTexture = App->textures->Load("Assets/Tilesets/TileMapSetStage1INV.png");
+	bgTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
 
 	return ret;
 }

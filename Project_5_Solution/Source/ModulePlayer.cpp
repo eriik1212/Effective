@@ -185,15 +185,21 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	// Position Players Limits
-	if (position.x < 25) position.x = 25;
-	if (position.x > 1250 && position.y < 165) position.x = 1250;
-	if (position.x > 1255 && position.y < 166) position.x = 1255;
-	if (position.x > 1260 && position.y < 167) position.x = 1260;
-	if (position.x > 1265 && position.y < 168) position.x = 1265;
+	if (position.x < App->render->playerLimitL) position.x = App->render->playerLimitL;
 	if (position.x > 1280) position.x = 1280;
 	if (position.y < 142) position.y = 142;
 	if (position.y > 224) position.y = 224;
 
+	// Camera Movement
+	if (position.x > (App->render->playerLimitR))
+	{
+		if (App->render->camera.x < CAMERA_LIMIT)
+		{
+			App->render->camera.x += App->render->cameraSpeed;
+			App->render->playerLimitR += speed;
+			App->render->playerLimitL += speed;
+		}
+	}
 
 	// Hits
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN)
@@ -203,15 +209,16 @@ update_status ModulePlayer::Update()
 		switch (x)
 		{
 		case 0:
-			if (currentAnimation != &hitAirAnim1R)
+			if (currentAnimation != &hitAirAnim1R
+				&& currentAnimation != &hitAirAnim2R)
 			{
 				hitAirAnim1R.Reset();
 				currentAnimation = &hitAirAnim1R;
-
 			}
 			break;
 		case 1:
-			if (currentAnimation != &hitAirAnim2R)
+			if (currentAnimation != &hitAirAnim2R
+				&& currentAnimation != &hitAirAnim1R)
 			{
 				hitAirAnim2R.Reset();
 				currentAnimation = &hitAirAnim2R;
@@ -403,7 +410,10 @@ update_status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_IDLE)
 	{
-		if (currentAnimation != &idleAnimR)
+		if (currentAnimation != &idleAnimR
+			&& currentAnimation != &hitAirAnim1R
+			&& currentAnimation != &hitAirAnim2R
+			&& currentAnimation != &hitCollideAnim1R)
 		{
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
