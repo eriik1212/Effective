@@ -54,8 +54,12 @@ public:
 	// Sprites will be rendered to the screen depending on the camera position
 	SDL_Rect camera = { 0, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 
+	// Limit of the player inside the camera
+	int playerLimitR = camera.w - 135;
+	int playerLimitL = camera.x + 10;
+
 	// The speed at which the camera will be moving
-	int cameraSpeed = 3;
+	int cameraSpeed = 6;
 
 };
 

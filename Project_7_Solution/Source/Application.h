@@ -2,6 +2,7 @@
 #define __APPLICATION_H__
 
 #include "Globals.h"
+#include <time.h>
 
 #define NUM_MODULES 10
 
