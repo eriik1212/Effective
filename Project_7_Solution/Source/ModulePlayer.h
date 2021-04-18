@@ -81,10 +81,23 @@ public:
 		hitUpAnimL,
 		hitDownAnimR,
 		hitDownAnimL,
-		hitAirHorizontalAnimR,
-		hitAirHorizontalAnimL,
-		hitAirDownAnimR,
-		hitAirDownAnimL;
+		hitJumpHorizontalAnimR,
+		hitJumpHorizontalAnimL,
+		hitJumpSwordAnimR,
+		hitJumpSwordAnimL,
+		hitJumpDownAnimR,
+		hitJumpDownAnimL,
+		
+		hittedLowAnim1R,
+		hittedLowAnim1L,
+		hittedLowAnim2R,
+		hittedLowAnim2L,
+		
+		hittedMediumAnimR,
+		hittedMediumAnimL,
+		
+		hittedHighAnimR,
+		hittedHighAnimL;
 
 
 
