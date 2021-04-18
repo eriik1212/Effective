@@ -77,7 +77,6 @@ public:
 
 		hitThrowAnimR,
 		hitThrowAnimL,
-		hitTHrowAnimL,
 		hitUpAnimR,
 		hitUpAnimL,
 		hitDownAnimR,

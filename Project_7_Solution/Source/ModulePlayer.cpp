@@ -159,16 +159,29 @@ ModulePlayer::ModulePlayer()
 	jumpAnimL.speed = 0.25f;
 
 	// Hit Air Animation 1
+	// RIGHT
 	hitAirAnim1R.PushBack({ 8, 336, 94, 84 });
 	hitAirAnim1R.PushBack({ 94, 336, 94, 84 });
 	hitAirAnim1R.PushBack({ 180, 336, 102, 84 });
 	hitAirAnim1R.PushBack({ 282, 336, 102, 84 });
-	hitAirAnim1R.PushBack({ 387, 336, 94, 84 });
-	hitAirAnim1R.PushBack({ 485, 336, 94, 84 });
+	hitAirAnim1R.PushBack({ 390, 336, 94, 84 });
+	hitAirAnim1R.PushBack({ 492, 336, 94, 84 });
 	hitAirAnim1R.loop = false;
 	hitAirAnim1R.speed = 0.3f;
 
+	// LEFT
+	hitAirAnim1L.PushBack({ 1692, 2016, 94, 84 });
+	hitAirAnim1L.PushBack({ 1598, 2016, 94, 84 });
+	hitAirAnim1L.PushBack({ 1504, 2016, 94, 84 });
+	hitAirAnim1L.PushBack({ 1398, 2016, 94, 84 });
+	hitAirAnim1L.PushBack({ 1304, 2016, 94, 84 });
+	hitAirAnim1L.PushBack({ 1196, 2016, 116, 84 });
+	hitAirAnim1L.loop = false;
+	hitAirAnim1L.speed = 0.3f;
+
+
 	// Hit Air Animation 2
+	// RIGHT
 	hitAirAnim2R.PushBack({ 0, 168, 94, 84 });
 	hitAirAnim2R.PushBack({ 98, 168, 94, 84 });
 	hitAirAnim2R.PushBack({ 192, 168, 94, 84 });
@@ -178,27 +191,76 @@ ModulePlayer::ModulePlayer()
 	hitAirAnim2R.loop = false;
 	hitAirAnim2R.speed = 0.3f;
 
+	// LEFT
+	hitAirAnim2L.PushBack({ 1692, 1848, 94, 84 });
+	hitAirAnim2L.PushBack({ 1598, 1848, 94, 84 });
+	hitAirAnim2L.PushBack({ 1504, 1848, 94, 84 });
+	hitAirAnim2L.PushBack({ 1410, 1848, 94, 84 });
+	hitAirAnim2L.PushBack({ 1316, 1848, 94, 84 });
+	hitAirAnim2L.PushBack({ 1222, 1848, 94, 84 });
+	hitAirAnim2L.loop = false;
+	hitAirAnim2L.speed = 0.3f;
+
 	//------------------------------------------------------------------------------------- Hit Collide
 	// 1R
 	hitKickAnimR.PushBack({ 4, 84, 94, 84 });
-	hitKickAnimR.PushBack({ 98, 84, 94, 84 });
-	hitKickAnimR.PushBack({ 192, 84, 108, 84 });
+	hitKickAnimR.PushBack({ 94, 84, 94, 84 });
+	hitKickAnimR.PushBack({ 182, 84, 108, 84 });
 	hitKickAnimR.PushBack({ 300, 84, 94, 84 });
 	
 	hitKickAnimR.loop = false;
 	hitKickAnimR.speed = 0.2f;
 
 	// 1L
-	hitKickAnimL.PushBack({ 4, 84, 94, 84 });
-	hitKickAnimL.PushBack({ 98, 84, 94, 84 });
-	hitKickAnimL.PushBack({ 192, 84, 108, 84 });
-	hitKickAnimL.PushBack({ 300, 84, 94, 84 });
+	hitKickAnimL.PushBack({ 1692, 1764, 94, 84 });
+	hitKickAnimL.PushBack({ 1598, 1764, 94, 84 });
+	hitKickAnimL.PushBack({ 1504, 1764, 108, 84 });
+	hitKickAnimL.PushBack({ 1410, 1764, 94, 84 });
 	
 	hitKickAnimL.loop = false;
 	hitKickAnimL.speed = 0.2f;
 
 	// 2R
-	
+	hitThrowAnimR.PushBack({ 1692, 1932, 94, 84 });
+	hitThrowAnimR.PushBack({ 1598, 1932, 94, 84 });
+	hitThrowAnimR.PushBack({ 1504, 1932, 94, 84 });
+	hitThrowAnimR.PushBack({ 1410, 1932, 94, 84 });
+	hitThrowAnimR.PushBack({ 1316, 1932, 94, 84 });
+	hitThrowAnimR.loop = false;
+	hitThrowAnimR.speed = 0.15f;
+
+	// 2L
+	hitThrowAnimL.PushBack({ 0, 252, 94, 84 });
+	hitThrowAnimL.PushBack({ 94, 252, 94, 84 });
+	hitThrowAnimL.PushBack({ 188, 252, 94, 84 });
+	hitThrowAnimL.PushBack({ 282, 252, 94, 84 });
+	hitThrowAnimL.PushBack({ 376, 252, 94, 84 });
+	hitThrowAnimL.loop = false;
+	hitThrowAnimL.speed = 0.15f;
+
+	// 3R
+	hitUpAnimR.PushBack({ 0, 420, 94, 84 });
+	hitUpAnimR.PushBack({ 94, 420, 94, 84 });
+	hitUpAnimR.PushBack({ 188, 420, 94, 84 });
+	hitUpAnimR.PushBack({ 282, 420, 94, 84 });
+	hitUpAnimR.loop = false;
+	hitUpAnimR.speed = 0.3f;
+
+	// 3L
+	hitUpAnimL.PushBack({ 1692, 2100, 94, 84 });
+	hitUpAnimL.PushBack({ 1598, 2100, 94, 84 });
+	hitUpAnimL.PushBack({ 1504, 2100, 94, 84 });
+	hitUpAnimL.PushBack({ 1410, 2100, 94, 84 });
+	hitUpAnimL.loop = false;
+	hitUpAnimL.speed = 0.3f;
+
+	// 4L
+	hitDownAnimL.PushBack({ 1692, 2184, 94, 84 });
+	hitDownAnimL.PushBack({ 1598, 2184, 94, 84 });
+	hitDownAnimL.PushBack({ 1504, 2184, 94, 84 });
+	hitDownAnimL.PushBack({ 1410, 2184, 94, 84 });
+	hitDownAnimL.loop = false;
+	hitDownAnimL.speed = 0.3f;
 }
 
 ModulePlayer::~ModulePlayer()
@@ -218,7 +280,7 @@ bool ModulePlayer::Start()
 	/*laserFx = App->audio->LoadFx("Assets/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/explosion.wav");*/
 
-	collider = App->collisions->AddCollider({ position.x, position.y, 32, 16 }, Collider::Type::PLAYER, this);
+	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
 
 	return ret;
 }
@@ -298,19 +360,16 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-
-
-
 	// TEST HITS
 
-	//--------------------------------------------------------------KICK RIGHT
+	//--------------------------------------------------------------COLLIDE RIGHT
 	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && lastPosition==0 )
 	{
-		if (currentAnimation != &hitKickAnimR)
+		if (currentAnimation != &hitDownAnimR)
 		{
 		
-			currentAnimation = &hitKickAnimR;
-			hitKickAnimR.Reset();
+			currentAnimation = &hitDownAnimR;
+			hitDownAnimR.Reset();
 		
 		}
 		
@@ -322,14 +381,14 @@ update_status ModulePlayer::Update()
 		idleAnimR.Reset();
 	}
 
-	//--------------------------------------------------------------KICK LEFT
+	//--------------------------------------------------------------COLLIDE LEFT
 	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && lastPosition == 1)
 	{
-		if (currentAnimation != &hitKickAnimR)
+		if (currentAnimation != &hitDownAnimL)
 		{
 
-			currentAnimation = &hitKickAnimR;
-			hitKickAnimR.Reset();
+			currentAnimation = &hitDownAnimL;
+			hitDownAnimL.Reset();
 
 		}
 
@@ -444,10 +503,10 @@ update_status ModulePlayer::Update()
 	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_UP && lastPosition == 1)
 	{
 
-	if (currentAnimation != &jumpAnimR)
+	if (currentAnimation != &jumpAnimL)
 	{
-		jumpAnimR.Reset();
-		currentAnimation = &jumpAnimR;
+		jumpAnimL.Reset();
+		currentAnimation = &jumpAnimL;
 
 	}
 	}
@@ -524,15 +583,28 @@ update_status ModulePlayer::Update()
 	}
 
 	// UP
-	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
+	// ---------------------------------------------------------UP LEFT
+	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && lastPosition == 1)
 	{
 		position.y -= speed;
-		if (currentAnimation != &upAnimR)
+		if (currentAnimation != &upAnimL)
 		{
-			upAnimR.Reset();
-			currentAnimation = &upAnimR;
+			upAnimL.Reset();
+			currentAnimation = &upAnimL;
 		}
 	}
+
+	// ---------------------------------------------------------UP RIGHT
+	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && lastPosition == 0)
+	{
+	position.y -= speed;
+	if (currentAnimation != &upAnimR)
+	{
+		upAnimR.Reset();
+		currentAnimation = &upAnimR;
+	}
+	}
+
 
 	// LEFT
 	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT)
@@ -560,7 +632,19 @@ update_status ModulePlayer::Update()
 	}
 
 	// DOWN
-	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
+	// --------------------------------------------------------DOWN LEFT
+	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && lastPosition == 1)
+	{
+	position.y += speed;
+	if (currentAnimation != &downAnimL)
+	{
+		downAnimL.Reset();
+		currentAnimation = &downAnimL;
+	}
+	}
+
+	// --------------------------------------------------------DOWN RIGHT
+	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && lastPosition == 0)
 	{
 		position.y += speed;
 		if (currentAnimation != &downAnimR)
@@ -577,11 +661,14 @@ update_status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_IDLE)
+		&& App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_IDLE
+		&& App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_IDLE)
 	{
 		if (currentAnimation != &idleAnimR
+			&& currentAnimation != &idleAnimL
 			&& currentAnimation != &hitKickAnimR
-			&& currentAnimation != &jumpAnimR)
+			&& currentAnimation != &jumpAnimR
+			&& currentAnimation != &jumpAnimL)
 		{
 			switch (lastPosition) {
 
@@ -609,7 +696,17 @@ update_status ModulePlayer::Update()
 		App->particles->AddParticle(App->particles->explosion, position.x + 25, position.y, 90);
 	}*/
 
-	collider->SetPos(position.x, position.y);
+	// ----------------------------- SET POS COLLIDER
+	switch (lastPosition) {
+
+	case 1:
+		collider->SetPos(position.x + 36, position.y + 68);
+		break;
+
+	case 0:
+		collider->SetPos(position.x + 20, position.y + 68);
+		break;
+	}
 
 	currentAnimation->Update();
 
