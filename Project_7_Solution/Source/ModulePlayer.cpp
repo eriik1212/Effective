@@ -127,6 +127,35 @@ ModulePlayer::ModulePlayer()
 	downAnimL.loop = true;
 	downAnimL.speed = 0.25f;
 
+	// JUMP
+	// Right
+	InitjumpAnimR.PushBack({ 0, 588, 94, 84 });
+	jumpAnimR.PushBack({ 94, 588, 94, 84 });
+	jumpAnimR.PushBack({ 188, 588, 94, 84 });
+	jumpAnimR.PushBack({ 282, 588, 94, 84 });
+	jumpAnimR.PushBack({ 376, 588, 94, 84 });
+	jumpAnimR.PushBack({ 470, 588, 94, 84 });
+	jumpAnimR.PushBack({ 564, 588, 94, 84 });
+	jumpAnimR.PushBack({ 658, 588, 94, 84 });
+	jumpAnimR.PushBack({ 752, 588, 94, 84 });
+	jumpAnimR.PushBack({ 846, 588, 94, 84 });
+	jumpAnimR.loop = false;
+	jumpAnimR.speed = 0.25f;
+
+	// Left
+	InitjumpAnimL.PushBack({ 1692, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 1598, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 1504, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 1410, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 1316, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 1222, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 1128, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 1034, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 940, 2268, 94, 84 });
+	jumpAnimL.PushBack({ 846, 2268, 94, 84 });
+	jumpAnimL.loop = false;
+	jumpAnimL.speed = 0.25f;
+
 	// Hit Air Animation 1
 	hitAirAnim1R.PushBack({ 8, 336, 94, 84 });
 	hitAirAnim1R.PushBack({ 94, 336, 94, 84 });
@@ -149,22 +178,23 @@ ModulePlayer::ModulePlayer()
 
 	// Hit Collide
 	// 1R
-	hitCollideAnim1R.PushBack({ 4, 84, 94, 84 });
-	hitCollideAnim1R.PushBack({ 98, 84, 94, 84 });
-	hitCollideAnim1R.PushBack({ 192, 84, 108, 84 });
-	hitCollideAnim1R.PushBack({ 300, 84, 94, 84 });
-	hitCollideAnim1R.loop = false;
-	hitCollideAnim1R.speed = 0.2f;
+	hitKickAnimR.PushBack({ 4, 84, 94, 84 });
+	hitKickAnimR.PushBack({ 98, 84, 94, 84 });
+	hitKickAnimR.PushBack({ 192, 84, 108, 84 });
+	hitKickAnimR.PushBack({ 300, 84, 94, 84 });
+	hitKickAnimR.loop = false;
+	hitKickAnimR.speed = 0.2f;
 
 	// 1L
-	hitCollideAnim1L.PushBack({ 1692, 1764, 94, 84 });
-	hitCollideAnim1L.PushBack({ 1598, 1764, 94, 84 });
-	hitCollideAnim1L.PushBack({ 1504, 1764, 94, 84 });
-	hitCollideAnim1L.PushBack({ 1410, 1764, 94, 84 });
-	hitCollideAnim1L.loop = false;
-	hitCollideAnim1L.speed = 0.2f;
+	hitKickAnimL.PushBack({ 1692, 1764, 94, 84 });
+	hitKickAnimL.PushBack({ 1598, 1764, 94, 84 });
+	hitKickAnimL.PushBack({ 1504, 1764, 94, 84 });
+	hitKickAnimL.PushBack({ 1410, 1764, 94, 84 });
+	hitKickAnimL.loop = false;
+	hitKickAnimL.speed = 0.2f;
 
 	// 2R
+	
 }
 
 ModulePlayer::~ModulePlayer()
@@ -237,12 +267,12 @@ update_status ModulePlayer::Update()
 	}
 
 	// TEST HITS
-	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_DOWN)
+	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN)
 	{
-		if (currentAnimation != &hitCollideAnim1R)
+		if (currentAnimation != &hitKickAnimR)
 		{
-			hitCollideAnim1R.Reset();
-			currentAnimation = &hitCollideAnim1R;
+			hitKickAnimR.Reset();
+			currentAnimation = &hitKickAnimR;
 
 		}
 	}
@@ -310,6 +340,27 @@ update_status ModulePlayer::Update()
 			rightAnim.Reset();
 			currentAnimation = &rightAnim;
 		}
+	}
+
+	// JUMP
+	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_REPEAT)
+	{
+	position.y -= 3;
+	if (currentAnimation != &InitjumpAnimR)
+	{
+		InitjumpAnimR.Reset();
+		currentAnimation = &InitjumpAnimR;
+
+	}
+	}
+	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_UP)
+	{
+	if (currentAnimation != &jumpAnimR)
+	{
+		jumpAnimR.Reset();
+		currentAnimation = &jumpAnimR;
+
+	}
 	}
 
 	// UP & RIGHT MOVEMENT
@@ -434,7 +485,8 @@ update_status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_IDLE)
 	{
 		if (currentAnimation != &idleAnimR
-			&& currentAnimation != &hitCollideAnim1R)
+			&& currentAnimation != &hitKickAnimR
+			&& currentAnimation != &jumpAnimR)
 		{
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;

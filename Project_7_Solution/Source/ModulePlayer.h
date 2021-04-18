@@ -47,20 +47,37 @@ public:
 	Animation* currentAnimation = nullptr;
 
 	// A set of animations
-	Animation idleAnimR;
-	Animation idleAnimL;
-	Animation leftAnim;
-	Animation rightAnim;
-	Animation upAnimR;
-	Animation upAnimL;
-	Animation downAnimR;
-	Animation downAnimL;
-	Animation hitAirAnim1R;
-	Animation hitAirAnim2R;
-	Animation hitAirAnim1L;
-	Animation hitAirAnim2L;
-	Animation hitCollideAnim1R;
-	Animation hitCollideAnim1L;
+	Animation idleAnimR,
+		idleAnimL,
+		leftAnim,
+		rightAnim,
+		upAnimR,
+		upAnimL,
+		downAnimR,
+		downAnimL,
+		InitjumpAnimR,
+		InitjumpAnimL,
+		jumpAnimR,
+		jumpAnimL,
+		hitAirAnim1R,
+		hitAirAnim2R,
+		hitAirAnim1L,
+		hitAirAnim2L,
+		hitKickAnimR,
+		hitKickAnimL,
+		hitThrowAnimR,
+		hitThrowAnimL,
+		hitTHrowAnimL,
+		hitUpAnimR,
+		hitUpAnimL,
+		hitDownAnimR,
+		hitDownAnimL,
+		hitAirHorizontalAnimR,
+		hitAirHorizontalAnimL,
+		hitAirDownAnimR,
+		hitAirDownAnimL;
+
+
 
 	// The player's collider
 	Collider* collider = nullptr;
