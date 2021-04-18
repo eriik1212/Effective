@@ -39,6 +39,8 @@ public:
 	// The speed in which we move the player (pixels per frame)
 	int speed = 2;
 
+	int lastPosition = 0; //    1 = Left || 0 = Right
+
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
 	
@@ -55,16 +57,24 @@ public:
 		upAnimL,
 		downAnimR,
 		downAnimL,
+		
 		InitjumpAnimR,
-		InitjumpAnimL,
 		jumpAnimR,
+		InitjumpAnimL,
 		jumpAnimL,
+
 		hitAirAnim1R,
 		hitAirAnim2R,
+
 		hitAirAnim1L,
 		hitAirAnim2L,
+
 		hitKickAnimR,
+		hitKickAnimRFinal,
+		
 		hitKickAnimL,
+		hitKickAnimLFinal,
+
 		hitThrowAnimR,
 		hitThrowAnimL,
 		hitTHrowAnimL,
