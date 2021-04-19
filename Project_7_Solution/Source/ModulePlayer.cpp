@@ -316,7 +316,45 @@ ModulePlayer::ModulePlayer()
 	hitDownAnimL.loop = false;
 	hitDownAnimL.speed = 0.3f;
 
+	// 5R
+	hitPrickAnimR.PushBack({ 0, 3780, 94, 84 });
+	hitPrickAnimR.PushBack({ 94, 3780, 94, 84 });
+	hitPrickAnimR.PushBack({ 188, 3780, 94, 84 });
+	hitPrickAnimR.PushBack({ 278, 3780, 104, 84 });
+	hitPrickAnimR.PushBack({ 380, 3780, 116, 84 });
+	hitPrickAnimR.loop = false;
+	hitPrickAnimR.speed = 0.3f;
+
+	// 5L
+	hitPrickAnimL.PushBack({ 1692, 3360, 94, 84 });
+	hitPrickAnimL.PushBack({ 1598, 3360, 94, 84 });
+	hitPrickAnimL.PushBack({ 1504, 3360, 94, 84 });
+	hitPrickAnimL.PushBack({ 1410, 3360, 94, 84 });
+	hitPrickAnimL.PushBack({ 1316, 3360, 94, 84 });
+	hitPrickAnimL.loop = false;
+	hitPrickAnimL.speed = 0.3f;
+
+	// 6R
+	hitOverAnimR.PushBack({ 0, 3864, 94, 84 });
+	hitOverAnimR.PushBack({ 88, 3864, 94, 84 });
+	hitOverAnimR.PushBack({ 188, 3864, 94, 84 });
+	hitOverAnimR.PushBack({ 278, 3864, 94, 84 });
+	hitOverAnimR.PushBack({ 381, 3864, 94, 84 });
+	hitOverAnimR.loop = false;
+	hitOverAnimR.speed = 0.3f;
+
+	// 6L
+	hitOverAnimL.PushBack({ 1692, 3444, 94, 84 });
+	hitOverAnimL.PushBack({ 1598, 3444, 94, 84 });
+	hitOverAnimL.PushBack({ 1504, 3444, 94, 84 });
+	hitOverAnimL.PushBack({ 1412, 3444, 94, 84 });
+	hitOverAnimL.PushBack({ 1304, 3444, 110, 84 });
+	hitOverAnimL.loop = false;
+	hitOverAnimL.speed = 0.3f;
+
+
 	// ---------------------------------------------------------------- Hitted
+	// --------------------------------------------- Front
 	// 1R
 	hittedLowAnim1R.PushBack({ 0, 1092, 94, 84 });
 	hittedLowAnim1R.PushBack({ 94, 1092, 94, 84 });
@@ -411,6 +449,132 @@ ModulePlayer::ModulePlayer()
 	hittedHighAnimL.loop = false;
 	hittedHighAnimL.speed = 0.1f;
 
+	// --------------------------------------------- Back
+	// 5R
+	hittedBackLowAnimR.PushBack({ 0, 1344, 94, 84 });
+	hittedBackLowAnimR.PushBack({ 92, 1344, 94, 84 });
+	hittedBackLowAnimR.PushBack({ 172, 1344, 110, 84 });
+	hittedBackLowAnimR.loop = false;
+	hittedBackLowAnimR.speed = 0.1f;
+
+	// 5L
+	hittedBackLowAnimL.PushBack({ 1692, 3024, 94, 84 });
+	hittedBackLowAnimL.PushBack({ 1594, 3024, 94, 84 });
+	hittedBackLowAnimL.PushBack({ 1525, 3024, 80, 84 });
+	hittedBackLowAnimL.loop = false;
+	hittedBackLowAnimL.speed = 0.1f;
+
+	// 6R
+	hittedBackMediumAnimR.PushBack({ 0, 1512, 94, 84 });
+	hittedBackMediumAnimR.PushBack({ 94, 1512, 94, 84 });
+	hittedBackMediumAnimR.PushBack({ 188, 1512, 94, 84 });
+	hittedBackMediumAnimR.PushBack({ 282, 1512, 94, 84 });
+	hittedBackMediumAnimR.PushBack({ 376, 1512, 94, 84 });
+	hittedBackMediumAnimR.PushBack({ 470, 1512, 94, 84 });
+	hittedBackMediumAnimR.PushBack({ 564, 1512, 90, 84 });
+	hittedBackMediumAnimR.PushBack({ 654, 1512, 94, 84 });
+	hittedBackMediumAnimR.PushBack({ 752, 1512, 94, 84 });
+	hittedBackMediumAnimR.PushBack({ 846, 1512, 94, 84 });
+	hittedBackMediumAnimR.loop = false;
+	hittedBackMediumAnimR.speed = 0.1f;
+
+	// 6L
+	hittedBackMediumAnimL.PushBack({ 1692, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 1598, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 1504, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 1410, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 1316, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 1222, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 1132, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 1034, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 940, 3192, 94, 84 });
+	hittedBackMediumAnimL.PushBack({ 846, 3192, 94, 84 });
+	hittedBackMediumAnimL.loop = false;
+	hittedBackMediumAnimL.speed = 0.1f;
+
+	// 7R
+	hittedBackHighAnimR.PushBack({ 0, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 188, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 282, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 376, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 470, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 564, 1428, 90, 84 });
+	hittedBackHighAnimR.PushBack({ 654, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 752, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 846, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 940, 1428, 90, 84 });
+	hittedBackHighAnimR.PushBack({ 1034, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 1034, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 1132, 1428, 94, 84 });
+	hittedBackHighAnimR.PushBack({ 1222, 1428, 94, 84 });
+	hittedBackHighAnimR.loop = false;
+	hittedBackHighAnimR.speed = 0.15f;
+
+	// 7L
+	hittedBackHighAnimL.PushBack({ 1692, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 1598, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 1504, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 1410, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 1316, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 1222, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 1132, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 1034, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 940, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 846, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 752, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 658, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 658, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 564, 3108, 94, 84 });
+	hittedBackHighAnimL.PushBack({ 470, 3108, 94, 84 });
+	hittedBackHighAnimL.loop = false;
+	hittedBackHighAnimL.speed = 0.15f;
+
+	// 8R
+	hittedGrabbedAnimR.PushBack({ 0, 1596, 94, 84 });
+	hittedGrabbedAnimR.PushBack({ 94, 1596, 94, 84 });
+	hittedGrabbedAnimR.PushBack({ 188, 1596, 94, 84 });
+	hittedGrabbedAnimR.loop = true;
+	hittedGrabbedAnimR.speed = 0.1f;
+
+	// 9L
+	hittedGrabbedAnimL.PushBack({ 1692, 3276, 94, 84 });
+	hittedGrabbedAnimL.PushBack({ 1598, 3276, 94, 84 });
+	hittedGrabbedAnimL.PushBack({ 1504, 3276, 94, 84 });
+	hittedGrabbedAnimL.loop = true;
+	hittedGrabbedAnimL.speed = 0.1f;
+
+	// -----------------------------------------------------------Death
+	// Right
+	deathAnimR.PushBack({ 1222, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1504, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1504, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1222, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1316, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1598, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1598, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1316, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1410, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1692, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1692, 3833, 94, 84 });
+	deathAnimR.PushBack({ 1410, 3833, 94, 84 });
+	deathAnimR.loop = true;
+	deathAnimR.speed = 0.6f;
+
+	// Left
+	deathAnimL.PushBack({ 1692, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1410, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1410, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1692, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1598, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1316, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1316, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1598, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1504, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1222, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1222, 3735, 94, 84 });
+	deathAnimL.PushBack({ 1504, 3735, 94, 84 });
+	deathAnimL.loop = true;
+	deathAnimL.speed = 0.6f;
 
 }
 
@@ -513,14 +677,14 @@ update_status ModulePlayer::Update()
 
 	// TEST HITS
 
-	//--------------------------------------------------------------COLLIDE RIGHT
+	//--------------------------------------------------------------TEST RIGHT
 	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && lastPosition==0 )
 	{
-		if (currentAnimation != &hittedHighAnimR)
+		if (currentAnimation != &hittedGrabbedAnimR)
 		{
 		
-			currentAnimation = &hittedHighAnimR;
-			hittedHighAnimR.Reset();
+			currentAnimation = &hittedGrabbedAnimR;
+			hittedGrabbedAnimR.Reset();
 		
 		}
 		
@@ -532,14 +696,14 @@ update_status ModulePlayer::Update()
 		idleAnimR.Reset();
 	}
 
-	//--------------------------------------------------------------COLLIDE LEFT
+	//--------------------------------------------------------------TEST LEFT
 	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && lastPosition == 1)
 	{
-		if (currentAnimation != &hittedHighAnimL)
+		if (currentAnimation != &hittedGrabbedAnimL)
 		{
 
-			currentAnimation = &hittedHighAnimL;
-			hittedHighAnimL.Reset();
+			currentAnimation = &hittedGrabbedAnimL;
+			hittedGrabbedAnimL.Reset();
 
 		}
 

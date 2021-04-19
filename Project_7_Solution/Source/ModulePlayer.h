@@ -81,6 +81,10 @@ public:
 		hitUpAnimL,
 		hitDownAnimR,
 		hitDownAnimL,
+		hitPrickAnimR,
+		hitPrickAnimL,
+		hitOverAnimR,
+		hitOverAnimL,
 		hitJumpHorizontalAnimR,
 		hitJumpHorizontalAnimL,
 		hitJumpSwordAnimR,
@@ -97,7 +101,22 @@ public:
 		hittedMediumAnimL,
 		
 		hittedHighAnimR,
-		hittedHighAnimL;
+		hittedHighAnimL,
+
+		hittedBackLowAnimR,
+		hittedBackLowAnimL,
+
+		hittedBackMediumAnimR,
+		hittedBackMediumAnimL,
+
+		hittedBackHighAnimR,
+		hittedBackHighAnimL,
+
+		hittedGrabbedAnimR,
+		hittedGrabbedAnimL,
+		
+		deathAnimR,
+		deathAnimL;
 
 
 
