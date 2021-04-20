@@ -35,10 +35,13 @@ public:
 	SDL_Texture* stageTexture = nullptr;
 
 	Animation fireDoor, 
-		fireElev, 
 		doorBreak,
 		doorBreak2,
-		doorBreak3;
+		doorBreak3,
+		
+		fireElev,
+		openElev,
+		openElev2;
 
 };
 
