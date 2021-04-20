@@ -27,7 +27,7 @@ ModulePlayer::ModulePlayer()
 	fire.PushBack({ 336, 565, 304, 62 });
 	fire.PushBack({ 710, 536, 304, 62 });
 	fire.PushBack({ 1030, 536, 304, 62 });
-	fire.speed = 0.2f;
+	fire.speed = 0.15f;
 
 	// ---------------------------------------------------------------------idle animation
 	// RIGHT
