@@ -7,7 +7,7 @@
 #include "ModuleAudio.h"
 
 #include "Enemy.h"
-#include "Enemy_Mech.h"
+#include "Enemy_Purple.h"
 
 #define SPAWN_MARGIN 50
 
@@ -25,8 +25,8 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/enemies.png");
-	enemyDestroyedFx = App->audio->LoadFx("Assets/explosion.wav");
+	texture = App->textures->Load("Assets/Enemies/Purple-enemy.png");
+	//enemyDestroyedFx = App->audio->LoadFx("Assets/explosion.wav");
 
 	return true;
 }
@@ -141,7 +141,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			switch (info.type)
 			{
 				case ENEMY_TYPE::MECH:
-					enemies[i] = new Enemy_Mech(info.x, info.y);
+					enemies[i] = new Enemy_Purple(info.x, info.y);
 					break;
 			}
 			//enemies[i]->texture = texture;

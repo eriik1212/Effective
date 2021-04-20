@@ -29,11 +29,17 @@ public:
 
 public:
 	
+	SDL_Rect background;
+
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* bgTexture = nullptr;
-	
-	// The sprite rectangle for the ground
-	SDL_Texture* starsTexture = nullptr;
+	SDL_Texture* stageTexture = nullptr;
+
+	Animation fireDoor, 
+		fireElev, 
+		doorBreak,
+		doorBreak2,
+		doorBreak3;
+
 };
 
-#endif
+#endif //__MODULE_SCENE_H__

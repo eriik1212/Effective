@@ -18,6 +18,17 @@ ModulePlayer::ModulePlayer()
 	position.x = 100;
 	position.y = 112;
 
+	// Fire animation
+	fire.PushBack({ 18, 429, 304, 62 });
+	fire.PushBack({ 335, 430, 304, 62 });
+	fire.PushBack({ 19, 497, 304, 62 });
+	fire.PushBack({ 336, 500, 304, 62 });
+	fire.PushBack({ 21, 564, 304, 62 });
+	fire.PushBack({ 336, 565, 304, 62 });
+	fire.PushBack({ 710, 536, 304, 62 });
+	fire.PushBack({ 1030, 536, 304, 62 });
+	fire.speed = 0.2f;
+
 	// ---------------------------------------------------------------------idle animation
 	// RIGHT
 	idleAnimR.PushBack({ 2, 0, 94, 84 });
@@ -590,6 +601,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	texture = App->textures->Load("Assets/Characters/Leonardo.png");
+	fireTexture = App->textures->Load("Assets/Tilesets/fire.png");
 	currentAnimation = &idleAnimR;
 
 	/*laserFx = App->audio->LoadFx("Assets/laser.wav");
@@ -602,6 +614,8 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
+	fire.Update();
+
 	// Position Players Limits
 	if (position.x < App->render->playerLimitL) position.x = App->render->playerLimitL;
 	if (position.x > 1250) position.x = 1250;
@@ -715,7 +729,8 @@ update_status ModulePlayer::Update()
 		idleAnimL.Reset();
 
 	}
-	// Moving the player
+
+	// ---------------------------------------------------------------------- Moving the player
 
 	// ALL MOVEMENT KEYS PRESSED
 	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
@@ -1032,6 +1047,8 @@ update_status ModulePlayer::Update()
 			return update_status::UPDATE_STOP;
 	}
 
+
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -1042,6 +1059,8 @@ update_status ModulePlayer::PostUpdate()
 		SDL_Rect rect = currentAnimation->GetCurrentFrame();
 		App->render->Blit(texture, position.x, position.y, &rect);
 	}
+
+	App->render->Blit(fireTexture, 0, 162, &(fire.GetCurrentFrame()), 0); // fire animation
 
 	return update_status::UPDATE_CONTINUE;
 }
