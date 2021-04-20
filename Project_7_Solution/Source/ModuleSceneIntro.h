@@ -1,19 +1,23 @@
-#ifndef __MODULE_SCENE_H__
-#define __MODULE_SCENE_H__
+#ifndef __MODULE_SCENEINTRO_H__
+#define __MODULE_SCENEINTRO_H__
 
 #include "Module.h"
 #include "Animation.h"
+#include "ModuleInput.h"
+#include "ModuleScene.h"
+#include "ModulePlayer.h"
+#include "ModuleEnemies.h"
 
 struct SDL_Texture;
 
-class ModuleScene : public Module
+class ModuleSceneIntro : public Module
 {
 public:
 	//Constructor
-	ModuleScene(bool enabled);
+	ModuleSceneIntro(bool enabled);
 
 	//Destructor
-	~ModuleScene();
+	~ModuleSceneIntro();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the map background
@@ -26,6 +30,9 @@ public:
 	// Called at the end of the application loop.
 	// Performs the render call of all the parts of the scene's background
 	update_status PostUpdate() override;
+
+	// CleanUp the scene
+	bool CleanUp();
 
 public:
 	
@@ -45,4 +52,4 @@ public:
 
 };
 
-#endif //__MODULE_SCENE_H__
+#endif //__MODULE_SCENEINTRO_H__

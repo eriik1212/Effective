@@ -11,7 +11,7 @@
 #include "SDL/include/SDL_scancode.h"
 
 
-ModulePlayer::ModulePlayer()
+ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 {
 	srand(time(NULL));
 

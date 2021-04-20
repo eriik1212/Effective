@@ -7,7 +7,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleEnemies.h"
 
-ModuleScene::ModuleScene()
+ModuleScene::ModuleScene(bool enabled) : Module(enabled)
 {
 	background.x = 0;
 	background.y = 0;

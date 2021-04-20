@@ -32,7 +32,7 @@ class ModuleEnemies : public Module
 {
 public:
 	// Constructor
-	ModuleEnemies();
+	ModuleEnemies(bool enabled);
 
 	// Destructor
 	~ModuleEnemies();

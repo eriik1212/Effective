@@ -3,7 +3,7 @@
 #include "ModuleInput.h"
 #include "SDL/include/SDL.h"
 
-ModuleInput::ModuleInput() : Module()
+ModuleInput::ModuleInput(bool enabled) : Module(enabled)
 {}
 
 ModuleInput::~ModuleInput()
