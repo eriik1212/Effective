@@ -37,7 +37,6 @@ public:
 public:
 	
 	SDL_Texture* introBackground;
-	const SDL_Rect introRect;
 };
 
 #endif //__MODULE_SCENEINTRO_H__
