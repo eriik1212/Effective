@@ -248,6 +248,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 	hitAirAnim2R.loop = false;
 	hitAirAnim2R.speed = 0.3f;
 
+
 	// LEFT
 	hitAirAnim2L.PushBack({ 1692, 1848, 94, 84 });
 	hitAirAnim2L.PushBack({ 1598, 1848, 94, 84 });
@@ -608,6 +609,7 @@ bool ModulePlayer::Start()
 	explosionFx = App->audio->LoadFx("Assets/explosion.wav");*/
 
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
+	
 
 	return ret;
 }
@@ -633,6 +635,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+
 	// ------------------------------------------------------Hits RIGHT
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0)
 	{
@@ -646,6 +649,10 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim1R.Reset();
 				currentAnimation = &hitAirAnim1R;
+				
+					HIT = App->collisions->AddCollider({ position.x + 50, position.y + 68, 38, 16 }, Collider::Type::PLAYER_SHOT, this);
+				
+
 			}
 			break;
 		case 1:
@@ -654,11 +661,21 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim2R.Reset();
 				currentAnimation = &hitAirAnim2R;
+				
+			HIT = App->collisions->AddCollider({ position.x + 50, position.y + 68, 38, 16 }, Collider::Type::PLAYER_SHOT, this);
+				
 			}
 			break;
+
 		default:
+			
 			break;
 		}
+
+
+			HIT->pendingToDelete = true;
+		
+		
 	}
 
 	// ------------------------------------------------------Hits LEFT
@@ -674,6 +691,7 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim1L.Reset();
 				currentAnimation = &hitAirAnim1L;
+				HIT = App->collisions->AddCollider({ position.x, position.y + 68, 38, 16 }, Collider::Type::PLAYER_SHOT, this);
 			}
 			break;
 		case 1:
@@ -682,11 +700,14 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim2L.Reset();
 				currentAnimation = &hitAirAnim2L;
+				HIT = App->collisions->AddCollider({ position.x , position.y + 68, 38, 16 }, Collider::Type::PLAYER_SHOT, this);
 			}
 			break;
 		default:
 			break;
+		
 		}
+		HIT->pendingToDelete = true;
 	}
 
 	// TEST HITS

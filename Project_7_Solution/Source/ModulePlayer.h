@@ -61,7 +61,7 @@ public:
 		upAnimL,
 		downAnimR,
 		downAnimL,
-		
+
 		InitjumpAnimR,
 		jumpAnimR,
 		InitjumpAnimL,
@@ -69,6 +69,7 @@ public:
 
 		hitAirAnim1R,
 		hitAirAnim2R,
+	
 
 		hitAirAnim1L,
 		hitAirAnim2L,
@@ -126,7 +127,7 @@ public:
 
 	// The player's collider
 	Collider* collider = nullptr;
-
+	Collider* HIT = nullptr;
 	// A flag to detect when the player has been destroyed
 	bool destroyed = false;
 
