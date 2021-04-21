@@ -5,7 +5,14 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
+
+#include "ModulePlayer.h"
 #include "ModuleEnemies.h"
+
+#include "ModuleSceneIntro.h"
+#include "ModuleSceneWin.h"
+#include "ModuleSceneLose.h"
+
 
 ModuleScene::ModuleScene(bool enabled) : Module(enabled)
 {
@@ -126,6 +133,33 @@ update_status ModuleScene::Update()
 		openElev2.Update();
 	}
 
+	if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
+	{
+		this->Disable();
+		CleanUp();
+
+		App->player->Disable();
+		App->player->CleanUp();
+
+		App->enemies->Disable();
+		App->enemies->CleanUp();
+
+		App->sceneWin->Enable();
+	}	
+	else if (App->input->keys[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN)
+	{
+		this->Disable();
+		CleanUp();
+
+		App->player->Disable();
+		App->player->CleanUp();
+
+		App->enemies->Disable();
+		App->enemies->CleanUp();
+
+		App->sceneLose->Enable();
+	}
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -153,4 +187,12 @@ update_status ModuleScene::PostUpdate()
 
 
 	return update_status::UPDATE_CONTINUE;
+}
+
+bool ModuleScene::CleanUp()
+{
+	bool ret;
+	App->textures->CleanUp();
+	//App->audio->CleanUp();
+	return true;
 }

@@ -8,6 +8,8 @@
 #include "ModulePlayer.h"
 #include "ModuleScene.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneWin.h"
+#include "ModuleSceneLose.h"
 #include "ModuleParticles.h"
 #include "ModuleEnemies.h"
 #include "ModuleCollisions.h"
@@ -25,13 +27,15 @@ Application::Application()
 
 	modules[4] = sceneIntro = new ModuleSceneIntro(true);
 	modules[5] = scene = new ModuleScene(false);
-	modules[6] = player = new ModulePlayer(false);
-	modules[7] = particles = new ModuleParticles(true);
-	modules[8] = enemies = new ModuleEnemies(false);
+	modules[6] = sceneWin = new ModuleSceneWin(false);
+	modules[7] = sceneLose = new ModuleSceneLose(false);
+	modules[8] = player = new ModulePlayer(false);
+	modules[9] = particles = new ModuleParticles(true);
+	modules[10] = enemies = new ModuleEnemies(false);
 
-	modules[9] = collisions = new ModuleCollisions(true);
+	modules[11] = collisions = new ModuleCollisions(true);
 
-	modules[10] = render = new ModuleRender(true);
+	modules[12] = render = new ModuleRender(true);
 }
 
 Application::~Application()

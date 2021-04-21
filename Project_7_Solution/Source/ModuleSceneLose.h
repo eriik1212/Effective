@@ -1,20 +1,23 @@
-#ifndef __MODULE_SCENE_H__
-#define __MODULE_SCENE_H__
+#ifndef __MODULE_SCENELOSE_H__
+#define __MODULE_SCENELOSE_H__
 
 #include "Module.h"
 #include "Animation.h"
 #include "ModuleInput.h"
+#include "ModuleScene.h"
+#include "ModulePlayer.h"
+#include "ModuleEnemies.h"
 
 struct SDL_Texture;
 
-class ModuleScene : public Module
+class ModuleSceneLose : public Module
 {
 public:
 	//Constructor
-	ModuleScene(bool enabled);
+	ModuleSceneLose(bool enabled);
 
 	//Destructor
-	~ModuleScene();
+	~ModuleSceneLose();
 
 	// Called when the module is activated
 	// Loads the necessary textures for the map background
@@ -28,24 +31,12 @@ public:
 	// Performs the render call of all the parts of the scene's background
 	update_status PostUpdate() override;
 
+	// CleanUp the scene
 	bool CleanUp();
 
 public:
 	
-	SDL_Rect background;
-
-	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* stageTexture = nullptr;
-
-	Animation fireDoor, 
-		doorBreak,
-		doorBreak2,
-		doorBreak3,
-		
-		fireElev,
-		openElev,
-		openElev2;
-
+	SDL_Texture* introBackground;
 };
 
-#endif //__MODULE_SCENE_H__
+#endif //__MODULE_SCENELOSE_H__

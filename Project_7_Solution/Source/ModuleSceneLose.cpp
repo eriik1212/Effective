@@ -1,30 +1,29 @@
-#include "ModuleSceneIntro.h"
+#include "ModuleSceneLose.h"
 
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 
-ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
+ModuleSceneLose::ModuleSceneLose(bool enabled) : Module(enabled)
 {
 	
 }
 
-ModuleSceneIntro::~ModuleSceneIntro() {}
+ModuleSceneLose::~ModuleSceneLose() {}
 
 // Load assets
-bool ModuleSceneIntro::Start()
+bool ModuleSceneLose::Start()
 {
-	introBackground = App->textures->Load("Assets/Introduction/title_screen.png");
-	App->audio->PlayMusic("Assets/Audio/01 Opening Demo.ogg", 1.0f);
+	introBackground = App->textures->Load("");
+	App->audio->PlayMusic("", 1.0f);
 	return true;
 }
 
-update_status ModuleSceneIntro::Update()
+update_status ModuleSceneLose::Update()
 {
 	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
 	{
-		CleanUp();
 		this->Disable();
 		App->scene->Enable();
 		App->player->Enable();
@@ -35,15 +34,14 @@ update_status ModuleSceneIntro::Update()
 }
 
 // Update: draw background
-update_status ModuleSceneIntro::PostUpdate()
+update_status ModuleSceneLose::PostUpdate()
 {
 	App->render->Blit(introBackground, 0, 0, NULL);
 	return update_status::UPDATE_CONTINUE;
 }
 
-bool ModuleSceneIntro::CleanUp()
+bool ModuleSceneLose::CleanUp()
 {
 	bool ret;
-	App->textures->CleanUp();
 	return true;
 }
