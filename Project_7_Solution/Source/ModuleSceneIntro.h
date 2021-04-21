@@ -36,20 +36,8 @@ public:
 
 public:
 	
-	SDL_Rect background;
-
-	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* stageTexture = nullptr;
-
-	Animation fireDoor, 
-		doorBreak,
-		doorBreak2,
-		doorBreak3,
-		
-		fireElev,
-		openElev,
-		openElev2;
-
+	SDL_Texture* introBackground;
+	const SDL_Rect introRect;
 };
 
 #endif //__MODULE_SCENEINTRO_H__
