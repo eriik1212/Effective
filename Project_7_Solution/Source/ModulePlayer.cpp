@@ -18,16 +18,24 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 	position.x = 100;
 	position.y = 112;
 
-	// Fire animation
-	fire.PushBack({ 18, 429, 304, 62 });
-	fire.PushBack({ 335, 430, 304, 62 });
-	fire.PushBack({ 19, 497, 304, 62 });
-	fire.PushBack({ 336, 500, 304, 62 });
-	fire.PushBack({ 21, 564, 304, 62 });
-	fire.PushBack({ 336, 565, 304, 62 });
-	fire.PushBack({ 710, 536, 304, 62 });
-	fire.PushBack({ 1030, 536, 304, 62 });
-	fire.speed = 0.15f;
+	// FrontFire animation
+	forntFire.PushBack({ 18, 429, 304, 62 });
+	forntFire.PushBack({ 335, 430, 304, 62 });
+	forntFire.PushBack({ 19, 497, 304, 62 });
+	forntFire.PushBack({ 336, 500, 304, 62 });
+	forntFire.PushBack({ 21, 564, 304, 62 });
+	forntFire.PushBack({ 336, 565, 304, 62 });
+	forntFire.PushBack({ 710, 536, 304, 62 });
+	forntFire.PushBack({ 1030, 536, 304, 62 });
+	forntFire.speed = 0.15f;
+
+	// SmallFire In Map Animation
+	smallFire.PushBack({ 20, 635, 82, 46 });
+	smallFire.PushBack({ 102, 635, 82, 46 });
+	smallFire.PushBack({ 184, 635, 82, 46 });
+	smallFire.PushBack({ 266, 635, 82, 46 });
+	smallFire.PushBack({ 348, 635, 82, 46 });
+	smallFire.speed = 0.15f;
 
 	// ---------------------------------------------------------------------idle animation
 	// RIGHT
@@ -616,7 +624,8 @@ bool ModulePlayer::Start()
 
 update_status ModulePlayer::Update()
 {
-	fire.Update();
+	forntFire.Update();
+	smallFire.Update();
 
 	// Position Players Limits
 	if (position.x < App->render->playerLimitL) position.x = App->render->playerLimitL;
@@ -1037,7 +1046,6 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-
 	// Spawn explosion particles when pressing B
 	/*if (App->input->keys[SDL_SCANCODE_B] == KEY_STATE::KEY_DOWN)
 	{
@@ -1081,7 +1089,9 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(texture, position.x, position.y, &rect);
 	}
 
-	App->render->Blit(fireTexture, 0, 162, &(fire.GetCurrentFrame()), 0); // fire animation
+	App->render->Blit(fireTexture, 0, 162, &(forntFire.GetCurrentFrame()), 0); // FrontFire animation
+
+	App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
 
 	return update_status::UPDATE_CONTINUE;
 }

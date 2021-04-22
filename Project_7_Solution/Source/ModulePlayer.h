@@ -46,7 +46,8 @@ public:
 
 	SDL_Texture* fireTexture = nullptr;
 
-	Animation fire;
+	Animation forntFire,
+		smallFire;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction

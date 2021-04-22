@@ -22,7 +22,7 @@ bool ModuleSceneIntro::Start()
 
 update_status ModuleSceneIntro::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 	{
 		CleanUp();
 		this->Disable();
