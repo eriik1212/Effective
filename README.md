@@ -6,27 +6,30 @@ Project I- My first amazing arcade game
 
 ## Key Features
 
- - 
+ - 1 Player
+ - Beat 'em Up
  - 
  - 
  
 ## Controls
 
 **Player 1**
--
--
--
- 
-**Player 2**
- -
- -
- -
+- Up, Down, Left, Right (Arrows) - Movement
+- X - Hit
+- Z - Jump
+
+**Additional controls**
+- Spacebar - Start game
+- God Mode - F1
+- Win - F2
+- Lose - F3
+
 
 ## Developers
 
  - Erik Martín Garzón - _Audio & Code_ - [_Eriik1212_](https://github.com/eriik1212)
  - Jan Carbonell Muñoz - _Art_ - [_JCarbonell01_](https://github.com/JCarbonell01)
- - Juan de Dios Garía Salguero - _Code_ - [_Pendent_](https://github.com/Noche39)
+ - Juan de Dios Garía Salguero - _Code_ - [_Jedtra_](https://github.com/Jedtra)
  - Chising Joaquin Lien - _Art_ - [_Noche39_](https://github.com/Noche39)
  - David Boces Obis - _Art & Code_ - [_VoZeS_](https://github.com/VoZeS)
 
