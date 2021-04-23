@@ -19,8 +19,9 @@ private:
 	// The path that will define the position in the world
 	Path path;
 
+
 	// Enemy animations
-	Animation front, back;
+	Animation idleAnimR;
 };
 
 #endif // __ENEMY_MECH_H__

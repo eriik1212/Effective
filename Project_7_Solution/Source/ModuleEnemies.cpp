@@ -25,7 +25,7 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/Enemies/Purple-enemy.png");
+	texture = App->textures->Load("Assets/Characters/Leonardo.png");
 	//enemyDestroyedFx = App->audio->LoadFx("Assets/explosion.wav");
 
 	return true;
@@ -140,12 +140,12 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		{
 			switch (info.type)
 			{
-				case ENEMY_TYPE::MECH:
+				case ENEMY_TYPE::PURPLE_ENEMY:
 					enemies[i] = new Enemy_Purple(info.x, info.y);
 					break;
 			}
-			//enemies[i]->texture = texture;
-			//enemies[i]->destroyedFx = enemyDestroyedFx;
+			enemies[i]->texture = texture;
+			enemies[i]->destroyedFx = enemyDestroyedFx;
 			break;
 		}
 	}

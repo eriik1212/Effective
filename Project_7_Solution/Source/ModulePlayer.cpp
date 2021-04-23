@@ -20,15 +20,16 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 	position.y = 112;
 
 	// FrontFire animation
-	forntFire.PushBack({ 18, 429, 304, 62 });
-	forntFire.PushBack({ 335, 430, 304, 62 });
-	forntFire.PushBack({ 19, 497, 304, 62 });
-	forntFire.PushBack({ 336, 500, 304, 62 });
-	forntFire.PushBack({ 21, 564, 304, 62 });
-	forntFire.PushBack({ 336, 565, 304, 62 });
-	forntFire.PushBack({ 710, 536, 304, 62 });
-	forntFire.PushBack({ 1030, 536, 304, 62 });
-	forntFire.speed = 0.15f;
+	frontFire.PushBack({ 335, 430, 304, 62 });
+	frontFire.PushBack({ 19, 497, 304, 62 });
+	frontFire.PushBack({ 336, 500, 304, 62 });
+	frontFire.PushBack({ 21, 564, 304, 62 });
+	//frontFire.PushBack({ 18, 429, 304, 62 });
+	//frontFire.PushBack({ 336, 565, 304, 62 });
+	frontFire.PushBack({ 710, 536, 304, 62 });
+	frontFire.PushBack({ 1030, 536, 304, 62 });
+	frontFire.speed = 0.15f;
+
 
 	// SmallFire In Map Animation
 	smallFire.PushBack({ 20, 635, 82, 46 });
@@ -36,6 +37,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 	smallFire.PushBack({ 184, 635, 82, 46 });
 	smallFire.PushBack({ 266, 635, 82, 46 });
 	smallFire.PushBack({ 348, 635, 82, 46 });
+	smallFire.PushBack({ 430, 635, 82, 46 });
 	smallFire.speed = 0.15f;
 
 	// ---------------------------------------------------------------------idle animation
@@ -628,7 +630,7 @@ bool ModulePlayer::Start()
 update_status ModulePlayer::Update()
 {
 	App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = false;
-	forntFire.Update();
+	frontFire.Update();
 	smallFire.Update();
 
 	// Position Players Limits
@@ -1093,13 +1095,27 @@ update_status ModulePlayer::PostUpdate()
 {
 	if (!destroyed)
 	{
-		SDL_Rect rect = currentAnimation->GetCurrentFrame();
-		App->render->Blit(texture, position.x, position.y, &rect);
+		if (position.y < 100)
+		{
+			SDL_Rect rect = currentAnimation->GetCurrentFrame();
+			App->render->Blit(texture, position.x, position.y, &rect);
+			App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
+		}
+		else
+		{
+			App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
+			SDL_Rect rect = currentAnimation->GetCurrentFrame();
+			App->render->Blit(texture, position.x, position.y, &rect);
+		}
+
 	}
 
-	App->render->Blit(fireTexture, 0, 162, &(forntFire.GetCurrentFrame()), 0); // FrontFire animation
-
-	App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
+	App->render->Blit(fireTexture, 0, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(fireTexture, 256, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(fireTexture, 512, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(fireTexture, 768, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(fireTexture, 1024, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(fireTexture, 1280, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 
 	return update_status::UPDATE_CONTINUE;
 }

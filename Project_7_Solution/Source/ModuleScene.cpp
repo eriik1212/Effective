@@ -101,8 +101,8 @@ bool ModuleScene::Start()
 
 	// Enemies ---
 
-		App->enemies->AddEnemy(ENEMY_TYPE::MECH, 200, 112);
-		App->enemies->AddEnemy(ENEMY_TYPE::MECH, 250, 112);
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 112);
+		//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 250, 112);
 	
 
 

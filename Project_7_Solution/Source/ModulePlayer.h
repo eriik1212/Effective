@@ -46,7 +46,7 @@ public:
 
 	SDL_Texture* fireTexture = nullptr;
 
-	Animation forntFire,
+	Animation frontFire,
 		smallFire;
 	
 	// The pointer to the current player animation
