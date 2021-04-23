@@ -100,8 +100,9 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 1000, 145, 20, 10 }, Collider::Type::WALL);*/
 
 	// Enemies ---
-	App->enemies->AddEnemy(ENEMY_TYPE::MECH, 200, 112);
-	App->enemies->AddEnemy(ENEMY_TYPE::REDBIRD, 625, 80);
+
+		App->enemies->AddEnemy(ENEMY_TYPE::MECH, 200, 112);
+		App->enemies->AddEnemy(ENEMY_TYPE::MECH, 250, 112);
 	
 
 

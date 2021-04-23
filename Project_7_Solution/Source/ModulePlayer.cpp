@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 
+
 #include "SDL/include/SDL_scancode.h"
 
 
@@ -598,6 +599,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 
 }
 
+
 ModulePlayer::~ModulePlayer()
 {
 
@@ -615,15 +617,17 @@ bool ModulePlayer::Start()
 
 	/*laserFx = App->audio->LoadFx("Assets/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/explosion.wav");*/
-
+	 HIT= App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
-	
+
+
 
 	return ret;
 }
 
 update_status ModulePlayer::Update()
 {
+	App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = false;
 	forntFire.Update();
 	smallFire.Update();
 
@@ -644,6 +648,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	
 
 	// ------------------------------------------------------Hits RIGHT
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0)
@@ -656,11 +661,12 @@ update_status ModulePlayer::Update()
 			if (currentAnimation != &hitAirAnim1R
 				&& currentAnimation != &hitAirAnim2R)
 			{
-				hitAirAnim1R.Reset();
-				currentAnimation = &hitAirAnim1R;
 				
-					HIT = App->collisions->AddCollider({ position.x + 50, position.y + 68, 38, 16 }, Collider::Type::PLAYER_SHOT, this);
+			hitAirAnim1R.Reset();
+			currentAnimation = &hitAirAnim1R;
+		    App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 				
+
 
 			}
 			break;
@@ -671,8 +677,7 @@ update_status ModulePlayer::Update()
 				hitAirAnim2R.Reset();
 				currentAnimation = &hitAirAnim2R;
 				
-			HIT = App->collisions->AddCollider({ position.x + 50, position.y + 68, 38, 16 }, Collider::Type::PLAYER_SHOT, this);
-				
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
 			break;
 
@@ -682,7 +687,7 @@ update_status ModulePlayer::Update()
 		}
 
 
-			HIT->pendingToDelete = true;
+		
 		
 		
 	}
@@ -700,7 +705,7 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim1L.Reset();
 				currentAnimation = &hitAirAnim1L;
-				HIT = App->collisions->AddCollider({ position.x, position.y + 68, 38, 16 }, Collider::Type::PLAYER_SHOT, this);
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
 			break;
 		case 1:
@@ -709,14 +714,15 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim2L.Reset();
 				currentAnimation = &hitAirAnim2L;
-				HIT = App->collisions->AddCollider({ position.x , position.y + 68, 38, 16 }, Collider::Type::PLAYER_SHOT, this);
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
 			break;
 		default:
 			break;
 		
 		}
-		HIT->pendingToDelete = true;
+
+		
 	}
 
 	// TEST HITS
@@ -1060,10 +1066,12 @@ update_status ModulePlayer::Update()
 
 	case 1:
 		collider->SetPos(position.x + 36, position.y + 68);
+		HIT->SetPos(position.x +16, position.y + 68);
 		break;
 
 	case 0:
 		collider->SetPos(position.x + 20, position.y + 68);
+		HIT->SetPos(position.x + 20, position.y + 68);
 		break;
 	}
 
@@ -1110,4 +1118,5 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		destroyed = true;
 	}
+
 }
