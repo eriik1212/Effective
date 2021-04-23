@@ -16,11 +16,11 @@ This is our first project as videogame design and developement students at CITM.
 - X - Hit
 - Z - Jump
 
-**Additional controls**
-- Spacebar - Start game
+**Additional Controls**
+- Start Game - Spacebar
 - God Mode - F1
-- Win - F2
-- Lose - F3
+- Instant Win - F2
+- Instant Lose - F3
 
 
 ## Developers
