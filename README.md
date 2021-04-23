@@ -18,9 +18,10 @@ This is our first project as videogame design and developement students at CITM.
 
 **Additional Controls**
 - Start Game - Spacebar
-- God Mode - F1
+- Colliders Mode - F1
 - Instant Win - F2
 - Instant Lose - F3
+- God Mode - F4
 
 
 ## Developers
