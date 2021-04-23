@@ -27,7 +27,7 @@ Project I- My first amazing arcade game
  - Erik Martín Garzón - _Audio & Code_
  - Jan Carbonell Muñoz - _Art_
  - Juan de Dios Garía Salguero - _Code_
- - Chising Joaquin Lien - _Art_
+ - Chising Joaquin Lien - _Art_ - [_Noche39_](https://github.com/Noche39)
  - David Boces Obis - _Art & Code_
 
 ## License
