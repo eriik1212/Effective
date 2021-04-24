@@ -45,7 +45,9 @@ public:
 		fireElev,
 		openElev,
 		openElev2;
-
+	//Initialazing scene audio index
+	uint DoorBrake=0;
+	uint ElevatorDoor = 0;
 };
 
 #endif //__MODULE_SCENE_H__

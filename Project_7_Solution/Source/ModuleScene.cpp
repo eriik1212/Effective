@@ -94,7 +94,8 @@ bool ModuleScene::Start()
 	stageTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
 
 	App->audio->PlayMusic("Assets/Audio/03 Fire! Scene 1 Stage 1.ogg", 1.0f);
-	
+	DoorBrake = App->audio->LoadFx("Assets/FX/BrokenDoor.wav");
+	ElevatorDoor = App->audio->LoadFx("Assets/FX/AutoDoors.wav");
 
 	// Final wall colliders
 	/*App->collisions->AddCollider({ 1000, 200, 20, 10 }, Collider::Type::WALL);
@@ -119,22 +120,26 @@ update_status ModuleScene::Update()
 	if (App->render->camera.x > 780)
 	{
 		doorBreak.Update();
+		
 	}
 
 	if (App->render->camera.x > 1650)
 	{
 		doorBreak2.Update();
+		
 	}
 
 	if (App->render->camera.x > 2025)
 	{
 		doorBreak3.Update();
+	
 	}
 
 	if (App->render->camera.x > 2500)
 	{
 		openElev.Update();
 		openElev2.Update();
+		
 	}
 
 	if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
@@ -176,17 +181,19 @@ update_status ModuleScene::PostUpdate()
 	App->render->Blit(stageTexture, 412, 49, &(fireDoor.GetCurrentFrame()), 1); // FireDoor1
 	App->render->Blit(stageTexture, 701, 49, &(fireDoor.GetCurrentFrame()), 1); // FireDoor2
 	App->render->Blit(stageTexture, 829, 49, &(fireDoor.GetCurrentFrame()), 1); // FireDoor3
+	
 
 	App->render->Blit(stageTexture, 412, 49, &(doorBreak.GetCurrentFrame()), 1); // DoorBreak1
 	App->render->Blit(stageTexture, 701, 49, &(doorBreak2.GetCurrentFrame()), 1); // DoorBreak2
 	App->render->Blit(stageTexture, 829, 49, &(doorBreak3.GetCurrentFrame()), 1); // DoorBreak3
-
+	
 
 	App->render->Blit(stageTexture, 950, 50, &(fireElev.GetCurrentFrame()), 1); // FireElevator1
 	App->render->Blit(stageTexture, 1079, 50, &(fireElev.GetCurrentFrame()), 1); // FireElevator2
 
 	App->render->Blit(stageTexture, 950, 50, &(openElev.GetCurrentFrame()), 1); // OpenElevator1
 	App->render->Blit(stageTexture, 1079, 50, &(openElev2.GetCurrentFrame()), 1); // OpenElevator2
+	
 
 
 
