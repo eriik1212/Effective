@@ -645,6 +645,7 @@ update_status ModulePlayer::Update()
 	frontFire.Update();
 	smallFire.Update();
 	AttackQuote.Update();
+	
 
 	// Position Players Limits
 	if (position.x < App->render->playerLimitL) position.x = App->render->playerLimitL;
@@ -1129,6 +1130,14 @@ update_status ModulePlayer::PostUpdate()
 	}
 
 	App->render->Blit(AttackQuoteTexture, 5, 112, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
+
+	if (App->render->camera.x == 0)
+	{
+		App->audio->PlayFx(Scream1);
+		App->render->camera.x += 1;
+
+	}
+	
 
 	App->render->Blit(fireTexture, 0, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 256, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
