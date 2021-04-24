@@ -715,7 +715,7 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	
+
 
 	// ------------------------------------------------------Hits RIGHT
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0)
@@ -728,13 +728,13 @@ update_status ModulePlayer::Update()
 			if (currentAnimation != &hitAirAnim1R
 				&& currentAnimation != &hitAirAnim2R)
 			{
-				
+
 			hitAirAnim1R.Reset();
 			currentAnimation = &hitAirAnim1R;
 		    App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			App->audio->PlayFx(PunchMiss);
-			
-				
+
+
 
 
 			}
@@ -745,21 +745,21 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim2R.Reset();
 				currentAnimation = &hitAirAnim2R;
-				
+
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 				App->audio->PlayFx(PunchMiss);
 			}
 			break;
 
 		default:
-			
+
 			break;
 		}
 
 
-		
-		
-		
+
+
+
 	}
 
 	// ------------------------------------------------------Hits LEFT
@@ -770,7 +770,7 @@ update_status ModulePlayer::Update()
 		switch (x)
 		{
 		case 0:
-			if (currentAnimation != &hitAirAnim1L 
+			if (currentAnimation != &hitAirAnim1L
 				&& currentAnimation != &hitAirAnim2L)
 			{
 				hitAirAnim1L.Reset();
@@ -791,10 +791,10 @@ update_status ModulePlayer::Update()
 			break;
 		default:
 			break;
-		
+
 		}
 
-		
+
 	}
 
 	// TEST HITS
@@ -804,16 +804,16 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation != &hittedGrabbedAnimR)
 		{
-		
+
 			currentAnimation = &hittedGrabbedAnimR;
 			hittedGrabbedAnimR.Reset();
-		
+
 		}
-		
+
 	}
 	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_UP && lastPosition == 0 )
 	{
-		
+
 		currentAnimation = &idleAnimR;
 		idleAnimR.Reset();
 	}
@@ -917,12 +917,12 @@ update_status ModulePlayer::Update()
 
 	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_UP && lastPosition == 0)
 	{
-	
+
 	if (currentAnimation != &jumpAnimR)
 	{
 		jumpAnimR.Reset();
 		currentAnimation = &jumpAnimR;
-		
+
 	}
 	}
 
@@ -948,7 +948,7 @@ update_status ModulePlayer::Update()
 
 	}
 	}
-	
+
 
 	// UP & RIGHT MOVEMENT
 	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT)
@@ -965,7 +965,7 @@ update_status ModulePlayer::Update()
 	// DOWN & RIGHT MOVEMENT
 	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT)
 	{
-	    
+
 
 		position.x += speed;
 		position.y += speed;
@@ -1120,7 +1120,7 @@ update_status ModulePlayer::Update()
 				currentAnimation = &idleAnimR;
 				break;
 			}
-			
+
 		}
 	}
 
@@ -1182,6 +1182,14 @@ update_status ModulePlayer::PostUpdate()
 
 	App->render->Blit(AttackQuoteTexture, 5, 112, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
 
+	if (App->render->camera.x == 0)
+	{
+		App->audio->PlayFx(Scream1);
+		App->render->camera.x += 1;
+
+	}
+
+
 	App->render->Blit(fireTexture, 0, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 256, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 512, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
@@ -1211,7 +1219,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);
 
-		
+
 
 		destroyed = true;
 	}

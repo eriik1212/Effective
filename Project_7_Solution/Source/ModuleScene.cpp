@@ -124,7 +124,7 @@ update_status ModuleScene::Update()
 	}
 
 	//Second if for the FX
-	if (App->render->camera.x == 780)
+	if (App->render->camera.x == 781)
 	{
 		App->audio->PlayFx(DoorBrake);
 
@@ -136,7 +136,7 @@ update_status ModuleScene::Update()
 		
 	}
 
-	if (App->render->camera.x == 1650)
+	if (App->render->camera.x == 1651)
 	{
 		App->audio->PlayFx(DoorBrake);
 
@@ -151,6 +151,8 @@ update_status ModuleScene::Update()
 	if (App->render->camera.x == 2025)
 	{
 		App->audio->PlayFx(DoorBrake);
+		App->audio->
+			
 
 	}
 
@@ -166,6 +168,8 @@ update_status ModuleScene::Update()
 		App->audio->PlayFx(ElevatorDoor);
 
 	}
+
+
 
 	if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
 	{
