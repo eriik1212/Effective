@@ -151,8 +151,6 @@ update_status ModuleScene::Update()
 	if (App->render->camera.x == 2025)
 	{
 		App->audio->PlayFx(DoorBrake);
-		App->audio->
-			
 
 	}
 
