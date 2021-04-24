@@ -46,7 +46,7 @@ public:
 		openElev,
 		openElev2;
 	//Initialazing scene audio index
-	uint DoorBrake=0;
+	uint DoorBrake = 0;
 	uint ElevatorDoor = 0;
 };
 

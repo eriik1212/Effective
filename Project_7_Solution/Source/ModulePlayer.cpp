@@ -16,8 +16,14 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 {
 	srand(time(NULL));
 
-	position.x = 100;
+	position.x = 5;
 	position.y = 112;
+
+	// Atack Quote
+	AttackQuote.PushBack({ 116, 168, 64, 32 });
+	AttackQuote.PushBack({ 0, 296, 64, 32 });
+	AttackQuote.speed = 0.01f;
+	AttackQuote.loop = false;
 
 	// HUD
 	HUD.PushBack({ 0, 0, 292, 32 });
@@ -619,6 +625,7 @@ bool ModulePlayer::Start()
 	texture = App->textures->Load("Assets/Characters/Leonardo.png");
 	fireTexture = App->textures->Load("Assets/Tilesets/fire.png");
 	HUDTexture = App->textures->Load("Assets/UI & HUD/HUD.png");
+	AttackQuoteTexture = App->textures->Load("Assets/UI & HUD/Quotes.png");
 	currentAnimation = &idleAnimR;
 
 	PunchMiss = App->audio->LoadFx("Assets/FX/Punch1.wav");
@@ -637,6 +644,7 @@ update_status ModulePlayer::Update()
 	App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = false;
 	frontFire.Update();
 	smallFire.Update();
+	AttackQuote.Update();
 
 	// Position Players Limits
 	if (position.x < App->render->playerLimitL) position.x = App->render->playerLimitL;
@@ -1120,7 +1128,7 @@ update_status ModulePlayer::PostUpdate()
 
 	}
 
-	App->render->Blit(HUDTexture, 0, 0, &(HUD.GetCurrentFrame()), 0); // HUD animation
+	App->render->Blit(AttackQuoteTexture, 5, 112, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
 
 	App->render->Blit(fireTexture, 0, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 256, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
@@ -1128,6 +1136,8 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(fireTexture, 768, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 1024, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 1280, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+
+	App->render->Blit(HUDTexture, 0, 0, &(HUD.GetCurrentFrame()), 0); // HUD animation
 
 	return update_status::UPDATE_CONTINUE;
 }

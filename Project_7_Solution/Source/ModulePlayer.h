@@ -48,9 +48,12 @@ public:
 
 	SDL_Texture* HUDTexture = nullptr;
 
+	SDL_Texture* AttackQuoteTexture = nullptr;
+
 	Animation frontFire,
 		smallFire,
-		HUD;
+		HUD,
+		AttackQuote;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
