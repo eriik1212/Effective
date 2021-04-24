@@ -123,10 +123,23 @@ update_status ModuleScene::Update()
 		
 	}
 
+	//Second if for the FX
+	if (App->render->camera.x == 780)
+	{
+		App->audio->PlayFx(DoorBrake);
+
+	}
+
 	if (App->render->camera.x > 1650)
 	{
 		doorBreak2.Update();
 		
+	}
+
+	if (App->render->camera.x == 1650)
+	{
+		App->audio->PlayFx(DoorBrake);
+
 	}
 
 	if (App->render->camera.x > 2025)
@@ -135,11 +148,23 @@ update_status ModuleScene::Update()
 	
 	}
 
+	if (App->render->camera.x == 2025)
+	{
+		App->audio->PlayFx(DoorBrake);
+
+	}
+
 	if (App->render->camera.x > 2500)
 	{
 		openElev.Update();
 		openElev2.Update();
 		
+	}
+
+	if (App->render->camera.x == 2500)
+	{
+		App->audio->PlayFx(ElevatorDoor);
+
 	}
 
 	if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
