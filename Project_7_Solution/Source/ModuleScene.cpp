@@ -94,6 +94,7 @@ bool ModuleScene::Start()
 	stageTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
 
 	App->audio->PlayMusic("Assets/Audio/03 Fire! Scene 1 Stage 1.ogg", 1.0f);
+	
 
 	// Final wall colliders
 	/*App->collisions->AddCollider({ 1000, 200, 20, 10 }, Collider::Type::WALL);
