@@ -619,9 +619,7 @@ bool ModulePlayer::Start()
 
 	PunchMiss = App->audio->LoadFx("Assets/FX/Punch1.wav");
 	PunchHit = App->audio->LoadFx("Assets/Fx/Punch2.wav");
-	/*laserFx = App->audio->LoadFx("Assets/laser.wav");
-	explosionFx = App->audio->LoadFx("Assets/explosion.wav");*/
-	 HIT= App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
+	HIT= App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
 
 
