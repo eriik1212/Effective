@@ -141,8 +141,9 @@ public:
 	// Sound effects indices
 	uint PunchMiss = 0;
 	uint PunchHit = 0;
-	uint EmenyDie = 0;
-
+	uint EnemyDie = 0;
+	uint Scream1 = 0;
+	
 };
 
 #endif //!__MODULE_PLAYER_H__

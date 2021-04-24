@@ -623,6 +623,7 @@ bool ModulePlayer::Start()
 
 	PunchMiss = App->audio->LoadFx("Assets/FX/Punch1.wav");
 	PunchHit = App->audio->LoadFx("Assets/Fx/Punch2.wav");
+	Scream1 = App->audio->LoadFx("Assets/FX/AtackScream.wav");
 	HIT= App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
 
@@ -715,6 +716,7 @@ update_status ModulePlayer::Update()
 				hitAirAnim1L.Reset();
 				currentAnimation = &hitAirAnim1L;
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchMiss);
 			}
 			break;
 		case 1:
@@ -724,6 +726,7 @@ update_status ModulePlayer::Update()
 				hitAirAnim2L.Reset();
 				currentAnimation = &hitAirAnim2L;
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchMiss);
 			}
 			break;
 		default:
