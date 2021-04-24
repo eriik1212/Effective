@@ -19,6 +19,9 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 	position.x = 100;
 	position.y = 112;
 
+	// HUD
+	HUD.PushBack({ 0, 0, 292, 32 });
+
 	// FrontFire animation
 	frontFire.PushBack({ 335, 430, 304, 62 });
 	frontFire.PushBack({ 19, 497, 304, 62 });
@@ -615,6 +618,7 @@ bool ModulePlayer::Start()
 
 	texture = App->textures->Load("Assets/Characters/Leonardo.png");
 	fireTexture = App->textures->Load("Assets/Tilesets/fire.png");
+	HUDTexture = App->textures->Load("Assets/UI & HUD/HUD.png");
 	currentAnimation = &idleAnimR;
 
 	PunchMiss = App->audio->LoadFx("Assets/FX/Punch1.wav");
@@ -1112,6 +1116,8 @@ update_status ModulePlayer::PostUpdate()
 		}
 
 	}
+
+	App->render->Blit(HUDTexture, 0, 0, &(HUD.GetCurrentFrame()), 0); // HUD animation
 
 	App->render->Blit(fireTexture, 0, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 256, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
