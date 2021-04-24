@@ -617,6 +617,8 @@ bool ModulePlayer::Start()
 	fireTexture = App->textures->Load("Assets/Tilesets/fire.png");
 	currentAnimation = &idleAnimR;
 
+	Punchmiss = App->audio->LoadFx("Assets/FX/Punch1.wav");
+	Punchit = App->audio->LoadFx("Assets/Fx/Punch2.wav");
 	/*laserFx = App->audio->LoadFx("Assets/laser.wav");
 	explosionFx = App->audio->LoadFx("Assets/explosion.wav");*/
 	 HIT= App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
@@ -667,6 +669,7 @@ update_status ModulePlayer::Update()
 			hitAirAnim1R.Reset();
 			currentAnimation = &hitAirAnim1R;
 		    App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+			App->audio->PlayFx(Punchmiss);
 				
 
 
@@ -680,6 +683,7 @@ update_status ModulePlayer::Update()
 				currentAnimation = &hitAirAnim2R;
 				
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(Punchit);
 			}
 			break;
 
@@ -1130,7 +1134,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
 		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);
 
-		App->audio->PlayFx(explosionFx);
+		
 
 		destroyed = true;
 	}
