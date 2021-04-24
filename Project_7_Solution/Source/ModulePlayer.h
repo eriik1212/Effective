@@ -52,7 +52,11 @@ public:
 
 	Animation frontFire,
 		smallFire,
-		HUD,
+		HUDP1,
+		HUDP234,
+		insertCoinP2,
+		insertCoinP3,
+		insertCoinP4,
 		AttackQuote;
 	
 	// The pointer to the current player animation

@@ -19,595 +19,644 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 	position.x = 5;
 	position.y = 112;
 
-	// Atack Quote
-	AttackQuote.PushBack({ 116, 168, 64, 32 });
-	AttackQuote.PushBack({ 0, 296, 64, 32 });
-	AttackQuote.speed = 0.01f;
-	AttackQuote.loop = false;
+	// ALL ANIMATIONS DOWN HERE
+	{
+		// Atack Quote
+		AttackQuote.PushBack({ 116, 168, 64, 32 });
+		AttackQuote.PushBack({ 0, 296, 64, 32 });
+		AttackQuote.speed = 0.01f;
+		AttackQuote.loop = false;
 
-	// HUD
-	HUD.PushBack({ 0, 0, 292, 32 });
+		// HUD Player1
+		HUDP1.PushBack({ 5, 0, 72, 32 });
 
-	// FrontFire animation
-	frontFire.PushBack({ 335, 430, 304, 62 });
-	frontFire.PushBack({ 19, 497, 304, 62 });
-	frontFire.PushBack({ 336, 500, 304, 62 });
-	frontFire.PushBack({ 21, 564, 304, 62 });
-	//frontFire.PushBack({ 18, 429, 304, 62 });
-	//frontFire.PushBack({ 336, 565, 304, 62 });
-	frontFire.PushBack({ 710, 536, 304, 62 });
-	frontFire.PushBack({ 1030, 536, 304, 62 });
-	frontFire.speed = 0.15f;
+		// HUD Player2,3,4
+		HUDP234.PushBack({ 77, 107, 213, 32 });
 
+		// INSERT COIN Anim for P2, P3, P4
+		// P2
+		insertCoinP2.PushBack({ 6, 167, 71, 13 });
+		insertCoinP2.PushBack({ 83, 167, 71, 13 });
+		insertCoinP2.PushBack({ 160, 167, 71, 13 });
+		insertCoinP2.PushBack({ 238, 167, 71, 13 });
+		insertCoinP2.PushBack({ 315, 167, 71, 13 });
+		insertCoinP2.PushBack({ 6, 187, 71, 13 });
+		insertCoinP2.PushBack({ 83, 187, 71, 13 });
+		insertCoinP2.PushBack({ 160, 187, 71, 13 });
+		insertCoinP2.PushBack({ 238, 187, 71, 13 });
+		insertCoinP2.PushBack({ 315, 187, 71, 13 });
+		insertCoinP2.speed = 0.15f;
+		insertCoinP2.loop = true;
 
-	// SmallFire In Map Animation
-	smallFire.PushBack({ 20, 635, 82, 46 });
-	smallFire.PushBack({ 102, 635, 82, 46 });
-	smallFire.PushBack({ 184, 635, 82, 46 });
-	smallFire.PushBack({ 266, 635, 82, 46 });
-	smallFire.PushBack({ 348, 635, 82, 46 });
-	smallFire.PushBack({ 430, 635, 82, 46 });
-	smallFire.speed = 0.15f;
+		// P3
+		insertCoinP3.PushBack({ 83, 167, 71, 13 });
+		insertCoinP3.PushBack({ 160, 167, 71, 13 });
+		insertCoinP3.PushBack({ 238, 167, 71, 13 });
+		insertCoinP3.PushBack({ 315, 167, 71, 13 });
+		insertCoinP3.PushBack({ 6, 187, 71, 13 });
+		insertCoinP3.PushBack({ 83, 187, 71, 13 });
+		insertCoinP3.PushBack({ 160, 187, 71, 13 });
+		insertCoinP3.PushBack({ 238, 187, 71, 13 });
+		insertCoinP3.PushBack({ 315, 187, 71, 13 });
+		insertCoinP3.PushBack({ 6, 167, 71, 13 });
+		insertCoinP3.speed = 0.15f;
+		insertCoinP3.loop = true;
 
-	// ---------------------------------------------------------------------idle animation
-	// RIGHT
-	idleAnimR.PushBack({ 2, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 282, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 2, 0, 94, 84 });
-	idleAnimR.PushBack({ 470, 0, 94, 84 });
-	idleAnimR.PushBack({ 2, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 188, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 282, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 2, 0, 94, 84 });
-	idleAnimR.loop = false;
-	idleAnimR.speed = 0.02f;
+		// P4
+		insertCoinP4.PushBack({ 160, 167, 71, 13 });
+		insertCoinP4.PushBack({ 238, 167, 71, 13 });
+		insertCoinP4.PushBack({ 315, 167, 71, 13 });
+		insertCoinP4.PushBack({ 6, 187, 71, 13 });
+		insertCoinP4.PushBack({ 83, 187, 71, 13 });
+		insertCoinP4.PushBack({ 160, 187, 71, 13 });
+		insertCoinP4.PushBack({ 238, 187, 71, 13 });
+		insertCoinP4.PushBack({ 315, 187, 71, 13 });
+		insertCoinP4.PushBack({ 6, 167, 71, 13 });
+		insertCoinP4.PushBack({ 83, 167, 71, 13 });
+		insertCoinP4.speed = 0.15f;
+		insertCoinP4.loop = true;
 
-	// LEFT
-	idleAnimL.PushBack({ 1690, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1598, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1410, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1598, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1690, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1222, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1690, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1598, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1504, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1598, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1410, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1598, 1680, 94, 84 });
-	idleAnimL.PushBack({ 1690, 1680, 94, 84 });
-	idleAnimL.loop = false;
-	idleAnimL.speed = 0.02f;
-	//-----------------------------------------------------------------------------MOVE
-	// move right
-	rightAnim.PushBack({ 0, 924, 94, 84 });
-	rightAnim.PushBack({ 94, 924, 94, 84 });
-	rightAnim.PushBack({ 188, 924, 94, 84 });
-	rightAnim.PushBack({ 282, 924, 94, 84 });
-	rightAnim.PushBack({ 376, 924, 94, 84 });
-	rightAnim.PushBack({ 470, 924, 94, 84 });
-	rightAnim.PushBack({ 564, 924, 94, 84 });
-	rightAnim.PushBack({ 658, 924, 94, 84 });
-	rightAnim.loop = true;
-	rightAnim.speed = 0.25f;
-
-	// move left
-	leftAnim.PushBack({ 1692, 2604, 94, 84 });
-	leftAnim.PushBack({ 1598, 2604, 94, 84 });
-	leftAnim.PushBack({ 1504, 2604, 94, 84 });
-	leftAnim.PushBack({ 1410, 2604, 94, 84 });
-	leftAnim.PushBack({ 1316, 2604, 94, 84 });
-	leftAnim.PushBack({ 1222, 2604, 94, 84 });
-	leftAnim.PushBack({ 1128, 2604, 94, 84 });
-	leftAnim.PushBack({ 1034, 2604, 94, 84 });
-	leftAnim.loop = true;
-	leftAnim.speed = 0.25f;
-
-	// move upwards
-	// RIGHT
-	upAnimR.PushBack({ 0, 1008, 94, 84 });
-	upAnimR.PushBack({ 94, 1008, 94, 84 });
-	upAnimR.PushBack({ 188, 1008, 94, 84 });
-	upAnimR.PushBack({ 282, 1008, 94, 84 });
-	upAnimR.PushBack({ 376, 1008, 94, 84 });
-	upAnimR.PushBack({ 470, 1008, 94, 84 });
-	upAnimR.PushBack({ 564, 1008, 94, 84 });
-	upAnimR.PushBack({ 658, 1008, 94, 84 });
-	upAnimR.loop = true;
-	upAnimR.speed = 0.25f;
-
-	//LEFT
-	upAnimL.PushBack({ 1692, 2688, 94, 84 });
-	upAnimL.PushBack({ 1598, 2688, 94, 84 });
-	upAnimL.PushBack({ 1504, 2688, 94, 84 });
-	upAnimL.PushBack({ 1410, 2688, 94, 84 });
-	upAnimL.PushBack({ 1316, 2688, 94, 84 });
-	upAnimL.PushBack({ 1222, 2688, 94, 84 });
-	upAnimL.PushBack({ 1128, 2688, 94, 84 });
-	upAnimL.PushBack({ 1034, 2688, 94, 84 });
-	upAnimL.loop = true;
-	upAnimL.speed = 0.25f;
-
-	// Move down
-	// RIGHT
-	downAnimR.PushBack({ 0, 924, 94, 84 });
-	downAnimR.PushBack({ 94, 924, 94, 84 });
-	downAnimR.PushBack({ 188, 924, 94, 84 });
-	downAnimR.PushBack({ 282, 924, 94, 84 });
-	downAnimR.PushBack({ 376, 924, 94, 84 });
-	downAnimR.PushBack({ 470, 924, 94, 84 });
-	downAnimR.PushBack({ 564, 924, 94, 84 });
-	downAnimR.PushBack({ 658, 924, 94, 84 });
-	downAnimR.loop = true;
-	downAnimR.speed = 0.25f;
-
-	// LEFT
-	downAnimL.PushBack({ 1692, 2604, 94, 84 });
-	downAnimL.PushBack({ 1598, 2604, 94, 84 });
-	downAnimL.PushBack({ 1504, 2604, 94, 84 });
-	downAnimL.PushBack({ 1410, 2604, 94, 84 });
-	downAnimL.PushBack({ 1316, 2604, 94, 84 });
-	downAnimL.PushBack({ 1222, 2604, 94, 84 });
-	downAnimL.PushBack({ 1128, 2604, 94, 84 });
-	downAnimL.PushBack({ 1034, 2604, 94, 84 });
-	downAnimL.loop = true;
-	downAnimL.speed = 0.25f;
-
-	//---------------------------------------------------------------------------- JUMP
-	//-------------------------------------------------------------Right
-	InitjumpAnimR.PushBack({ 0, 588, 94, 84 });
-	jumpAnimR.PushBack({ 94, 588, 94, 84 });
-	jumpAnimR.PushBack({ 188, 588, 94, 84 });
-	jumpAnimR.PushBack({ 282, 588, 94, 84 });
-	jumpAnimR.PushBack({ 376, 588, 94, 84 });
-	jumpAnimR.PushBack({ 470, 588, 94, 84 });
-	jumpAnimR.PushBack({ 564, 588, 94, 84 });
-	jumpAnimR.PushBack({ 658, 588, 94, 84 });
-	jumpAnimR.PushBack({ 752, 588, 94, 84 });
-	jumpAnimR.PushBack({ 846, 588, 94, 84 });
+		// FrontFire animation
+		frontFire.PushBack({ 335, 430, 304, 62 });
+		frontFire.PushBack({ 19, 497, 304, 62 });
+		frontFire.PushBack({ 336, 500, 304, 62 });
+		frontFire.PushBack({ 21, 564, 304, 62 });
+		//frontFire.PushBack({ 18, 429, 304, 62 });
+		//frontFire.PushBack({ 336, 565, 304, 62 });
+		frontFire.PushBack({ 710, 536, 304, 62 });
+		frontFire.PushBack({ 1030, 536, 304, 62 });
+		frontFire.speed = 0.15f;
 
 
-	jumpAnimR.loop = false;
-	jumpAnimR.speed = 0.25f;
+		// SmallFire In Map Animation
+		smallFire.PushBack({ 20, 635, 82, 46 });
+		smallFire.PushBack({ 102, 635, 82, 46 });
+		smallFire.PushBack({ 184, 635, 82, 46 });
+		smallFire.PushBack({ 266, 635, 82, 46 });
+		smallFire.PushBack({ 348, 635, 82, 46 });
+		smallFire.PushBack({ 430, 635, 82, 46 });
+		smallFire.speed = 0.15f;
 
-	//---------------------------------- JUMP HIT ANIM
-	hitJumpHorizontalAnimR.PushBack({ 0, 672, 94, 84 });
-	hitJumpHorizontalAnimR.PushBack({ 94, 672, 94, 84 });
-	hitJumpHorizontalAnimR.PushBack({ 188, 672, 94, 84 });
-	hitJumpHorizontalAnimR.loop = false;
-	hitJumpHorizontalAnimR.speed = 0.1f;
+		// ---------------------------------------------------------------------idle animation
+		// RIGHT
+		idleAnimR.PushBack({ 2, 0, 94, 84 });
+		idleAnimR.PushBack({ 94, 0, 94, 84 });
+		idleAnimR.PushBack({ 282, 0, 94, 84 });
+		idleAnimR.PushBack({ 94, 0, 94, 84 });
+		idleAnimR.PushBack({ 2, 0, 94, 84 });
+		idleAnimR.PushBack({ 470, 0, 94, 84 });
+		idleAnimR.PushBack({ 2, 0, 94, 84 });
+		idleAnimR.PushBack({ 94, 0, 94, 84 });
+		idleAnimR.PushBack({ 188, 0, 94, 84 });
+		idleAnimR.PushBack({ 94, 0, 94, 84 });
+		idleAnimR.PushBack({ 282, 0, 94, 84 });
+		idleAnimR.PushBack({ 94, 0, 94, 84 });
+		idleAnimR.PushBack({ 2, 0, 94, 84 });
+		idleAnimR.loop = false;
+		idleAnimR.speed = 0.02f;
 
-	hitJumpSwordAnimR.PushBack({ 0, 756, 94, 84 });
-	hitJumpSwordAnimR.PushBack({ 94, 756, 94, 84 });
-	hitJumpSwordAnimR.PushBack({ 188, 756, 94, 84 });
-	hitJumpSwordAnimR.PushBack({ 282, 756, 94, 84 });
-	hitJumpSwordAnimR.PushBack({ 376, 756, 94, 84 });
-	hitJumpSwordAnimR.PushBack({ 470, 756, 94, 84 });
-	hitJumpSwordAnimR.PushBack({ 564, 756, 94, 84 });
-	hitJumpSwordAnimR.loop = false;
-	hitJumpSwordAnimR.speed = 0.2f;
+		// LEFT
+		idleAnimL.PushBack({ 1690, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1598, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1410, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1598, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1690, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1222, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1690, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1598, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1504, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1598, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1410, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1598, 1680, 94, 84 });
+		idleAnimL.PushBack({ 1690, 1680, 94, 84 });
+		idleAnimL.loop = false;
+		idleAnimL.speed = 0.02f;
+		//-----------------------------------------------------------------------------MOVE
+		// move right
+		rightAnim.PushBack({ 0, 924, 94, 84 });
+		rightAnim.PushBack({ 94, 924, 94, 84 });
+		rightAnim.PushBack({ 188, 924, 94, 84 });
+		rightAnim.PushBack({ 282, 924, 94, 84 });
+		rightAnim.PushBack({ 376, 924, 94, 84 });
+		rightAnim.PushBack({ 470, 924, 94, 84 });
+		rightAnim.PushBack({ 564, 924, 94, 84 });
+		rightAnim.PushBack({ 658, 924, 94, 84 });
+		rightAnim.loop = true;
+		rightAnim.speed = 0.25f;
 
-	hitJumpDownAnimR.PushBack({ 0, 840, 94, 84 });
-	hitJumpDownAnimR.PushBack({ 94, 840, 94, 84 });
-	hitJumpDownAnimR.PushBack({ 188, 840, 94, 84 });
-	hitJumpDownAnimR.loop = false;
-	hitJumpDownAnimR.speed = 0.2f;
+		// move left
+		leftAnim.PushBack({ 1692, 2604, 94, 84 });
+		leftAnim.PushBack({ 1598, 2604, 94, 84 });
+		leftAnim.PushBack({ 1504, 2604, 94, 84 });
+		leftAnim.PushBack({ 1410, 2604, 94, 84 });
+		leftAnim.PushBack({ 1316, 2604, 94, 84 });
+		leftAnim.PushBack({ 1222, 2604, 94, 84 });
+		leftAnim.PushBack({ 1128, 2604, 94, 84 });
+		leftAnim.PushBack({ 1034, 2604, 94, 84 });
+		leftAnim.loop = true;
+		leftAnim.speed = 0.25f;
 
-	//--------------------------------------------------------------Left
-	InitjumpAnimL.PushBack({ 1692, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 1598, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 1504, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 1410, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 1316, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 1222, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 1128, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 1034, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 940, 2268, 94, 84 });
-	jumpAnimL.PushBack({ 846, 2268, 94, 84 });
-	jumpAnimL.loop = false;
-	jumpAnimL.speed = 0.25f;
+		// move upwards
+		// RIGHT
+		upAnimR.PushBack({ 0, 1008, 94, 84 });
+		upAnimR.PushBack({ 94, 1008, 94, 84 });
+		upAnimR.PushBack({ 188, 1008, 94, 84 });
+		upAnimR.PushBack({ 282, 1008, 94, 84 });
+		upAnimR.PushBack({ 376, 1008, 94, 84 });
+		upAnimR.PushBack({ 470, 1008, 94, 84 });
+		upAnimR.PushBack({ 564, 1008, 94, 84 });
+		upAnimR.PushBack({ 658, 1008, 94, 84 });
+		upAnimR.loop = true;
+		upAnimR.speed = 0.25f;
 
-	//---------------------------------- JUMP HIT ANIM
-	hitJumpHorizontalAnimL.PushBack({ 1692, 2352, 94, 84 });
-	hitJumpHorizontalAnimL.PushBack({ 1598, 2352, 94, 84 });
-	hitJumpHorizontalAnimL.PushBack({ 1504, 2352, 94, 84 });
-	hitJumpHorizontalAnimL.loop = false;
-	hitJumpHorizontalAnimL.speed = 0.1f;
+		//LEFT
+		upAnimL.PushBack({ 1692, 2688, 94, 84 });
+		upAnimL.PushBack({ 1598, 2688, 94, 84 });
+		upAnimL.PushBack({ 1504, 2688, 94, 84 });
+		upAnimL.PushBack({ 1410, 2688, 94, 84 });
+		upAnimL.PushBack({ 1316, 2688, 94, 84 });
+		upAnimL.PushBack({ 1222, 2688, 94, 84 });
+		upAnimL.PushBack({ 1128, 2688, 94, 84 });
+		upAnimL.PushBack({ 1034, 2688, 94, 84 });
+		upAnimL.loop = true;
+		upAnimL.speed = 0.25f;
 
-	hitJumpSwordAnimL.PushBack({ 1692, 2436, 94, 84 });
-	hitJumpSwordAnimL.PushBack({ 1598, 2436, 94, 84 });
-	hitJumpSwordAnimL.PushBack({ 1504, 2436, 94, 84 });
-	hitJumpSwordAnimL.PushBack({ 1410, 2436, 94, 84 });
-	hitJumpSwordAnimL.PushBack({ 1316, 2436, 94, 84 });
-	hitJumpSwordAnimL.PushBack({ 1222, 2436, 94, 84 });
-	hitJumpSwordAnimL.PushBack({ 1128, 2436, 94, 84 });
-	hitJumpSwordAnimL.loop = false;
-	hitJumpSwordAnimL.speed = 0.2f;
+		// Move down
+		// RIGHT
+		downAnimR.PushBack({ 0, 924, 94, 84 });
+		downAnimR.PushBack({ 94, 924, 94, 84 });
+		downAnimR.PushBack({ 188, 924, 94, 84 });
+		downAnimR.PushBack({ 282, 924, 94, 84 });
+		downAnimR.PushBack({ 376, 924, 94, 84 });
+		downAnimR.PushBack({ 470, 924, 94, 84 });
+		downAnimR.PushBack({ 564, 924, 94, 84 });
+		downAnimR.PushBack({ 658, 924, 94, 84 });
+		downAnimR.loop = true;
+		downAnimR.speed = 0.25f;
 
-	hitJumpDownAnimL.PushBack({ 1692, 2520, 94, 84 });
-	hitJumpDownAnimL.PushBack({ 1598, 2520, 94, 84 });
-	hitJumpDownAnimL.PushBack({ 1504, 2520, 94, 84 });
-	hitJumpDownAnimL.loop = false;
-	hitJumpDownAnimL.speed = 0.2f;
+		// LEFT
+		downAnimL.PushBack({ 1692, 2604, 94, 84 });
+		downAnimL.PushBack({ 1598, 2604, 94, 84 });
+		downAnimL.PushBack({ 1504, 2604, 94, 84 });
+		downAnimL.PushBack({ 1410, 2604, 94, 84 });
+		downAnimL.PushBack({ 1316, 2604, 94, 84 });
+		downAnimL.PushBack({ 1222, 2604, 94, 84 });
+		downAnimL.PushBack({ 1128, 2604, 94, 84 });
+		downAnimL.PushBack({ 1034, 2604, 94, 84 });
+		downAnimL.loop = true;
+		downAnimL.speed = 0.25f;
 
-	// Hit Air Animation 1
-	// RIGHT
-	hitAirAnim1R.PushBack({ 8, 336, 94, 84 });
-	hitAirAnim1R.PushBack({ 94, 336, 94, 84 });
-	hitAirAnim1R.PushBack({ 180, 336, 102, 84 });
-	hitAirAnim1R.PushBack({ 282, 336, 102, 84 });
-	hitAirAnim1R.PushBack({ 390, 336, 94, 84 });
-	hitAirAnim1R.PushBack({ 492, 336, 94, 84 });
-	hitAirAnim1R.loop = false;
-	hitAirAnim1R.speed = 0.3f;
-
-	// LEFT
-	hitAirAnim1L.PushBack({ 1692, 2016, 94, 84 });
-	hitAirAnim1L.PushBack({ 1598, 2016, 94, 84 });
-	hitAirAnim1L.PushBack({ 1504, 2016, 94, 84 });
-	hitAirAnim1L.PushBack({ 1398, 2016, 94, 84 });
-	hitAirAnim1L.PushBack({ 1304, 2016, 94, 84 });
-	hitAirAnim1L.PushBack({ 1196, 2016, 116, 84 });
-	hitAirAnim1L.loop = false;
-	hitAirAnim1L.speed = 0.3f;
-
-
-	// Hit Air Animation 2
-	// RIGHT
-	hitAirAnim2R.PushBack({ 0, 168, 94, 84 });
-	hitAirAnim2R.PushBack({ 98, 168, 94, 84 });
-	hitAirAnim2R.PushBack({ 192, 168, 94, 84 });
-	hitAirAnim2R.PushBack({ 276, 168, 94, 84 });
-	hitAirAnim2R.PushBack({ 370, 168, 94, 84 });
-	hitAirAnim2R.PushBack({ 476, 168, 94, 84 });
-	hitAirAnim2R.loop = false;
-	hitAirAnim2R.speed = 0.3f;
-
-
-	// LEFT
-	hitAirAnim2L.PushBack({ 1692, 1848, 94, 84 });
-	hitAirAnim2L.PushBack({ 1598, 1848, 94, 84 });
-	hitAirAnim2L.PushBack({ 1504, 1848, 94, 84 });
-	hitAirAnim2L.PushBack({ 1410, 1848, 94, 84 });
-	hitAirAnim2L.PushBack({ 1316, 1848, 94, 84 });
-	hitAirAnim2L.PushBack({ 1222, 1848, 94, 84 });
-	hitAirAnim2L.loop = false;
-	hitAirAnim2L.speed = 0.3f;
-
-	//------------------------------------------------------------------------------------- Hit Collide
-	// 1R
-	hitKickAnimR.PushBack({ 4, 84, 94, 84 });
-	hitKickAnimR.PushBack({ 94, 84, 94, 84 });
-	hitKickAnimR.PushBack({ 182, 84, 108, 84 });
-	hitKickAnimR.PushBack({ 300, 84, 94, 84 });
-	
-	hitKickAnimR.loop = false;
-	hitKickAnimR.speed = 0.2f;
-
-	// 1L
-	hitKickAnimL.PushBack({ 1692, 1764, 94, 84 });
-	hitKickAnimL.PushBack({ 1598, 1764, 94, 84 });
-	hitKickAnimL.PushBack({ 1504, 1764, 108, 84 });
-	hitKickAnimL.PushBack({ 1410, 1764, 94, 84 });
-	
-	hitKickAnimL.loop = false;
-	hitKickAnimL.speed = 0.2f;
-
-	// 2R
-	hitThrowAnimR.PushBack({ 1692, 1932, 94, 84 });
-	hitThrowAnimR.PushBack({ 1598, 1932, 94, 84 });
-	hitThrowAnimR.PushBack({ 1504, 1932, 94, 84 });
-	hitThrowAnimR.PushBack({ 1410, 1932, 94, 84 });
-	hitThrowAnimR.PushBack({ 1316, 1932, 94, 84 });
-	hitThrowAnimR.loop = false;
-	hitThrowAnimR.speed = 0.15f;
-
-	// 2L
-	hitThrowAnimL.PushBack({ 0, 252, 94, 84 });
-	hitThrowAnimL.PushBack({ 94, 252, 94, 84 });
-	hitThrowAnimL.PushBack({ 188, 252, 94, 84 });
-	hitThrowAnimL.PushBack({ 282, 252, 94, 84 });
-	hitThrowAnimL.PushBack({ 376, 252, 94, 84 });
-	hitThrowAnimL.loop = false;
-	hitThrowAnimL.speed = 0.15f;
-
-	// 3R
-	hitUpAnimR.PushBack({ 0, 420, 94, 84 });
-	hitUpAnimR.PushBack({ 94, 420, 94, 84 });
-	hitUpAnimR.PushBack({ 188, 420, 94, 84 });
-	hitUpAnimR.PushBack({ 282, 420, 94, 84 });
-	hitUpAnimR.loop = false;
-	hitUpAnimR.speed = 0.3f;
-
-	// 3L
-	hitUpAnimL.PushBack({ 1692, 2100, 94, 84 });
-	hitUpAnimL.PushBack({ 1598, 2100, 94, 84 });
-	hitUpAnimL.PushBack({ 1504, 2100, 94, 84 });
-	hitUpAnimL.PushBack({ 1410, 2100, 94, 84 });
-	hitUpAnimL.loop = false;
-	hitUpAnimL.speed = 0.3f;
-
-	// 4R
-	hitDownAnimR.PushBack({ 0, 504, 94, 84 });
-	hitDownAnimR.PushBack({ 94, 504, 94, 84 });
-	hitDownAnimR.PushBack({ 188, 504, 94, 84 });
-	hitDownAnimR.PushBack({ 282, 504, 110, 84 });
-	hitDownAnimR.loop = false;
-	hitDownAnimR.speed = 0.3f;
-
-	// 4L
-	hitDownAnimL.PushBack({ 1692, 2184, 94, 84 });
-	hitDownAnimL.PushBack({ 1598, 2184, 94, 84 });
-	hitDownAnimL.PushBack({ 1504, 2184, 94, 84 });
-	hitDownAnimL.PushBack({ 1415, 2184, 94, 84 });
-	hitDownAnimL.loop = false;
-	hitDownAnimL.speed = 0.3f;
-
-	// 5R
-	hitPrickAnimR.PushBack({ 0, 3780, 94, 84 });
-	hitPrickAnimR.PushBack({ 94, 3780, 94, 84 });
-	hitPrickAnimR.PushBack({ 188, 3780, 94, 84 });
-	hitPrickAnimR.PushBack({ 278, 3780, 104, 84 });
-	hitPrickAnimR.PushBack({ 380, 3780, 116, 84 });
-	hitPrickAnimR.loop = false;
-	hitPrickAnimR.speed = 0.3f;
-
-	// 5L
-	hitPrickAnimL.PushBack({ 1692, 3360, 94, 84 });
-	hitPrickAnimL.PushBack({ 1598, 3360, 94, 84 });
-	hitPrickAnimL.PushBack({ 1504, 3360, 94, 84 });
-	hitPrickAnimL.PushBack({ 1410, 3360, 94, 84 });
-	hitPrickAnimL.PushBack({ 1316, 3360, 94, 84 });
-	hitPrickAnimL.loop = false;
-	hitPrickAnimL.speed = 0.3f;
-
-	// 6R
-	hitOverAnimR.PushBack({ 0, 3864, 94, 84 });
-	hitOverAnimR.PushBack({ 88, 3864, 94, 84 });
-	hitOverAnimR.PushBack({ 188, 3864, 94, 84 });
-	hitOverAnimR.PushBack({ 278, 3864, 94, 84 });
-	hitOverAnimR.PushBack({ 381, 3864, 94, 84 });
-	hitOverAnimR.loop = false;
-	hitOverAnimR.speed = 0.3f;
-
-	// 6L
-	hitOverAnimL.PushBack({ 1692, 3444, 94, 84 });
-	hitOverAnimL.PushBack({ 1598, 3444, 94, 84 });
-	hitOverAnimL.PushBack({ 1504, 3444, 94, 84 });
-	hitOverAnimL.PushBack({ 1412, 3444, 94, 84 });
-	hitOverAnimL.PushBack({ 1304, 3444, 110, 84 });
-	hitOverAnimL.loop = false;
-	hitOverAnimL.speed = 0.3f;
+		//---------------------------------------------------------------------------- JUMP
+		//-------------------------------------------------------------Right
+		InitjumpAnimR.PushBack({ 0, 588, 94, 84 });
+		jumpAnimR.PushBack({ 94, 588, 94, 84 });
+		jumpAnimR.PushBack({ 188, 588, 94, 84 });
+		jumpAnimR.PushBack({ 282, 588, 94, 84 });
+		jumpAnimR.PushBack({ 376, 588, 94, 84 });
+		jumpAnimR.PushBack({ 470, 588, 94, 84 });
+		jumpAnimR.PushBack({ 564, 588, 94, 84 });
+		jumpAnimR.PushBack({ 658, 588, 94, 84 });
+		jumpAnimR.PushBack({ 752, 588, 94, 84 });
+		jumpAnimR.PushBack({ 846, 588, 94, 84 });
 
 
-	// ---------------------------------------------------------------- Hitted
-	// --------------------------------------------- Front
-	// 1R
-	hittedLowAnim1R.PushBack({ 0, 1092, 94, 84 });
-	hittedLowAnim1R.PushBack({ 94, 1092, 94, 84 });
-	hittedLowAnim1R.PushBack({ 188, 1092, 94, 84 });
-	hittedLowAnim1R.PushBack({ 282, 1092, 94, 84 });
-	hittedLowAnim1R.PushBack({ 376, 1092, 94, 84 });
-	hittedLowAnim1R.loop = false;
-	hittedLowAnim1R.speed = 0.2f;
+		jumpAnimR.loop = false;
+		jumpAnimR.speed = 0.25f;
 
-	// 1L
-	hittedLowAnim1L.PushBack({ 1692, 2772, 94, 84 });
-	hittedLowAnim1L.PushBack({ 1598, 2772, 94, 84 });
-	hittedLowAnim1L.PushBack({ 1504, 2772, 94, 84 });
-	hittedLowAnim1L.PushBack({ 1410, 2772, 94, 84 });
-	hittedLowAnim1L.PushBack({ 1316, 2772, 94, 84 });
-	hittedLowAnim1L.loop = false;
-	hittedLowAnim1L.speed = 0.2f;
+		//---------------------------------- JUMP HIT ANIM
+		hitJumpHorizontalAnimR.PushBack({ 0, 672, 94, 84 });
+		hitJumpHorizontalAnimR.PushBack({ 94, 672, 94, 84 });
+		hitJumpHorizontalAnimR.PushBack({ 188, 672, 94, 84 });
+		hitJumpHorizontalAnimR.loop = false;
+		hitJumpHorizontalAnimR.speed = 0.1f;
 
-	// 2R
-	hittedLowAnim2R.PushBack({ 0, 1176, 94, 84 });
-	hittedLowAnim2R.PushBack({ 94, 1176, 94, 84 });
-	hittedLowAnim2R.PushBack({ 188, 1176, 94, 84 });
-	hittedLowAnim2R.PushBack({ 282, 1176, 94, 84 });
-	hittedLowAnim2R.PushBack({ 376, 1176, 94, 84 });
-	hittedLowAnim2R.loop = false;
-	hittedLowAnim2R.speed = 0.2f;
+		hitJumpSwordAnimR.PushBack({ 0, 756, 94, 84 });
+		hitJumpSwordAnimR.PushBack({ 94, 756, 94, 84 });
+		hitJumpSwordAnimR.PushBack({ 188, 756, 94, 84 });
+		hitJumpSwordAnimR.PushBack({ 282, 756, 94, 84 });
+		hitJumpSwordAnimR.PushBack({ 376, 756, 94, 84 });
+		hitJumpSwordAnimR.PushBack({ 470, 756, 94, 84 });
+		hitJumpSwordAnimR.PushBack({ 564, 756, 94, 84 });
+		hitJumpSwordAnimR.loop = false;
+		hitJumpSwordAnimR.speed = 0.2f;
 
-	// 2L
-	hittedLowAnim2L.PushBack({ 1692, 2856, 94, 84 });
-	hittedLowAnim2L.PushBack({ 1598, 2856, 94, 84 });
-	hittedLowAnim2L.PushBack({ 1504, 2856, 94, 84 });
-	hittedLowAnim2L.PushBack({ 1410, 2856, 94, 84 });
-	hittedLowAnim2L.PushBack({ 1316, 2856, 94, 84 });
-	hittedLowAnim2L.loop = false;
-	hittedLowAnim2L.speed = 0.2f;
+		hitJumpDownAnimR.PushBack({ 0, 840, 94, 84 });
+		hitJumpDownAnimR.PushBack({ 94, 840, 94, 84 });
+		hitJumpDownAnimR.PushBack({ 188, 840, 94, 84 });
+		hitJumpDownAnimR.loop = false;
+		hitJumpDownAnimR.speed = 0.2f;
 
-	// 3R
-	hittedMediumAnimR.PushBack({ 0, 1260, 94, 84 });
-	hittedMediumAnimR.PushBack({ 94, 1260, 94, 84 });
-	hittedMediumAnimR.PushBack({ 188, 1260, 94, 84 });
-	hittedMediumAnimR.PushBack({ 282, 1260, 94, 84 });
-	hittedMediumAnimR.PushBack({ 376, 1260, 94, 84 });
-	hittedMediumAnimR.PushBack({ 470, 1240, 94, 120 });
-	hittedMediumAnimR.PushBack({ 564, 1260, 94, 84 });
-	hittedMediumAnimR.PushBack({ 658, 1260, 94, 84 });
-	hittedMediumAnimR.PushBack({ 752, 1260, 94, 84 });
-	hittedMediumAnimR.PushBack({ 846, 1260, 94, 84 });
-	hittedMediumAnimR.loop = false;
-	hittedMediumAnimR.speed = 0.2f;
+		//--------------------------------------------------------------Left
+		InitjumpAnimL.PushBack({ 1692, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 1598, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 1504, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 1410, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 1316, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 1222, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 1128, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 1034, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 940, 2268, 94, 84 });
+		jumpAnimL.PushBack({ 846, 2268, 94, 84 });
+		jumpAnimL.loop = false;
+		jumpAnimL.speed = 0.25f;
 
-	// 3L
-	hittedMediumAnimL.PushBack({ 1692, 2940, 94, 84 });
-	hittedMediumAnimL.PushBack({ 1598, 2940, 94, 84 });
-	hittedMediumAnimL.PushBack({ 1504, 2940, 94, 84 });
-	hittedMediumAnimL.PushBack({ 1410, 2940, 94, 84 });
-	hittedMediumAnimL.PushBack({ 1316, 2940, 94, 84 });
-	hittedMediumAnimL.PushBack({ 1222, 2920, 94, 120 });
-	hittedMediumAnimL.PushBack({ 1128, 2940, 94, 84 });
-	hittedMediumAnimL.PushBack({ 1034, 2940, 94, 84 });
-	hittedMediumAnimL.PushBack({ 940, 2940, 94, 84 });
-	hittedMediumAnimL.PushBack({ 846, 2940, 94, 84 });
-	hittedMediumAnimL.loop = false;
-	hittedMediumAnimL.speed = 0.2f;
+		//---------------------------------- JUMP HIT ANIM
+		hitJumpHorizontalAnimL.PushBack({ 1692, 2352, 94, 84 });
+		hitJumpHorizontalAnimL.PushBack({ 1598, 2352, 94, 84 });
+		hitJumpHorizontalAnimL.PushBack({ 1504, 2352, 94, 84 });
+		hitJumpHorizontalAnimL.loop = false;
+		hitJumpHorizontalAnimL.speed = 0.1f;
 
-	// 4R
-	hittedHighAnimR.PushBack({ 0, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 94, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 188, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 282, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 376, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 470, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 564, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 658, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 752, 4032, 94, 84 });
-	hittedHighAnimR.PushBack({ 846, 4022, 94, 110 });
-	hittedHighAnimR.PushBack({ 940, 4032, 94, 84 });
-	hittedHighAnimR.loop = false;
-	hittedHighAnimR.speed = 0.1f;
+		hitJumpSwordAnimL.PushBack({ 1692, 2436, 94, 84 });
+		hitJumpSwordAnimL.PushBack({ 1598, 2436, 94, 84 });
+		hitJumpSwordAnimL.PushBack({ 1504, 2436, 94, 84 });
+		hitJumpSwordAnimL.PushBack({ 1410, 2436, 94, 84 });
+		hitJumpSwordAnimL.PushBack({ 1316, 2436, 94, 84 });
+		hitJumpSwordAnimL.PushBack({ 1222, 2436, 94, 84 });
+		hitJumpSwordAnimL.PushBack({ 1128, 2436, 94, 84 });
+		hitJumpSwordAnimL.loop = false;
+		hitJumpSwordAnimL.speed = 0.2f;
 
-	// 4L
-	hittedHighAnimL.PushBack({ 1692, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 1598, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 1504, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 1410, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 1316, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 1222, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 1128, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 1034, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 940, 3612, 94, 84 });
-	hittedHighAnimL.PushBack({ 846, 3592, 94, 120 });
-	hittedHighAnimL.PushBack({ 752, 3612, 94, 84 });
-	hittedHighAnimL.loop = false;
-	hittedHighAnimL.speed = 0.1f;
+		hitJumpDownAnimL.PushBack({ 1692, 2520, 94, 84 });
+		hitJumpDownAnimL.PushBack({ 1598, 2520, 94, 84 });
+		hitJumpDownAnimL.PushBack({ 1504, 2520, 94, 84 });
+		hitJumpDownAnimL.loop = false;
+		hitJumpDownAnimL.speed = 0.2f;
 
-	// --------------------------------------------- Back
-	// 5R
-	hittedBackLowAnimR.PushBack({ 0, 1344, 94, 84 });
-	hittedBackLowAnimR.PushBack({ 92, 1344, 94, 84 });
-	hittedBackLowAnimR.PushBack({ 172, 1344, 110, 84 });
-	hittedBackLowAnimR.loop = false;
-	hittedBackLowAnimR.speed = 0.1f;
+		// Hit Air Animation 1
+		// RIGHT
+		hitAirAnim1R.PushBack({ 8, 336, 94, 84 });
+		hitAirAnim1R.PushBack({ 94, 336, 94, 84 });
+		hitAirAnim1R.PushBack({ 180, 336, 102, 84 });
+		hitAirAnim1R.PushBack({ 282, 336, 102, 84 });
+		hitAirAnim1R.PushBack({ 390, 336, 94, 84 });
+		hitAirAnim1R.PushBack({ 492, 336, 94, 84 });
+		hitAirAnim1R.loop = false;
+		hitAirAnim1R.speed = 0.3f;
 
-	// 5L
-	hittedBackLowAnimL.PushBack({ 1692, 3024, 94, 84 });
-	hittedBackLowAnimL.PushBack({ 1594, 3024, 94, 84 });
-	hittedBackLowAnimL.PushBack({ 1525, 3024, 80, 84 });
-	hittedBackLowAnimL.loop = false;
-	hittedBackLowAnimL.speed = 0.1f;
+		// LEFT
+		hitAirAnim1L.PushBack({ 1692, 2016, 94, 84 });
+		hitAirAnim1L.PushBack({ 1598, 2016, 94, 84 });
+		hitAirAnim1L.PushBack({ 1504, 2016, 94, 84 });
+		hitAirAnim1L.PushBack({ 1398, 2016, 94, 84 });
+		hitAirAnim1L.PushBack({ 1304, 2016, 94, 84 });
+		hitAirAnim1L.PushBack({ 1196, 2016, 116, 84 });
+		hitAirAnim1L.loop = false;
+		hitAirAnim1L.speed = 0.3f;
 
-	// 6R
-	hittedBackMediumAnimR.PushBack({ 0, 1512, 94, 84 });
-	hittedBackMediumAnimR.PushBack({ 94, 1512, 94, 84 });
-	hittedBackMediumAnimR.PushBack({ 188, 1512, 94, 84 });
-	hittedBackMediumAnimR.PushBack({ 282, 1512, 94, 84 });
-	hittedBackMediumAnimR.PushBack({ 376, 1512, 94, 84 });
-	hittedBackMediumAnimR.PushBack({ 470, 1512, 94, 84 });
-	hittedBackMediumAnimR.PushBack({ 564, 1512, 90, 84 });
-	hittedBackMediumAnimR.PushBack({ 654, 1512, 94, 84 });
-	hittedBackMediumAnimR.PushBack({ 752, 1512, 94, 84 });
-	hittedBackMediumAnimR.PushBack({ 846, 1512, 94, 84 });
-	hittedBackMediumAnimR.loop = false;
-	hittedBackMediumAnimR.speed = 0.1f;
 
-	// 6L
-	hittedBackMediumAnimL.PushBack({ 1692, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 1598, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 1504, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 1410, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 1316, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 1222, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 1132, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 1034, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 940, 3192, 94, 84 });
-	hittedBackMediumAnimL.PushBack({ 846, 3192, 94, 84 });
-	hittedBackMediumAnimL.loop = false;
-	hittedBackMediumAnimL.speed = 0.1f;
+		// Hit Air Animation 2
+		// RIGHT
+		hitAirAnim2R.PushBack({ 0, 168, 94, 84 });
+		hitAirAnim2R.PushBack({ 98, 168, 94, 84 });
+		hitAirAnim2R.PushBack({ 192, 168, 94, 84 });
+		hitAirAnim2R.PushBack({ 276, 168, 94, 84 });
+		hitAirAnim2R.PushBack({ 370, 168, 94, 84 });
+		hitAirAnim2R.PushBack({ 476, 168, 94, 84 });
+		hitAirAnim2R.loop = false;
+		hitAirAnim2R.speed = 0.3f;
 
-	// 7R
-	hittedBackHighAnimR.PushBack({ 0, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 188, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 282, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 376, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 470, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 564, 1428, 90, 84 });
-	hittedBackHighAnimR.PushBack({ 654, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 752, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 846, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 940, 1428, 90, 84 });
-	hittedBackHighAnimR.PushBack({ 1034, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 1034, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 1132, 1428, 94, 84 });
-	hittedBackHighAnimR.PushBack({ 1222, 1428, 94, 84 });
-	hittedBackHighAnimR.loop = false;
-	hittedBackHighAnimR.speed = 0.15f;
 
-	// 7L
-	hittedBackHighAnimL.PushBack({ 1692, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 1598, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 1504, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 1410, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 1316, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 1222, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 1132, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 1034, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 940, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 846, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 752, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 658, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 658, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 564, 3108, 94, 84 });
-	hittedBackHighAnimL.PushBack({ 470, 3108, 94, 84 });
-	hittedBackHighAnimL.loop = false;
-	hittedBackHighAnimL.speed = 0.15f;
+		// LEFT
+		hitAirAnim2L.PushBack({ 1692, 1848, 94, 84 });
+		hitAirAnim2L.PushBack({ 1598, 1848, 94, 84 });
+		hitAirAnim2L.PushBack({ 1504, 1848, 94, 84 });
+		hitAirAnim2L.PushBack({ 1410, 1848, 94, 84 });
+		hitAirAnim2L.PushBack({ 1316, 1848, 94, 84 });
+		hitAirAnim2L.PushBack({ 1222, 1848, 94, 84 });
+		hitAirAnim2L.loop = false;
+		hitAirAnim2L.speed = 0.3f;
 
-	// 8R
-	hittedGrabbedAnimR.PushBack({ 0, 1596, 94, 84 });
-	hittedGrabbedAnimR.PushBack({ 94, 1596, 94, 84 });
-	hittedGrabbedAnimR.PushBack({ 188, 1596, 94, 84 });
-	hittedGrabbedAnimR.loop = true;
-	hittedGrabbedAnimR.speed = 0.1f;
+		//------------------------------------------------------------------------------------- Hit Collide
+		// 1R
+		hitKickAnimR.PushBack({ 4, 84, 94, 84 });
+		hitKickAnimR.PushBack({ 94, 84, 94, 84 });
+		hitKickAnimR.PushBack({ 182, 84, 108, 84 });
+		hitKickAnimR.PushBack({ 300, 84, 94, 84 });
 
-	// 9L
-	hittedGrabbedAnimL.PushBack({ 1692, 3276, 94, 84 });
-	hittedGrabbedAnimL.PushBack({ 1598, 3276, 94, 84 });
-	hittedGrabbedAnimL.PushBack({ 1504, 3276, 94, 84 });
-	hittedGrabbedAnimL.loop = true;
-	hittedGrabbedAnimL.speed = 0.1f;
+		hitKickAnimR.loop = false;
+		hitKickAnimR.speed = 0.2f;
 
-	// -----------------------------------------------------------Death
-	// Right
-	deathAnimR.PushBack({ 1222, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1504, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1504, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1222, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1316, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1598, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1598, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1316, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1410, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1692, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1692, 3833, 94, 84 });
-	deathAnimR.PushBack({ 1410, 3833, 94, 84 });
-	deathAnimR.loop = true;
-	deathAnimR.speed = 0.6f;
+		// 1L
+		hitKickAnimL.PushBack({ 1692, 1764, 94, 84 });
+		hitKickAnimL.PushBack({ 1598, 1764, 94, 84 });
+		hitKickAnimL.PushBack({ 1504, 1764, 108, 84 });
+		hitKickAnimL.PushBack({ 1410, 1764, 94, 84 });
 
-	// Left
-	deathAnimL.PushBack({ 1692, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1410, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1410, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1692, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1598, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1316, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1316, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1598, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1504, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1222, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1222, 3735, 94, 84 });
-	deathAnimL.PushBack({ 1504, 3735, 94, 84 });
-	deathAnimL.loop = true;
-	deathAnimL.speed = 0.6f;
+		hitKickAnimL.loop = false;
+		hitKickAnimL.speed = 0.2f;
 
+		// 2R
+		hitThrowAnimR.PushBack({ 1692, 1932, 94, 84 });
+		hitThrowAnimR.PushBack({ 1598, 1932, 94, 84 });
+		hitThrowAnimR.PushBack({ 1504, 1932, 94, 84 });
+		hitThrowAnimR.PushBack({ 1410, 1932, 94, 84 });
+		hitThrowAnimR.PushBack({ 1316, 1932, 94, 84 });
+		hitThrowAnimR.loop = false;
+		hitThrowAnimR.speed = 0.15f;
+
+		// 2L
+		hitThrowAnimL.PushBack({ 0, 252, 94, 84 });
+		hitThrowAnimL.PushBack({ 94, 252, 94, 84 });
+		hitThrowAnimL.PushBack({ 188, 252, 94, 84 });
+		hitThrowAnimL.PushBack({ 282, 252, 94, 84 });
+		hitThrowAnimL.PushBack({ 376, 252, 94, 84 });
+		hitThrowAnimL.loop = false;
+		hitThrowAnimL.speed = 0.15f;
+
+		// 3R
+		hitUpAnimR.PushBack({ 0, 420, 94, 84 });
+		hitUpAnimR.PushBack({ 94, 420, 94, 84 });
+		hitUpAnimR.PushBack({ 188, 420, 94, 84 });
+		hitUpAnimR.PushBack({ 282, 420, 94, 84 });
+		hitUpAnimR.loop = false;
+		hitUpAnimR.speed = 0.3f;
+
+		// 3L
+		hitUpAnimL.PushBack({ 1692, 2100, 94, 84 });
+		hitUpAnimL.PushBack({ 1598, 2100, 94, 84 });
+		hitUpAnimL.PushBack({ 1504, 2100, 94, 84 });
+		hitUpAnimL.PushBack({ 1410, 2100, 94, 84 });
+		hitUpAnimL.loop = false;
+		hitUpAnimL.speed = 0.3f;
+
+		// 4R
+		hitDownAnimR.PushBack({ 0, 504, 94, 84 });
+		hitDownAnimR.PushBack({ 94, 504, 94, 84 });
+		hitDownAnimR.PushBack({ 188, 504, 94, 84 });
+		hitDownAnimR.PushBack({ 282, 504, 110, 84 });
+		hitDownAnimR.loop = false;
+		hitDownAnimR.speed = 0.3f;
+
+		// 4L
+		hitDownAnimL.PushBack({ 1692, 2184, 94, 84 });
+		hitDownAnimL.PushBack({ 1598, 2184, 94, 84 });
+		hitDownAnimL.PushBack({ 1504, 2184, 94, 84 });
+		hitDownAnimL.PushBack({ 1415, 2184, 94, 84 });
+		hitDownAnimL.loop = false;
+		hitDownAnimL.speed = 0.3f;
+
+		// 5R
+		hitPrickAnimR.PushBack({ 0, 3780, 94, 84 });
+		hitPrickAnimR.PushBack({ 94, 3780, 94, 84 });
+		hitPrickAnimR.PushBack({ 188, 3780, 94, 84 });
+		hitPrickAnimR.PushBack({ 278, 3780, 104, 84 });
+		hitPrickAnimR.PushBack({ 380, 3780, 116, 84 });
+		hitPrickAnimR.loop = false;
+		hitPrickAnimR.speed = 0.3f;
+
+		// 5L
+		hitPrickAnimL.PushBack({ 1692, 3360, 94, 84 });
+		hitPrickAnimL.PushBack({ 1598, 3360, 94, 84 });
+		hitPrickAnimL.PushBack({ 1504, 3360, 94, 84 });
+		hitPrickAnimL.PushBack({ 1410, 3360, 94, 84 });
+		hitPrickAnimL.PushBack({ 1316, 3360, 94, 84 });
+		hitPrickAnimL.loop = false;
+		hitPrickAnimL.speed = 0.3f;
+
+		// 6R
+		hitOverAnimR.PushBack({ 0, 3864, 94, 84 });
+		hitOverAnimR.PushBack({ 88, 3864, 94, 84 });
+		hitOverAnimR.PushBack({ 188, 3864, 94, 84 });
+		hitOverAnimR.PushBack({ 278, 3864, 94, 84 });
+		hitOverAnimR.PushBack({ 381, 3864, 94, 84 });
+		hitOverAnimR.loop = false;
+		hitOverAnimR.speed = 0.3f;
+
+		// 6L
+		hitOverAnimL.PushBack({ 1692, 3444, 94, 84 });
+		hitOverAnimL.PushBack({ 1598, 3444, 94, 84 });
+		hitOverAnimL.PushBack({ 1504, 3444, 94, 84 });
+		hitOverAnimL.PushBack({ 1412, 3444, 94, 84 });
+		hitOverAnimL.PushBack({ 1304, 3444, 110, 84 });
+		hitOverAnimL.loop = false;
+		hitOverAnimL.speed = 0.3f;
+
+
+		// ---------------------------------------------------------------- Hitted
+		// --------------------------------------------- Front
+		// 1R
+		hittedLowAnim1R.PushBack({ 0, 1092, 94, 84 });
+		hittedLowAnim1R.PushBack({ 94, 1092, 94, 84 });
+		hittedLowAnim1R.PushBack({ 188, 1092, 94, 84 });
+		hittedLowAnim1R.PushBack({ 282, 1092, 94, 84 });
+		hittedLowAnim1R.PushBack({ 376, 1092, 94, 84 });
+		hittedLowAnim1R.loop = false;
+		hittedLowAnim1R.speed = 0.2f;
+
+		// 1L
+		hittedLowAnim1L.PushBack({ 1692, 2772, 94, 84 });
+		hittedLowAnim1L.PushBack({ 1598, 2772, 94, 84 });
+		hittedLowAnim1L.PushBack({ 1504, 2772, 94, 84 });
+		hittedLowAnim1L.PushBack({ 1410, 2772, 94, 84 });
+		hittedLowAnim1L.PushBack({ 1316, 2772, 94, 84 });
+		hittedLowAnim1L.loop = false;
+		hittedLowAnim1L.speed = 0.2f;
+
+		// 2R
+		hittedLowAnim2R.PushBack({ 0, 1176, 94, 84 });
+		hittedLowAnim2R.PushBack({ 94, 1176, 94, 84 });
+		hittedLowAnim2R.PushBack({ 188, 1176, 94, 84 });
+		hittedLowAnim2R.PushBack({ 282, 1176, 94, 84 });
+		hittedLowAnim2R.PushBack({ 376, 1176, 94, 84 });
+		hittedLowAnim2R.loop = false;
+		hittedLowAnim2R.speed = 0.2f;
+
+		// 2L
+		hittedLowAnim2L.PushBack({ 1692, 2856, 94, 84 });
+		hittedLowAnim2L.PushBack({ 1598, 2856, 94, 84 });
+		hittedLowAnim2L.PushBack({ 1504, 2856, 94, 84 });
+		hittedLowAnim2L.PushBack({ 1410, 2856, 94, 84 });
+		hittedLowAnim2L.PushBack({ 1316, 2856, 94, 84 });
+		hittedLowAnim2L.loop = false;
+		hittedLowAnim2L.speed = 0.2f;
+
+		// 3R
+		hittedMediumAnimR.PushBack({ 0, 1260, 94, 84 });
+		hittedMediumAnimR.PushBack({ 94, 1260, 94, 84 });
+		hittedMediumAnimR.PushBack({ 188, 1260, 94, 84 });
+		hittedMediumAnimR.PushBack({ 282, 1260, 94, 84 });
+		hittedMediumAnimR.PushBack({ 376, 1260, 94, 84 });
+		hittedMediumAnimR.PushBack({ 470, 1240, 94, 120 });
+		hittedMediumAnimR.PushBack({ 564, 1260, 94, 84 });
+		hittedMediumAnimR.PushBack({ 658, 1260, 94, 84 });
+		hittedMediumAnimR.PushBack({ 752, 1260, 94, 84 });
+		hittedMediumAnimR.PushBack({ 846, 1260, 94, 84 });
+		hittedMediumAnimR.loop = false;
+		hittedMediumAnimR.speed = 0.2f;
+
+		// 3L
+		hittedMediumAnimL.PushBack({ 1692, 2940, 94, 84 });
+		hittedMediumAnimL.PushBack({ 1598, 2940, 94, 84 });
+		hittedMediumAnimL.PushBack({ 1504, 2940, 94, 84 });
+		hittedMediumAnimL.PushBack({ 1410, 2940, 94, 84 });
+		hittedMediumAnimL.PushBack({ 1316, 2940, 94, 84 });
+		hittedMediumAnimL.PushBack({ 1222, 2920, 94, 120 });
+		hittedMediumAnimL.PushBack({ 1128, 2940, 94, 84 });
+		hittedMediumAnimL.PushBack({ 1034, 2940, 94, 84 });
+		hittedMediumAnimL.PushBack({ 940, 2940, 94, 84 });
+		hittedMediumAnimL.PushBack({ 846, 2940, 94, 84 });
+		hittedMediumAnimL.loop = false;
+		hittedMediumAnimL.speed = 0.2f;
+
+		// 4R
+		hittedHighAnimR.PushBack({ 0, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 94, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 188, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 282, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 376, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 470, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 564, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 658, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 752, 4032, 94, 84 });
+		hittedHighAnimR.PushBack({ 846, 4022, 94, 110 });
+		hittedHighAnimR.PushBack({ 940, 4032, 94, 84 });
+		hittedHighAnimR.loop = false;
+		hittedHighAnimR.speed = 0.1f;
+
+		// 4L
+		hittedHighAnimL.PushBack({ 1692, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 1598, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 1504, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 1410, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 1316, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 1222, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 1128, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 1034, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 940, 3612, 94, 84 });
+		hittedHighAnimL.PushBack({ 846, 3592, 94, 120 });
+		hittedHighAnimL.PushBack({ 752, 3612, 94, 84 });
+		hittedHighAnimL.loop = false;
+		hittedHighAnimL.speed = 0.1f;
+
+		// --------------------------------------------- Back
+		// 5R
+		hittedBackLowAnimR.PushBack({ 0, 1344, 94, 84 });
+		hittedBackLowAnimR.PushBack({ 92, 1344, 94, 84 });
+		hittedBackLowAnimR.PushBack({ 172, 1344, 110, 84 });
+		hittedBackLowAnimR.loop = false;
+		hittedBackLowAnimR.speed = 0.1f;
+
+		// 5L
+		hittedBackLowAnimL.PushBack({ 1692, 3024, 94, 84 });
+		hittedBackLowAnimL.PushBack({ 1594, 3024, 94, 84 });
+		hittedBackLowAnimL.PushBack({ 1525, 3024, 80, 84 });
+		hittedBackLowAnimL.loop = false;
+		hittedBackLowAnimL.speed = 0.1f;
+
+		// 6R
+		hittedBackMediumAnimR.PushBack({ 0, 1512, 94, 84 });
+		hittedBackMediumAnimR.PushBack({ 94, 1512, 94, 84 });
+		hittedBackMediumAnimR.PushBack({ 188, 1512, 94, 84 });
+		hittedBackMediumAnimR.PushBack({ 282, 1512, 94, 84 });
+		hittedBackMediumAnimR.PushBack({ 376, 1512, 94, 84 });
+		hittedBackMediumAnimR.PushBack({ 470, 1512, 94, 84 });
+		hittedBackMediumAnimR.PushBack({ 564, 1512, 90, 84 });
+		hittedBackMediumAnimR.PushBack({ 654, 1512, 94, 84 });
+		hittedBackMediumAnimR.PushBack({ 752, 1512, 94, 84 });
+		hittedBackMediumAnimR.PushBack({ 846, 1512, 94, 84 });
+		hittedBackMediumAnimR.loop = false;
+		hittedBackMediumAnimR.speed = 0.1f;
+
+		// 6L
+		hittedBackMediumAnimL.PushBack({ 1692, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 1598, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 1504, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 1410, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 1316, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 1222, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 1132, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 1034, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 940, 3192, 94, 84 });
+		hittedBackMediumAnimL.PushBack({ 846, 3192, 94, 84 });
+		hittedBackMediumAnimL.loop = false;
+		hittedBackMediumAnimL.speed = 0.1f;
+
+		// 7R
+		hittedBackHighAnimR.PushBack({ 0, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 188, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 282, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 376, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 470, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 564, 1428, 90, 84 });
+		hittedBackHighAnimR.PushBack({ 654, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 752, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 846, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 940, 1428, 90, 84 });
+		hittedBackHighAnimR.PushBack({ 1034, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 1034, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 1132, 1428, 94, 84 });
+		hittedBackHighAnimR.PushBack({ 1222, 1428, 94, 84 });
+		hittedBackHighAnimR.loop = false;
+		hittedBackHighAnimR.speed = 0.15f;
+
+		// 7L
+		hittedBackHighAnimL.PushBack({ 1692, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 1598, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 1504, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 1410, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 1316, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 1222, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 1132, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 1034, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 940, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 846, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 752, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 658, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 658, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 564, 3108, 94, 84 });
+		hittedBackHighAnimL.PushBack({ 470, 3108, 94, 84 });
+		hittedBackHighAnimL.loop = false;
+		hittedBackHighAnimL.speed = 0.15f;
+
+		// 8R
+		hittedGrabbedAnimR.PushBack({ 0, 1596, 94, 84 });
+		hittedGrabbedAnimR.PushBack({ 94, 1596, 94, 84 });
+		hittedGrabbedAnimR.PushBack({ 188, 1596, 94, 84 });
+		hittedGrabbedAnimR.loop = true;
+		hittedGrabbedAnimR.speed = 0.1f;
+
+		// 9L
+		hittedGrabbedAnimL.PushBack({ 1692, 3276, 94, 84 });
+		hittedGrabbedAnimL.PushBack({ 1598, 3276, 94, 84 });
+		hittedGrabbedAnimL.PushBack({ 1504, 3276, 94, 84 });
+		hittedGrabbedAnimL.loop = true;
+		hittedGrabbedAnimL.speed = 0.1f;
+
+		// -----------------------------------------------------------Death
+		// Right
+		deathAnimR.PushBack({ 1222, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1504, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1504, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1222, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1316, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1598, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1598, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1316, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1410, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1692, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1692, 3833, 94, 84 });
+		deathAnimR.PushBack({ 1410, 3833, 94, 84 });
+		deathAnimR.loop = true;
+		deathAnimR.speed = 0.6f;
+
+		// Left
+		deathAnimL.PushBack({ 1692, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1410, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1410, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1692, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1598, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1316, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1316, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1598, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1504, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1222, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1222, 3735, 94, 84 });
+		deathAnimL.PushBack({ 1504, 3735, 94, 84 });
+		deathAnimL.loop = true;
+		deathAnimL.speed = 0.6f;
+
+	}
 }
 
 
@@ -645,6 +694,9 @@ update_status ModulePlayer::Update()
 	frontFire.Update();
 	smallFire.Update();
 	AttackQuote.Update();
+	insertCoinP2.Update();
+	insertCoinP3.Update();
+	insertCoinP4.Update();
 
 	// Position Players Limits
 	if (position.x < App->render->playerLimitL) position.x = App->render->playerLimitL;
@@ -1137,7 +1189,14 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(fireTexture, 1024, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 1280, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 
-	App->render->Blit(HUDTexture, 0, 0, &(HUD.GetCurrentFrame()), 0); // HUD animation
+	// -------------------------------------------------------------------------------------------- HUD
+
+	App->render->Blit(HUDTexture, 8, 0, &(HUDP1.GetCurrentFrame()), 0); // HUD Square Player1
+	App->render->Blit(HUDTexture, 80, 0, &(HUDP234.GetCurrentFrame()), 0); // HUD Square Player2,3,4
+
+	App->render->Blit(HUDTexture, 80, 16, &(insertCoinP2.GetCurrentFrame()), 0); // INSERT COIN Player2
+	App->render->Blit(HUDTexture, 151, 16, &(insertCoinP3.GetCurrentFrame()), 0); // INSERT COIN Player3
+	App->render->Blit(HUDTexture, 222, 16, &(insertCoinP4.GetCurrentFrame()), 0); // INSERT COIN Player4
 
 	return update_status::UPDATE_CONTINUE;
 }
