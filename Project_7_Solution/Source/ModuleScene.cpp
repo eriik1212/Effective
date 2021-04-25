@@ -63,7 +63,8 @@ ModuleScene::ModuleScene(bool enabled) : Module(enabled)
 	doorBreak3.PushBack({ 452, 233, 16, 79 });
 	doorBreak3.loop = false;
 	doorBreak3.speed = 0.2f;
-
+	App->audio->PlayFx(ElevatorDoor);
+	
 	openElev.PushBack({ 262, 326, 44, 77 });
 	openElev.PushBack({ 308, 326, 44, 77 });
 	openElev.PushBack({ 354, 326, 44, 77 });
@@ -159,13 +160,16 @@ update_status ModuleScene::Update()
 		openElev.Update();
 		openElev2.Update();
 		
-	}
 
-	if (App->render->camera.x == 2500)
+		
+	}
+	
+
+	/*if (App->render->camera.x == 100)
 	{
 		App->audio->PlayFx(ElevatorDoor);
 
-	}
+	}*/
 
 
 
