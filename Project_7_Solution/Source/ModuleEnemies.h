@@ -15,6 +15,7 @@ enum class ENEMY_TYPE
 {
 	NO_TYPE,
 	PURPLE_ENEMY,
+	WHITE_ENEMY,
 };
 
 struct EnemySpawnpoint
@@ -76,8 +77,8 @@ private:
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
-	SDL_Texture* texture = nullptr;
-
+	SDL_Texture* white = nullptr;
+	SDL_Texture* purple = nullptr;
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
 };
