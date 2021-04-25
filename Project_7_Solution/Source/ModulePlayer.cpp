@@ -7,7 +7,9 @@
 #include "ModuleParticles.h"
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
+#include "ModuleFonts.h"
 
+#include <stdio.h>
 
 #include "SDL/include/SDL_scancode.h"
 
@@ -683,7 +685,9 @@ bool ModulePlayer::Start()
 	HIT= App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
 
-
+	char lookupTable[] = { "0123456789 " };
+	scoreFont = App->fonts->Load("Assets/UI & HUD/fonts.png", lookupTable, 1);
+	lifeFont = App->fonts->Load("Assets/UI & HUD/NumLifesFont.png", lookupTable, 1);
 
 	return ret;
 }
@@ -1206,6 +1210,16 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(HUDTexture, 151, 16, &(insertCoinP3.GetCurrentFrame()), 0); // INSERT COIN Player3
 	App->render->Blit(HUDTexture, 222, 16, &(insertCoinP4.GetCurrentFrame()), 0); // INSERT COIN Player4
 
+	// Draw UI (score) --------------------------------------
+	sprintf_s(scoreText, 10, "%3d", score);
+
+	App->fonts->BlitText(45, 8, scoreFont, scoreText);
+
+	// Draw UI (NumLifes) --------------------------------------
+	sprintf_s(lifeText, 10, "%3d", lifes);
+
+	App->fonts->BlitText(20, 15, lifeFont, lifeText);
+
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -1213,15 +1227,17 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
-		App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
+		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
 		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
 		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
 		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
-		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);
-
-
+		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
 
 		destroyed = true;
 	}
 
+	if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
+	{
+		score += 1;
+	}
 }

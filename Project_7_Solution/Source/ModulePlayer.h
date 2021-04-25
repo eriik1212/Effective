@@ -50,6 +50,7 @@ public:
 
 	SDL_Texture* AttackQuoteTexture = nullptr;
 
+	// HUD & Foreground Animations
 	Animation frontFire,
 		smallFire,
 		HUDP1,
@@ -63,7 +64,7 @@ public:
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
 
-	// A set of animations
+	// A set of Player Animations
 	Animation idleAnimR,
 		idleAnimL,
 		leftAnim,
@@ -150,6 +151,14 @@ public:
 	uint PunchHit = 0;
 	uint EnemyDie = 0;
 	uint Scream1 = 0;
+
+	// Font score index
+	uint score = 000;
+	uint lifes = 000;
+	int scoreFont = -1;
+	int lifeFont = -1;
+	char scoreText[10] = { "\0" };
+	char lifeText[10] = { "\0" };
 	
 };
 

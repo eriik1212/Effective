@@ -4,7 +4,7 @@
 #include "Globals.h"
 #include <time.h>
 
-#define NUM_MODULES 13
+#define NUM_MODULES 14
 
 class Module;
 class ModuleWindow;
@@ -20,6 +20,7 @@ class ModuleParticles;
 class ModuleCollisions;
 class ModuleEnemies;
 class ModuleRender;
+class ModuleFonts;
 
 class Application
 {
@@ -62,6 +63,8 @@ public:
 	ModuleCollisions* collisions = nullptr;
 
 	ModuleRender* render = nullptr;
+
+	ModuleFonts* fonts = nullptr;
 };
 
 // Global var made extern for Application ---
