@@ -682,6 +682,7 @@ bool ModulePlayer::Start()
 	PunchMiss = App->audio->LoadFx("Assets/FX/Punch1.wav");
 	PunchHit = App->audio->LoadFx("Assets/Fx/Punch2.wav");
 	Scream1 = App->audio->LoadFx("Assets/FX/AtackScream.wav");
+	lifeIncrease = App->audio->LoadFx("Assets/FX/01Cowabunga.wav");
 	HIT= App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
 
@@ -719,7 +720,12 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-
+	// ------------------------------- Life's Increment
+	if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_STATE::KEY_DOWN)
+	{
+		lifes += 2;
+		App->audio->PlayFx(lifeIncrease);
+	}
 
 	// ------------------------------------------------------Hits RIGHT
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0)
@@ -1218,7 +1224,7 @@ update_status ModulePlayer::PostUpdate()
 	// Draw UI (NumLifes) --------------------------------------
 	sprintf_s(lifeText, 10, "%3d", lifes);
 
-	App->fonts->BlitText(20, 15, lifeFont, lifeText);
+	App->fonts->BlitText(17, 16, lifeFont, lifeText);
 
 	return update_status::UPDATE_CONTINUE;
 }
