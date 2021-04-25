@@ -152,6 +152,7 @@ public:
 	uint PunchHit = 0;
 	uint EnemyDie = 0;
 	uint Scream1 = 0;
+	uint lifeIncrease = 0;
 
 	// Font score index
 	uint score = 000;
