@@ -1,7 +1,7 @@
 # Effective   
 [_Effective_](https://github.com/eriik1212/Effective) is a group of students always ready to learn new things about videogames design and development. 
 
-
+# Teenage Mutant Ninja Turtles Arcade
 ## Description
 This is our first project as videogame design and developement students at CITM. This project is a tribute to the _Teenage Mutant Ninja Turtles_ arcade game (1989).
 
