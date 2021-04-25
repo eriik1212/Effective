@@ -19,6 +19,7 @@ private:
 	// The path that will define the position in the world
 	Path path;
 
+	iPoint positionEnemy;
 
 	// Enemy animations
 	Animation idleAnimR;
