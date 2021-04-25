@@ -1,9 +1,9 @@
-#include "Enemy_Purple.h"
+#include "Enemy_White.h"
 
 #include "Application.h"
 #include "ModuleCollisions.h"
 
-Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
+Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 {
 
 	// RIGHT
@@ -29,21 +29,16 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	back.speed = 0.1f;*/
 	//back.pingpong = true;
 
-	//path.PushBack({-1.2f, 0.0f}, 150, &idleAnimR);
-	//path.PushBack({1.2f, 0.0f}, 150, &idleAnimR);
 	
-
-	collider = App->collisions->AddCollider({0, 0, 38, 16}, Collider::Type::ENEMY, (Module*)App->enemies);
-	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
-	SEE = App->collisions->AddCollider({ 150, 122, 70, 16 }, Collider::Type::SEE, (Module*)App->enemies);
+	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 }
 
-void Enemy_Purple::Update()
+void Enemy_White::Update()
 {
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
 	currentAnim = &idleAnimR;
-	
+
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();

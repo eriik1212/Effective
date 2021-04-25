@@ -28,7 +28,7 @@ void Enemy::Update()
 		currentAnim->Update();
 
 	if (collider != nullptr)
-		collider->SetPos(position.x, position.y);
+		collider->SetPos(position.x+40, position.y+70);
 }
 
 void Enemy::Draw()
@@ -39,6 +39,8 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
+	
+	
 	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
 	App->audio->PlayFx(destroyedFx);
 }

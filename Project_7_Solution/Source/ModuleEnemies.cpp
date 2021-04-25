@@ -8,6 +8,8 @@
 
 #include "Enemy.h"
 #include "Enemy_Purple.h"
+#include "Enemy_White.h"
+#include "ModuleCollisions.h"
 
 #define SPAWN_MARGIN 50
 
@@ -25,7 +27,8 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	texture = App->textures->Load("Assets/Characters/Leonardo.png");
+	white = App->textures->Load("Assets/Enemies/White_enemy.png");
+	purple = App->textures->Load("Assets/Enemies/Purple-enemy.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/FX/EnemyDie.wav");
 
 	return true;
@@ -142,10 +145,16 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			{
 				case ENEMY_TYPE::PURPLE_ENEMY:
 					enemies[i] = new Enemy_Purple(info.x, info.y);
+					enemies[i]->texture = purple;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					break;
+				case ENEMY_TYPE::WHITE_ENEMY:
+					enemies[i] = new Enemy_White(info.x, info.y);
+					enemies[i]->texture = white;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
 					break;
 			}
-			enemies[i]->texture = texture;
-			enemies[i]->destroyedFx = enemyDestroyedFx;
+			
 			break;
 		}
 	}
@@ -159,8 +168,13 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
-			delete enemies[i];
-			enemies[i] = nullptr;
+			if (App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::SEE])
+			{
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+			}
+			
+			/*delete enemies[i];
+			enemies[i] = nullptr;*/
 			break;
 		}
 	}
