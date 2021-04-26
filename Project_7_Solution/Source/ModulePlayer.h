@@ -4,6 +4,9 @@
 #include "Module.h"
 #include "Animation.h"
 #include "p2Point.h"
+#include "Path.h"
+
+#define MAX_LIFE 10
 
 struct SDL_Texture;
 struct Collider;
@@ -32,10 +35,10 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
-	// Update Life P1
-	void updateLifeIndicatorPlayer1(unsigned short* lifeIndicatorP1, unsigned short damage);
 
 public:
+	Path path;
+
 	// Position of the player in the map
 	iPoint position;
 
@@ -43,6 +46,8 @@ public:
 	int speed = 2;
 
 	int lastPosition = 0; //    1 = Left || 0 = Right
+
+	unsigned short lifesP1[MAX_LIFE];
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
