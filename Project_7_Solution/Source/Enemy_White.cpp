@@ -60,11 +60,24 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 	
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
 }
 
 void Enemy_White::Update()
 {
+	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
 
+	if (coolTime >= coolDown)
+	{
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+		coolTime = 0;
+
+	}
+	else
+	{
+		coolTime += 0.1;
+
+	}
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
 	currentAnim = path.GetCurrentAnimation();
