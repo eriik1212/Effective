@@ -11,6 +11,8 @@
 
 #include <stdio.h>
 
+#define MAX_LIFE 10
+
 #include "SDL/include/SDL_scancode.h"
 
 
@@ -28,6 +30,21 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		AttackQuote.PushBack({ 0, 296, 64, 32 });
 		AttackQuote.speed = 0.01f;
 		AttackQuote.loop = false;
+
+		// Life's Animation
+		lifeP1.PushBack({ 6, 233, 31, 11 });
+		lifeP1.PushBack({ 40, 233, 31, 11 });
+		lifeP1.PushBack({ 74, 233, 31, 11 });
+		lifeP1.PushBack({ 108, 233, 31, 11 });
+		lifeP1.PushBack({ 143, 233, 31, 11 });
+		lifeP1.PushBack({ 177, 233, 31, 11 });
+		lifeP1.PushBack({ 211, 233, 31, 11 });
+		lifeP1.PushBack({ 246, 233, 31, 11 });
+		lifeP1.PushBack({ 280, 233, 31, 11 });
+		lifeP1.PushBack({ 314, 233, 31, 11 });
+		lifeP1.PushBack({ 360, 233, 31, 11 });
+		lifeP1.speed = 0.01f;
+		lifeP1.loop = false;
 
 		// HUD Player1
 		HUDP1.PushBack({ 5, 0, 72, 32 });
@@ -673,19 +690,32 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
+	// ----------------------------------------------------------------- LIFE ELEMENTS
+	unsigned short lifeP1[MAX_LIFE];
+
+	// Load Lifes P1
+	for (int i = 0; i < 10; ++i) {
+		lifeP1[i] = 1;
+	}
+
+	// ----------------------------------------------------------------- TEXTURES
 	texture = App->textures->Load("Assets/Characters/Leonardo.png");
 	fireTexture = App->textures->Load("Assets/Tilesets/fire.png");
 	HUDTexture = App->textures->Load("Assets/UI & HUD/HUD.png");
 	AttackQuoteTexture = App->textures->Load("Assets/UI & HUD/Quotes.png");
 	currentAnimation = &idleAnimR;
 
+	// ----------------------------------------------------------------- AUDIO
 	PunchMiss = App->audio->LoadFx("Assets/FX/Punch1.wav");
 	PunchHit = App->audio->LoadFx("Assets/Fx/Punch2.wav");
 	Scream1 = App->audio->LoadFx("Assets/FX/AtackScream.wav");
 	lifeIncrease = App->audio->LoadFx("Assets/FX/01Cowabunga.wav");
-	HIT= App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
+
+	// ----------------------------------------------------------------- COLLIDERS
+	HIT = App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
 
+	// ----------------------------------------------------------------- FONTS
 	char lookupTable[] = { "0123456789 " };
 	scoreFont = App->fonts->Load("Assets/UI & HUD/fonts.png", lookupTable, 1);
 	lifeFont = App->fonts->Load("Assets/UI & HUD/NumLifesFont.png", lookupTable, 1);
@@ -1216,6 +1246,8 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(HUDTexture, 151, 16, &(insertCoinP3.GetCurrentFrame()), 0); // INSERT COIN Player3
 	App->render->Blit(HUDTexture, 222, 16, &(insertCoinP4.GetCurrentFrame()), 0); // INSERT COIN Player4
 
+	App->render->Blit(HUDTexture, 41, 16, &(lifeP1.GetCurrentFrame()), 0); // Full life P1
+
 	// Draw UI (score) --------------------------------------
 	sprintf_s(scoreText, 10, "%3d", score);
 
@@ -1229,16 +1261,24 @@ update_status ModulePlayer::PostUpdate()
 	return update_status::UPDATE_CONTINUE;
 }
 
+void updateLifeIndicatorPlayer1(unsigned short* lifeIndicatorP1, unsigned short damage)
+{
+	for (int i = (MAX_LIFE - 1); i >= 0; --i) {
+
+		if (*(lifeIndicatorP1 + i) == 0) {
+			++damage;
+		}
+		else if (*(lifeIndicatorP1 + i) == 1 && i >= (MAX_LIFE - damage)) {
+			*(lifeIndicatorP1 + i) = 0;
+		}
+	}
+}
+
 void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
-		/*App->particles->AddParticle(App->particles->explosion, position.x, position.y, Collider::Type::NONE, 9);
-		App->particles->AddParticle(App->particles->explosion, position.x + 8, position.y + 11, Collider::Type::NONE, 14);
-		App->particles->AddParticle(App->particles->explosion, position.x - 7, position.y + 12, Collider::Type::NONE, 40);
-		App->particles->AddParticle(App->particles->explosion, position.x + 5, position.y - 5, Collider::Type::NONE, 28);
-		App->particles->AddParticle(App->particles->explosion, position.x - 4, position.y - 4, Collider::Type::NONE, 21);*/
-
+		
 		destroyed = true;
 	}
 	

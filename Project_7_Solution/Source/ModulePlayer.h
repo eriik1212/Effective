@@ -32,6 +32,9 @@ public:
 	// Collision callback, called when the player intersects with another collider
 	void OnCollision(Collider* c1, Collider* c2) override;
 
+	// Update Life P1
+	void updateLifeIndicatorPlayer1(unsigned short* lifeIndicatorP1, unsigned short damage);
+
 public:
 	// Position of the player in the map
 	iPoint position;
@@ -58,7 +61,8 @@ public:
 		insertCoinP2,
 		insertCoinP3,
 		insertCoinP4,
-		AttackQuote;
+		AttackQuote,
+		lifeP1;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
