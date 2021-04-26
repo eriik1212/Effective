@@ -27,6 +27,12 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
+	// ----------------------------------------------------------------- LIFE ELEMENTS
+	// Load Lifes Enemies
+	for (int i = 0; i < MAX_LIFE; ++i) {
+		lifesEnemies[i] = 1;
+	}
+
 	white = App->textures->Load("Assets/Enemies/White_enemy.png");
 	purple = App->textures->Load("Assets/Enemies/Purple-enemy.png");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/FX/EnemyDie.wav");
@@ -123,13 +129,13 @@ void ModuleEnemies::HandleEnemiesDespawn()
 		if (enemies[i] != nullptr)
 		{
 			// Delete the enemy when it has reached the end of the screen
-			if (enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
+			/*if (enemies[i]->position.x * SCREEN_SIZE < (App->render->camera.x) - SPAWN_MARGIN)
 			{
 				LOG("DeSpawning enemy at %d", enemies[i]->position.x * SCREEN_SIZE);
 
 				delete enemies[i];
 				enemies[i] = nullptr;
-			}
+			}*/
 		}
 	}
 }
@@ -160,6 +166,19 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 	}
 }
 
+void updateLifeIndicatorEnemies(unsigned short* lifeIndicatorP1, unsigned short damage)
+{
+	for (int i = (MAX_LIFE - 1); i >= 0; --i) {
+
+		if (*(lifeIndicatorP1 + i) == 0) {
+			++damage;
+		}
+		else if (*(lifeIndicatorP1 + i) == 1 && i >= (MAX_LIFE - damage)) {
+			*(lifeIndicatorP1 + i) = 0;
+		}
+	}
+}
+
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
@@ -173,8 +192,17 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
 			
-			/*delete enemies[i];
-			enemies[i] = nullptr;*/
+			updateLifeIndicatorEnemies(lifesEnemies, 1);
+
+			if (lifesEnemies[0] == 0) {
+				delete enemies[i];
+				enemies[i] = nullptr;
+				// Load Lifes Enemies
+				for (int i = 0; i < MAX_LIFE; ++i) {
+					lifesEnemies[i] = 1;
+				}
+			}
+			
 			break;
 		}
 	}
