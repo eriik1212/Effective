@@ -15,6 +15,10 @@ Enemy::~Enemy()
 {
 	if (collider != nullptr)
 		collider->pendingToDelete = true;
+	if (HIT != nullptr)
+		HIT->pendingToDelete = true;
+	if (SEE != nullptr)
+	    SEE->pendingToDelete = true;
 }
 
 const Collider* Enemy::GetCollider() const
@@ -29,6 +33,12 @@ void Enemy::Update()
 
 	if (collider != nullptr)
 		collider->SetPos(position.x+40, position.y+70);
+
+	if (HIT != nullptr)
+		HIT->SetPos(position.x +10, position.y + 70);
+
+	
+
 }
 
 void Enemy::Draw()
