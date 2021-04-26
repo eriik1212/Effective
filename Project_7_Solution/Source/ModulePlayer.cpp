@@ -11,9 +11,8 @@
 
 #include <stdio.h>
 
-#define MAX_LIFE 10
-
 #include "SDL/include/SDL_scancode.h"
+#include "SDL/include/SDL.h"
 
 
 ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
@@ -43,7 +42,6 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		lifeP1.PushBack({ 280, 233, 31, 11 });
 		lifeP1.PushBack({ 314, 233, 31, 11 });
 		lifeP1.PushBack({ 360, 233, 31, 11 });
-		lifeP1.speed = 0.01f;
 		lifeP1.loop = false;
 
 		// HUD Player1
@@ -691,11 +689,9 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	// ----------------------------------------------------------------- LIFE ELEMENTS
-	unsigned short lifeP1[MAX_LIFE];
-
 	// Load Lifes P1
-	for (int i = 0; i < 10; ++i) {
-		lifeP1[i] = 1;
+	for (int i = 0; i < MAX_LIFE; ++i) {
+		lifesP1[i] = 1;
 	}
 
 	// ----------------------------------------------------------------- TEXTURES
@@ -1146,7 +1142,9 @@ update_status ModulePlayer::Update()
 			&& currentAnimation != &idleAnimL
 			&& currentAnimation != &hitKickAnimR
 			&& currentAnimation != &jumpAnimR
-			&& currentAnimation != &jumpAnimL)
+			&& currentAnimation != &jumpAnimL
+			&& currentAnimation != &deathAnimR
+			&& currentAnimation != &deathAnimL)
 		{
 			switch (lastPosition) {
 
@@ -1278,8 +1276,64 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
-		
-		destroyed = true;
+		lifeP1.Update();
+		updateLifeIndicatorPlayer1(lifesP1, 1);
+
+		// ---------------------------------------------------------------- RIGHT
+		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
+			lifes -= 1;
+			currentAnimation = &deathAnimR;
+
+			position.x = 5;
+			position.y = 112;
+
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+			lifeP1.Reset();
+
+			// Load Lifes P1 Again
+			for (int i = 0; i < MAX_LIFE; ++i) {
+				lifesP1[i] = 1;
+			}
+		}
+
+		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 0) {
+			currentAnimation = &deathAnimR;
+
+			if (deathAnimR.loopCount == 5)
+			{
+				destroyed = true;
+			}
+		}
+
+		// ---------------------------------------------------------------- LEFT
+		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
+			lifes -= 1;
+			currentAnimation = &deathAnimL;
+
+			position.x = 5;
+			position.y = 112;
+
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+
+			lifeP1.Reset();
+			// Load Lifes P1 Again
+			for (int i = 0; i < MAX_LIFE; ++i) {
+				lifesP1[i] = 1;
+			}
+		}
+
+		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+			currentAnimation = &deathAnimL;
+
+			if (deathAnimL.loopCount == 5)
+			{
+				destroyed = true;
+			}
+		}
+
+
 	}
 	
 	
