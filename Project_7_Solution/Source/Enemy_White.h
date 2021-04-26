@@ -23,14 +23,12 @@ private:
 
 	// Enemy animations
 	//temporary animations 
-	Animation idleAnimRW,
-		idleAnimLW,
+	Animation
 		leftAnimW,
 		rightAnimW,
 		upAnimRW,
-		upAnimLW,
-		downAnimRW,
-		downAnimLW;
+		upAnimLW;
+		
 
 	//There are more animations, but for the prtotype we are not including it.
 };
