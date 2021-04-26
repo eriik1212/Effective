@@ -5,11 +5,7 @@
 
 #define MAX_ENEMIES 100
 
-// TODO 2: Add a new enemy: Brown Cookies!
-
-// TODO 3: Have the Brown Cookies describe a path in the screen
-
-// TODO 4: Create a new enemy type: the Mech
+#define MAX_LIFE 10
 
 enum class ENEMY_TYPE
 {
@@ -65,7 +61,7 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
-
+	unsigned short lifesEnemies[MAX_LIFE];
 
 private:
 	// Spawns a new enemy using the data from the queue
