@@ -25,7 +25,10 @@ private:
 	iPoint positionEnemy;
 
 	// Enemy animations
-	Animation idleAnimR;
+	Animation leftAnimP,
+		rightAnimP,
+		upAnimRP,
+		upAnimLP;
 };
 
 #endif // __ENEMY_MECH_H__

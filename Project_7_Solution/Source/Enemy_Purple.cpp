@@ -7,21 +7,21 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 {
 
 	// RIGHT
-	idleAnimR.PushBack({ 2, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 282, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 2, 0, 94, 84 });
-	idleAnimR.PushBack({ 470, 0, 94, 84 });
-	idleAnimR.PushBack({ 2, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 188, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 282, 0, 94, 84 });
-	idleAnimR.PushBack({ 94, 0, 94, 84 });
-	idleAnimR.PushBack({ 2, 0, 94, 84 });
-	idleAnimR.loop = false;
-	idleAnimR.speed = 0.02f;
+	leftAnimP.PushBack({ 2, 0, 94, 84 });
+	leftAnimP.PushBack({ 94, 0, 94, 84 });
+	leftAnimP.PushBack({ 282, 0, 94, 84 });
+	leftAnimP.PushBack({ 94, 0, 94, 84 });
+	leftAnimP.PushBack({ 2, 0, 94, 84 });
+	leftAnimP.PushBack({ 470, 0, 94, 84 });
+	leftAnimP.PushBack({ 2, 0, 94, 84 });
+	leftAnimP.PushBack({ 94, 0, 94, 84 });
+	leftAnimP.PushBack({ 188, 0, 94, 84 });
+	leftAnimP.PushBack({ 94, 0, 94, 84 });
+	leftAnimP.PushBack({ 282, 0, 94, 84 });
+	leftAnimP.PushBack({ 94, 0, 94, 84 });
+	leftAnimP.PushBack({ 2, 0, 94, 84 });
+	leftAnimP.loop = false;
+	leftAnimP.speed = 0.02f;
 
 	/*back.PushBack({170, 108, 31, 29});
 	back.PushBack({170, 141, 31, 29});
@@ -57,7 +57,7 @@ void Enemy_Purple::Update()
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
-	currentAnim = &idleAnimR;
+	currentAnim = &leftAnimP;
 	
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
