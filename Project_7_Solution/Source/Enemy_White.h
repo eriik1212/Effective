@@ -22,7 +22,17 @@ private:
 	iPoint positionEnemy;
 
 	// Enemy animations
-	Animation idleAnimR;
+	//temporary animations 
+	Animation idleAnimRW,
+		idleAnimLW,
+		leftAnimW,
+		rightAnimW,
+		upAnimRW,
+		upAnimLW,
+		downAnimRW,
+		downAnimLW;
+
+	//There are more animations, but for the prtotype we are not including it.
 };
 
 #endif // __ENEMY_MECH_H__
