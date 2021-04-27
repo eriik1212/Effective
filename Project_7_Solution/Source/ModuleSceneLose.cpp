@@ -22,7 +22,7 @@ bool ModuleSceneLose::Start()
 
 update_status ModuleSceneLose::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
 		App->scene->Enable();
@@ -36,7 +36,7 @@ update_status ModuleSceneLose::Update()
 // Update: draw background
 update_status ModuleSceneLose::PostUpdate()
 {
-	App->render->Blit(introBackground, 0, 0, NULL);
+	App->render->Blit(introBackground, 0, 0, NULL, NULL, true);
 	return update_status::UPDATE_CONTINUE;
 }
 

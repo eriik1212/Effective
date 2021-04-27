@@ -37,7 +37,7 @@ update_status ModuleSceneIntro::Update()
 // Update: draw background
 update_status ModuleSceneIntro::PostUpdate()
 {
-	App->render->Blit(introBackground, 0, 0, NULL);
+	App->render->Blit(introBackground, 0, 0, NULL, NULL, true);
 	return update_status::UPDATE_CONTINUE;
 }
 

@@ -19,8 +19,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 {
 	srand(time(NULL));
 
-	position.x = 5;
-	position.y = 112;
+
 
 	// ALL ANIMATIONS DOWN HERE
 	{
@@ -687,6 +686,9 @@ bool ModulePlayer::Start()
 	LOG("Loading player textures");
 
 	bool ret = true;
+
+	position.x = 5;
+	position.y = 112;
 
 	// ----------------------------------------------------------------- LIFE ELEMENTS
 	// Load Lifes P1

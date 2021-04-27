@@ -92,6 +92,10 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	App->render->camera.x = 0;
+	App->render->playerLimitR = App->render->camera.w - 135;
+	App->render->playerLimitL = App->render->camera.x + 5;
+
 	stageTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
 	gameOverTexture = App->textures->Load("Assets/UI & HUD/game_over.png");
 
@@ -169,13 +173,9 @@ update_status ModuleScene::Update()
 		App->audio->PlayFx(ElevatorDoor);
 
 	}
-	
-
-	
 
 
-
-	if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
 		CleanUp();
@@ -188,7 +188,7 @@ update_status ModuleScene::Update()
 
 		App->sceneWin->Enable();
 	}	
-	else if (App->input->keys[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN)
+	else if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{	
 		gameOver = true;
 
