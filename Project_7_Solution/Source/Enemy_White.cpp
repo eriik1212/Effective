@@ -56,7 +56,9 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 	
 	path.PushBack({ -1.0f, 0.0f }, 150, &leftAnimW);
+	path.PushBack({ 0.0f, 0.0f }, 150, &upAnimLW);
 	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
+	path.PushBack({ 0.0f, 0.0f }, 150, &upAnimRW);
 
 	
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
@@ -66,18 +68,26 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 void Enemy_White::Update()
 {
 	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
+	if (currentAnim == &leftAnimW)direcction = 0;
+	if (currentAnim == &rightAnimW)direcction = 1;
+	if (coolTime >= coolDown) {
 
-	if (coolTime >= coolDown)
-	{
-		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
-		coolTime = 0;
+		if (currentAnim == &upAnimLW)
+		{
+			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+			coolTime = 0.0f;
 
+		}
+		else if (currentAnim == &upAnimRW)
+		{
+			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+			coolTime = 0.0f;
+		}
+		
 	}
 	else
-	{
-		coolTime += 0.1;
+		coolTime +=0.1f;
 
-	}
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
 	currentAnim = path.GetCurrentAnimation();

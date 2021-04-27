@@ -34,9 +34,11 @@ void Enemy::Update()
 	if (collider != nullptr)
 		collider->SetPos(position.x+40, position.y+70);
 
-	if (HIT != nullptr)
+	if (HIT != nullptr && direcction == 0)
 		HIT->SetPos(position.x +10, position.y + 70);
 
+	if (HIT != nullptr && direcction==1)
+		HIT->SetPos(position.x + 70, position.y + 70);
 	
 
 }
