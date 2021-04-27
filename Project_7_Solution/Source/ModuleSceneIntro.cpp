@@ -21,6 +21,8 @@ bool ModuleSceneIntro::Start()
 	membersCounter = 0;
 
 	introBackground = App->textures->Load("Assets/Introduction/title_screen.png");	
+
+	App->audio->PlayMusic("Assets/Audio/02 Character selection.ogg", 1.0f);
 	return true;
 }
 
