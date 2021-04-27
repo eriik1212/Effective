@@ -27,7 +27,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		// Atack Quote
 		AttackQuote.PushBack({ 116, 168, 64, 32 });
 		AttackQuote.PushBack({ 0, 296, 64, 32 });
-		AttackQuote.speed = 0.01f;
+		AttackQuote.speed = 0.015f;
 		AttackQuote.loop = false;
 
 		// Life's Animation
@@ -1540,7 +1540,7 @@ update_status ModulePlayer::PostUpdate()
 		hitAirAnim2L.loopCount = 0;
 	}
 
-	App->render->Blit(AttackQuoteTexture, 5, 112, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
+	App->render->Blit(AttackQuoteTexture, position.x, position.y - 10, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
 
 	if (App->render->camera.x == 0)
 	{
