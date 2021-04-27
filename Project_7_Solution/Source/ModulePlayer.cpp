@@ -1394,6 +1394,7 @@ update_status ModulePlayer::Update()
 	{
 		CleanUp();
 		this->Disable();
+		App->audio->StopMusic();
 		App->player->Disable();
 		App->enemies->Disable();
 		App->scene->Disable();

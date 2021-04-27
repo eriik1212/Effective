@@ -34,9 +34,13 @@ public:
 	// CleanUp the scene
 	bool CleanUp();
 
-public:
-	
+public:	
 	SDL_Texture* introBackground;
+
+	// Members Texture
+	SDL_Texture* introMembers;
+	int membersCounter;
+	bool members;
 };
 
 #endif //__MODULE_SCENEINTRO_H__

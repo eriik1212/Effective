@@ -11,7 +11,6 @@
 
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneWin.h"
-#include "ModuleSceneLose.h"
 
 
 ModuleScene::ModuleScene(bool enabled) : Module(enabled)
@@ -108,13 +107,10 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 1000, 145, 20, 10 }, Collider::Type::WALL);*/
 
 	// Enemies ---
-
-		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 52);
-		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 200, 112);
-		//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 250, 112);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 52);
+	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 200, 112);
+	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 250, 112);
 	
-
-
 	return ret;
 }
 
@@ -124,57 +120,51 @@ update_status ModuleScene::Update()
 	fireDoor.Update();
 	fireElev.Update();
 
+
+	// Camera
 	if (App->render->camera.x > 780)
 	{
-		doorBreak.Update();
-		
+		doorBreak.Update();		
 	}
 
 	//Second if for the FX
 	if (App->render->camera.x == 781)
 	{
 		App->audio->PlayFx(DoorBrake);
-
 	}
 
 	if (App->render->camera.x > 1650)
 	{
-		doorBreak2.Update();
-		
+		doorBreak2.Update();		
 	}
 
 	if (App->render->camera.x == 1651)
 	{
 		App->audio->PlayFx(DoorBrake);
-
 	}
 
 	if (App->render->camera.x >2025)
 	{
-		doorBreak3.Update();
-	
+		doorBreak3.Update();	
 	}
 
 	if (App->render->camera.x >= 2026 && App->render->camera.x <= 2029)
 	{
 		App->audio->PlayFx(DoorBrake);
-
 	}
 
 	if (App->render->camera.x > 2500)
 	{
 		openElev.Update();
-		openElev2.Update();
-		
+		openElev2.Update();		
 	}
 
 	if (App->render->camera.x >= 2501 && App->render->camera.x <= 2504)
 	{
 		App->audio->PlayFx(ElevatorDoor);
-
 	}
 
-
+	// SCANCODES
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
@@ -197,12 +187,12 @@ update_status ModuleScene::Update()
 
 		App->enemies->Disable();
 		App->enemies->CleanUp();
-
-			
-
 	}
+
+	// GameOver Counter
 	if (gameOver)
 	{
+		App->audio->StopMusic();
 		if (gOverCounter <= 200)
 		{
 			gOverCounter++;
@@ -242,11 +232,10 @@ update_status ModuleScene::PostUpdate()
 
 	App->render->Blit(stageTexture, 950, 50, &(openElev.GetCurrentFrame()), 1); // OpenElevator1
 	App->render->Blit(stageTexture, 1079, 50, &(openElev2.GetCurrentFrame()), 1); // OpenElevator2
-	
+	 
 	if (gameOver)
 	{
-		App->render->Blit(gameOverTexture, 0, 0); // GameOver Texture
-
+		App->render->Blit(gameOverTexture, SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 50, NULL, 0, true); // GameOver Texture
 	}
 
 

@@ -15,14 +15,34 @@ ModuleSceneIntro::~ModuleSceneIntro() {}
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-	introBackground = App->textures->Load("Assets/Introduction/title_screen.png");
-	App->audio->PlayMusic("Assets/Audio/01 Opening Demo.ogg", 1.0f);
+	// Members Texture
+	introMembers = App->textures->Load("Assets/Introduction/intro.png");
+	members = true;
+	membersCounter = 0;
+
+	introBackground = App->textures->Load("Assets/Introduction/title_screen.png");	
 	return true;
 }
 
 update_status ModuleSceneIntro::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
+	// Counter
+	if (members)
+	{
+		if (membersCounter <= 300)
+		{
+			membersCounter++;
+		}
+		else if (membersCounter > 300)
+		{
+			introMembers = nullptr;
+			members = false;
+			membersCounter = 0;
+			App->audio->PlayMusic("Assets/Audio/01 Opening Demo.ogg", 1.0f);
+		}
+	}
+	// ScanCodes
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) && (!members))
 	{
 		CleanUp();
 		this->Disable();
@@ -42,7 +62,14 @@ update_status ModuleSceneIntro::Update()
 // Update: draw background
 update_status ModuleSceneIntro::PostUpdate()
 {
-	App->render->Blit(introBackground, 0, 0, NULL, NULL, true);
+	if (members)
+	{
+		App->render->Blit(introMembers, 0, 0, NULL, NULL, true);
+	}
+	else
+	{
+		App->render->Blit(introBackground, 0, 0, NULL, NULL, true);
+	}	
 	return update_status::UPDATE_CONTINUE;
 }
 
