@@ -21,7 +21,8 @@ This is our first project as videogame design and developement students at CITM.
 - Colliders Mode - F1
 - Instant Win - F2
 - Instant Lose - F3
-- God Mode - F10
+- God Mode - F4
+- Restart - R
 
 
 ## Developers
