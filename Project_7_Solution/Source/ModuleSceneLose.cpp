@@ -30,6 +30,11 @@ update_status ModuleSceneLose::Update()
 		App->enemies->Enable();
 	}
 
+	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
+	{
+		return update_status::UPDATE_STOP;
+	}
+
 	return update_status::UPDATE_CONTINUE;
 }
 

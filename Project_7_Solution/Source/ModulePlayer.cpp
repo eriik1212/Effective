@@ -8,6 +8,7 @@
 #include "ModuleAudio.h"
 #include "ModuleCollisions.h"
 #include "ModuleFonts.h"
+#include "ModuleSceneIntro.h"
 
 #include <stdio.h>
 
@@ -1381,6 +1382,23 @@ update_status ModulePlayer::Update()
 	}
 
 	currentAnimation->Update();
+
+	// ESC to leave the game
+	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
+	{
+		return update_status::UPDATE_STOP;
+	}
+
+	// R to Restart
+	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
+	{
+		CleanUp();
+		this->Disable();
+		App->player->Disable();
+		App->enemies->Disable();
+		App->scene->Disable();
+		App->sceneIntro->Enable();
+	}
 
 	if (destroyed)
 	{

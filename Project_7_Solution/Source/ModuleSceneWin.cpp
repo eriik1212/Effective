@@ -25,9 +25,12 @@ update_status ModuleSceneWin::Update()
 	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
-		App->scene->Enable();
-		App->player->Enable();
-		App->enemies->Enable();
+		App->sceneIntro->Enable();
+	}
+
+	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
+	{
+		return update_status::UPDATE_STOP;
 	}
 
 	return update_status::UPDATE_CONTINUE;
