@@ -59,8 +59,8 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	leftKickW.PushBack({ 784-98,1496,98,88 });
 	leftKickW.PushBack({ 784 - 98*2,1496,98,88 });
 	leftKickW.PushBack({ 784 - 98*3,1496,98,88 });
-	leftAnimW.loop = false;
-	leftAnimW.speed = 0.15f;
+	leftKickW.loop = false;
+	leftKickW.speed = 0.15f;
 
 	//kick to right animation
 	rightKickW.PushBack({ 0,353,98,88 });
@@ -75,7 +75,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	knifeMeleeLW.PushBack({ 784-98,1673,98,88 });
 	knifeMeleeLW.PushBack({ 784 - 98*2,1673,98,88 });
 	knifeMeleeLW.PushBack({ 784 - 98*3,1673,98,88 });
-	knifeMeleeLW.loop = false;
+	knifeMeleeLW.loop = true;
 	knifeMeleeLW.speed = 0.15f;
 
 	//right knife melee
@@ -83,7 +83,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	knifeMeleeRW.PushBack({ 98,528,98,88 });
 	knifeMeleeRW.PushBack({ 98 * 2,528,98,88 });
 	knifeMeleeRW.PushBack({ 98 * 3,528,98,88 });
-	knifeMeleeRW.loop = false;
+	knifeMeleeRW.loop = true;
 	knifeMeleeRW.speed = 0.15f;
 
 	//right knife throwing
@@ -125,9 +125,10 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 
 	path.PushBack({ -1.0f, 0.0f }, 150, &leftAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 150, &knifeMeleeLW);
+	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeLW);
 	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 150, &knifeMeleeRW);
+	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
+
 
 	
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
