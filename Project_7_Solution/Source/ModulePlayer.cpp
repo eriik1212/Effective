@@ -831,47 +831,227 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	// TEST HITS
-
-	//--------------------------------------------------------------TEST RIGHT
-	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && lastPosition==0 )
+	// COLLIDE HITS
+/*
+	//------------------------------------------------------------------------------------ COLLIDE RIGHT
+	else if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0)
 	{
-		if (currentAnimation != &hittedGrabbedAnimR)
+		int x = (rand() % 6);
+
+		switch (x)
 		{
+		case 0:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
 
-			currentAnimation = &hittedGrabbedAnimR;
-			hittedGrabbedAnimR.Reset();
+				hitKickAnimR.Reset();
+				currentAnimation = &hitKickAnimR;
 
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 1:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitThrowAnimR.Reset();
+				currentAnimation = &hitThrowAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 2:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitUpAnimR.Reset();
+				currentAnimation = &hitUpAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 3:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitDownAnimR.Reset();
+				currentAnimation = &hitDownAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 4:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitPrickAnimR.Reset();
+				currentAnimation = &hitPrickAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 5:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitOverAnimR.Reset();
+				currentAnimation = &hitOverAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		default:
+
+			break;
 		}
-
-	}
-	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_UP && lastPosition == 0 )
-	{
-
-		currentAnimation = &idleAnimR;
-		idleAnimR.Reset();
 	}
 
-	//--------------------------------------------------------------TEST LEFT
-	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && lastPosition == 1)
+	// -------------------------------------------------------------------------------------- COLLIDE LEFT
+	else if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 1)
 	{
-		if (currentAnimation != &hittedGrabbedAnimL)
+		int x = (rand() % 6);
+
+		switch (x)
 		{
+		case 0:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
 
-			currentAnimation = &hittedGrabbedAnimL;
-			hittedGrabbedAnimL.Reset();
+				hitKickAnimL.Reset();
+				currentAnimation = &hitKickAnimL;
 
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 1:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitThrowAnimL.Reset();
+				currentAnimation = &hitThrowAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 2:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitUpAnimL.Reset();
+				currentAnimation = &hitUpAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 3:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitDownAnimL.Reset();
+				currentAnimation = &hitDownAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 4:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitPrickAnimL.Reset();
+				currentAnimation = &hitPrickAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 5:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitOverAnimL.Reset();
+				currentAnimation = &hitOverAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		default:
+
+			break;
 		}
-
-	}
-	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_UP && lastPosition == 1)
-	{
-
-		currentAnimation = &idleAnimL;
-		idleAnimL.Reset();
-
-	}
-
+	}*/
 	// ---------------------------------------------------------------------- Moving the player
 
 	// ALL MOVEMENT KEYS PRESSED
@@ -1142,6 +1322,18 @@ update_status ModulePlayer::Update()
 			&& currentAnimation != &hitAirAnim2L
 			&& currentAnimation != &hitAirAnim2R
 			&& currentAnimation != &hitAirAnim1R
+			&& currentAnimation != &hitKickAnimL
+			&& currentAnimation != &hitThrowAnimL
+			&& currentAnimation != &hitUpAnimL
+			&& currentAnimation != &hitDownAnimL
+			&& currentAnimation != &hitPrickAnimL
+			&& currentAnimation != &hitOverAnimL
+			&& currentAnimation != &hitKickAnimR
+			&& currentAnimation != &hitThrowAnimR
+			&& currentAnimation != &hitUpAnimR
+			&& currentAnimation != &hitDownAnimR
+			&& currentAnimation != &hitPrickAnimR
+			&& currentAnimation != &hitOverAnimR
 			&& currentAnimation != &jumpAnimR
 			&& currentAnimation != &jumpAnimL
 			&& currentAnimation != &deathAnimR
@@ -1217,6 +1409,9 @@ update_status ModulePlayer::PostUpdate()
 			App->render->Blit(texture, position.x, position.y, &rect);
 		}
 
+		// After Hits Animations, go back to Idle Anim
+		// HIT AIR
+		// RIGHT
 		if (hitAirAnim1R.loopCount > 0)
 		{
 			idleAnimR.Reset();
@@ -1227,6 +1422,8 @@ update_status ModulePlayer::PostUpdate()
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
 		}
+
+		// LEFT
 		else if (hitAirAnim1L.loopCount > 0)
 		{
 			idleAnimL.Reset();
@@ -1237,7 +1434,85 @@ update_status ModulePlayer::PostUpdate()
 			idleAnimL.Reset();
 			currentAnimation = &idleAnimL;
 		}
+		// HIT COLLIDE
+		// LEFT
+		else if (hitKickAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitThrowAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitUpAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitDownAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitPrickAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitOverAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
 
+		// RIGHT
+		else if (hitKickAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitThrowAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitUpAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitDownAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitPrickAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitOverAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+
+		// Return de LoopCount to 0
+
+		hitKickAnimL.loopCount = 0;
+		hitThrowAnimL.loopCount = 0;
+		hitUpAnimL.loopCount = 0;
+		hitDownAnimL.loopCount = 0;
+		hitPrickAnimL.loopCount = 0;
+		hitOverAnimL.loopCount = 0;
+		hitKickAnimR.loopCount = 0;
+		hitThrowAnimR.loopCount = 0;
+		hitUpAnimR.loopCount = 0;
+		hitDownAnimR.loopCount = 0;
+		hitPrickAnimR.loopCount = 0;
+		hitOverAnimR.loopCount = 0;
 		hitAirAnim1R.loopCount = 0;
 		hitAirAnim2R.loopCount = 0;
 		hitAirAnim1L.loopCount = 0;
