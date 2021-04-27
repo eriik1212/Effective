@@ -17,7 +17,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	rightAnimP.PushBack({ 86 * 6, 453, 86, 90 });
 	rightAnimP.PushBack({ 86 * 7, 453, 86, 90 });
 	rightAnimP.loop = true;
-	leftAnimP.speed = 0.15f;
+	rightAnimP.speed = 0.15f;
 
 	
 
@@ -50,7 +50,7 @@ void Enemy_Purple::Update()
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
-	currentAnim = &leftAnimP;
+	currentAnim = path.GetCurrentAnimation();
 	
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
