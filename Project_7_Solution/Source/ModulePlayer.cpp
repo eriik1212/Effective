@@ -1397,7 +1397,7 @@ update_status ModulePlayer::Update()
 		App->audio->StopMusic();
 		App->player->Disable();
 		App->enemies->Disable();
-		App->scene->Disable();
+		App->scene->Disable();  
 		App->sceneIntro->Enable();
 	}
 

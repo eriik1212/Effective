@@ -29,11 +29,11 @@ update_status ModuleSceneIntro::Update()
 	// Counter
 	if (members)
 	{
-		if (membersCounter <= 300)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 		{
-			membersCounter++;
+			membersCounter = 1;
 		}
-		else if (membersCounter > 300)
+		else if (membersCounter > 0)
 		{
 			introMembers = nullptr;
 			members = false;
