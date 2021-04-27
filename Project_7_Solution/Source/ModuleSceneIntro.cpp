@@ -21,6 +21,8 @@ bool ModuleSceneIntro::Start()
 	membersCounter = 0;
 
 	introBackground = App->textures->Load("Assets/Introduction/title_screen.png");	
+
+	App->audio->PlayMusic("Assets/Audio/02 Character selection.ogg", 1.0f);
 	return true;
 }
 
@@ -29,11 +31,11 @@ update_status ModuleSceneIntro::Update()
 	// Counter
 	if (members)
 	{
-		if (membersCounter <= 300)
+		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
 		{
-			membersCounter++;
+			membersCounter = 1;
 		}
-		else if (membersCounter > 300)
+		else if (membersCounter > 0)
 		{
 			introMembers = nullptr;
 			members = false;

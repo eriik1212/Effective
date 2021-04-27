@@ -8,30 +8,21 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 {
 
 	// RIGHT
-	leftAnimP.PushBack({ 2, 0, 94, 84 });
-	leftAnimP.PushBack({ 94, 0, 94, 84 });
-	leftAnimP.PushBack({ 282, 0, 94, 84 });
-	leftAnimP.PushBack({ 94, 0, 94, 84 });
-	leftAnimP.PushBack({ 2, 0, 94, 84 });
-	leftAnimP.PushBack({ 470, 0, 94, 84 });
-	leftAnimP.PushBack({ 2, 0, 94, 84 });
-	leftAnimP.PushBack({ 94, 0, 94, 84 });
-	leftAnimP.PushBack({ 188, 0, 94, 84 });
-	leftAnimP.PushBack({ 94, 0, 94, 84 });
-	leftAnimP.PushBack({ 282, 0, 94, 84 });
-	leftAnimP.PushBack({ 94, 0, 94, 84 });
-	leftAnimP.PushBack({ 2, 0, 94, 84 });
-	leftAnimP.loop = false;
-	leftAnimP.speed = 0.02f;
+	rightAnimP.PushBack({ 0, 453, 86, 90 });
+	rightAnimP.PushBack({ 86, 453, 86, 90 });
+	rightAnimP.PushBack({ 86 * 2, 453, 86, 90 });
+	rightAnimP.PushBack({ 86 * 3, 453, 86, 90 });
+	rightAnimP.PushBack({ 86 * 4, 453, 86, 90 });
+	rightAnimP.PushBack({ 86 * 5, 453, 86, 90 });
+	rightAnimP.PushBack({ 86 * 6, 453, 86, 90 });
+	rightAnimP.PushBack({ 86 * 7, 453, 86, 90 });
+	rightAnimP.loop = true;
+	rightAnimP.speed = 0.15f;
 
-	/*back.PushBack({170, 108, 31, 29});
-	back.PushBack({170, 141, 31, 29});
-	back.PushBack({137, 108, 31, 29});
-	back.speed = 0.1f;*/
-	//back.pingpong = true;
+	
 
-	//path.PushBack({-1.2f, 0.0f}, 150, &idleAnimR);
-	//path.PushBack({1.2f, 0.0f}, 150, &idleAnimR);
+	path.PushBack({-1.2f, 0.0f}, 150, &rightAnimP);
+	path.PushBack({1.2f, 0.0f}, 150, &rightAnimP);
 	
 
 	collider = App->collisions->AddCollider({0, 0, 38, 16}, Collider::Type::ENEMY, (Module*)App->enemies);
@@ -59,7 +50,7 @@ void Enemy_Purple::Update()
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
-	currentAnim = &leftAnimP;
+	currentAnim = path.GetCurrentAnimation();
 	
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

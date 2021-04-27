@@ -31,7 +31,13 @@ private:
 		leftAnimW,
 		rightAnimW,
 		upAnimRW,
-		upAnimLW;
+		upAnimLW,
+		leftKickW,
+		rightKickW,
+		knifeMeleeLW,
+		knifeMeleeRW,
+		knifeThrowLW,
+		knifeThrowRW;
 		
 
 	//There are more animations, but for the prtotype we are not including it.
