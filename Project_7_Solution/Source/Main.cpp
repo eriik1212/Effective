@@ -63,6 +63,7 @@ int main(int argc, char* argv[])
 				{
 					state = main_states::MAIN_FINISH;
 				}
+				
 			}	break;
 
 			case main_states::MAIN_FINISH:

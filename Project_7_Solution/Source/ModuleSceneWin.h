@@ -5,6 +5,7 @@
 #include "Animation.h"
 #include "ModuleInput.h"
 #include "ModuleScene.h"
+#include "ModuleSceneIntro.h"
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
 
