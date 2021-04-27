@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleParticles.h"
 
 Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 {
@@ -47,7 +48,8 @@ void Enemy_Purple::Update()
 	{
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
 		coolTime = 0;	
-		
+		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y+74, Collider::Type::ENEMY_SHOT);
+	
 	}
 	else 
 	{

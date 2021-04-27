@@ -70,6 +70,7 @@ void Enemy_White::Update()
 	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
 	if (currentAnim == &leftAnimW)direcction = 0;
 	if (currentAnim == &rightAnimW)direcction = 1;
+
 	if (coolTime >= coolDown) {
 
 		if (currentAnim == &upAnimLW)

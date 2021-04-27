@@ -34,11 +34,11 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
-	laser.anim.PushBack({ 232, 103, 16, 12 });
-	laser.anim.PushBack({ 249, 103, 16, 12 });
-	laser.speed.x = 5;
-	laser.lifetime = 180;
-	laser.anim.speed = 0.2f;
+	suriken.anim.PushBack({ 232, 103, 16, 12 });
+	suriken.anim.PushBack({ 249, 103, 16, 12 });
+	suriken.speed.x = -5;
+	suriken.lifetime = 180;
+	suriken.anim.speed = 0.2f;
 
 	return true;
 }
