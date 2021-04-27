@@ -16,7 +16,7 @@ ModuleSceneIntro::~ModuleSceneIntro() {}
 bool ModuleSceneIntro::Start()
 {
 	// Members Texture
-	introMembers = App->textures->Load("Assets/Introduction/intro.png");
+	introMembers = App->textures->Load("Assets/Introduction/introMembers.png");
 	members = true;
 	membersCounter = 0;
 
