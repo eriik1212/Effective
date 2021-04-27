@@ -19,8 +19,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 {
 	srand(time(NULL));
 
-	position.x = 5;
-	position.y = 112;
+
 
 	// ALL ANIMATIONS DOWN HERE
 	{
@@ -129,7 +128,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		idleAnimR.PushBack({ 282, 0, 94, 84 });
 		idleAnimR.PushBack({ 94, 0, 94, 84 });
 		idleAnimR.PushBack({ 2, 0, 94, 84 });
-		idleAnimR.loop = false;
+		idleAnimR.loop = true;
 		idleAnimR.speed = 0.02f;
 
 		// LEFT
@@ -146,7 +145,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		idleAnimL.PushBack({ 1410, 1680, 94, 84 });
 		idleAnimL.PushBack({ 1598, 1680, 94, 84 });
 		idleAnimL.PushBack({ 1690, 1680, 94, 84 });
-		idleAnimL.loop = false;
+		idleAnimL.loop = true;
 		idleAnimL.speed = 0.02f;
 		//-----------------------------------------------------------------------------MOVE
 		// move right
@@ -688,6 +687,9 @@ bool ModulePlayer::Start()
 
 	bool ret = true;
 
+	position.x = 5;
+	position.y = 112;
+
 	// ----------------------------------------------------------------- LIFE ELEMENTS
 	// Load Lifes P1
 	for (int i = 0; i < MAX_LIFE; ++i) {
@@ -767,11 +769,9 @@ update_status ModulePlayer::Update()
 
 			hitAirAnim1R.Reset();
 			currentAnimation = &hitAirAnim1R;
+
 		    App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			App->audio->PlayFx(PunchMiss);
-
-
-
 
 			}
 			break;
@@ -784,6 +784,7 @@ update_status ModulePlayer::Update()
 
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 				App->audio->PlayFx(PunchMiss);
+
 			}
 			break;
 
@@ -791,11 +792,6 @@ update_status ModulePlayer::Update()
 
 			break;
 		}
-
-
-
-
-
 	}
 
 	// ------------------------------------------------------Hits LEFT
@@ -811,8 +807,11 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim1L.Reset();
 				currentAnimation = &hitAirAnim1L;
+
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 				App->audio->PlayFx(PunchMiss);
+
+
 			}
 			break;
 		case 1:
@@ -821,59 +820,240 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim2L.Reset();
 				currentAnimation = &hitAirAnim2L;
+
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 				App->audio->PlayFx(PunchMiss);
+
+
 			}
 			break;
 		default:
 			break;
 
 		}
-
-
 	}
 
-	// TEST HITS
-
-	//--------------------------------------------------------------TEST RIGHT
-	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && lastPosition==0 )
+	// COLLIDE HITS
+/*
+	//------------------------------------------------------------------------------------ COLLIDE RIGHT
+	else if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0)
 	{
-		if (currentAnimation != &hittedGrabbedAnimR)
+		int x = (rand() % 6);
+
+		switch (x)
 		{
+		case 0:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
 
-			currentAnimation = &hittedGrabbedAnimR;
-			hittedGrabbedAnimR.Reset();
+				hitKickAnimR.Reset();
+				currentAnimation = &hitKickAnimR;
 
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 1:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitThrowAnimR.Reset();
+				currentAnimation = &hitThrowAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 2:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitUpAnimR.Reset();
+				currentAnimation = &hitUpAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 3:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitDownAnimR.Reset();
+				currentAnimation = &hitDownAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 4:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitPrickAnimR.Reset();
+				currentAnimation = &hitPrickAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 5:
+			if (currentAnimation != &hitKickAnimR
+				&& currentAnimation != &hitThrowAnimR
+				&& currentAnimation != &hitUpAnimR
+				&& currentAnimation != &hitDownAnimR
+				&& currentAnimation != &hitPrickAnimR
+				&& currentAnimation != &hitOverAnimR)
+			{
+				hitOverAnimR.Reset();
+				currentAnimation = &hitOverAnimR;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		default:
+
+			break;
 		}
-
-	}
-	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_UP && lastPosition == 0 )
-	{
-
-		currentAnimation = &idleAnimR;
-		idleAnimR.Reset();
 	}
 
-	//--------------------------------------------------------------TEST LEFT
-	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_DOWN && lastPosition == 1)
+	// -------------------------------------------------------------------------------------- COLLIDE LEFT
+	else if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 1)
 	{
-		if (currentAnimation != &hittedGrabbedAnimL)
+		int x = (rand() % 6);
+
+		switch (x)
 		{
+		case 0:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
 
-			currentAnimation = &hittedGrabbedAnimL;
-			hittedGrabbedAnimL.Reset();
+				hitKickAnimL.Reset();
+				currentAnimation = &hitKickAnimL;
 
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 1:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitThrowAnimL.Reset();
+				currentAnimation = &hitThrowAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 2:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitUpAnimL.Reset();
+				currentAnimation = &hitUpAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 3:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitDownAnimL.Reset();
+				currentAnimation = &hitDownAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 4:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitPrickAnimL.Reset();
+				currentAnimation = &hitPrickAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		case 5:
+			if (currentAnimation != &hitKickAnimL
+				&& currentAnimation != &hitThrowAnimL
+				&& currentAnimation != &hitUpAnimL
+				&& currentAnimation != &hitDownAnimL
+				&& currentAnimation != &hitPrickAnimL
+				&& currentAnimation != &hitOverAnimL)
+			{
+				hitOverAnimL.Reset();
+				currentAnimation = &hitOverAnimL;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchHit);
+
+			}
+			break;
+		default:
+
+			break;
 		}
-
-	}
-	else if (App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_UP && lastPosition == 1)
-	{
-
-		currentAnimation = &idleAnimL;
-		idleAnimL.Reset();
-
-	}
-
+	}*/
 	// ---------------------------------------------------------------------- Moving the player
 
 	// ALL MOVEMENT KEYS PRESSED
@@ -1140,7 +1320,22 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation != &idleAnimR
 			&& currentAnimation != &idleAnimL
+			&& currentAnimation != &hitAirAnim1L
+			&& currentAnimation != &hitAirAnim2L
+			&& currentAnimation != &hitAirAnim2R
+			&& currentAnimation != &hitAirAnim1R
+			&& currentAnimation != &hitKickAnimL
+			&& currentAnimation != &hitThrowAnimL
+			&& currentAnimation != &hitUpAnimL
+			&& currentAnimation != &hitDownAnimL
+			&& currentAnimation != &hitPrickAnimL
+			&& currentAnimation != &hitOverAnimL
 			&& currentAnimation != &hitKickAnimR
+			&& currentAnimation != &hitThrowAnimR
+			&& currentAnimation != &hitUpAnimR
+			&& currentAnimation != &hitDownAnimR
+			&& currentAnimation != &hitPrickAnimR
+			&& currentAnimation != &hitOverAnimR
 			&& currentAnimation != &jumpAnimR
 			&& currentAnimation != &jumpAnimL
 			&& currentAnimation != &deathAnimR
@@ -1216,6 +1411,114 @@ update_status ModulePlayer::PostUpdate()
 			App->render->Blit(texture, position.x, position.y, &rect);
 		}
 
+		// After Hits Animations, go back to Idle Anim
+		// HIT AIR
+		// RIGHT
+		if (hitAirAnim1R.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitAirAnim2R.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+
+		// LEFT
+		else if (hitAirAnim1L.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitAirAnim2L.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		// HIT COLLIDE
+		// LEFT
+		else if (hitKickAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitThrowAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitUpAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitDownAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitPrickAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitOverAnimL.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+
+		// RIGHT
+		else if (hitKickAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitThrowAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitUpAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitDownAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitPrickAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitOverAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+
+		// Return de LoopCount to 0
+
+		hitKickAnimL.loopCount = 0;
+		hitThrowAnimL.loopCount = 0;
+		hitUpAnimL.loopCount = 0;
+		hitDownAnimL.loopCount = 0;
+		hitPrickAnimL.loopCount = 0;
+		hitOverAnimL.loopCount = 0;
+		hitKickAnimR.loopCount = 0;
+		hitThrowAnimR.loopCount = 0;
+		hitUpAnimR.loopCount = 0;
+		hitDownAnimR.loopCount = 0;
+		hitPrickAnimR.loopCount = 0;
+		hitOverAnimR.loopCount = 0;
+		hitAirAnim1R.loopCount = 0;
+		hitAirAnim2R.loopCount = 0;
+		hitAirAnim1L.loopCount = 0;
+		hitAirAnim2L.loopCount = 0;
 	}
 
 	App->render->Blit(AttackQuoteTexture, 5, 112, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
@@ -1247,9 +1550,14 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(HUDTexture, 41, 16, &(lifeP1.GetCurrentFrame()), 0); // Full life P1
 
 	// Draw UI (score) --------------------------------------
-	sprintf_s(scoreText, 10, "%3d", score);
+	sprintf_s(scoreTextP1, 10, "%3d", scoreP1); //P1
+	sprintf_s(scoreTextP234, 10, "%3d", scoreP234); //P234
 
-	App->fonts->BlitText(45, 8, scoreFont, scoreText);
+	App->fonts->BlitText(45, 8, scoreFont, scoreTextP1); // P1
+	App->fonts->BlitText(116, 8, scoreFont, scoreTextP234); // P2
+	App->fonts->BlitText(187, 8, scoreFont, scoreTextP234); // P3
+	App->fonts->BlitText(258, 8, scoreFont, scoreTextP234); // P4
+
 
 	// Draw UI (NumLifes) --------------------------------------
 	sprintf_s(lifeText, 10, "%3d", lifes);
@@ -1277,30 +1585,37 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 		lifeP1.Update();
-		updateLifeIndicatorPlayer1(lifesP1, 1);
+		updateLifeIndicatorPlayer1(lifesP1, 5);
 
 		// ---------------------------------------------------------------- RIGHT
 		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
 			lifes -= 1;
+			deathAnimR.Reset();
 			currentAnimation = &deathAnimR;
 
-			position.x = 5;
-			position.y = 112;
+			if (deathAnimR.loopCount > 1)
+			{
+				position.x = 5;
+				position.y = 112;
 
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
-			lifeP1.Reset();
+				idleAnimR.Reset();
+				currentAnimation = &idleAnimR;
+				lifeP1.Reset();
 
-			// Load Lifes P1 Again
-			for (int i = 0; i < MAX_LIFE; ++i) {
-				lifesP1[i] = 1;
+				// Load Lifes P1 Again
+				for (int i = 0; i < MAX_LIFE; ++i) {
+					lifesP1[i] = 1;
+				}
 			}
+
+			deathAnimR.loopCount = 0;
 		}
 
 		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 0) {
+			deathAnimR.Reset();
 			currentAnimation = &deathAnimR;
 
-			if (deathAnimR.loopCount == 5)
+			if (deathAnimR.loopCount > 1)
 			{
 				destroyed = true;
 			}
@@ -1309,25 +1624,32 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		// ---------------------------------------------------------------- LEFT
 		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
 			lifes -= 1;
+			deathAnimL.Reset();
 			currentAnimation = &deathAnimL;
 
-			position.x = 5;
-			position.y = 112;
+			if (deathAnimL.loopCount > 1)
+			{
+				position.x = 5;
+				position.y = 112;
 
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
+				idleAnimR.Reset();
+				currentAnimation = &idleAnimR;
+				lifeP1.Reset();
 
-			lifeP1.Reset();
-			// Load Lifes P1 Again
-			for (int i = 0; i < MAX_LIFE; ++i) {
-				lifesP1[i] = 1;
+				// Load Lifes P1 Again
+				for (int i = 0; i < MAX_LIFE; ++i) {
+					lifesP1[i] = 1;
+				}
 			}
+
+			deathAnimL.loopCount = 0;
 		}
 
 		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+			deathAnimL.Reset();
 			currentAnimation = &deathAnimL;
 
-			if (deathAnimL.loopCount == 5)
+			if (deathAnimL.loopCount > 1)
 			{
 				destroyed = true;
 			}
@@ -1341,6 +1663,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 	{
-		score += 1;
+		scoreP1 += 1;
 	}
 }

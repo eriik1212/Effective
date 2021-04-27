@@ -11,6 +11,10 @@ public:
 	// Creates animation and movement data and the collider
 	Enemy_White(int x, int y);
 
+	float coolDown = 20.0f;
+	float coolTime = 0.0f;
+	float velociti = 1.0f;
+
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;

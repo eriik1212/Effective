@@ -15,14 +15,14 @@ ModuleSceneWin::~ModuleSceneWin() {}
 // Load assets
 bool ModuleSceneWin::Start()
 {
-	introBackground = App->textures->Load("");
+	introBackground = App->textures->Load("Assets/Introduction/intro.png");
 	App->audio->PlayMusic("", 1.0f);
 	return true;
 }
 
 update_status ModuleSceneWin::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_1] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
 		App->scene->Enable();
@@ -36,7 +36,7 @@ update_status ModuleSceneWin::Update()
 // Update: draw background
 update_status ModuleSceneWin::PostUpdate()
 {
-	App->render->Blit(introBackground, 0, 0, NULL);
+	App->render->Blit(introBackground, 0, 0, NULL, NULL, true);
 	return update_status::UPDATE_CONTINUE;
 }
 

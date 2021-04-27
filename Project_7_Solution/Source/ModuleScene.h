@@ -48,6 +48,12 @@ public:
 	//Initialazing scene audio index
 	uint DoorBrake = 0;
 	uint ElevatorDoor = 0;
+private:
+	// Game Over
+	SDL_Texture* gameOverTexture = nullptr;
+	bool gameOver = false;
+	int gOverCounter = 0;
 };
+
 
 #endif //__MODULE_SCENE_H__

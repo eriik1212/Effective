@@ -164,11 +164,13 @@ public:
 	uint lifeIncrease = 0;
 
 	// Font score index
-	uint score = 000;
+	uint scoreP1 = 000;
+	uint scoreP234 = 000;
 	uint lifes = 000;
 	int scoreFont = -1;
 	int lifeFont = -1;
-	char scoreText[10] = { "\0" };
+	char scoreTextP1[10] = { "\0" };
+	char scoreTextP234[10] = { "\0" };
 	char lifeText[10] = { "\0" };
 	
 };

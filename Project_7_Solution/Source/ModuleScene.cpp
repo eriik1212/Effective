@@ -92,7 +92,12 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	App->render->camera.x = 0;
+	App->render->playerLimitR = App->render->camera.w - 135;
+	App->render->playerLimitL = App->render->camera.x + 5;
+
 	stageTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
+	gameOverTexture = App->textures->Load("Assets/UI & HUD/game_over.png");
 
 	App->audio->PlayMusic("Assets/Audio/03 Fire! Scene 1 Stage 1.ogg", 1.0f);
 	DoorBrake = App->audio->LoadFx("Assets/FX/BrokenDoor.wav");
@@ -168,13 +173,9 @@ update_status ModuleScene::Update()
 		App->audio->PlayFx(ElevatorDoor);
 
 	}
-	
-
-	
 
 
-
-	if (App->input->keys[SDL_SCANCODE_2] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
 		CleanUp();
@@ -187,10 +188,9 @@ update_status ModuleScene::Update()
 
 		App->sceneWin->Enable();
 	}	
-	else if (App->input->keys[SDL_SCANCODE_3] == KEY_STATE::KEY_DOWN)
-	{
-		this->Disable();
-		CleanUp();
+	else if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
+	{	
+		gameOver = true;
 
 		App->player->Disable();
 		App->player->CleanUp();
@@ -198,7 +198,24 @@ update_status ModuleScene::Update()
 		App->enemies->Disable();
 		App->enemies->CleanUp();
 
-		App->sceneLose->Enable();
+			
+
+	}
+	if (gameOver)
+	{
+		if (gOverCounter <= 200)
+		{
+			gOverCounter++;
+		}
+		else if(gOverCounter > 200)
+		{
+			gameOverTexture = nullptr;
+			gameOver = false;
+			gOverCounter = 0;
+			this->Disable();
+			CleanUp();
+			App->sceneIntro->Enable();
+		}
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -226,7 +243,11 @@ update_status ModuleScene::PostUpdate()
 	App->render->Blit(stageTexture, 950, 50, &(openElev.GetCurrentFrame()), 1); // OpenElevator1
 	App->render->Blit(stageTexture, 1079, 50, &(openElev2.GetCurrentFrame()), 1); // OpenElevator2
 	
+	if (gameOver)
+	{
+		App->render->Blit(gameOverTexture, 0, 0); // GameOver Texture
 
+	}
 
 
 	return update_status::UPDATE_CONTINUE;
