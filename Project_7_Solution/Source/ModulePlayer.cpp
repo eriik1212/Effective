@@ -129,7 +129,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		idleAnimR.PushBack({ 282, 0, 94, 84 });
 		idleAnimR.PushBack({ 94, 0, 94, 84 });
 		idleAnimR.PushBack({ 2, 0, 94, 84 });
-		idleAnimR.loop = false;
+		idleAnimR.loop = true;
 		idleAnimR.speed = 0.02f;
 
 		// LEFT
@@ -146,7 +146,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		idleAnimL.PushBack({ 1410, 1680, 94, 84 });
 		idleAnimL.PushBack({ 1598, 1680, 94, 84 });
 		idleAnimL.PushBack({ 1690, 1680, 94, 84 });
-		idleAnimL.loop = false;
+		idleAnimL.loop = true;
 		idleAnimL.speed = 0.02f;
 		//-----------------------------------------------------------------------------MOVE
 		// move right
@@ -767,11 +767,9 @@ update_status ModulePlayer::Update()
 
 			hitAirAnim1R.Reset();
 			currentAnimation = &hitAirAnim1R;
+
 		    App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			App->audio->PlayFx(PunchMiss);
-
-
-
 
 			}
 			break;
@@ -784,6 +782,7 @@ update_status ModulePlayer::Update()
 
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 				App->audio->PlayFx(PunchMiss);
+
 			}
 			break;
 
@@ -791,11 +790,6 @@ update_status ModulePlayer::Update()
 
 			break;
 		}
-
-
-
-
-
 	}
 
 	// ------------------------------------------------------Hits LEFT
@@ -811,8 +805,11 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim1L.Reset();
 				currentAnimation = &hitAirAnim1L;
+
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 				App->audio->PlayFx(PunchMiss);
+
+
 			}
 			break;
 		case 1:
@@ -821,16 +818,17 @@ update_status ModulePlayer::Update()
 			{
 				hitAirAnim2L.Reset();
 				currentAnimation = &hitAirAnim2L;
+
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 				App->audio->PlayFx(PunchMiss);
+
+
 			}
 			break;
 		default:
 			break;
 
 		}
-
-
 	}
 
 	// TEST HITS
@@ -1140,7 +1138,10 @@ update_status ModulePlayer::Update()
 	{
 		if (currentAnimation != &idleAnimR
 			&& currentAnimation != &idleAnimL
-			&& currentAnimation != &hitKickAnimR
+			&& currentAnimation != &hitAirAnim1L
+			&& currentAnimation != &hitAirAnim2L
+			&& currentAnimation != &hitAirAnim2R
+			&& currentAnimation != &hitAirAnim1R
 			&& currentAnimation != &jumpAnimR
 			&& currentAnimation != &jumpAnimL
 			&& currentAnimation != &deathAnimR
@@ -1216,6 +1217,31 @@ update_status ModulePlayer::PostUpdate()
 			App->render->Blit(texture, position.x, position.y, &rect);
 		}
 
+		if (hitAirAnim1R.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitAirAnim2R.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
+		else if (hitAirAnim1L.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+		else if (hitAirAnim2L.loopCount > 0)
+		{
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
+		}
+
+		hitAirAnim1R.loopCount = 0;
+		hitAirAnim2R.loopCount = 0;
+		hitAirAnim1L.loopCount = 0;
+		hitAirAnim2L.loopCount = 0;
 	}
 
 	App->render->Blit(AttackQuoteTexture, 5, 112, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
@@ -1247,9 +1273,14 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(HUDTexture, 41, 16, &(lifeP1.GetCurrentFrame()), 0); // Full life P1
 
 	// Draw UI (score) --------------------------------------
-	sprintf_s(scoreText, 10, "%3d", score);
+	sprintf_s(scoreTextP1, 10, "%3d", scoreP1); //P1
+	sprintf_s(scoreTextP234, 10, "%3d", scoreP234); //P234
 
-	App->fonts->BlitText(45, 8, scoreFont, scoreText);
+	App->fonts->BlitText(45, 8, scoreFont, scoreTextP1); // P1
+	App->fonts->BlitText(116, 8, scoreFont, scoreTextP234); // P2
+	App->fonts->BlitText(187, 8, scoreFont, scoreTextP234); // P3
+	App->fonts->BlitText(258, 8, scoreFont, scoreTextP234); // P4
+
 
 	// Draw UI (NumLifes) --------------------------------------
 	sprintf_s(lifeText, 10, "%3d", lifes);
@@ -1277,30 +1308,37 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 		lifeP1.Update();
-		updateLifeIndicatorPlayer1(lifesP1, 1);
+		updateLifeIndicatorPlayer1(lifesP1, 5);
 
 		// ---------------------------------------------------------------- RIGHT
 		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
 			lifes -= 1;
+			deathAnimR.Reset();
 			currentAnimation = &deathAnimR;
 
-			position.x = 5;
-			position.y = 112;
+			if (deathAnimR.loopCount > 1)
+			{
+				position.x = 5;
+				position.y = 112;
 
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
-			lifeP1.Reset();
+				idleAnimR.Reset();
+				currentAnimation = &idleAnimR;
+				lifeP1.Reset();
 
-			// Load Lifes P1 Again
-			for (int i = 0; i < MAX_LIFE; ++i) {
-				lifesP1[i] = 1;
+				// Load Lifes P1 Again
+				for (int i = 0; i < MAX_LIFE; ++i) {
+					lifesP1[i] = 1;
+				}
 			}
+
+			deathAnimR.loopCount = 0;
 		}
 
 		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 0) {
+			deathAnimR.Reset();
 			currentAnimation = &deathAnimR;
 
-			if (deathAnimR.loopCount == 5)
+			if (deathAnimR.loopCount > 1)
 			{
 				destroyed = true;
 			}
@@ -1309,25 +1347,32 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		// ---------------------------------------------------------------- LEFT
 		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
 			lifes -= 1;
+			deathAnimL.Reset();
 			currentAnimation = &deathAnimL;
 
-			position.x = 5;
-			position.y = 112;
+			if (deathAnimL.loopCount > 1)
+			{
+				position.x = 5;
+				position.y = 112;
 
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
+				idleAnimR.Reset();
+				currentAnimation = &idleAnimR;
+				lifeP1.Reset();
 
-			lifeP1.Reset();
-			// Load Lifes P1 Again
-			for (int i = 0; i < MAX_LIFE; ++i) {
-				lifesP1[i] = 1;
+				// Load Lifes P1 Again
+				for (int i = 0; i < MAX_LIFE; ++i) {
+					lifesP1[i] = 1;
+				}
 			}
+
+			deathAnimL.loopCount = 0;
 		}
 
 		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+			deathAnimL.Reset();
 			currentAnimation = &deathAnimL;
 
-			if (deathAnimL.loopCount == 5)
+			if (deathAnimL.loopCount > 1)
 			{
 				destroyed = true;
 			}
@@ -1341,6 +1386,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 	{
-		score += 1;
+		scoreP1 += 1;
 	}
 }
