@@ -15,7 +15,7 @@ ModuleSceneWin::~ModuleSceneWin() {}
 // Load assets
 bool ModuleSceneWin::Start()
 {
-	introBackground = App->textures->Load("Assets/Introduction/introMembers.png");
+	introBackground = App->textures->Load("Assets/UI & HUD/to be continued.png");
 	App->audio->PlayMusic("", 1.0f);
 	return true;
 }
