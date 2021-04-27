@@ -23,6 +23,7 @@ This is our first project as videogame design and developement students at CITM.
 - Instant Lose - F3
 - God Mode - F4
 - Restart - R
+- Exit game - Escape
 
 
 ## Developers
