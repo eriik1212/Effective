@@ -62,6 +62,8 @@ public:
 
 	//Template particle for a laser
 	Particle suriken;
+
+	Particle surikenBreak;
 };
 
 #endif // !__MODULEPARTICLES_H__
