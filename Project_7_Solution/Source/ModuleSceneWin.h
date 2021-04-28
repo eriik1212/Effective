@@ -35,6 +35,8 @@ public:
 	// CleanUp the scene
 	bool CleanUp();
 
+	uint countDown = 0;
+
 public:
 	
 	SDL_Texture* introBackground;

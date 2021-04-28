@@ -11,6 +11,7 @@
 
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneWin.h"
+#include "ModuleSceneLose.h"
 
 
 ModuleScene::ModuleScene(bool enabled) : Module(enabled)
@@ -181,7 +182,6 @@ update_status ModuleScene::Update()
 	}	
 	else if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{	
-		gameOver = true;
 		App->player->HIT->pendingToDelete = true;
 		App->player->collider->pendingToDelete = true;
 		App->player->Disable();
@@ -189,25 +189,8 @@ update_status ModuleScene::Update()
 
 		App->enemies->Disable();
 		App->enemies->CleanUp();
-	}
 
-	// GameOver Counter
-	if (gameOver)
-	{
-		
-		if (gOverCounter <= 200)
-		{
-			gOverCounter++;
-		}
-		else if(gOverCounter > 200)
-		{
-			gameOverTexture = nullptr;
-			gameOver = false;
-			gOverCounter = 0;
-			this->Disable();
-			CleanUp();
-			App->sceneIntro->Enable();
-		}
+		App->sceneLose->Enable();
 	}
 
 	return update_status::UPDATE_CONTINUE;
