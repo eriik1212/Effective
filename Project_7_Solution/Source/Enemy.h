@@ -4,8 +4,6 @@
 #include "p2Point.h"
 #include "Animation.h"
 
-#define MAX_LIFE 10
-
 struct SDL_Texture;
 struct Collider;
 
@@ -43,10 +41,6 @@ public:
 	// Sound fx when destroyed
 	int destroyedFx = 0;
 	int damageFX = 0;
-
-	// ----------------------------------------------------------------- LIFE ELEMENTS
-	// Load Lifes Enemies
-	int lifesEnemy[MAX_LIFE];
 
 protected:
 	// A ptr to the current animation

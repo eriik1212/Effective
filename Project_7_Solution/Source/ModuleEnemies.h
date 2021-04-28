@@ -5,8 +5,6 @@
 
 #define MAX_ENEMIES 100
 
-#define MAX_LIFE 10
-
 enum class ENEMY_TYPE
 {
 	NO_TYPE,
@@ -60,9 +58,6 @@ public:
 
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
-
-	unsigned short lifesEnemies[MAX_LIFE];
-
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);

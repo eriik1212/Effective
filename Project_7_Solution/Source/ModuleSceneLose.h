@@ -35,6 +35,8 @@ public:
 	// CleanUp the scene
 	bool CleanUp();
 
+	int countDown = 0;
+
 public:
 
 	SDL_Texture* gameOverTexture;
