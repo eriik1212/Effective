@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleParticles.h"
 
 Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 {
@@ -93,7 +94,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	knifeThrowRW.PushBack({ 98 * 3,617,98,88 });
 	knifeThrowRW.PushBack({ 98 * 4,617,98,88 });
 	knifeThrowRW.PushBack({ 98 * 5,617,98,88 });
-	knifeThrowRW.loop = false;
+	knifeThrowRW.loop = true;
 	knifeThrowRW.speed = 0.15f;
 
 	//left knife throwing
@@ -103,7 +104,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	knifeThrowLW.PushBack({ 784 - 98 * 3,1760,98,88 });
 	knifeThrowLW.PushBack({ 784 - 98 * 4,1760,98,88 });
 	knifeThrowLW.PushBack({ 784 - 98 * 5,1760,98,88 });
-	knifeThrowLW.loop = false;
+	knifeThrowLW.loop = true;
 	knifeThrowLW.speed = 0.15f;
 
 	//die to right face forward
@@ -124,40 +125,32 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	//aereal kick to right (not for this version)
 
 
-	path.PushBack({ -1.0f, 0.0f }, 150, &leftAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeLW);
-	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
+	//path.PushBack({ -1.0f, 0.0f }, 150, &leftAnimW);
+	path.PushBack({ 0.0f, 0.0f }, 40, & knifeThrowLW);
+	//path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
+	//path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
 
 
 	
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 }
 
 void Enemy_White::Update()
 {
-	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
-	if (currentAnim == &leftAnimW)direcction = 0;
-	if (currentAnim == &rightAnimW)direcction = 1;
 
-	if (coolTime >= coolDown) {
+	if (coolTime >= coolDown && currentAnim == &knifeThrowLW)
+	{
+		coolTime = 0;
+		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
 
-		if (currentAnim == &upAnimLW)
-		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
-			coolTime = 0.0f;
-
-		}
-		else if (currentAnim == &upAnimRW)
-		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
-			coolTime = 0.0f;
-		}
-		
 	}
 	else
-		coolTime +=0.1f;
+	{
+		coolTime += 0.1;
+	}
+
+
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();

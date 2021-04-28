@@ -22,7 +22,8 @@ ModuleParticles::~ModuleParticles()
 bool ModuleParticles::Start()
 {
 	LOG("Loading particles");
-	texture = App->textures->Load("Assets/particles.png");
+	
+texture = App->textures->Load("Assets/Enemies/White_enemy.png");
 
 	// Explosion particle
 	explosion.anim.PushBack({274, 296, 33, 30});
@@ -34,8 +35,8 @@ bool ModuleParticles::Start()
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
-	suriken.anim.PushBack({ 232, 103, 16, 12 });
-	suriken.anim.PushBack({ 249, 103, 16, 12 });
+	suriken.anim.PushBack({ 40, 1142, 17, 16 }); // 40 / 1142  /17 /2
+	
 	suriken.speed.x = -5;
 	suriken.lifetime = 180;
 	suriken.anim.speed = 0.2f;
@@ -103,6 +104,7 @@ update_status ModuleParticles::PostUpdate()
 		if (particle != nullptr && particle->isAlive)
 		{
 			App->render->Blit(texture, particle->position.x, particle->position.y, &(particle->anim.GetCurrentFrame()));
+			
 		}
 	}
 

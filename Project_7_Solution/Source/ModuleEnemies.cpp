@@ -187,7 +187,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 		{
 			enemies[i]->OnCollision(c2); //Notify the enemy of a collision
 
-			if (App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::SEE])
+			if (App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT])
 			{
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}

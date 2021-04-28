@@ -11,8 +11,9 @@ public:
 	// Creates animation and movement data and the collider
 	Enemy_Purple(int x, int y);
 
-	float coolDown = 30;
-	float coolTime = 0;
+	float coolDown = 10.0f;
+	float coolTime = 0.0f;
+	float velociti = 1.0f;
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
@@ -28,7 +29,15 @@ private:
 	Animation leftAnimP,
 		rightAnimP,
 		upAnimRP,
-		upAnimLP;
+		upAnimLP,
+		kickLP,
+		kickRP,
+		punchLP,
+		punchRP,
+		jumpLP,
+		jumpRP;
+
+
 };
 
 #endif // __ENEMY_MECH_H__

@@ -11,7 +11,7 @@ public:
 	// Creates animation and movement data and the collider
 	Enemy_White(int x, int y);
 
-	float coolDown = 20.0f;
+	float coolDown = 10.0f;
 	float coolTime = 0.0f;
 	float velociti = 1.0f;
 
@@ -22,7 +22,7 @@ public:
 private:
 	// The path that will define the position in the world
 	Path path;
-
+	SDL_Texture* texture = nullptr;
 	iPoint positionEnemy;
 
 	// Enemy animations
