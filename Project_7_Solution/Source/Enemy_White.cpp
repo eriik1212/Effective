@@ -139,11 +139,13 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 void Enemy_White::Update()
 {
 	
+
+
 	if (coolTime >= coolDown && currentAnim == &knifeThrowLW)
 	{
 	
 		coolTime = 0;
-		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_HIT);
+		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
 		
 	}
 	else

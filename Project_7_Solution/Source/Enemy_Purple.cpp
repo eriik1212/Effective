@@ -132,14 +132,14 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	
 
 	collider = App->collisions->AddCollider({0, 0, 38, 16}, Collider::Type::ENEMY, (Module*)App->enemies);
-	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 	//SEE = App->collisions->AddCollider({ 150, 122, 70, 16 }, Collider::Type::SEE, (Module*)App->enemies);
 }
 
 void Enemy_Purple::Update()
 {
 
-	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
+	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 	if (currentAnim == &leftAnimP)direcction = 0;
 	if (currentAnim == &rightAnimP)direcction = 1;
 
@@ -147,17 +147,17 @@ void Enemy_Purple::Update()
 
 		if (currentAnim == &punchLP)
 		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
 			coolTime = 0.0f;
 
 		}
 		else if (currentAnim == &kickRP)
 		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
 			coolTime = 0.0f;
 		}
 		else
-            App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false; 
+            App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 	}
 	else
 		coolTime += 0.1f;
