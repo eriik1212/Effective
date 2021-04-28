@@ -98,8 +98,10 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		frontFire.PushBack({ 19, 497, 304, 62 });
 		frontFire.PushBack({ 336, 500, 304, 62 });
 		frontFire.PushBack({ 21, 564, 304, 62 });
+
 		//frontFire.PushBack({ 18, 429, 304, 62 });
 		//frontFire.PushBack({ 336, 565, 304, 62 });
+
 		frontFire.PushBack({ 710, 536, 304, 62 });
 		frontFire.PushBack({ 1030, 536, 304, 62 });
 		frontFire.speed = 0.15f;
@@ -1309,6 +1311,9 @@ update_status ModulePlayer::Update()
 		}
 	}
 
+	//---------------------------------------------------------GOD MODE
+
+	
 
 	// If no movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
@@ -1392,6 +1397,8 @@ update_status ModulePlayer::Update()
 	// R to Restart
 	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
+		HIT->pendingToDelete = true;
+		collider->pendingToDelete = true;
 		CleanUp();
 		this->Disable();
 		App->audio->StopMusic();
@@ -1405,6 +1412,7 @@ update_status ModulePlayer::Update()
 	{
 		destroyedCountdown--;
 		if (destroyedCountdown <= 0)
+		
 			return update_status::UPDATE_STOP;
 	}
 

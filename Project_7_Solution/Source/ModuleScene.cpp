@@ -165,11 +165,19 @@ update_status ModuleScene::Update()
 	}
 
 	// SCANCODES
+
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
+	{
+		
+		
+	}
+
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
 		CleanUp();
-
+		App->player->HIT->pendingToDelete = true;
+		App->player->collider->pendingToDelete = true;
 		App->player->Disable();
 		App->player->CleanUp();
 
@@ -181,7 +189,8 @@ update_status ModuleScene::Update()
 	else if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{	
 		gameOver = true;
-
+		App->player->HIT->pendingToDelete = true;
+		App->player->collider->pendingToDelete = true;
 		App->player->Disable();
 		App->player->CleanUp();
 
