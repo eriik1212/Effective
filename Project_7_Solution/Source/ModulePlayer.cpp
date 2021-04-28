@@ -1604,7 +1604,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 		lifeP1.Update();
-		updateLifeIndicatorPlayer1(lifesP1, 5);
+		updateLifeIndicatorPlayer1(lifesP1, 1);
 
 		// ---------------------------------------------------------------- RIGHT
 		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
@@ -1636,52 +1636,62 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 			if (deathAnimR.loopCount > 1)
 			{
-				destroyed = true;
+				App->scene->gameOver = true;
+
+				App->player->Disable();
+				App->player->CleanUp();
+
+				App->enemies->Disable();
+				App->enemies->CleanUp();
+			}
+		}
+	}
+
+	// ---------------------------------------------------------------- LEFT
+	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
+		lifes -= 1;
+		deathAnimL.Reset();
+		currentAnimation = &deathAnimL;
+
+		if (deathAnimL.loopCount > 1)
+		{
+			position.x = 5;
+			position.y = 112;
+
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+			lifeP1.Reset();
+
+			// Load Lifes P1 Again
+			for (int i = 0; i < MAX_LIFE; ++i) {
+				lifesP1[i] = 1;
 			}
 		}
 
-		// ---------------------------------------------------------------- LEFT
-		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
-			lifes -= 1;
-			deathAnimL.Reset();
-			currentAnimation = &deathAnimL;
+		deathAnimL.loopCount = 0;
+	}
 
-			if (deathAnimL.loopCount > 1)
-			{
-				position.x = 5;
-				position.y = 112;
+	else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+		deathAnimL.Reset();
+		currentAnimation = &deathAnimL;
 
-				idleAnimR.Reset();
-				currentAnimation = &idleAnimR;
-				lifeP1.Reset();
+		if (deathAnimL.loopCount > 1)
+		{
+			App->scene->gameOver = true;
 
-				// Load Lifes P1 Again
-				for (int i = 0; i < MAX_LIFE; ++i) {
-					lifesP1[i] = 1;
-				}
-			}
+			App->player->Disable();
+			App->player->CleanUp();
 
-			deathAnimL.loopCount = 0;
+			App->enemies->Disable();
+			App->enemies->CleanUp();
 		}
-
-		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
-			deathAnimL.Reset();
-			currentAnimation = &deathAnimL;
-
-			if (deathAnimL.loopCount > 1)
-			{
-				destroyed = true;
-			}
-		}
-
-
 	}
 	
 	
 	
 
-	if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
-	{
-		scoreP1 += 1;
-	}
+		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
+		{
+			scoreP1 += 1;
+		}
 }
