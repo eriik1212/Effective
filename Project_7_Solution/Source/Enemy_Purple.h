@@ -28,7 +28,15 @@ private:
 	Animation leftAnimP,
 		rightAnimP,
 		upAnimRP,
-		upAnimLP;
+		upAnimLP,
+		kickLP,
+		kickRP,
+		punchLP,
+		punchRP,
+		jumpLP,
+		jumpRP;
+
+
 };
 
 #endif // __ENEMY_MECH_H__
