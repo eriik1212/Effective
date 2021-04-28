@@ -1671,6 +1671,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 			if (deathAnimR.loopCount > 1)
 			{
+				App->player->HIT->pendingToDelete = true;
+				App->player->collider->pendingToDelete = true;
+
 				App->player->Disable();
 				App->player->CleanUp();
 
@@ -1715,6 +1718,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		if (deathAnimL.loopCount > 1)
 		{
+			App->player->HIT->pendingToDelete = true;
+			App->player->collider->pendingToDelete = true;
+
 			App->player->Disable();
 			App->player->CleanUp();
 
@@ -1724,10 +1730,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->sceneLose->Enable();
 		}
 	}
-	
-	
-	
-
 		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
 			scoreP1 += 1;

@@ -163,7 +163,7 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i]->damageFX = enemyDamageFX;
 					break;
 			}
-			
+
 			break;
 		}
 	}
@@ -194,7 +194,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
-			
+
 			updateLifeIndicatorEnemies(lifesEnemies, 1);
 
 			if (lifesEnemies[0] == 0) {
@@ -205,7 +205,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					lifesEnemies[i] = 1;
 				}
 			}
-			
+
 			break;
 		}
 	}
