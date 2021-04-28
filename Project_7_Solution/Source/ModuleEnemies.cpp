@@ -197,14 +197,14 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 
 			updateLifeIndicatorEnemies(lifesEnemies, 1);
 
-			if (lifesEnemies[0] == 0) {
+			//if (lifesEnemies[0] == 0) {
 				delete enemies[i];
 				enemies[i] = nullptr;
-				// Load Lifes Enemies
-				for (int i = 0; i < MAX_LIFE; ++i) {
+				//---------------------------------------------- Load Lifes Enemies
+				/*for (int i = 0; i < MAX_LIFE; ++i) {
 					lifesEnemies[i] = 1;
 				}
-			}
+			}*/
 
 			break;
 		}
