@@ -42,11 +42,11 @@ void Enemy::Update()
 	//----------------------------------------------------right collider
 
 	if (collider != nullptr && direcction ==1 )
-		collider->SetPos(position.x + 12, position.y + 75);
+		collider->SetPos(position.x + 20, position.y + 75);
 
 
 	if (HIT != nullptr && direcction==1)
-		HIT->SetPos(position.x + 50, position.y + 75);
+		HIT->SetPos(position.x + 58, position.y + 75);
 	
 
 }
