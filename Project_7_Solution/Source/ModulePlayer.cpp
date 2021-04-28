@@ -766,6 +766,7 @@ update_status ModulePlayer::Update()
 	// ------------------------------------------------------Hits RIGHT
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0 && blockAnim == false)
 	{
+		
 		int x = (rand() % 2);
 
 		switch (x)

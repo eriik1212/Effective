@@ -33,7 +33,7 @@ ModuleCollisions::ModuleCollisions(bool enabled) : Module(enabled)
 	matrix[Collider::Type::ENEMY][Collider::Type::ENEMY_HIT] = false;
 
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::WALL] = true;
-	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = false;
+	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY] = true;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::PLAYER_SHOT] = false;
 	matrix[Collider::Type::PLAYER_SHOT][Collider::Type::ENEMY_SHOT] = false;
@@ -111,6 +111,26 @@ update_status ModuleCollisions::Update()
 	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN)
 		debug = !debug;
 
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
+	{
+		debug = !debug;
+		if (GodMode == false) 
+		{
+			matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+
+		
+			GodMode = true;
+		}
+
+		else if (GodMode == true)
+		{
+			matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
+		
+			GodMode = false;
+
+		}
+		
+	}
 	return update_status::UPDATE_CONTINUE;
 }
 

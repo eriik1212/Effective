@@ -138,6 +138,30 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	hitRP.loop = false;
 	hitRP.speed = 0.15f;
 
+	//DIE FACE FORWARD TO LEFT
+	dieFacefwLP.PushBack({ 0,270,86,90});
+	dieFacefwLP.PushBack({ 86,270,86,90});
+	dieFacefwLP.PushBack({ 86 * 2,270,86,90});
+	dieFacefwLP.PushBack({ 86 * 3,270,86,90 });
+	dieFacefwLP.PushBack({ 86 * 4,270,86,90 });
+	dieFacefwLP.PushBack({ 86 * 5,270,86,90 });
+	dieFacefwLP.PushBack({ 86 * 6,270,86,90 });
+	dieFacefwLP.loop = false;
+	dieFacefwLP.speed = 0.15f;
+
+	//DIE FACE FORWARD TO RIGHT
+	dieFacefwRP.PushBack({ 1032,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 2,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 3,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 4,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 5,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 6,1710,86,90 });
+	dieFacefwRP.loop = false;
+	dieFacefwRP.speed = 0.15f;
+
+	
+
 
 	//PATH
 	path.PushBack({ -1.2f, 0.0f }, 45, &jumpLP);
@@ -155,31 +179,33 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 
 void Enemy_Purple::Update()
 {
+	if (App->collisions->GodMode == true) {
 
-	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
-	if (currentAnim == &leftAnimP)direcction = 0;
-	if (currentAnim == &rightAnimP)direcction = 1;
 
-	if (coolTime >= coolDown) {
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+		if (currentAnim == &leftAnimP)direcction = 0;
+		if (currentAnim == &rightAnimP)direcction = 1;
 
-		if (currentAnim == &punchLP)
-		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
-			coolTime = 0.0f;
+		if (coolTime >= coolDown) {
 
-		}
-		else if (currentAnim == &kickRP)
-		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
-			coolTime = 0.0f;
+			if (currentAnim == &punchLP)
+			{
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+
+			}
+			else if (currentAnim == &kickRP)
+			{
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+			}
+			else
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		}
 		else
-            App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+			coolTime += 0.1f;
+
 	}
-	else
-		coolTime += 0.1f;
-
-
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
 	currentAnim = path.GetCurrentAnimation();

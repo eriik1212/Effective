@@ -39,6 +39,7 @@ public:
 	void DebugDraw();
 
 	bool matrix[Collider::Type::MAX][Collider::Type::MAX];
+	bool GodMode = true;
 
 private:
 	// All existing colliders in the scene

@@ -37,7 +37,10 @@ private:
 		jumpLP,
 		jumpRP,
 		hitLP,
-		hitRP;
+		hitRP,
+		dieFacefwLP,
+		dieFacefwRP;
+		
 
 
 };
