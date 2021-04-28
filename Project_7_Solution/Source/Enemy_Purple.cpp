@@ -173,7 +173,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	
 
 	collider = App->collisions->AddCollider({0, 0, 38, 16}, Collider::Type::ENEMY, (Module*)App->enemies);
-	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
+	HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 	
 }
 
@@ -183,8 +183,12 @@ void Enemy_Purple::Update()
 
 
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+		if (currentAnim == &jumpLP)direcction = 0;
 		if (currentAnim == &leftAnimP)direcction = 0;
-		if (currentAnim == &rightAnimP)direcction = 1;
+		if (currentAnim == &punchLP)direcction = 0;
+
+		if (currentAnim == &upAnimRP)direcction = 1;
+		if (currentAnim == &kickRP)direcction = 1;
 
 		if (coolTime >= coolDown) {
 

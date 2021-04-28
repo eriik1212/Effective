@@ -692,7 +692,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	blockAnim = false;
-
+	eneAlive = 2;
 	scoreP1 = 0;
 
 	lifeP1.Reset();
@@ -720,7 +720,7 @@ bool ModulePlayer::Start()
 	lifeIncrease = App->audio->LoadFx("Assets/FX/01Cowabunga.wav");
 
 	// ----------------------------------------------------------------- COLLIDERS
-	HIT = App->collisions->AddCollider({ position.x , position.y  , 58, 16 }, Collider::Type::PLAYER_SHOT,this);
+	HIT = App->collisions->AddCollider({ position.x , position.y, 20, 16 }, Collider::Type::PLAYER_SHOT,this);
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
 
 	// ----------------------------------------------------------------- FONTS
@@ -1447,7 +1447,7 @@ update_status ModulePlayer::Update()
 
 	case 0:
 		collider->SetPos(position.x + 20, position.y + 68);
-		HIT->SetPos(position.x + 20, position.y + 68);
+		HIT->SetPos(position.x + 58, position.y + 68);
 		break;
 	}
 
@@ -1774,5 +1774,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
 			scoreP1 += 1;
+			eneAlive--;
 		}
 }

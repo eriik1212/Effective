@@ -172,7 +172,7 @@ update_status ModuleScene::Update()
 
 	}
 
-	if (App->player->scoreP1 == 2)
+	if (App->player->eneAlive == 0)
 	{
 		this->Disable();
 		CleanUp();

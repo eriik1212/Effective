@@ -31,15 +31,22 @@ void Enemy::Update()
 {
 	if (currentAnim != nullptr)
 		currentAnim->Update();
+	//----------------------------------------------------left collider
 
-	if (collider != nullptr)
-		collider->SetPos(position.x+40, position.y+70);
+	if (collider != nullptr && direcction ==0) 
+		collider->SetPos(position.x+28, position.y+75);
 
 	if (HIT != nullptr && direcction == 0)
-		HIT->SetPos(position.x +10, position.y + 70);
+		HIT->SetPos(position.x + 10, position.y + 75);
+
+	//----------------------------------------------------right collider
+
+	if (collider != nullptr && direcction ==1 )
+		collider->SetPos(position.x + 12, position.y + 75);
+
 
 	if (HIT != nullptr && direcction==1)
-		HIT->SetPos(position.x + 70, position.y + 70);
+		HIT->SetPos(position.x + 50, position.y + 75);
 	
 
 }

@@ -44,6 +44,7 @@ public:
 
 	// The speed in which we move the player (pixels per frame)
 	int speed = 2;
+	int eneAlive = 2;
 
 	int lastPosition = 0; //    1 = Left || 0 = Right
 	bool blockAnim = false;
