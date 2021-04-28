@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleFonts.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneLose.h"
 
 #include <stdio.h>
 
@@ -1661,13 +1662,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 			if (deathAnimR.loopCount > 1)
 			{
-				App->scene->gameOver = true;
-
 				App->player->Disable();
 				App->player->CleanUp();
 
 				App->enemies->Disable();
 				App->enemies->CleanUp();
+
+				App->sceneLose->Enable();
 			}
 		}
 	}
@@ -1705,13 +1706,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		if (deathAnimL.loopCount > 1)
 		{
-			App->scene->gameOver = true;
-
 			App->player->Disable();
 			App->player->CleanUp();
 
 			App->enemies->Disable();
 			App->enemies->CleanUp();
+
+			App->sceneLose->Enable();
 		}
 	}
 	
