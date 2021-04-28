@@ -96,7 +96,6 @@ bool ModuleScene::Start()
 	App->render->playerLimitL = App->render->camera.x + 5;
 
 	stageTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
-	gameOverTexture = App->textures->Load("Assets/UI & HUD/game_over.png");
 
 	App->audio->PlayMusic("Assets/Audio/03 Fire! Scene 1 Stage 1.ogg", 1.0f);
 	DoorBrake = App->audio->LoadFx("Assets/FX/BrokenDoor.wav");
@@ -108,7 +107,7 @@ bool ModuleScene::Start()
 
 	// Enemies ---
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 52);
-	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 200, 102);
+	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 200, 112);
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 250, 112);
 	
 	return ret;
@@ -201,7 +200,7 @@ update_status ModuleScene::Update()
 	// GameOver Counter
 	if (gameOver)
 	{
-		App->audio->StopMusic();
+		
 		if (gOverCounter <= 200)
 		{
 			gOverCounter++;

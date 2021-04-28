@@ -46,6 +46,7 @@ public:
 	int speed = 2;
 
 	int lastPosition = 0; //    1 = Left || 0 = Right
+	bool blockAnim = false;
 
 	unsigned short lifesP1[MAX_LIFE];
 

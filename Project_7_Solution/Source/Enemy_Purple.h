@@ -35,7 +35,9 @@ private:
 		punchLP,
 		punchRP,
 		jumpLP,
-		jumpRP;
+		jumpRP,
+		hitLP,
+		hitRP;
 
 
 };
