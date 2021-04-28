@@ -194,7 +194,7 @@ void Enemy_White::Update()
 
 	
 
-	if (coolTime >= coolDown && currentAnim == &knifeThrowLW)
+	if (coolTime >= coolDown )
 	{
 		coolTime = 0;
 		App->particles->AddParticle(App->particles->suriken, position.x +20, position.y + 74, Collider::Type::ENEMY_SHOT);
