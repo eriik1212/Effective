@@ -1114,6 +1114,10 @@ update_status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
+		&& currentAnimation != &hitAirAnim1R
+		&& currentAnimation != &hitAirAnim2R
+		&& currentAnimation != &hitAirAnim1L
+		&& currentAnimation != &hitAirAnim2L
 		&& blockAnim == false)
 	{
 		if (currentAnimation != &idleAnimR)
@@ -1128,6 +1132,10 @@ update_status ModulePlayer::Update()
 	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
+		&& currentAnimation != &hitAirAnim1R
+		&& currentAnimation != &hitAirAnim2R
+		&& currentAnimation != &hitAirAnim1L
+		&& currentAnimation != &hitAirAnim2L
 		&& blockAnim == false)
 	{
 		position.y -= speed;
@@ -1141,6 +1149,10 @@ update_status ModulePlayer::Update()
 	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
+		&& currentAnimation != &hitAirAnim1R
+		&& currentAnimation != &hitAirAnim2R
+		&& currentAnimation != &hitAirAnim1L
+		&& currentAnimation != &hitAirAnim2L
 		&& blockAnim == false)
 	{
 		position.y += speed;
@@ -1154,6 +1166,10 @@ update_status ModulePlayer::Update()
 	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
+		&& currentAnimation != &hitAirAnim1R
+		&& currentAnimation != &hitAirAnim2R
+		&& currentAnimation != &hitAirAnim1L
+		&& currentAnimation != &hitAirAnim2L
 		&& blockAnim == false)
 	{
 		position.x -= speed;
@@ -1167,6 +1183,10 @@ update_status ModulePlayer::Update()
 	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
+		&& currentAnimation != &hitAirAnim1R
+		&& currentAnimation != &hitAirAnim2R
+		&& currentAnimation != &hitAirAnim1L
+		&& currentAnimation != &hitAirAnim2L
 		&& blockAnim == false)
 	{
 		position.x += speed;
@@ -1178,7 +1198,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// ---------------------------------------------JUMP RIGHT
-	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_REPEAT && lastPosition == 0 && blockAnim == false)
+	/*else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_REPEAT && lastPosition == 0 && blockAnim == false)
 	{
 	position.y -= 2;
 	if (currentAnimation != &InitjumpAnimR)
@@ -1198,10 +1218,10 @@ update_status ModulePlayer::Update()
 		currentAnimation = &jumpAnimR;
 
 	}
-	}
+	}*/
 
 	// ---------------------------------------------JUMP LEFT
-	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_REPEAT && lastPosition == 1 && blockAnim == false)
+	/*else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_REPEAT && lastPosition == 1 && blockAnim == false)
 	{
 	position.y -= 2;
 	if (currentAnimation != &InitjumpAnimL)
@@ -1221,12 +1241,16 @@ update_status ModulePlayer::Update()
 		currentAnimation = &jumpAnimL;
 
 	}
-	}
+	}*/
 
 
 	// UP & RIGHT MOVEMENT
 	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT 
 	&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
 	&& blockAnim == false)
 	{
 		position.x += speed;
@@ -1241,6 +1265,10 @@ update_status ModulePlayer::Update()
 	// DOWN & RIGHT MOVEMENT
 	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT 
 	&& App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
 	&& blockAnim == false)
 	{
 
@@ -1257,6 +1285,10 @@ update_status ModulePlayer::Update()
 	// LEFT & UP MOVEMENT
 	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT 
 	&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
 	&& blockAnim == false)
 	{
 		position.x -= speed;
@@ -1271,6 +1303,10 @@ update_status ModulePlayer::Update()
 	// LEFT & DOWN
 	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT 
 	&& App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
 	&& blockAnim == false)
 	{
 		position.x -= speed;
@@ -1285,6 +1321,10 @@ update_status ModulePlayer::Update()
 	// LEFT & RIGHT PRESSED
 	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT 
 	&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
 	&& blockAnim == false)
 	{
 		if (currentAnimation != &idleAnimR)
@@ -1297,6 +1337,10 @@ update_status ModulePlayer::Update()
 	// UP & DOWN PRESSED
 	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 	&& App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
 	&& blockAnim == false)
 	{
 		if (currentAnimation != &idleAnimR)
@@ -1308,7 +1352,13 @@ update_status ModulePlayer::Update()
 
 	// UP
 	// ---------------------------------------------------------UP LEFT
-	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && lastPosition == 1 && blockAnim == false)
+	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT 
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
+	&& lastPosition == 1 
+	&& blockAnim == false)
 	{
 		position.y -= speed;
 		if (currentAnimation != &upAnimL)
@@ -1319,7 +1369,13 @@ update_status ModulePlayer::Update()
 	}
 
 	// ---------------------------------------------------------UP RIGHT
-	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT && lastPosition == 0 && blockAnim == false)
+	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
+	&& lastPosition == 0
+	&& blockAnim == false)
 	{
 	position.y -= speed;
 	if (currentAnimation != &upAnimR)
@@ -1331,7 +1387,12 @@ update_status ModulePlayer::Update()
 
 
 	// LEFT
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT && blockAnim == false)
+	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT 
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
+	&& blockAnim == false)
 	{
 	lastPosition = 1;
 		position.x -= speed;
@@ -1346,6 +1407,8 @@ update_status ModulePlayer::Update()
 	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT 
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
 	&& blockAnim == false)
 	{
 	lastPosition = 0;
@@ -1360,7 +1423,13 @@ update_status ModulePlayer::Update()
 
 	// DOWN
 	// --------------------------------------------------------DOWN LEFT
-	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && lastPosition == 1 && blockAnim == false)
+	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
+	&& lastPosition == 1 
+	&& blockAnim == false)
 	{
 	position.y += speed;
 	if (currentAnimation != &downAnimL)
@@ -1371,7 +1440,13 @@ update_status ModulePlayer::Update()
 	}
 
 	// --------------------------------------------------------DOWN RIGHT
-	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT && lastPosition == 0 && blockAnim == false)
+	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT 
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& currentAnimation != &hitAirAnim1L
+	&& currentAnimation != &hitAirAnim2L
+	&& lastPosition == 0
+	&& blockAnim == false)
 	{
 		position.y += speed;
 		if (currentAnimation != &downAnimR)
