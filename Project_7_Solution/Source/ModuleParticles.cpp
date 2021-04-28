@@ -35,7 +35,13 @@ texture = App->textures->Load("Assets/Enemies/White_enemy.png");
 	explosion.anim.loop = false;
 	explosion.anim.speed = 0.3f;
 
-	suriken.anim.PushBack({ 0, 1057, 17, 16 }); // 40 / 1142  /17 /16
+	suriken.anim.PushBack({ 34, 1129, 29, 15 });
+
+	surikenBreak.anim.PushBack({ 34, 1129, 29, 15 });
+	surikenBreak.anim.PushBack({ 34, 1129, 29, 15 });
+	surikenBreak.anim.PushBack({ 34, 1129, 29, 15 });
+	surikenBreak.anim.PushBack({ 34, 1129, 29, 15 });
+	surikenBreak.anim.PushBack({ 34, 1129, 29, 15 });
 	
 	suriken.speed.x = -5;
 	suriken.lifetime = 180;
