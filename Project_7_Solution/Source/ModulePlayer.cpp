@@ -1203,26 +1203,28 @@ update_status ModulePlayer::Update()
 	// ---------------------------------------------JUMP LEFT
 	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_REPEAT && lastPosition == 1 && blockAnim == false)
 	{
-	position.y -= 2;
-	if (currentAnimation != &InitjumpAnimL)
-	{
+		position.y -= 2;
+		if (currentAnimation != &InitjumpAnimL)
+		{
 		InitjumpAnimL.Reset();
 		currentAnimation = &InitjumpAnimL;
 
-	}
+		}
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_UP && lastPosition == 1 && blockAnim == false)
 	{
 
-	if (currentAnimation != &jumpAnimL)
-	{
+		if (currentAnimation != &jumpAnimL)
+		{
 		jumpAnimL.Reset();
 		currentAnimation = &jumpAnimL;
 
-	}
+		}
 	}
 
+
+	
 
 	// UP & RIGHT MOVEMENT
 	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT 
