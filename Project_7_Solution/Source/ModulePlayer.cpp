@@ -695,6 +695,8 @@ bool ModulePlayer::Start()
 
 	lifeP1.Reset();
 
+	scoreP1 = 0;
+
 	position.x = 5;
 	position.y = 112;
 
@@ -1683,55 +1685,55 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				App->sceneLose->Enable();
 			}
 		}
-	}
 
-	// ---------------------------------------------------------------- LEFT
-	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
-		lifes -= 1;
-		deathAnimL.Reset();
-		currentAnimation = &deathAnimL;
-		blockAnim = true;
+		// ---------------------------------------------------------------- LEFT
+		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
+			lifes -= 1;
+			deathAnimL.Reset();
+			currentAnimation = &deathAnimL;
+			blockAnim = true;
 
-		if (deathAnimL.loopCount > 1)
-		{
-			position.x = 5;
-			position.y = 112;
+			if (deathAnimL.loopCount > 1)
+			{
+				position.x = 5;
+				position.y = 112;
 
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
-			lifeP1.Reset();
+				idleAnimR.Reset();
+				currentAnimation = &idleAnimR;
+				lifeP1.Reset();
 
-			blockAnim = false;
-			// Load Lifes P1 Again
-			for (int i = 0; i < MAX_LIFE; ++i) {
-				lifesP1[i] = 1;
+				blockAnim = false;
+				// Load Lifes P1 Again
+				for (int i = 0; i < MAX_LIFE; ++i) {
+					lifesP1[i] = 1;
+				}
+			}
+
+			deathAnimL.loopCount = 0;
+		}
+
+		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+			deathAnimL.Reset();
+			currentAnimation = &deathAnimL;
+			blockAnim = true;
+
+			if (deathAnimL.loopCount > 1)
+			{
+				App->player->HIT->pendingToDelete = true;
+				App->player->collider->pendingToDelete = true;
+
+				App->player->Disable();
+				App->player->CleanUp();
+
+				App->enemies->Disable();
+				App->enemies->CleanUp();
+
+				App->sceneLose->Enable();
 			}
 		}
-
-		deathAnimL.loopCount = 0;
 	}
-
-	else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
-		deathAnimL.Reset();
-		currentAnimation = &deathAnimL;
-		blockAnim = true;
-
-		if (deathAnimL.loopCount > 1)
-		{
-			App->player->HIT->pendingToDelete = true;
-			App->player->collider->pendingToDelete = true;
-
-			App->player->Disable();
-			App->player->CleanUp();
-
-			App->enemies->Disable();
-			App->enemies->CleanUp();
-
-			App->sceneLose->Enable();
-		}
+	if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
+	{
+		scoreP1 += 1;
 	}
-		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
-		{
-			scoreP1 += 1;
-		}
 }
