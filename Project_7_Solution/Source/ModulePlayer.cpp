@@ -658,7 +658,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		deathAnimR.PushBack({ 1692, 3833, 94, 84 });
 		deathAnimR.PushBack({ 1410, 3833, 94, 84 });
 		deathAnimR.loop = true;
-		deathAnimR.speed = 0.6f;
+		deathAnimR.speed = 0.9f;
 
 		// Left
 		deathAnimL.PushBack({ 1692, 3735, 94, 84 });
@@ -674,7 +674,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		deathAnimL.PushBack({ 1222, 3735, 94, 84 });
 		deathAnimL.PushBack({ 1504, 3735, 94, 84 });
 		deathAnimL.loop = true;
-		deathAnimL.speed = 0.6f;
+		deathAnimL.speed = 0.9f;
 
 	}
 }
@@ -692,7 +692,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	blockAnim = false;
-	eneAlive = 2;
+	eneAlive = 3;
 	scoreP1 = 0;
 
 	lifeP1.Reset();
@@ -761,8 +761,12 @@ update_status ModulePlayer::Update()
 	// ------------------------------- Life's Increment
 	if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_STATE::KEY_DOWN)
 	{
-		lifes += 2;
-		App->audio->PlayFx(lifeIncrease);
+		if (lifes < 998)
+		{
+			lifes += 2;
+			App->audio->PlayFx(lifeIncrease);
+		}
+
 	}
 
 	// ------------------------------------------------------Hits RIGHT
@@ -1758,17 +1762,19 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	if (c1 == collider && destroyed == false)
 	{
 		lifeP1.Update();
-		updateLifeIndicatorPlayer1(lifesP1, 1);
+		lifeP1.Update();
+		updateLifeIndicatorPlayer1(lifesP1, 2);
+
 
 		// ---------------------------------------------------------------- RIGHT
 		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
-			lifes -= 1;
 			deathAnimR.Reset();
 			currentAnimation = &deathAnimR;
 			blockAnim = true;
 
-			if (deathAnimR.loopCount > 1)
+			if (deathAnimR.loopCount > 0)
 			{
+				lifes--;
 				position.x = 5;
 				position.y = 112;
 
@@ -1791,7 +1797,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			currentAnimation = &deathAnimR;
 			blockAnim = true;
 
-			if (deathAnimR.loopCount > 1)
+			if (deathAnimR.loopCount > 0)
 			{
 				App->player->HIT->pendingToDelete = true;
 				App->player->collider->pendingToDelete = true;
@@ -1809,13 +1815,13 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 	// ---------------------------------------------------------------- LEFT
 	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
-		lifes -= 1;
 		deathAnimL.Reset();
 		currentAnimation = &deathAnimL;
 		blockAnim = true;
 
-		if (deathAnimL.loopCount > 1)
+		if (deathAnimL.loopCount > 0)
 		{
+			lifes--;
 			position.x = 5;
 			position.y = 112;
 
@@ -1838,7 +1844,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		currentAnimation = &deathAnimL;
 		blockAnim = true;
 
-		if (deathAnimL.loopCount > 1)
+		if (deathAnimL.loopCount > 0)
 		{
 			App->player->HIT->pendingToDelete = true;
 			App->player->collider->pendingToDelete = true;

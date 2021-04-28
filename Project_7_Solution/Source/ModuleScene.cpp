@@ -94,6 +94,13 @@ bool ModuleScene::Start()
 
 	countDown = 0;
 
+	doorBreak.Reset();
+	doorBreak2.Reset();
+	doorBreak3.Reset();
+
+	openElev.Reset();
+	openElev2.Reset();
+
 	App->render->camera.x = 0;
 	App->render->playerLimitR = App->render->camera.w - 135;
 	App->render->playerLimitL = App->render->camera.x + 5;
@@ -109,9 +116,9 @@ bool ModuleScene::Start()
 	App->collisions->AddCollider({ 1000, 145, 20, 10 }, Collider::Type::WALL);*/
 
 	// Enemies ---
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 52);
-	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 200, 112);
-	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 250, 112);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 400, 52);
+	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 1000, 52);
+	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 75);
 
 	return ret;
 }
@@ -164,14 +171,6 @@ update_status ModuleScene::Update()
 	if (App->render->camera.x >= 2501 && App->render->camera.x <= 2504)
 	{
 		App->audio->PlayFx(ElevatorDoor);
-	}
-
-	// SCANCODES
-
-	if (App->input->keys[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
-	{
-
-
 	}
 
 	if (App->player->eneAlive == 0)
