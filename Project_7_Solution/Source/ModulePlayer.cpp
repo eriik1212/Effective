@@ -805,7 +805,10 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0 && blockAnim == false)
+	else if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN 
+		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
+		&& lastPosition == 0 
+		&& blockAnim == false)
 	{
 
 		int x = (rand() % 2);
@@ -1340,7 +1343,10 @@ update_status ModulePlayer::Update()
 	}
 
 	// RIGHT
-	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT && blockAnim == false)
+	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT 
+	&& currentAnimation != &hitAirAnim1R
+	&& currentAnimation != &hitAirAnim2R
+	&& blockAnim == false)
 	{
 	lastPosition = 0;
 
