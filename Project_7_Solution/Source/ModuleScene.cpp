@@ -11,6 +11,7 @@
 
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneWin.h"
+#include "ModuleSceneLose.h"
 
 
 ModuleScene::ModuleScene(bool enabled) : Module(enabled)
@@ -62,8 +63,8 @@ ModuleScene::ModuleScene(bool enabled) : Module(enabled)
 	doorBreak3.PushBack({ 452, 233, 16, 79 });
 	doorBreak3.loop = false;
 	doorBreak3.speed = 0.2f;
-	
-	
+
+
 	openElev.PushBack({ 262, 326, 44, 77 });
 	openElev.PushBack({ 308, 326, 44, 77 });
 	openElev.PushBack({ 354, 326, 44, 77 });
@@ -109,7 +110,7 @@ bool ModuleScene::Start()
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 52);
 	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 200, 112);
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 250, 112);
-	
+
 	return ret;
 }
 
@@ -123,7 +124,7 @@ update_status ModuleScene::Update()
 	// Camera
 	if (App->render->camera.x > 780)
 	{
-		doorBreak.Update();		
+		doorBreak.Update();
 	}
 
 	//Second if for the FX
@@ -134,7 +135,7 @@ update_status ModuleScene::Update()
 
 	if (App->render->camera.x > 1650)
 	{
-		doorBreak2.Update();		
+		doorBreak2.Update();
 	}
 
 	if (App->render->camera.x == 1651)
@@ -144,7 +145,7 @@ update_status ModuleScene::Update()
 
 	if (App->render->camera.x >2025)
 	{
-		doorBreak3.Update();	
+		doorBreak3.Update();
 	}
 
 	if (App->render->camera.x >= 2026 && App->render->camera.x <= 2029)
@@ -155,7 +156,7 @@ update_status ModuleScene::Update()
 	if (App->render->camera.x > 2500)
 	{
 		openElev.Update();
-		openElev2.Update();		
+		openElev2.Update();
 	}
 
 	if (App->render->camera.x >= 2501 && App->render->camera.x <= 2504)
@@ -164,6 +165,12 @@ update_status ModuleScene::Update()
 	}
 
 	// SCANCODES
+
+	if (App->input->keys[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
+	{
+
+
+	}
 
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
@@ -178,10 +185,9 @@ update_status ModuleScene::Update()
 		App->enemies->CleanUp();
 
 		App->sceneWin->Enable();
-	}	
+	}
 	else if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
 	{	
-		gameOver = true;
 		App->player->HIT->pendingToDelete = true;
 		App->player->collider->pendingToDelete = true;
 		App->player->Disable();
@@ -189,25 +195,8 @@ update_status ModuleScene::Update()
 
 		App->enemies->Disable();
 		App->enemies->CleanUp();
-	}
 
-	// GameOver Counter
-	if (gameOver)
-	{
-		
-		if (gOverCounter <= 200)
-		{
-			gOverCounter++;
-		}
-		else if(gOverCounter > 200)
-		{
-			gameOverTexture = nullptr;
-			gameOver = false;
-			gOverCounter = 0;
-			this->Disable();
-			CleanUp();
-			App->sceneIntro->Enable();
-		}
+		App->sceneLose->Enable();
 	}
 
 	return update_status::UPDATE_CONTINUE;
@@ -222,19 +211,19 @@ update_status ModuleScene::PostUpdate()
 	App->render->Blit(stageTexture, 412, 49, &(fireDoor.GetCurrentFrame()), 1); // FireDoor1
 	App->render->Blit(stageTexture, 701, 49, &(fireDoor.GetCurrentFrame()), 1); // FireDoor2
 	App->render->Blit(stageTexture, 829, 49, &(fireDoor.GetCurrentFrame()), 1); // FireDoor3
-	
+
 
 	App->render->Blit(stageTexture, 412, 49, &(doorBreak.GetCurrentFrame()), 1); // DoorBreak1
 	App->render->Blit(stageTexture, 701, 49, &(doorBreak2.GetCurrentFrame()), 1); // DoorBreak2
 	App->render->Blit(stageTexture, 829, 49, &(doorBreak3.GetCurrentFrame()), 1); // DoorBreak3
-	
+
 
 	App->render->Blit(stageTexture, 950, 50, &(fireElev.GetCurrentFrame()), 1); // FireElevator1
 	App->render->Blit(stageTexture, 1079, 50, &(fireElev.GetCurrentFrame()), 1); // FireElevator2
 
 	App->render->Blit(stageTexture, 950, 50, &(openElev.GetCurrentFrame()), 1); // OpenElevator1
 	App->render->Blit(stageTexture, 1079, 50, &(openElev2.GetCurrentFrame()), 1); // OpenElevator2
-	 
+
 	if (gameOver)
 	{
 		App->render->Blit(gameOverTexture, SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 50, NULL, 0, true); // GameOver Texture
