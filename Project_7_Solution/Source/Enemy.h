@@ -42,6 +42,7 @@ public:
 
 	// Sound fx when destroyed
 	int destroyedFx = 0;
+	int damageFX = 0;
 
 	// ----------------------------------------------------------------- LIFE ELEMENTS
 	// Load Lifes Enemies

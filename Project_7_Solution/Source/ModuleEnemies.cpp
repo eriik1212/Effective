@@ -35,6 +35,7 @@ bool ModuleEnemies::Start()
 
 	white = App->textures->Load("Assets/Enemies/White_enemy.png");
 	purple = App->textures->Load("Assets/Enemies/Purple-enemy.png");
+	enemyDamageFX = App->audio->LoadFx("Assets/FX/Punch2.wav");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/FX/EnemyDie.wav");
 
 	return true;
@@ -153,16 +154,16 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_Purple(info.x, info.y);
 					enemies[i]->texture = purple;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
-					enemies[i]->lifesEnemy[MAX_LIFE] = lifesEnemies[MAX_LIFE];
+					enemies[i]->damageFX = enemyDamageFX;
 					break;
 				case ENEMY_TYPE::WHITE_ENEMY:
 					enemies[i] = new Enemy_White(info.x, info.y);
 					enemies[i]->texture = white;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
-					enemies[i]->lifesEnemy[MAX_LIFE] = lifesEnemies[MAX_LIFE];
+					enemies[i]->damageFX = enemyDamageFX;
 					break;
 			}
-			
+
 			break;
 		}
 	}
@@ -193,7 +194,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
-			
+
 			updateLifeIndicatorEnemies(lifesEnemies, 1);
 
 			if (lifesEnemies[0] == 0) {
@@ -204,7 +205,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 					lifesEnemies[i] = 1;
 				}
 			}
-			
+
 			break;
 		}
 	}
