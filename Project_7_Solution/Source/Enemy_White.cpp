@@ -125,27 +125,26 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	//aereal kick to right (not for this version)
 
 
-	path.PushBack({ -1.0f, 0.0f }, 150, &leftAnimW);
+	//path.PushBack({ -1.0f, 0.0f }, 150, &leftAnimW);
 	path.PushBack({ 0.0f, 0.0f }, 40, & knifeThrowLW);
-	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
+	//path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
+	//path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
 
 
 	
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_SHOT, (Module*)App->enemies);
+	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 }
 
 void Enemy_White::Update()
 {
-	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
-
+	
 	if (coolTime >= coolDown && currentAnim == &knifeThrowLW)
 	{
-		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+	
 		coolTime = 0;
-		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
-
+		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_HIT);
+		
 	}
 	else
 	{
