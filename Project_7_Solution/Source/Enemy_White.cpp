@@ -108,16 +108,42 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	knifeThrowLW.speed = 0.15f;
 
 	//die to right face forward
+	dieFacefwRW.PushBack({ 0,705,98,88});
+	dieFacefwRW.PushBack({ 98,705,98,88 }); 
+	dieFacefwRW.PushBack({ 98 * 2,705,98,88 });
+	dieFacefwRW.PushBack({ 98 * 3,705,98,88 });
+	dieFacefwRW.PushBack({ 98 * 4,705,98,88 });
+	dieFacefwRW.PushBack({ 98 * 5,705,98,88 });
+	dieFacefwRW.loop = false;
+	dieFacefwRW.speed = 0.15f;
 
-
-	//die to left backwards
-
+	//die to right backwards
+	dieBackwRW.PushBack({ 784,2026,98,88 });
+	dieBackwRW.PushBack({ 784 - 98,2026,98,88 });
+	dieBackwRW.PushBack({ 784 - 98 * 2,2026,98,88 });
+	dieBackwRW.PushBack({ 784 - 98 * 3,2026,98,88 });
+	dieBackwRW.PushBack({ 784 - 98 * 4,2026,98,88 });
+	dieBackwRW.PushBack({ 784 - 98 * 5,2026,98,88 });
+	dieBackwRW.loop = false;
+	dieBackwRW.speed = 0.15f;
 
 	//die to left face forward
+	dieFacefwLW.PushBack({ 784,1850,98,88 });
+	dieFacefwLW.PushBack({ 784 - 98,1850,98,88 });
+	dieFacefwLW.PushBack({ 784 - 98 * 2,1850,98,88 });
+	dieFacefwLW.PushBack({ 784 - 98 * 3,1850,98,88 });
+	dieFacefwLW.PushBack({ 784 - 98 * 4,1850,98,88 });
+	dieFacefwLW.PushBack({ 784 - 98 * 5,1850,98,88 });
+	dieFacefwLW.loop = false;
+	dieFacefwLW.speed = 0.15f;
 
-
-	//die to right backwards 
-
+	//die to left backwards 
+	dieBackwLW.PushBack({ 0,880,98,88 });
+	dieBackwLW.PushBack({ 98,880,98,88 });
+	dieBackwLW.PushBack({ 98 * 2,880,98,88 });
+	dieBackwLW.PushBack({ 98 * 3,880,98,88 });
+	dieBackwLW.loop = false;
+	dieBackwLW.speed = 0.15f;
 
 	//aereal kick to left (not for this version)
 
