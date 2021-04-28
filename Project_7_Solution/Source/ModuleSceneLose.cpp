@@ -1,27 +1,28 @@
-#include "ModuleSceneWin.h"
+#include "ModuleSceneLose.h"
 
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 
-ModuleSceneWin::ModuleSceneWin(bool enabled) : Module(enabled)
+ModuleSceneLose::ModuleSceneLose(bool enabled) : Module(enabled)
 {
-	
+
 }
 
-ModuleSceneWin::~ModuleSceneWin() {}
+ModuleSceneLose::~ModuleSceneLose() {}
 
 // Load assets
-bool ModuleSceneWin::Start()
+bool ModuleSceneLose::Start()
 {
-	introBackground = App->textures->Load("Assets/UI & HUD/to be continued.png");
+	gameOverTexture = App->textures->Load("Assets/UI & HUD/game_over.png");
 	App->audio->PlayMusic("Assets/Audio/06 shredder final", 1.0f);
 	return true;
 }
 
-update_status ModuleSceneWin::Update()
+update_status ModuleSceneLose::Update()
 {
+	App->audio->PlayMusic("Assets/Audio/08 GameOver.ogg");
 	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
@@ -37,13 +38,13 @@ update_status ModuleSceneWin::Update()
 }
 
 // Update: draw background
-update_status ModuleSceneWin::PostUpdate()
+update_status ModuleSceneLose::PostUpdate()
 {
-	App->render->Blit(introBackground, 0, 0, NULL, NULL, true);
+	App->render->Blit(gameOverTexture, SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 50, NULL, 0, true); // GameOver Texture
 	return update_status::UPDATE_CONTINUE;
 }
 
-bool ModuleSceneWin::CleanUp()
+bool ModuleSceneLose::CleanUp()
 {
 	bool ret;
 	return true;
