@@ -10,6 +10,7 @@
 #include "Enemy_Purple.h"
 #include "Enemy_White.h"
 #include "ModuleCollisions.h"
+#include "ModulePlayer.h"
 
 #define SPAWN_MARGIN 50
 
@@ -27,11 +28,6 @@ ModuleEnemies::~ModuleEnemies()
 
 bool ModuleEnemies::Start()
 {
-	// ----------------------------------------------------------------- LIFE ELEMENTS
-	// Load Lifes Enemies
-	for (int i = 0; i < MAX_LIFE; ++i) {
-		lifesEnemies[i] = 1;
-	}
 
 	white = App->textures->Load("Assets/Enemies/White_enemy.png");
 	purple = App->textures->Load("Assets/Enemies/Purple-enemy.png");
@@ -169,21 +165,9 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 	}
 }
 
-void updateLifeIndicatorEnemies(unsigned short* lifeIndicatorP1, unsigned short damage)
-{
-	for (int i = (MAX_LIFE - 1); i >= 0; --i) {
-
-		if (*(lifeIndicatorP1 + i) == 0) {
-			++damage;
-		}
-		else if (*(lifeIndicatorP1 + i) == 1 && i >= (MAX_LIFE - damage)) {
-			*(lifeIndicatorP1 + i) = 0;
-		}
-	}
-}
-
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
+
 	for(uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if(enemies[i] != nullptr && enemies[i]->GetCollider() == c1)
@@ -195,16 +179,8 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
 
-			updateLifeIndicatorEnemies(lifesEnemies, 1);
-
-			if (lifesEnemies[0] == 0) {
-				delete enemies[i];
-				enemies[i] = nullptr;
-				// Load Lifes Enemies
-				for (int i = 0; i < MAX_LIFE; ++i) {
-					lifesEnemies[i] = 1;
-				}
-			}
+			delete enemies[i];
+			enemies[i] = nullptr;
 
 			break;
 		}
