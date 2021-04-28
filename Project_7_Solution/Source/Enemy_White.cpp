@@ -151,10 +151,11 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	//aereal kick to right (not for this version)
 
 
-	//path.PushBack({ -1.0f, 0.0f }, 150, &leftAnimW);
+	path.PushBack({ -1.0f, 0.0f }, 20, &leftAnimW);
 	path.PushBack({ 0.0f, 0.0f }, 40, & knifeThrowLW);
-	//path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
-	//path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
+	path.PushBack({ -1.0f, 0.0f }, 130, & leftAnimW);
+	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
+	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
 
 
 	
@@ -168,8 +169,8 @@ void Enemy_White::Update()
 	if (coolTime >= coolDown && currentAnim == &knifeThrowLW)
 	{
 		coolTime = 0;
-		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
-
+		App->particles->AddParticle(App->particles->suriken, position.x +20, position.y + 74, Collider::Type::ENEMY_SHOT);
+		
 	}
 	else
 	{
