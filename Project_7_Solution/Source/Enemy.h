@@ -40,6 +40,7 @@ public:
 
 	// Sound fx when destroyed
 	int destroyedFx = 0;
+	int damageFX = 0;
 
 protected:
 	// A ptr to the current animation
