@@ -92,6 +92,8 @@ bool ModuleScene::Start()
 
 	bool ret = true;
 
+	countDown = 0;
+
 	App->render->camera.x = 0;
 	App->render->playerLimitR = App->render->camera.w - 135;
 	App->render->playerLimitL = App->render->camera.x + 5;
@@ -174,18 +176,22 @@ update_status ModuleScene::Update()
 
 	if (App->player->eneAlive == 0)
 	{
-		this->Disable();
-		CleanUp();
-		App->player->HIT->pendingToDelete = true;
-		App->player->collider->pendingToDelete = true;
-		App->player->Disable();
-		App->player->CleanUp();
+		countDown++;
 
-		App->enemies->Disable();
-		App->enemies->CleanUp();
+		if (countDown > 80)
+		{
+			this->Disable();
+			CleanUp();
+			App->player->HIT->pendingToDelete = true;
+			App->player->collider->pendingToDelete = true;
+			App->player->Disable();
+			App->player->CleanUp();
 
-		App->sceneWin->Enable();
+			App->enemies->Disable();
+			App->enemies->CleanUp();
 
+			App->sceneWin->Enable();
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
@@ -239,11 +245,6 @@ update_status ModuleScene::PostUpdate()
 
 	App->render->Blit(stageTexture, 950, 50, &(openElev.GetCurrentFrame()), 1); // OpenElevator1
 	App->render->Blit(stageTexture, 1079, 50, &(openElev2.GetCurrentFrame()), 1); // OpenElevator2
-
-	if (gameOver)
-	{
-		App->render->Blit(gameOverTexture, SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT / 2 - 50, NULL, 0, true); // GameOver Texture
-	}
 
 
 	return update_status::UPDATE_CONTINUE;
