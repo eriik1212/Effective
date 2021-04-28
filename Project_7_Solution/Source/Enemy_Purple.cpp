@@ -155,31 +155,33 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 
 void Enemy_Purple::Update()
 {
+	if (App->collisions->GodMode == true) {
 
-	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
-	if (currentAnim == &leftAnimP)direcction = 0;
-	if (currentAnim == &rightAnimP)direcction = 1;
 
-	if (coolTime >= coolDown) {
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+		if (currentAnim == &leftAnimP)direcction = 0;
+		if (currentAnim == &rightAnimP)direcction = 1;
 
-		if (currentAnim == &punchLP)
-		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
-			coolTime = 0.0f;
+		if (coolTime >= coolDown) {
 
-		}
-		else if (currentAnim == &kickRP)
-		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
-			coolTime = 0.0f;
+			if (currentAnim == &punchLP)
+			{
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+
+			}
+			else if (currentAnim == &kickRP)
+			{
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+			}
+			else
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		}
 		else
-            App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+			coolTime += 0.1f;
+
 	}
-	else
-		coolTime += 0.1f;
-
-
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
 	currentAnim = path.GetCurrentAnimation();

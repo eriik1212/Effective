@@ -165,12 +165,6 @@ update_status ModuleScene::Update()
 
 	// SCANCODES
 
-	if (App->input->keys[SDL_SCANCODE_F4] == KEY_STATE::KEY_DOWN)
-	{
-		
-		
-	}
-
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
