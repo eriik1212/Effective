@@ -15,7 +15,6 @@ ModuleSceneWin::~ModuleSceneWin() {}
 // Load assets
 bool ModuleSceneWin::Start()
 {
-	countDown = 0;
 	introBackground = App->textures->Load("Assets/UI & HUD/to be continued.png");
 	App->audio->PlayMusic("Assets/Audio/06 shredder final.ogg", 1.0f);
 	return true;
@@ -23,18 +22,7 @@ bool ModuleSceneWin::Start()
 
 update_status ModuleSceneWin::Update()
 {
-
-	countDown++;
-
-
-	if (countDown > 450)
-	{
-		this->Disable();
-		CleanUp();
-		App->sceneIntro->Enable();
-	}
-
-	else if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
+	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
 		CleanUp();
