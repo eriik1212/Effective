@@ -2,6 +2,7 @@
 
 #include "Application.h"
 #include "ModuleCollisions.h"
+#include "ModuleParticles.h"
 
 Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 {
@@ -138,26 +139,21 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 void Enemy_White::Update()
 {
 	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
-	if (currentAnim == &leftAnimW)direcction = 0;
-	if (currentAnim == &rightAnimW)direcction = 1;
 
-	if (coolTime >= coolDown) {
+	if (coolTime >= coolDown && currentAnim == &knifeThrowLW)
+	{
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+		coolTime = 0;
+		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
 
-		if (currentAnim == &upAnimLW)
-		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
-			coolTime = 0.0f;
-
-		}
-		else if (currentAnim == &upAnimRW)
-		{
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
-			coolTime = 0.0f;
-		}
-		
 	}
 	else
-		coolTime +=0.1f;
+	{
+		coolTime += 0.1;
+
+	}
+
+
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();

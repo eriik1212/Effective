@@ -140,19 +140,28 @@ void Enemy_Purple::Update()
 {
 
 	App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
+	if (currentAnim == &leftAnimP)direcction = 0;
+	if (currentAnim == &rightAnimP)direcction = 1;
 
-	if (coolTime >= coolDown) 
-	{
-		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
-		coolTime = 0;	
-		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y+74, Collider::Type::ENEMY_SHOT);
-	
-	}
-	else 
-	{
-		coolTime += 0.1;
+	if (coolTime >= coolDown) {
 
+		if (currentAnim == &punchLP)
+		{
+			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+			coolTime = 0.0f;
+
+		}
+		else if (currentAnim == &kickRP)
+		{
+			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = true;
+			coolTime = 0.0f;
+		}
+		else
+            App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false; 
 	}
+	else
+		coolTime += 0.1f;
+
 
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();
