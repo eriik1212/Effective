@@ -22,6 +22,7 @@ bool ModuleSceneLose::Start()
 
 update_status ModuleSceneLose::Update()
 {
+
 	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();

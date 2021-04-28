@@ -153,11 +153,13 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i] = new Enemy_Purple(info.x, info.y);
 					enemies[i]->texture = purple;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
+					enemies[i]->lifesEnemy[MAX_LIFE] = lifesEnemies[MAX_LIFE];
 					break;
 				case ENEMY_TYPE::WHITE_ENEMY:
 					enemies[i] = new Enemy_White(info.x, info.y);
 					enemies[i]->texture = white;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
+					enemies[i]->lifesEnemy[MAX_LIFE] = lifesEnemies[MAX_LIFE];
 					break;
 			}
 			
