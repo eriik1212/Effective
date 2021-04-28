@@ -165,7 +165,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 
 	//PATH
 	path.PushBack({ -1.2f, 0.0f }, 45, &jumpLP);
-	path.PushBack({ -1.0f, 1.0f }, 50, & leftAnimP);
+	path.PushBack({ -1.0f, 1.0f }, 48, & leftAnimP);
 	path.PushBack({ 0.0f, 0.0f }, 68, & punchLP);
 	path.PushBack({1.35f, -0.5f}, 95, &upAnimRP);
 	path.PushBack({ 0.0f, 0.0f }, 25, & kickRP);
