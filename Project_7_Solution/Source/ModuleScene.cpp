@@ -108,7 +108,7 @@ bool ModuleScene::Start()
 
 	// Enemies ---
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 52);
-	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 200, 112);
+	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 200, 102);
 	//App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 250, 112);
 	
 	return ret;

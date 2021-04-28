@@ -133,7 +133,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 
 	collider = App->collisions->AddCollider({0, 0, 38, 16}, Collider::Type::ENEMY, (Module*)App->enemies);
 	HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
-	//SEE = App->collisions->AddCollider({ 150, 122, 70, 16 }, Collider::Type::SEE, (Module*)App->enemies);
+	
 }
 
 void Enemy_Purple::Update()
