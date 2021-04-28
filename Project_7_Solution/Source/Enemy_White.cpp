@@ -152,10 +152,10 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 
 	path.PushBack({ -1.0f, 0.0f }, 20, &leftAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 40, & knifeThrowLW);
-	path.PushBack({ -1.0f, 0.0f }, 130, & leftAnimW);
+	path.PushBack({ 0.0f, 0.0f }, 40, &knifeThrowLW);
+	path.PushBack({ -1.0f, 0.0f }, 130, &leftAnimW);
 	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
+	path.PushBack({ 0.0f, 0.0f }, 40, &knifeMeleeRW);
 
 
 	
@@ -165,44 +165,40 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 void Enemy_White::Update()
 {
+	//------------------------------------------------------------LEFT direcction
+	if (currentAnim == &leftAnimW)direcction = 0;
+
+	//------------------------------------------------------------LEFT ANIM direction
+	if (currentAnim == &rightAnimW)direcction = 1;
+	if (currentAnim == &knifeMeleeRW)direcction = 1;
+
 	if (App->collisions->GodMode == true)
 	{
-//------------------------------------------------------------LEFT direcction
-		if (currentAnim == &leftAnimW)direcction = 0;
-
-//------------------------------------------------------------LEFT ANIM direction
-		if (currentAnim == &rightAnimW)direcction = 1;
-		if (currentAnim == &knifeMeleeRW)direcction = 1;
-
-
+	
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 
-		if (coolTime >= coolDown) {
+		if (coolTime >= coolDown && currentAnim == &knifeMeleeRW)
+		{
 
-			if (currentAnim == &knifeMeleeRW)
-			{
-				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
-				coolTime = 0.0f;
+			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+			coolTime = 0.0f;
 
-			}
-			}
-			else
-				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		}
 		else
-			coolTime += 0.1f;
-
+			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+	     	coolTime += 0.1f;
+	}
 	
-
-	if (coolTime >= coolDown )
+	
+	if (coolTime2 >= coolDown && currentAnim == &knifeThrowLW)
 	{
-		coolTime = 0;
-		App->particles->AddParticle(App->particles->suriken, position.x +20, position.y + 74, Collider::Type::ENEMY_SHOT);
-		
+		coolTime2 = 0;
+		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
+
 	}
 	else
 	{
-		coolTime += 0.1;
+		coolTime2 += 0.1;
 	}
 
 

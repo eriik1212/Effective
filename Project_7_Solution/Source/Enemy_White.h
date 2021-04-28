@@ -13,6 +13,7 @@ public:
 
 	float coolDown = 10.0f;
 	float coolTime = 0.0f;
+	float coolTime2 = 0.0f;
 	float velociti = 1.0f;
 
 	// The enemy is going to follow the different steps in the path
