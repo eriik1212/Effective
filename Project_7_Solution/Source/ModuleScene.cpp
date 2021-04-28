@@ -192,7 +192,7 @@ update_status ModuleScene::Update()
 	// GameOver Counter
 	if (gameOver)
 	{
-		App->audio->StopMusic();
+		App->audio->PlayMusic("Assets/Audio/08 GameOver.ogg");
 		if (gOverCounter <= 200)
 		{
 			gOverCounter++;
