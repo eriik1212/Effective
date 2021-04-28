@@ -37,7 +37,11 @@ private:
 		knifeMeleeLW,
 		knifeMeleeRW,
 		knifeThrowLW,
-		knifeThrowRW;
+		knifeThrowRW,
+		dieFacefwRW,
+		dieFacefwLW,
+		dieBackwRW,
+		dieBackwLW;
 		
 
 	//There are more animations, but for the prtotype we are not including it.
