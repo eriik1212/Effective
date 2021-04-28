@@ -108,6 +108,7 @@ update_status ModuleCollisions::PreUpdate()
 
 update_status ModuleCollisions::Update()
 {
+	
 	if (App->input->keys[SDL_SCANCODE_F1] == KEY_DOWN)
 		debug = !debug;
 
@@ -124,8 +125,10 @@ update_status ModuleCollisions::Update()
 			matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_SHOT] = false;
 			GodMode =false;
 		}
-
+		
 	}
+
+
 	return update_status::UPDATE_CONTINUE;
 }
 

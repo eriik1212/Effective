@@ -160,11 +160,39 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 	
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	//HIT = App->collisions->AddCollider({ 200, 122, 40, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
+	HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 }
 
 void Enemy_White::Update()
 {
+	if (App->collisions->GodMode == true)
+	{
+//------------------------------------------------------------LEFT direcction
+		if (currentAnim == &leftAnimW)direcction = 0;
+
+//------------------------------------------------------------LEFT ANIM direction
+		if (currentAnim == &rightAnimW)direcction = 1;
+		if (currentAnim == &knifeMeleeRW)direcction = 1;
+
+
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+
+		if (coolTime >= coolDown) {
+
+			if (currentAnim == &knifeMeleeRW)
+			{
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+
+			}
+			}
+			else
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+		}
+		else
+			coolTime += 0.1f;
+
+	
 
 	if (coolTime >= coolDown && currentAnim == &knifeThrowLW)
 	{
