@@ -93,7 +93,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	knifeThrowRW.PushBack({ 98 * 3,617,98,88 });
 	knifeThrowRW.PushBack({ 98 * 4,617,98,88 });
 	knifeThrowRW.PushBack({ 98 * 5,617,98,88 });
-	knifeThrowRW.loop = false;
+	knifeThrowRW.loop = true;
 	knifeThrowRW.speed = 0.15f;
 
 	//left knife throwing
@@ -103,7 +103,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	knifeThrowLW.PushBack({ 784 - 98 * 3,1760,98,88 });
 	knifeThrowLW.PushBack({ 784 - 98 * 4,1760,98,88 });
 	knifeThrowLW.PushBack({ 784 - 98 * 5,1760,98,88 });
-	knifeThrowLW.loop = false;
+	knifeThrowLW.loop = true;
 	knifeThrowLW.speed = 0.15f;
 
 	//die to right face forward
@@ -125,7 +125,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 
 	path.PushBack({ -1.0f, 0.0f }, 150, &leftAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeLW);
+	path.PushBack({ 0.0f, 0.0f }, 40, & knifeThrowLW);
 	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
 	path.PushBack({ 0.0f, 0.0f }, 30, &knifeMeleeRW);
 

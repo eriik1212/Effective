@@ -61,7 +61,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	kickRP.PushBack({ 86, 90, 86, 90 });
 	kickRP.PushBack({ 86 * 2, 90, 86, 90 });
 	kickRP.PushBack({ 86 * 3, 90, 86, 90 });
-	kickRP.loop = false; //it can be true
+	kickRP.loop = true; //it can be true
 	kickRP.speed = 0.15f;
 
 	//LEFT KICK
@@ -73,17 +73,17 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	kickLP.speed = 0.15f;
 
 	//LEFT PUNCH
-	punchLP.PushBack({ 1032,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86 * 2,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86 * 3,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86 * 4,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86 * 5,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86 * 6,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86 * 7,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86 * 8,2789,86,90 });
-	punchLP.PushBack({ 1032 - 86 * 9,2789,86,90 });
-	punchLP.loop = false; //it can be true
+	punchLP.PushBack({ 1032, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86 * 2, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86 * 3, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86 * 4, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86 * 5, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86 * 6, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86 * 7, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86 * 8, 2790, 86, 90 });
+	punchLP.PushBack({ 1032 - 86 * 9, 2790, 86, 90 });
+	punchLP.loop = true; //it can be true
 	punchLP.speed = 0.15f;
 
 	//RIGHT PUNCH
@@ -97,7 +97,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	punchRP.PushBack({ 86 * 7, 1350, 86, 90 });
 	punchRP.PushBack({ 86 * 8, 1350, 86, 90 });
 	punchRP.PushBack({ 86 * 9, 1350, 86, 90 });
-	punchRP.loop = false; //it can be true
+	punchRP.loop = true; //it can be true
 	punchRP.speed = 0.15f;
 
 	//RIGHT JUMP
@@ -123,9 +123,12 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	jumpLP.speed = 0.15f;
 
 	
-	path.PushBack({ -1.2f, 0.0f }, 50, &jumpLP);
+	path.PushBack({ -1.2f, 0.0f }, 45, &jumpLP);
 	path.PushBack({ -1.2f, 0.0f }, 50, & leftAnimP);
-	path.PushBack({1.2f, 0.0f}, 100, &rightAnimP);
+	path.PushBack({ 0.0f, 0.0f }, 68, & punchLP);
+	path.PushBack({1.2f, 0.0f}, 120, &rightAnimP);
+	path.PushBack({ 0.0f, 0.0f }, 25, & kickRP);
+	path.PushBack({ -1.2f, 0.0f }, 20, & leftAnimP);
 	
 
 	collider = App->collisions->AddCollider({0, 0, 38, 16}, Collider::Type::ENEMY, (Module*)App->enemies);
