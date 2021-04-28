@@ -16,7 +16,7 @@ ModuleSceneWin::~ModuleSceneWin() {}
 bool ModuleSceneWin::Start()
 {
 	introBackground = App->textures->Load("Assets/UI & HUD/to be continued.png");
-	App->audio->PlayMusic("Assets/Audio/06 shredder final", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/06 shredder final.ogg", 1.0f);
 	return true;
 }
 
@@ -25,6 +25,7 @@ update_status ModuleSceneWin::Update()
 	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
+		CleanUp();
 		App->sceneIntro->Enable();
 	}
 

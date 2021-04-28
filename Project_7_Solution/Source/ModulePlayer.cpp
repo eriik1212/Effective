@@ -9,6 +9,7 @@
 #include "ModuleCollisions.h"
 #include "ModuleFonts.h"
 #include "ModuleSceneIntro.h"
+#include "ModuleSceneLose.h"
 
 #include <stdio.h>
 
@@ -765,6 +766,7 @@ update_status ModulePlayer::Update()
 	// ------------------------------------------------------Hits RIGHT
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0 && blockAnim == false)
 	{
+		
 		int x = (rand() % 2);
 
 		switch (x)
@@ -1669,13 +1671,16 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 			if (deathAnimR.loopCount > 1)
 			{
-				App->scene->gameOver = true;
+				App->player->HIT->pendingToDelete = true;
+				App->player->collider->pendingToDelete = true;
 
 				App->player->Disable();
 				App->player->CleanUp();
 
 				App->enemies->Disable();
 				App->enemies->CleanUp();
+
+				App->sceneLose->Enable();
 			}
 		}
 	}
@@ -1713,19 +1718,18 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 		if (deathAnimL.loopCount > 1)
 		{
-			App->scene->gameOver = true;
+			App->player->HIT->pendingToDelete = true;
+			App->player->collider->pendingToDelete = true;
 
 			App->player->Disable();
 			App->player->CleanUp();
 
 			App->enemies->Disable();
 			App->enemies->CleanUp();
+
+			App->sceneLose->Enable();
 		}
 	}
-	
-	
-	
-
 		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
 			scoreP1 += 1;

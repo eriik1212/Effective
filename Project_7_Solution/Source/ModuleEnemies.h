@@ -79,6 +79,7 @@ private:
 	SDL_Texture* purple = nullptr;
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
+	int enemyDamageFX = 0;
 };
 
 #endif // __MODULE_ENEMIES_H__

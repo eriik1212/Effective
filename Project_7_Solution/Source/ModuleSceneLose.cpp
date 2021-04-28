@@ -16,16 +16,19 @@ ModuleSceneLose::~ModuleSceneLose() {}
 bool ModuleSceneLose::Start()
 {
 	gameOverTexture = App->textures->Load("Assets/UI & HUD/game_over.png");
-	App->audio->PlayMusic("Assets/Audio/06 shredder final", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/08 GameOver.ogg", 1.0f);
 	return true;
 }
 
 update_status ModuleSceneLose::Update()
 {
-	App->audio->PlayMusic("Assets/Audio/08 GameOver.ogg");
+
 	if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
+		CleanUp();
+		App->scene->Disable();
+		App->scene->CleanUp();
 		App->sceneIntro->Enable();
 	}
 

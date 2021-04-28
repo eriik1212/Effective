@@ -138,6 +138,30 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	hitRP.loop = false;
 	hitRP.speed = 0.15f;
 
+	//DIE FACE FORWARD TO LEFT
+	dieFacefwLP.PushBack({ 0,270,86,90});
+	dieFacefwLP.PushBack({ 86,270,86,90});
+	dieFacefwLP.PushBack({ 86 * 2,270,86,90});
+	dieFacefwLP.PushBack({ 86 * 3,270,86,90 });
+	dieFacefwLP.PushBack({ 86 * 4,270,86,90 });
+	dieFacefwLP.PushBack({ 86 * 5,270,86,90 });
+	dieFacefwLP.PushBack({ 86 * 6,270,86,90 });
+	dieFacefwLP.loop = false;
+	dieFacefwLP.speed = 0.15f;
+
+	//DIE FACE FORWARD TO RIGHT
+	dieFacefwRP.PushBack({ 1032,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 2,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 3,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 4,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 5,1710,86,90 });
+	dieFacefwRP.PushBack({ 1032 - 86 * 6,1710,86,90 });
+	dieFacefwRP.loop = false;
+	dieFacefwRP.speed = 0.15f;
+
+	
+
 
 	//PATH
 	path.PushBack({ -1.2f, 0.0f }, 45, &jumpLP);
