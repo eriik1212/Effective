@@ -22,7 +22,7 @@ public:
 private:
 	// The path that will define the position in the world
 	Path path;
-
+	SDL_Texture* texture = nullptr;
 	iPoint positionEnemy;
 
 	// Enemy animations
