@@ -44,14 +44,14 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	upAnimLP.speed = 0.15f;
 
 	//UP RIGHT
-	upAnimRP.PushBack({ 0, 443, 86, 90 });
-	upAnimRP.PushBack({ 86, 443, 86, 90 });
-	upAnimRP.PushBack({ 86 * 2, 443, 86, 90 });
-	upAnimRP.PushBack({ 86 * 3, 443, 86, 90 });
-	upAnimRP.PushBack({ 86 * 4, 443, 86, 90 });
-	upAnimRP.PushBack({ 86 * 5, 443, 86, 90 });
-	upAnimRP.PushBack({ 86 * 6, 443, 86, 90 });
-	upAnimRP.PushBack({ 86 * 7, 443, 86, 90 });
+	upAnimRP.PushBack({ 0, 540, 86, 90 });
+	upAnimRP.PushBack({ 86, 540, 86, 90 });
+	upAnimRP.PushBack({ 86 * 2, 540, 86, 90 });
+	upAnimRP.PushBack({ 86 * 3, 540, 86, 90 });
+	upAnimRP.PushBack({ 86 * 4, 540, 86, 90 });
+	upAnimRP.PushBack({ 86 * 5, 540, 86, 90 });
+	upAnimRP.PushBack({ 86 * 6, 540, 86, 90 });
+	upAnimRP.PushBack({ 86 * 7, 540, 86, 90 });
 	upAnimRP.loop = true;
 	upAnimRP.speed = 0.15f;
 
@@ -122,11 +122,28 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	jumpLP.loop = true; //it can be true
 	jumpLP.speed = 0.15f;
 
-	
+	//FROM LEFT HIT
+	hitLP.PushBack({ 1032,1440,86,90 });
+	hitLP.PushBack({ 1032-86,1440,86,90 });
+	hitLP.PushBack({ 1032-86 * 2,1440,86,90 });
+	hitLP.PushBack({ 1032-87 * 3,1440,86,90 });
+	hitLP.loop = false;
+	hitLP.speed = 0.15f;
+
+	//FROM RIGHT HIT
+	hitRP.PushBack({ 0,0,86,90 });
+	hitRP.PushBack({ 86,0,86,90 });
+	hitRP.PushBack({ 86 * 2,0,86,90 });
+	hitRP.PushBack({ 86 * 3,0,86,90 });
+	hitRP.loop = false;
+	hitRP.speed = 0.15f;
+
+
+	//PATH
 	path.PushBack({ -1.2f, 0.0f }, 45, &jumpLP);
-	path.PushBack({ -1.2f, 0.0f }, 50, & leftAnimP);
+	path.PushBack({ -1.0f, 1.0f }, 50, & leftAnimP);
 	path.PushBack({ 0.0f, 0.0f }, 68, & punchLP);
-	path.PushBack({1.2f, 0.0f}, 120, &rightAnimP);
+	path.PushBack({1.35f, -0.5f}, 95, &upAnimRP);
 	path.PushBack({ 0.0f, 0.0f }, 25, & kickRP);
 	path.PushBack({ -1.2f, 0.0f }, 20, & leftAnimP);
 	
