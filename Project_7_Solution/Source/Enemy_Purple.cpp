@@ -179,16 +179,20 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 
 void Enemy_Purple::Update()
 {
+	//------------------------------------------------------------LEFT direcction
+	if (currentAnim == &jumpLP)direcction = 0;
+	if (currentAnim == &leftAnimP)direcction = 0;
+	if (currentAnim == &punchLP)direcction = 0;
+
+	//------------------------------------------------------------LEFT ANIM direction
+	if (currentAnim == &upAnimRP)direcction = 1;
+	if (currentAnim == &kickRP)direcction = 1;
+
 	if (App->collisions->GodMode == true) {
 
 
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
-		if (currentAnim == &jumpLP)direcction = 0;
-		if (currentAnim == &leftAnimP)direcction = 0;
-		if (currentAnim == &punchLP)direcction = 0;
-
-		if (currentAnim == &upAnimRP)direcction = 1;
-		if (currentAnim == &kickRP)direcction = 1;
+		
 
 		if (coolTime >= coolDown) {
 
