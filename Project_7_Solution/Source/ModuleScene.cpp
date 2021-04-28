@@ -172,6 +172,22 @@ update_status ModuleScene::Update()
 
 	}
 
+	if (App->player->scoreP1 == 2)
+	{
+		this->Disable();
+		CleanUp();
+		App->player->HIT->pendingToDelete = true;
+		App->player->collider->pendingToDelete = true;
+		App->player->Disable();
+		App->player->CleanUp();
+
+		App->enemies->Disable();
+		App->enemies->CleanUp();
+
+		App->sceneWin->Enable();
+
+	}
+
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();

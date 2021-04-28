@@ -693,6 +693,8 @@ bool ModulePlayer::Start()
 
 	blockAnim = false;
 
+	scoreP1 = 0;
+
 	lifeP1.Reset();
 
 	position.x = 5;
@@ -781,6 +783,45 @@ update_status ModulePlayer::Update()
 
 		    App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			App->audio->PlayFx(PunchMiss);
+
+			}
+			break;
+		case 1:
+			if (currentAnimation != &hitAirAnim2R
+				&& currentAnimation != &hitAirAnim1R)
+			{
+				hitAirAnim2R.Reset();
+				currentAnimation = &hitAirAnim2R;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchMiss);
+
+			}
+			break;
+
+		default:
+
+			break;
+		}
+	}
+
+	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0 && blockAnim == false)
+	{
+
+		int x = (rand() % 2);
+
+		switch (x)
+		{
+		case 0:
+			if (currentAnimation != &hitAirAnim1R
+				&& currentAnimation != &hitAirAnim2R)
+			{
+
+				hitAirAnim1R.Reset();
+				currentAnimation = &hitAirAnim1R;
+
+				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+				App->audio->PlayFx(PunchMiss);
 
 			}
 			break;
