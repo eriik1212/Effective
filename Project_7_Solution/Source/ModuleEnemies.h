@@ -61,6 +61,7 @@ public:
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
 
+	unsigned short lifesEnemies[MAX_LIFE];
 
 private:
 	// Spawns a new enemy using the data from the queue
