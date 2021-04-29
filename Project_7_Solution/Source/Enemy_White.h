@@ -12,8 +12,8 @@ public:
 	Enemy_White(int x, int y);
 
 	float coolDown = 10.0f;
-	float coolTime = 0.0f;
-	float coolTime2 = 0.0f;
+	float coolTime = 0.0f; //Punch
+	float coolTime2 = 10.0f; //Knife
 	float velociti = 1.0f;
 
 	// The enemy is going to follow the different steps in the path

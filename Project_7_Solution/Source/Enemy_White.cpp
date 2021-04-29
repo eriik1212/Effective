@@ -172,6 +172,16 @@ void Enemy_White::Update()
 	if (currentAnim == &rightAnimW)direcction = 1;
 	if (currentAnim == &knifeMeleeRW)direcction = 1;
 
+	if (coolTime2 >= coolDown && currentAnim == &knifeThrowLW)
+	{
+		coolTime2 = 0;
+		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
+
+	}
+	else
+	{
+		coolTime2 += 0.1;
+	}
 	if (App->collisions->GodMode == true)
 	{
 	
@@ -190,16 +200,7 @@ void Enemy_White::Update()
 	}
 	
 	
-	if (coolTime2 >= coolDown && currentAnim == &knifeThrowLW)
-	{
-		coolTime2 = 0;
-		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
-
-	}
-	else
-	{
-		coolTime2 += 0.1;
-	}
+	
 
 
 
