@@ -694,7 +694,7 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	blockAnim = false;
-	eneAlive = 3;
+	eneAlive = 2;
 	scoreP1 = 0;
 
 	lifeP1.Reset();
