@@ -16,6 +16,8 @@
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
 
+#define DEAD_LOOP 5
+
 
 ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 {
@@ -1471,7 +1473,6 @@ update_status ModulePlayer::Update()
 		&& App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_IDLE
 		&& App->input->keys[SDL_SCANCODE_Z] == KEY_STATE::KEY_IDLE
-		&& App->input->keys[SDL_SCANCODE_C] == KEY_STATE::KEY_IDLE
 		&& blockAnim == false)
 	{
 		if (currentAnimation != &idleAnimR
@@ -1698,6 +1699,86 @@ update_status ModulePlayer::PostUpdate()
 		hitAirAnim2L.loopCount = 0;
 	}
 
+	// ---------------------------------------------------------------- RIGHT
+	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
+		if (deathAnimR.loopCount > DEAD_LOOP)
+		{
+			lifes--;
+			position.x = 5;
+			position.y = 112;
+
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+			lifeP1.Reset();
+
+			blockAnim = false;
+			// Load Lifes P1 Again
+			for (int i = 0; i < MAX_LIFE; ++i) {
+				lifesP1[i] = 1;
+			}
+		}
+	}
+
+	else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 0) {
+		if (deathAnimR.loopCount > DEAD_LOOP)
+		{
+			App->player->HIT->pendingToDelete = true;
+			App->player->collider->pendingToDelete = true;
+
+			App->player->Disable();
+			App->player->CleanUp();
+
+			App->enemies->Disable();
+			App->enemies->CleanUp();
+
+			App->sceneLose->Enable();
+		}
+	}
+
+
+	// ---------------------------------------------------------------- LEFT
+	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
+		if (deathAnimL.loopCount > DEAD_LOOP)
+		{
+			lifes--;
+			position.x = 5;
+			position.y = 112;
+
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+			lifeP1.Reset();
+
+			blockAnim = false;
+			// Load Lifes P1 Again
+			for (int i = 0; i < MAX_LIFE; ++i) {
+				lifesP1[i] = 1;
+			}
+		}
+	}
+
+	else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+		if (deathAnimL.loopCount > DEAD_LOOP)
+		{
+			App->player->HIT->pendingToDelete = true;
+			App->player->collider->pendingToDelete = true;
+
+			App->player->Disable();
+			App->player->CleanUp();
+
+			App->enemies->Disable();
+			App->enemies->CleanUp();
+
+			App->sceneLose->Enable();
+		}
+	}
+	
+	if (deathAnimL.loopCount > DEAD_LOOP
+		|| deathAnimR.loopCount > DEAD_LOOP)
+	{
+		deathAnimR.loopCount = 0;
+		deathAnimL.loopCount = 0;
+	}
+
 	App->render->Blit(AttackQuoteTexture, position.x, position.y - 10, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
 
 	if (App->render->camera.x == 0)
@@ -1771,7 +1852,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			currentAnimation = &deathAnimR;
 			blockAnim = true;
 
-			if (deathAnimR.loopCount > 0)
+			if (deathAnimR.loopCount > DEAD_LOOP)
 			{
 				lifes--;
 				position.x = 5;
@@ -1787,8 +1868,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 					lifesP1[i] = 1;
 				}
 			}
-
-			deathAnimR.loopCount = 0;
 		}
 
 		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 0) {
@@ -1796,7 +1875,52 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			currentAnimation = &deathAnimR;
 			blockAnim = true;
 
-			if (deathAnimR.loopCount > 0)
+			if (deathAnimR.loopCount > DEAD_LOOP)
+			{
+				App->player->HIT->pendingToDelete = true;
+				App->player->collider->pendingToDelete = true;
+
+				App->player->Disable();
+				App->player->CleanUp();
+
+				App->enemies->Disable();
+				App->enemies->CleanUp();
+
+				App->sceneLose->Enable();
+			}
+		}
+
+
+		// ---------------------------------------------------------------- LEFT
+		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
+			deathAnimL.Reset();
+			currentAnimation = &deathAnimL;
+			blockAnim = true;
+
+			if (deathAnimL.loopCount > DEAD_LOOP)
+			{
+				lifes--;
+				position.x = 5;
+				position.y = 112;
+
+				idleAnimR.Reset();
+				currentAnimation = &idleAnimR;
+				lifeP1.Reset();
+
+				blockAnim = false;
+				// Load Lifes P1 Again
+				for (int i = 0; i < MAX_LIFE; ++i) {
+					lifesP1[i] = 1;
+				}
+			}
+		}
+
+		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+			deathAnimL.Reset();
+			currentAnimation = &deathAnimL;
+			blockAnim = true;
+
+			if (deathAnimL.loopCount > DEAD_LOOP)
 			{
 				App->player->HIT->pendingToDelete = true;
 				App->player->collider->pendingToDelete = true;
@@ -1813,51 +1937,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	}
 	
 
-	// ---------------------------------------------------------------- LEFT
-	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
-		deathAnimL.Reset();
-		currentAnimation = &deathAnimL;
-		blockAnim = true;
-
-		if (deathAnimL.loopCount > 0)
-		{
-			lifes--;
-			position.x = 5;
-			position.y = 112;
-
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
-			lifeP1.Reset();
-
-			blockAnim = false;
-			// Load Lifes P1 Again
-			for (int i = 0; i < MAX_LIFE; ++i) {
-				lifesP1[i] = 1;
-			}
-		}
-
-		deathAnimL.loopCount = 0;
-	}
-
-	else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
-		deathAnimL.Reset();
-		currentAnimation = &deathAnimL;
-		blockAnim = true;
-
-		if (deathAnimL.loopCount > 0)
-		{
-			App->player->HIT->pendingToDelete = true;
-			App->player->collider->pendingToDelete = true;
-
-			App->player->Disable();
-			App->player->CleanUp();
-
-			App->enemies->Disable();
-			App->enemies->CleanUp();
-
-			App->sceneLose->Enable();
-		}
-	}
 	
 		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
