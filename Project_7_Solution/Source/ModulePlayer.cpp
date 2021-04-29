@@ -16,7 +16,7 @@
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
 
-#define DEAD_LOOP 5
+#define DEAD_LOOP 10
 
 
 ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
