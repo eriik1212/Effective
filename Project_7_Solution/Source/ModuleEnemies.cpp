@@ -6,6 +6,8 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 
+#include "ModulePlayer.h"
+
 #include "Enemy.h"
 #include "Enemy_Purple.h"
 #include "Enemy_White.h"
@@ -58,6 +60,14 @@ update_status ModuleEnemies::PostUpdate()
 		if (enemies[i] != nullptr)
 			enemies[i]->Draw();
 	}
+
+
+	App->render->Blit(App->player->fireTexture, 0, 162, &(App->player->frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(App->player->fireTexture, 256, 162, &(App->player->frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(App->player->fireTexture, 512, 162, &(App->player->frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(App->player->fireTexture, 768, 162, &(App->player->frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(App->player->fireTexture, 1024, 162, &(App->player->frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	App->render->Blit(App->player->fireTexture, 1280, 162, &(App->player->frontFire.GetCurrentFrame()), 1); // FrontFire animation
 
 	return update_status::UPDATE_CONTINUE;
 }

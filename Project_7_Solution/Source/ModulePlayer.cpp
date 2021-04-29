@@ -1765,7 +1765,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		lifeP1.Update();
 		updateLifeIndicatorPlayer1(lifesP1, 2);
 
-
 		// ---------------------------------------------------------------- RIGHT
 		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
 			deathAnimR.Reset();
@@ -1812,6 +1811,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 	}
+	
 
 	// ---------------------------------------------------------------- LEFT
 	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
@@ -1858,6 +1858,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			App->sceneLose->Enable();
 		}
 	}
+	
 		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
 			scoreP1 += 1;
