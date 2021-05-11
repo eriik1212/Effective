@@ -46,8 +46,8 @@ update_status ModuleSceneIntro::Update()
 	// ScanCodes
 	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) && (!members))
 	{
-		CleanUp();
 		this->Disable();
+		CleanUp();
 		App->scene->Enable();
 		App->player->Enable();
 		App->enemies->Enable();

@@ -694,8 +694,8 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	blockAnim = false;
-	eneAlive = 2;
 	scoreP1 = 0;
+	lifes = 0;
 
 	lifeP1.Reset();
 
@@ -1940,7 +1940,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	
 		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
-			scoreP1 += 1;
-			eneAlive--;
+			scoreP1 ++;
 		}
 }

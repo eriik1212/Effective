@@ -3,7 +3,7 @@
 
 #include "Module.h"
 
-#define MAX_ENEMIES 100
+#define MAX_ENEMIES 2
 
 enum class ENEMY_TYPE
 {
@@ -58,6 +58,9 @@ public:
 
 	// Destroys any enemies that have moved outside the camera limits
 	void HandleEnemiesDespawn();
+
+	// All spawned enemies in the scene
+	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
@@ -65,9 +68,6 @@ private:
 private:
 	// A queue with all spawn points information
 	EnemySpawnpoint spawnQueue[MAX_ENEMIES];
-
-	// All spawned enemies in the scene
-	Enemy* enemies[MAX_ENEMIES] = { nullptr };
 
 	// The enemies sprite sheet
 	SDL_Texture* white = nullptr;

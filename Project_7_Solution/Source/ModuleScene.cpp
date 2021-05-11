@@ -115,7 +115,9 @@ bool ModuleScene::Start()
 	/*App->collisions->AddCollider({ 1000, 200, 20, 10 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1000, 145, 20, 10 }, Collider::Type::WALL);*/
 
-	// Enemies ---
+	// Enemies --- CURRENT MAX. ENEMIES == 2 --- 
+	//¡¡IMPORTANT: TO ADD AN ENEMY CHANGE moduleEnemies.h -> #define MAX_ENEMIES 2!!
+
 	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 400, 52);
 	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 110);
 
@@ -172,7 +174,7 @@ update_status ModuleScene::Update()
 		App->audio->PlayFx(ElevatorDoor);
 	}
 
-	if (App->player->eneAlive == 0)
+	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT)
 	{
 		countDown++;
 
