@@ -14,31 +14,47 @@ _Here will be our gameplay video when it get's finished._
 
 Keyboard controls
 
-- Up, Down, Left, Right (Arrows) - Movement
+- UP, DOWN, LEFT, RIGHT (Arrows) - Movement
 - X - Hit
 - Z - Jump
 
 General Controls
 
-- Spacebar - Next Screen
+- SPACEBAR - Next Screen
 - R - Restart
 
-# Gamepad controls
+Gamepad controls
 
 Coming soon!
 
 
-
-
-
-[Link](url) and ![Image](src)
 ```
 
 
 ### Effective studio team members
 ![](https://github.com/eriik1212/Effective/blob/main/Team%20photo.jpeg?raw=true)
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/eriik1212/Effective/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
-### Support or Contact
+### Responsabilities
+Erik Martín Garzón
+* Audio/Code
+* Github: [Eriik1212](https://github.com/eriik1212)
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+David Boces Obis
+* Art/Code
+* Github: [VoZeS](https://github.com/VoZeS)
+
+Jan Carbonell Muñoz
+* Art
+* Github: [JCarbonell01](https://github.com/JCarbonell01)
+
+Juan de Dios García Salguero
+* Code
+* Github: [Jedtra](https://github.com/Jedtra) 
+
+Chising Joaquin Lien Cong
+* Art/Q&A
+* Github: [Noche39](https://github.com/Noche39)
+
+### For more information you can check our [wiki](https://github.com/eriik1212/Effective/wiki)
+### Download our TMNT arcade tribute's [lastest version](https://github.com/eriik1212/Effective/releases/tag/0.5)
+### Check our project's repository on [Github](https://github.com/eriik1212/Effective)
