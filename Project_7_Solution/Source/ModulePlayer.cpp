@@ -10,6 +10,7 @@
 #include "ModuleFonts.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneLose.h"
+#include "ModuleLevel2.h"
 
 #include <stdio.h>
 
@@ -698,9 +699,6 @@ bool ModulePlayer::Start()
 	lifes = 0;
 
 	lifeP1.Reset();
-
-	position.x = 5;
-	position.y = 112;
 
 	// ----------------------------------------------------------------- LIFE ELEMENTS
 	// Load Lifes P1
@@ -1550,6 +1548,7 @@ update_status ModulePlayer::Update()
 		App->player->Disable();
 		App->enemies->Disable();
 		App->scene->Disable();  
+		App->level2->Disable();
 		App->sceneIntro->Enable();
 	}
 

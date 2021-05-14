@@ -35,7 +35,7 @@ public:
 	SDL_Rect background;
 
 	// The scene sprite sheet loaded into an SDL_Texture
-	SDL_Texture* stage2Texture = nullptr;
+	SDL_Texture* stageTexture = nullptr;
 
 	//Animation drill;
 

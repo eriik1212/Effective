@@ -95,12 +95,18 @@ bool ModuleScene::Start()
 
 	countDown = 0;
 
+	App->player->Enable();
+	App->enemies->Enable();
+
 	doorBreak.Reset();
 	doorBreak2.Reset();
 	doorBreak3.Reset();
 
 	openElev.Reset();
 	openElev2.Reset();
+
+	App->player->position.x = 5;
+	App->player->position.y = 112;
 
 	App->render->camera.x = 0;
 	App->render->playerLimitR = App->render->camera.w - 135;
@@ -192,15 +198,14 @@ update_status ModuleScene::Update()
 		{
 			this->Disable();
 			CleanUp();
-			App->player->HIT->pendingToDelete = true;
-			App->player->collider->pendingToDelete = true;
+
 			App->player->Disable();
 			App->player->CleanUp();
 
 			App->enemies->Disable();
 			App->enemies->CleanUp();
 
-			App->sceneWin->Enable();
+			App->level2->Enable();
 		}
 	}
 
@@ -230,8 +235,11 @@ update_status ModuleScene::Update()
 
 		App->sceneLose->Enable();
 	}
-	else if (App->input->keys[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+	else if (App->input->keys[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN)
 	{
+		this->Disable();
+		CleanUp();
+
 		App->player->Disable();
 		App->player->CleanUp();
 
