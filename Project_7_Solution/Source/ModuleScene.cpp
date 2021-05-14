@@ -9,6 +9,7 @@
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
 
+#include "ModuleLevel2.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneWin.h"
 #include "ModuleSceneLose.h"
@@ -126,6 +127,15 @@ bool ModuleScene::Start()
 
 update_status ModuleScene::Update()
 {
+	//Handle Camera Limits
+	if (App->render->camera.x > CAMERA_LIMIT_LVL1) App->render->camera.x = CAMERA_LIMIT_LVL1;
+
+	// Position Players Limits
+	if (App->player->position.x < App->render->playerLimitL) App->player->position.x = App->render->playerLimitL;
+	if (App->player->position.x > 1250) App->player->position.x = 1250;
+	if (App->player->position.y < 56) App->player->position.y = 56;
+	if (App->player->position.y > 136) App->player->position.y = 136;
+
 	// ------------------------------------------- World Animations Updates
 	fireDoor.Update();
 	fireElev.Update();
@@ -174,7 +184,7 @@ update_status ModuleScene::Update()
 		App->audio->PlayFx(ElevatorDoor);
 	}
 
-	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT)
+	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT_LVL1)
 	{
 		countDown++;
 
@@ -219,6 +229,16 @@ update_status ModuleScene::Update()
 		App->enemies->CleanUp();
 
 		App->sceneLose->Enable();
+	}
+	else if (App->input->keys[SDL_SCANCODE_F5] == KEY_STATE::KEY_DOWN)
+	{
+		App->player->Disable();
+		App->player->CleanUp();
+
+		App->enemies->Disable();
+		App->enemies->CleanUp();
+
+		App->level2->Enable();
 	}
 
 	return update_status::UPDATE_CONTINUE;

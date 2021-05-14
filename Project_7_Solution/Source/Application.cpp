@@ -7,6 +7,7 @@
 #include "ModuleAudio.h"
 #include "ModulePlayer.h"
 #include "ModuleScene.h"
+#include "ModuleLevel2.h"
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneWin.h"
 #include "ModuleSceneLose.h"
@@ -39,6 +40,8 @@ Application::Application()
 	modules[12] = render = new ModuleRender(true);
 
 	modules[13] = fonts = new ModuleFonts(true);
+
+	modules[14] = level2 = new ModuleLevel2(false);
 }
 
 Application::~Application()

@@ -55,9 +55,6 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	//Handle Camera Limits
-	if (camera.x > CAMERA_LIMIT) camera.x = CAMERA_LIMIT;
-
 
 	return update_status::UPDATE_CONTINUE;
 }

@@ -743,16 +743,10 @@ update_status ModulePlayer::Update()
 	insertCoinP3.Update();
 	insertCoinP4.Update();
 
-	// Position Players Limits
-	if (position.x < App->render->playerLimitL) position.x = App->render->playerLimitL;
-	if (position.x > 1250) position.x = 1250;
-	if (position.y < 56) position.y = 56;
-	if (position.y > 136) position.y = 136;
-
 	// Camera Movement
 	if (position.x > (App->render->playerLimitR))
 	{
-		if (App->render->camera.x < CAMERA_LIMIT)
+		if (App->render->camera.x < CAMERA_LIMIT_LVL1)
 		{
 			App->render->camera.x += App->render->cameraSpeed;
 			App->render->playerLimitR += speed;
