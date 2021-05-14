@@ -199,12 +199,6 @@ update_status ModuleScene::Update()
 			this->Disable();
 			CleanUp();
 
-			App->player->Disable();
-			App->player->CleanUp();
-
-			App->enemies->Disable();
-			App->enemies->CleanUp();
-
 			App->level2->Enable();
 		}
 	}
@@ -239,12 +233,6 @@ update_status ModuleScene::Update()
 	{
 		this->Disable();
 		CleanUp();
-
-		App->player->Disable();
-		App->player->CleanUp();
-
-		App->enemies->Disable();
-		App->enemies->CleanUp();
 
 		App->level2->Enable();
 	}

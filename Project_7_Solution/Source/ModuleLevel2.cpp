@@ -38,9 +38,6 @@ bool ModuleLevel2::Start()
 
 	countDown = 0;
 
-	App->player->Enable();
-	App->enemies->Enable();
-
 	App->player->position.x = 5;
 	App->player->position.y = 112;
 
