@@ -1,34 +1,42 @@
-## Welcome to Effective webpage
+## About the game
 
-You can use the [editor on GitHub](https://github.com/eriik1212/Effective/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+Teenage Mutant Ninja Turtles, released in 1989, is a Beat 'em Up videogame based on the first TMNT animated series that began in 1987. The game was developed by Konami for the arcade machines of that time.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+The objective of the game is saving April O'Neil and Splinter, two iconic characters of the serie, and defeat the evil Shredder. To do that, the player has to pass through different levels and overthrow an iconic boss at the end of each level.
+
+The gameplay mechanics are simple: an Horizontal Scrolling Interface System combined with intuitive controls that allow the player to have a complete Movement (Up, Down, Left, Right) and have two action buttons (Jump and Attack). TMNT is a 2D videogame, but due to the complete movement system and the background design, the game generates a false sentation of 3D.
 
 ### Gameplay
+_Here will be our gameplay video when it get's finished._
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
+### Controls
 ```markdown
-Syntax highlighted code block
 
-# Header 1
-## Header 2
+Keyboard controls
 
-- Bulleted
-- List
+- Up, Down, Left, Right (Arrows) - Movement
+- X - Hit
+- Z - Jump
 
-1. Numbered
-2. List
+General Controls
 
-**Bold** and _Italic_ and `Code` text
+- Spacebar - Next Screen
+- R - Restart
+
+# Gamepad controls
+
+Coming soon!
+
+
+
+
 
 [Link](url) and ![Image](src)
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
 
-### Jekyll Themes
-
+### Effective studio team members
+![](https://github.com/eriik1212/Effective/blob/main/Team%20photo.jpeg?raw=true)
 Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/eriik1212/Effective/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
 
 ### Support or Contact
