@@ -23,7 +23,7 @@ typedef unsigned int uint;
 #define SCREEN_WIDTH 302
 #define SCREEN_HEIGHT 224
 #define CAMERA_LIMIT_LVL1 3168
-#define CAMERA_LIMIT_LVL2 1344
+#define CAMERA_LIMIT_LVL2 394
 
 #define SCREEN_SIZE 3
 #define WIN_FULLSCREEN 0

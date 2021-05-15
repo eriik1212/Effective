@@ -110,6 +110,12 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		frontFire.PushBack({ 1030, 536, 304, 62 });
 		frontFire.speed = 0.15f;
 
+		// Smoke animation
+		smoke.PushBack({ 731, 229, 128, 64 });
+		smoke.PushBack({ 731, 304, 128, 64 });
+		smoke.PushBack({ 731, 383, 128, 64 });
+		smoke.speed = 0.15f;
+
 
 		// SmallFire In Map Animation
 		smallFire.PushBack({ 20, 635, 82, 46 });
@@ -709,6 +715,7 @@ bool ModulePlayer::Start()
 	// ----------------------------------------------------------------- TEXTURES
 	texture = App->textures->Load("Assets/Characters/Leonardo.png");
 	fireTexture = App->textures->Load("Assets/Tilesets/fire.png");
+	smokeTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
 	HUDTexture = App->textures->Load("Assets/UI & HUD/HUD.png");
 	AttackQuoteTexture = App->textures->Load("Assets/UI & HUD/Quotes.png");
 	currentAnimation = &idleAnimR;
@@ -735,6 +742,7 @@ update_status ModulePlayer::Update()
 {
 	App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = false;
 	frontFire.Update();
+	smoke.Update();
 	smallFire.Update();
 	AttackQuote.Update();
 	insertCoinP2.Update();
@@ -744,7 +752,13 @@ update_status ModulePlayer::Update()
 	// Camera Movement
 	if (position.x > (App->render->playerLimitR))
 	{
-		if (App->render->camera.x < CAMERA_LIMIT_LVL1)
+		if (App->render->camera.x < CAMERA_LIMIT_LVL1 && App->scene->Enabled())
+		{
+			App->render->camera.x += App->render->cameraSpeed;
+			App->render->playerLimitR += speed;
+			App->render->playerLimitL += speed;
+		}
+		if (App->render->camera.x < CAMERA_LIMIT_LVL2 && App->level2->Enabled())
 		{
 			App->render->camera.x += App->render->cameraSpeed;
 			App->render->playerLimitR += speed;
@@ -1567,17 +1581,23 @@ update_status ModulePlayer::Update()
 
 update_status ModulePlayer::PostUpdate()
 {
+
 	if (!destroyed)
 	{
-		if (position.y < 100)
+		if (position.y < 100 && App->scene->Enabled()) // PAINT PLAYER & FIRE IN LVL1
 		{
 			SDL_Rect rect = currentAnimation->GetCurrentFrame();
 			App->render->Blit(texture, position.x, position.y, &rect);
 			App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
 		}
-		else
+		else if (position.y >= 100 && App->scene->Enabled())  // PAINT PLAYER & FIRE IN LVL1
 		{
 			App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
+			SDL_Rect rect = currentAnimation->GetCurrentFrame();
+			App->render->Blit(texture, position.x, position.y, &rect);
+		}
+		else if (App->level2->Enabled()) // PAINT PLAYER IN LVL2
+		{
 			SDL_Rect rect = currentAnimation->GetCurrentFrame();
 			App->render->Blit(texture, position.x, position.y, &rect);
 		}
@@ -1789,7 +1809,17 @@ update_status ModulePlayer::PostUpdate()
 	App->render->Blit(fireTexture, 1024, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 	App->render->Blit(fireTexture, 1280, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
 
-	// -------------------------------------------------------------------------------------------- HUD
+
+	if (App->scene->Disabled() && App->level2->Enabled())
+	{
+		App->render->Blit(smokeTexture, 0, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
+		App->render->Blit(smokeTexture, 79, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
+		App->render->Blit(smokeTexture, 158, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
+		App->render->Blit(smokeTexture, 237, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
+		App->render->Blit(smokeTexture, 316, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
+	}
+
+		// -------------------------------------------------------------------------------------------- HUD
 
 	App->render->Blit(HUDTexture, 8, 0, &(HUDP1.GetCurrentFrame()), 0); // HUD Square Player1
 	App->render->Blit(HUDTexture, 80, 0, &(HUDP234.GetCurrentFrame()), 0); // HUD Square Player2,3,4

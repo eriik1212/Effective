@@ -55,7 +55,8 @@ update_status ModuleRender::PreUpdate()
 
 update_status ModuleRender::Update()
 {
-	if (App->input->keys[SDL_SCANCODE_L] == KEY_STATE::KEY_REPEAT) {
+	//MANUAL CAMERA MOVEMENT (IF NEEDED)
+	/*if (App->input->keys[SDL_SCANCODE_L] == KEY_STATE::KEY_REPEAT) {
 		camera.x += cameraSpeed;
 	}
 	else if (App->input->keys[SDL_SCANCODE_J] == KEY_STATE::KEY_REPEAT) {
@@ -66,7 +67,8 @@ update_status ModuleRender::Update()
 	}
 	else if (App->input->keys[SDL_SCANCODE_I] == KEY_STATE::KEY_REPEAT) {
 		camera.y -= cameraSpeed;
-	}
+	}*/
+
 	return update_status::UPDATE_CONTINUE;
 }
 

@@ -56,7 +56,7 @@ public:
 
 	// Limit of the player inside the camera
 	int playerLimitR = camera.w - 135;
-	int playerLimitL = camera.x + 5;
+	int playerLimitL = camera.x - 13;
 
 	// The speed at which the camera will be moving
 	int cameraSpeed = 6;

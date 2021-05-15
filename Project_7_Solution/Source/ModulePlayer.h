@@ -55,6 +55,8 @@ public:
 
 	SDL_Texture* fireTexture = nullptr;
 
+	SDL_Texture* smokeTexture = nullptr;
+
 	SDL_Texture* HUDTexture = nullptr;
 
 	SDL_Texture* AttackQuoteTexture = nullptr;
@@ -62,6 +64,7 @@ public:
 	// HUD & Foreground Animations
 	Animation frontFire,
 		smallFire,
+		smoke,
 		HUDP1,
 		HUDP234,
 		insertCoinP2,

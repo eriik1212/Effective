@@ -110,7 +110,7 @@ bool ModuleScene::Start()
 
 	App->render->camera.x = 0;
 	App->render->playerLimitR = App->render->camera.w - 135;
-	App->render->playerLimitL = App->render->camera.x + 5;
+	App->render->playerLimitL = App->render->camera.x - 13;
 
 	stageTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
 
@@ -124,9 +124,21 @@ bool ModuleScene::Start()
 
 	// Enemies --- CURRENT MAX. ENEMIES == 2 --- 
 	//¡¡IMPORTANT: TO ADD AN ENEMY CHANGE moduleEnemies.h -> #define MAX_ENEMIES 2!!
-
-	App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 400, 52);
-	App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 110);
+	if (App->scene->Enabled() && App->level2->Disabled())
+	{
+		// Iterate existing enemies
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		{
+			if (App->enemies->enemies[i] != nullptr)
+			{
+				// Delete the enemy when it has reached the end of the screen
+				delete App->enemies->enemies[i];
+				App->enemies->enemies[i] = nullptr;
+			}
+		}
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 400, 52);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 110);
+	}
 
 	return ret;
 }
@@ -198,6 +210,11 @@ update_status ModuleScene::Update()
 		{
 			this->Disable();
 			CleanUp();
+			App->player->Disable();
+			App->player->CleanUp();
+
+			App->enemies->Disable();
+			App->enemies->CleanUp();
 
 			App->level2->Enable();
 		}
@@ -233,6 +250,11 @@ update_status ModuleScene::Update()
 	{
 		this->Disable();
 		CleanUp();
+		App->player->Disable();
+		App->player->CleanUp();
+
+		App->enemies->Disable();
+		App->enemies->CleanUp();
 
 		App->level2->Enable();
 	}
