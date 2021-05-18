@@ -7,12 +7,12 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 {
-	spawnPos = iPoint(100,0);
+	/*spawnPos = iPoint(100,0);
 
 	cloud1.PushBack({ 20, 539, 207, 29 });
 
 	//PATH
-	path.PushBack({ -1.2f, 0.0f }, 45, &cloud1);
+	path.PushBack({ -1.2f, 0.0f }, 45, &cloud1);*/
 }
 
 ModuleSceneIntro::~ModuleSceneIntro() {}
@@ -45,35 +45,29 @@ update_status ModuleSceneIntro::Update()
 			introMembers = nullptr;
 			members = false;
 			membersCounter = 0;
-<<<<<<< Updated upstream
+
 			App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 1.0f);
-=======
 
-			App->audio->PlayMusic("Assets/Audio/01 Opening Demo.ogg", 1.0f);
-
-			path.Update();
+			/*path.Update();
 			position = spawnPos + path.GetRelativePosition();
-			currentAnim = path.GetCurrentAnimation();
-
->>>>>>> Stashed changes
+			currentAnim = path.GetCurrentAnimation();*/
 		}
 	}
-	// ScanCodes
-	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) && (!members))
-	{
-		this->Disable();
-		CleanUp();
-		App->scene->Enable();
-		App->player->Enable();
-		App->enemies->Enable();
-	}
+		// ScanCodes
+		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) && (!members))
+		{
+			this->Disable();
+			CleanUp();
+			App->scene->Enable();
+			App->player->Enable();
+			App->enemies->Enable();
+		}
 
-	else if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
-	{
-		return update_status::UPDATE_STOP;
-	}
-
-	return update_status::UPDATE_CONTINUE;
+		else if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
+		{
+			return update_status::UPDATE_STOP;
+		}
+		return update_status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
