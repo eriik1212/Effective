@@ -7,12 +7,13 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 {
-	/*spawnPos = iPoint(100,0);
 
 	cloud1.PushBack({ 20, 539, 207, 29 });
+	cloud1.loop = true;
+	cloud1.speed = 0.15f;
 
 	//PATH
-	path.PushBack({ -1.2f, 0.0f }, 45, &cloud1);*/
+	path.PushBack({ -0.5f, 0.0f }, 45, &cloud1);
 }
 
 ModuleSceneIntro::~ModuleSceneIntro() {}
@@ -48,9 +49,9 @@ update_status ModuleSceneIntro::Update()
 
 			App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 1.0f);
 
-			/*path.Update();
+			path.Update();
 			position = spawnPos + path.GetRelativePosition();
-			currentAnim = path.GetCurrentAnimation();*/
+			currentAnim = path.GetCurrentAnimation();
 		}
 	}
 		// ScanCodes
