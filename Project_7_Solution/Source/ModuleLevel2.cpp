@@ -48,9 +48,9 @@ bool ModuleLevel2::Start()
 	App->render->playerLimitR = App->render->camera.w - 135;
 	App->render->playerLimitL = App->render->camera.x - 13;
 
-	stage2Texture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
+	stage2Texture = App->textures->Load("Assets/Tilesets/tile_map_stage_1.png");
 
-	App->audio->PlayMusic("Assets/Audio/03 Fire! Scene 1 Stage 1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/03_fire_scene_1_stage_1.ogg", 1.0f);
 
 	// Final wall colliders
 	/*App->collisions->AddCollider({ 1000, 200, 20, 10 }, Collider::Type::WALL);

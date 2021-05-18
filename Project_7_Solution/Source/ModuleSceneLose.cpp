@@ -18,7 +18,7 @@ bool ModuleSceneLose::Start()
 	countDown = 0;
 
 	gameOverTexture = App->textures->Load("Assets/UI & HUD/game_over.png");
-	App->audio->PlayMusic("Assets/Audio/08 GameOver.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/08_game_over", 1.0f);
 	return true;
 }
 

@@ -713,18 +713,18 @@ bool ModulePlayer::Start()
 	}
 
 	// ----------------------------------------------------------------- TEXTURES
-	texture = App->textures->Load("Assets/Characters/Leonardo.png");
+	texture = App->textures->Load("Assets/Characters/leonardo.png");
 	fireTexture = App->textures->Load("Assets/Tilesets/fire.png");
-	smokeTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
+	smokeTexture = App->textures->Load("Assets/Tilesets/tile_map_stage_1.png");
 	HUDTexture = App->textures->Load("Assets/UI & HUD/HUD.png");
-	AttackQuoteTexture = App->textures->Load("Assets/UI & HUD/Quotes.png");
+	AttackQuoteTexture = App->textures->Load("Assets/UI & HUD/quotes.png");
 	currentAnimation = &idleAnimR;
 
 	// ----------------------------------------------------------------- AUDIO
-	PunchMiss = App->audio->LoadFx("Assets/FX/Punch1.wav");
-	PunchHit = App->audio->LoadFx("Assets/Fx/Punch2.wav");
-	Scream1 = App->audio->LoadFx("Assets/FX/AtackScream.wav");
-	lifeIncrease = App->audio->LoadFx("Assets/FX/01Cowabunga.wav");
+	PunchMiss = App->audio->LoadFx("Assets/FX/punch_1.wav");
+	PunchHit = App->audio->LoadFx("Assets/Fx/punch_2.wav");
+	Scream1 = App->audio->LoadFx("Assets/FX/atack_scream.wav");
+	lifeIncrease = App->audio->LoadFx("Assets/FX/01_cowabunga.wav");
 
 	// ----------------------------------------------------------------- COLLIDERS
 	HIT = App->collisions->AddCollider({ position.x , position.y, 20, 16 }, Collider::Type::PLAYER_SHOT,this);
@@ -733,7 +733,7 @@ bool ModulePlayer::Start()
 	// ----------------------------------------------------------------- FONTS
 	char lookupTable[] = { "0123456789 " };
 	scoreFont = App->fonts->Load("Assets/UI & HUD/fonts.png", lookupTable, 1);
-	lifeFont = App->fonts->Load("Assets/UI & HUD/NumLifesFont.png", lookupTable, 1);
+	lifeFont = App->fonts->Load("Assets/UI & HUD/num_lifes_font.png", lookupTable, 1);
 
 	return ret;
 }

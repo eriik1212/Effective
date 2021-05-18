@@ -17,8 +17,8 @@ bool ModuleSceneWin::Start()
 {
 	countDown = 0;
 
-	introBackground = App->textures->Load("Assets/UI & HUD/to be continued.png");
-	App->audio->PlayMusic("Assets/Audio/06 shredder final.ogg", 1.0f);
+	introBackground = App->textures->Load("Assets/UI & HUD/to_be_continued.png");
+	App->audio->PlayMusic("Assets/Audio/06_shredder_final.ogg", 1.0f);
 	return true;
 }
 

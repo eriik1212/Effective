@@ -112,11 +112,11 @@ bool ModuleScene::Start()
 	App->render->playerLimitR = App->render->camera.w - 135;
 	App->render->playerLimitL = App->render->camera.x - 13;
 
-	stageTexture = App->textures->Load("Assets/Tilesets/TileMapStage1.png");
+	stageTexture = App->textures->Load("Assets/Tilesets/tile_map_stage_1.png");
 
-	App->audio->PlayMusic("Assets/Audio/03 Fire! Scene 1 Stage 1.ogg", 1.0f);
-	DoorBrake = App->audio->LoadFx("Assets/FX/BrokenDoor.wav");
-	ElevatorDoor = App->audio->LoadFx("Assets/FX/AutoDoors.wav");
+	App->audio->PlayMusic("Assets/Audio/03_fire_scene_1_stage_1.ogg", 1.0f);
+	DoorBrake = App->audio->LoadFx("Assets/FX/broken_door.wav");
+	ElevatorDoor = App->audio->LoadFx("Assets/FX/auto_doors.wav");
 
 	// Final wall colliders
 	/*App->collisions->AddCollider({ 1000, 200, 20, 10 }, Collider::Type::WALL);

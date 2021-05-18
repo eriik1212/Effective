@@ -30,10 +30,10 @@ ModuleEnemies::~ModuleEnemies()
 bool ModuleEnemies::Start()
 {
 
-	white = App->textures->Load("Assets/Enemies/White_enemy.png");
-	purple = App->textures->Load("Assets/Enemies/Purple-enemy.png");
+	white = App->textures->Load("Assets/Enemies/white_enemy.png");
+	purple = App->textures->Load("Assets/Enemies/purple_enemy.png");
 	enemyDamageFX = App->audio->LoadFx("Assets/FX/Punch2.wav");
-	enemyDestroyedFx = App->audio->LoadFx("Assets/FX/EnemyDie.wav");
+	enemyDestroyedFx = App->audio->LoadFx("Assets/FX/enemy_die.wav");
 
 	return true;
 }

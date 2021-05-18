@@ -16,13 +16,13 @@ ModuleSceneIntro::~ModuleSceneIntro() {}
 bool ModuleSceneIntro::Start()
 {
 	// Members Texture
-	introMembers = App->textures->Load("Assets/Introduction/introMembers.png");
+	introMembers = App->textures->Load("Assets/Introduction/intro_members.png");
 	members = true;
 	membersCounter = 0;
 
 	introBackground = App->textures->Load("Assets/Introduction/title_screen.png");	
 
-	App->audio->PlayMusic("Assets/Audio/02 Character selection.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/02_character_selection.ogg", 1.0f);
 	return true;
 }
 
@@ -40,7 +40,7 @@ update_status ModuleSceneIntro::Update()
 			introMembers = nullptr;
 			members = false;
 			membersCounter = 0;
-			App->audio->PlayMusic("Assets/Audio/01 Opening Demo.ogg", 1.0f);
+			App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 1.0f);
 		}
 	}
 	// ScanCodes
