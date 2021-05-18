@@ -7,6 +7,7 @@
 #include "ModuleScene.h"
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
+#include "Path.h"
 
 struct SDL_Texture;
 
@@ -37,10 +38,25 @@ public:
 public:	
 	SDL_Texture* introBackground;
 
+	// The path that will define the position in the world
+	Path path;
+
+	// A ptr to the current animation
+	Animation* currentAnim = nullptr;
+
+	Animation cloud1,
+		cloud2;
+
 	// Members Texture
 	SDL_Texture* introMembers;
 	int membersCounter;
 	bool members;
+
+	// The current position in the world
+	iPoint position;
+
+	// Original spawn position. Stored for movement calculations
+	iPoint spawnPos;
 };
 
 #endif //__MODULE_SCENEINTRO_H__

@@ -7,7 +7,12 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 {
-	
+	spawnPos = iPoint(100,0);
+
+	cloud1.PushBack({ 20, 539, 207, 29 });
+
+	//PATH
+	path.PushBack({ -1.2f, 0.0f }, 45, &cloud1);
 }
 
 ModuleSceneIntro::~ModuleSceneIntro() {}
@@ -20,7 +25,7 @@ bool ModuleSceneIntro::Start()
 	members = true;
 	membersCounter = 0;
 
-	introBackground = App->textures->Load("Assets/Introduction/title_screen.png");	
+	introBackground = App->textures->Load("Assets/Introduction/introduction.png");	
 
 	App->audio->PlayMusic("Assets/Audio/02_character_selection.ogg", 1.0f);
 	return true;
@@ -40,7 +45,17 @@ update_status ModuleSceneIntro::Update()
 			introMembers = nullptr;
 			members = false;
 			membersCounter = 0;
+<<<<<<< Updated upstream
 			App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 1.0f);
+=======
+
+			App->audio->PlayMusic("Assets/Audio/01 Opening Demo.ogg", 1.0f);
+
+			path.Update();
+			position = spawnPos + path.GetRelativePosition();
+			currentAnim = path.GetCurrentAnimation();
+
+>>>>>>> Stashed changes
 		}
 	}
 	// ScanCodes
@@ -70,7 +85,7 @@ update_status ModuleSceneIntro::PostUpdate()
 	}
 	else
 	{
-		App->render->Blit(introBackground, 0, 0, NULL, NULL, true);
+		App->render->Blit(introBackground, -550, -89, NULL, NULL, true);
 	}	
 	return update_status::UPDATE_CONTINUE;
 }
