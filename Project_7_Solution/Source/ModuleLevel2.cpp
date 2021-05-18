@@ -50,7 +50,7 @@ bool ModuleLevel2::Start()
 
 	stage2Texture = App->textures->Load("Assets/Tilesets/tile_map_stage_1.png");
 
-	App->audio->PlayMusic("Assets/Audio/03_fire_scene_1_stage_1.ogg", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/04_aprils_room_scene_1_stage_2.ogg", 1.0f);
 
 	// Final wall colliders
 	/*App->collisions->AddCollider({ 1000, 200, 20, 10 }, Collider::Type::WALL);

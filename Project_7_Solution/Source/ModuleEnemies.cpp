@@ -32,7 +32,7 @@ bool ModuleEnemies::Start()
 
 	white = App->textures->Load("Assets/Enemies/white_enemy.png");
 	purple = App->textures->Load("Assets/Enemies/purple_enemy.png");
-	enemyDamageFX = App->audio->LoadFx("Assets/FX/Punch2.wav");
+	enemyDamageFX = App->audio->LoadFx("Assets/FX/punch_2.wav");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/FX/enemy_die.wav");
 
 	return true;
