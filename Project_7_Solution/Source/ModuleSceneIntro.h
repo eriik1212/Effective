@@ -53,7 +53,8 @@ public:
 	bool members;
 
 	// The current position in the world
-	iPoint position;
+	iPoint positionCloud1,
+		positionCloud2;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPos;

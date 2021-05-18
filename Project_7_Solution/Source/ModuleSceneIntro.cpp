@@ -4,10 +4,10 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
+#include "ModuleFadeToBlack.h"
 
 ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 {
-
 	cloud1.PushBack({ 20, 539, 207, 29 });
 	cloud1.loop = true;
 	cloud1.speed = 0.15f;
@@ -43,32 +43,37 @@ update_status ModuleSceneIntro::Update()
 		}
 		else if (membersCounter > 0)
 		{
+			
 			introMembers = nullptr;
 			members = false;
 			membersCounter = 0;
 
 			App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 1.0f);
 
-			path.Update();
-			position = spawnPos + path.GetRelativePosition();
-			currentAnim = path.GetCurrentAnimation();
 		}
 	}
-		// ScanCodes
-		if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) && (!members))
-		{
-			this->Disable();
-			CleanUp();
-			App->scene->Enable();
-			App->player->Enable();
-			App->enemies->Enable();
-		}
+	else {
+		path.Update();
+		positionCloud1 = iPoint((int)100, (int)65) + path.GetRelativePosition();
+		currentAnim = path.GetCurrentAnimation();
+	}
 
-		else if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
-		{
-			return update_status::UPDATE_STOP;
-		}
-		return update_status::UPDATE_CONTINUE;
+	// ScanCodes
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) && (!members))
+	{
+		this->Disable();
+		CleanUp();
+		App->scene->Enable();
+		App->player->Enable();
+		App->enemies->Enable();
+	}
+
+	else if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
+	{
+		return update_status::UPDATE_STOP;
+	}
+
+	return update_status::UPDATE_CONTINUE;
 }
 
 // Update: draw background
@@ -80,7 +85,11 @@ update_status ModuleSceneIntro::PostUpdate()
 	}
 	else
 	{
-		App->render->Blit(introBackground, -550, -89, NULL, NULL, true);
+  		App->render->Blit(introBackground, -550, -89, NULL, NULL, true);
+
+		if (currentAnim != nullptr)
+		App->render->Blit(introBackground, positionCloud1.x, positionCloud1.y, &(currentAnim->GetCurrentFrame()));
+
 	}	
 	return update_status::UPDATE_CONTINUE;
 }

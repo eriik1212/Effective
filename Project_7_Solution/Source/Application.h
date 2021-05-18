@@ -4,7 +4,7 @@
 #include "Globals.h"
 #include <time.h>
 
-#define NUM_MODULES 15
+#define NUM_MODULES 16
 
 class Module;
 class ModuleWindow;
@@ -22,6 +22,7 @@ class ModuleCollisions;
 class ModuleEnemies;
 class ModuleRender;
 class ModuleFonts;
+class ModuleFadeToBlack;
 
 class Application
 {
@@ -65,6 +66,7 @@ public:
 	ModuleCollisions* collisions = nullptr;
 
 	ModuleRender* render = nullptr;
+	ModuleFadeToBlack* fade = nullptr;
 
 	ModuleFonts* fonts = nullptr;
 };
