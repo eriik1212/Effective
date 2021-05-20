@@ -36,28 +36,34 @@ public:
 	bool CleanUp();
 
 public:	
+	SDL_Rect frontBuildings,
+		buildingLights,
+		floor;
+
 	SDL_Texture* introBackground;
 
 	// The path that will define the position in the world
-	Path path;
+	Path pathCloud1,
+		pathCloud2;
 
 	// A ptr to the current animation
-	Animation* currentAnim = nullptr;
+	Animation* currentAnimCloud1 = nullptr;
+
+	Animation* currentAnimCloud2 = nullptr;
 
 	Animation cloud1,
 		cloud2;
-
-	// Members Texture
-	SDL_Texture* introMembers;
-	int membersCounter;
-	bool members;
 
 	// The current position in the world
 	iPoint positionCloud1,
 		positionCloud2;
 
 	// Original spawn position. Stored for movement calculations
-	iPoint spawnPos;
+	iPoint spawnPosCloud1,
+		spawnPosCloud2;
+
+	// Counter for camera movement and audio
+	int counter;
 };
 
 #endif //__MODULE_SCENEINTRO_H__

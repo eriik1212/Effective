@@ -11,6 +11,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneLose.h"
 #include "ModuleLevel2.h"
+#include "ModuleMembers.h"
 
 #include <stdio.h>
 
@@ -705,6 +706,7 @@ bool ModulePlayer::Start()
 	lifes = 0;
 
 	lifeP1.Reset();
+	AttackQuote.Reset();
 
 	// ----------------------------------------------------------------- LIFE ELEMENTS
 	// Load Lifes P1
@@ -1563,7 +1565,7 @@ update_status ModulePlayer::Update()
 		App->enemies->Disable();
 		App->scene->Disable();  
 		App->level2->Disable();
-		App->sceneIntro->Enable();
+		App->members->Enable();
 	}
 
 	if (destroyed)

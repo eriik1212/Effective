@@ -109,6 +109,7 @@ bool ModuleScene::Start()
 	App->player->position.y = 112;
 
 	App->render->camera.x = 0;
+	App->render->camera.y = 0;
 	App->render->playerLimitR = App->render->camera.w - 135;
 	App->render->playerLimitL = App->render->camera.x - 13;
 

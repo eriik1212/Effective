@@ -8,12 +8,35 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 {
+	frontBuildings.x = 919;
+	frontBuildings.y = 89;
+	frontBuildings.w = 304;
+	frontBuildings.h = 515;
+
+	buildingLights.x = 1263;
+	buildingLights.y = 114;
+	buildingLights.w = 304;
+	buildingLights.h = 64;
+
+	floor.x = 1604;
+	floor.y = 114;
+	floor.w = 304;
+	floor.h = 503;
+
 	cloud1.PushBack({ 20, 539, 207, 29 });
 	cloud1.loop = true;
 	cloud1.speed = 0.15f;
 
-	//PATH
-	path.PushBack({ -0.5f, 0.0f }, 45, &cloud1);
+	cloud2.PushBack({ 119, 461, 88, 26 });
+	cloud2.loop = true;
+	cloud2.speed = 0.15f;
+
+	//PATH Cloud1
+	pathCloud1.PushBack({ -0.3f, 0.0f }, 300, &cloud1);
+
+	//PATH Cloud2
+	pathCloud2.PushBack({ 0.3f, 0.0f }, 300, &cloud2);
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro() {}
@@ -21,51 +44,53 @@ ModuleSceneIntro::~ModuleSceneIntro() {}
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-	// Members Texture
-	introMembers = App->textures->Load("Assets/Introduction/intro_members.png");
-	members = true;
-	membersCounter = 0;
+	counter = 0;
+
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
+	pathCloud1.ResetRelativePosition();
+	spawnPosCloud1 = iPoint((int)100, (int)65);
+
+	pathCloud2.ResetRelativePosition();
+	spawnPosCloud2 = iPoint((int)10, (int)28);
 
 	introBackground = App->textures->Load("Assets/Introduction/introduction.png");	
 
-	App->audio->PlayMusic("Assets/Audio/02_character_selection.ogg", 1.0f);
+	App->audio->StopMusic();
+
 	return true;
 }
 
 update_status ModuleSceneIntro::Update()
 {
-	// Counter
-	if (members)
+	counter++;
+	if (counter == 80)
 	{
-		if (App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN)
-		{
-			membersCounter = 1;
-		}
-		else if (membersCounter > 0)
-		{
-			
-			introMembers = nullptr;
-			members = false;
-			membersCounter = 0;
-
-			App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 1.0f);
-
-		}
+		App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 0.0f);
 	}
-	else {
-		path.Update();
-		positionCloud1 = iPoint((int)100, (int)65) + path.GetRelativePosition();
-		currentAnim = path.GetCurrentAnimation();
+
+	if (counter > 150)
+	{
+		App->render->camera.y += 6.0f;
 	}
+
+	pathCloud1.Update();
+	positionCloud1 = spawnPosCloud1 + pathCloud1.GetRelativePosition();
+	currentAnimCloud1 = pathCloud1.GetCurrentAnimation();
+
+	pathCloud2.Update();
+	positionCloud2 = spawnPosCloud2 + pathCloud2.GetRelativePosition();
+	currentAnimCloud2 = pathCloud2.GetCurrentAnimation();
+
+
 
 	// ScanCodes
-	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) && (!members))
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN))
 	{
 		this->Disable();
 		CleanUp();
 		App->scene->Enable();
-		App->player->Enable();
-		App->enemies->Enable();
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
@@ -79,18 +104,34 @@ update_status ModuleSceneIntro::Update()
 // Update: draw background
 update_status ModuleSceneIntro::PostUpdate()
 {
-	if (members)
-	{
-		App->render->Blit(introMembers, 0, 0, NULL, NULL, true);
-	}
-	else
-	{
-  		App->render->Blit(introBackground, -550, -89, NULL, NULL, true);
+  	App->render->Blit(introBackground, -550, -89, NULL, 1, true); //BackGround
+	App->render->Blit(introBackground, 0, 400, &frontBuildings, 6, true); //Front Buildings
 
-		if (currentAnim != nullptr)
-		App->render->Blit(introBackground, positionCloud1.x, positionCloud1.y, &(currentAnim->GetCurrentFrame()));
+	//Building Lights
+	App->render->Blit(introBackground, 0, 915, &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 1), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 2), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 3), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 4), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 5), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 6), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 7), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 8), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 9), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 10), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 11), &buildingLights, 6, true);
 
-	}	
+	//Floor
+	App->render->Blit(introBackground, 0, 915 + (64 * 12), &floor, 6, true);
+
+	if (App->render->camera.y > 975) App->render->camera.y = 975;
+
+	if (currentAnimCloud1 != nullptr)
+	App->render->Blit(introBackground, positionCloud1.x, positionCloud1.y, &(currentAnimCloud1->GetCurrentFrame()));
+
+	if (currentAnimCloud2 != nullptr)
+		App->render->Blit(introBackground, positionCloud2.x, positionCloud2.y, &(currentAnimCloud2->GetCurrentFrame()));
+
 	return update_status::UPDATE_CONTINUE;
 }
 

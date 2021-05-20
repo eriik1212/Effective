@@ -23,6 +23,9 @@ public:
 	// Increases the frame count and, if necessary, increases step
 	void Update();
 
+	// Resets the position relative to the start of the path
+	void ResetRelativePosition();
+
 	// Returns the position relative to the start of the path
 	iPoint GetRelativePosition() const;
 
