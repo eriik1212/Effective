@@ -8,6 +8,11 @@
 
 ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 {
+	backGround.x = 550;
+	backGround.y = 89;
+	backGround.w = 320;
+	backGround.h = 385;
+
 	frontBuildings.x = 919;
 	frontBuildings.y = 89;
 	frontBuildings.w = 304;
@@ -22,6 +27,16 @@ ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 	floor.y = 114;
 	floor.w = 304;
 	floor.h = 503;
+
+	sewer.x = 21;
+	sewer.y = 459;
+	sewer.w = 60;
+	sewer.h = 28;
+
+	littleLight.x = 252;
+	littleLight.y = 579;
+	littleLight.w = 64;
+	littleLight.h = 21;
 
 	cloud1.PushBack({ 20, 539, 207, 29 });
 	cloud1.loop = true;
@@ -104,33 +119,38 @@ update_status ModuleSceneIntro::Update()
 // Update: draw background
 update_status ModuleSceneIntro::PostUpdate()
 {
-  	App->render->Blit(introBackground, -550, -89, NULL, 1, true); //BackGround
-	App->render->Blit(introBackground, 0, 400, &frontBuildings, 6, true); //Front Buildings
+  	App->render->Blit(introBackground, 0, 0, &backGround, 2, true); //BackGround
+	App->render->Blit(introBackground, 0, 400, &frontBuildings, 7, true); //Front Buildings
 
 	//Building Lights
-	App->render->Blit(introBackground, 0, 915, &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 1), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 2), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 3), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 4), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 5), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 6), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 7), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 8), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 9), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 10), &buildingLights, 6, true);
-	App->render->Blit(introBackground, 0, 915 + (64 * 11), &buildingLights, 6, true);
+	App->render->Blit(introBackground, 0, 915, &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 1), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 2), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 3), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 4), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 5), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 6), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 7), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 8), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 9), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 10), &buildingLights, 7, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 11), &buildingLights, 7, true);
 
 	//Floor
-	App->render->Blit(introBackground, 0, 915 + (64 * 12), &floor, 6, true);
+	App->render->Blit(introBackground, 0, 915 + (64 * 12), &floor, 7, true);
 
-	if (App->render->camera.y > 975) App->render->camera.y = 975;
+	//Sewer (Alcantarilla)
+	App->render->Blit(introBackground, 128, 2125, &sewer, 7, true);
+
+
+	//Camera Limit
+	if (App->render->camera.y >= 835) App->render->camera.y = 835;
 
 	if (currentAnimCloud1 != nullptr)
-	App->render->Blit(introBackground, positionCloud1.x, positionCloud1.y, &(currentAnimCloud1->GetCurrentFrame()));
+	App->render->Blit(introBackground, positionCloud1.x, positionCloud1.y, &(currentAnimCloud1->GetCurrentFrame()), 2, true);
 
 	if (currentAnimCloud2 != nullptr)
-		App->render->Blit(introBackground, positionCloud2.x, positionCloud2.y, &(currentAnimCloud2->GetCurrentFrame()));
+		App->render->Blit(introBackground, positionCloud2.x, positionCloud2.y, &(currentAnimCloud2->GetCurrentFrame()), 2, true);
 
 	return update_status::UPDATE_CONTINUE;
 }

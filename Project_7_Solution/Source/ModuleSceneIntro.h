@@ -36,9 +36,12 @@ public:
 	bool CleanUp();
 
 public:	
-	SDL_Rect frontBuildings,
+	SDL_Rect backGround,
+		frontBuildings,
 		buildingLights,
-		floor;
+		floor,
+		sewer,
+		littleLight;
 
 	SDL_Texture* introBackground;
 
