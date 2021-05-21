@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
 Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 {
@@ -21,7 +22,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 
 	
 	//PATH
-	//path.PushBack({ -1.2f, 0.0f }, 45, &jumpLP);
+	path.PushBack({0.0f, 0.0f }, 45, &jumpLP);
 	
 
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
@@ -31,6 +32,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 
 void Enemy_Boss::Update()
 {
+
 	
 	path.Update();
 	position = spawnPos + path.GetRelativePosition();

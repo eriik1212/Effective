@@ -25,7 +25,7 @@ Enemy_Ball::Enemy_Ball(int x, int y) : Enemy(x, y)
 
 
 	//PATH
-	//path.PushBack({ -1.2f, 0.0f }, 45, &jumpLP);
+	path.PushBack({ 0.0f, 0.0f }, 45, &jumpLP);
 	
 
 
