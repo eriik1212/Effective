@@ -11,6 +11,8 @@
 #include "Enemy.h"
 #include "Enemy_Purple.h"
 #include "Enemy_White.h"
+#include "Enemy_Boss.h"
+#include "Enemy_Ball.h"
 #include "ModuleCollisions.h"
 
 #define SPAWN_MARGIN 50
@@ -32,6 +34,9 @@ bool ModuleEnemies::Start()
 
 	white = App->textures->Load("Assets/Enemies/white_enemy.png");
 	purple = App->textures->Load("Assets/Enemies/purple_enemy.png");
+	boss = App->textures->Load("Assets/Enemies/white_enemy.png");
+	ball = App->textures->Load("Assets/Enemies/purple_enemy.png");
+
 	enemyDamageFX = App->audio->LoadFx("Assets/FX/punch_2.wav");
 	enemyDestroyedFx = App->audio->LoadFx("Assets/FX/enemy_die.wav");
 
@@ -164,6 +169,18 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 				case ENEMY_TYPE::WHITE_ENEMY:
 					enemies[i] = new Enemy_White(info.x, info.y);
 					enemies[i]->texture = white;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					enemies[i]->damageFX = enemyDamageFX;
+					break;
+				case ENEMY_TYPE::BOSS_ENEMY:
+					enemies[i] = new Enemy_Boss(info.x, info.y);
+					enemies[i]->texture = boss;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					enemies[i]->damageFX = enemyDamageFX;
+					break;
+				case ENEMY_TYPE::BALL_ENEMY:
+					enemies[i] = new Enemy_Ball(info.x, info.y);
+					enemies[i]->texture = ball;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					enemies[i]->damageFX = enemyDamageFX;
 					break;

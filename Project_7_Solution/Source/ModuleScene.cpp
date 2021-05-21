@@ -123,7 +123,7 @@ bool ModuleScene::Start()
 	/*App->collisions->AddCollider({ 1000, 200, 20, 10 }, Collider::Type::WALL);
 	App->collisions->AddCollider({ 1000, 145, 20, 10 }, Collider::Type::WALL);*/
 
-	// Enemies --- CURRENT MAX. ENEMIES == 2 --- 
+	// Enemies --- CURRENT MAX. ENEMIES == 4 --- 
 	//¡¡IMPORTANT: TO ADD AN ENEMY CHANGE moduleEnemies.h -> #define MAX_ENEMIES 2!!
 	if (App->scene->Enabled() && App->level2->Disabled())
 	{
@@ -139,6 +139,8 @@ bool ModuleScene::Start()
 		}
 		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 400, 52);
 		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 110);
+		App->enemies->AddEnemy(ENEMY_TYPE::BOSS_ENEMY, 300, 52);
+		App->enemies->AddEnemy(ENEMY_TYPE::BALL_ENEMY, 250, 52);
 	}
 
 	return ret;
