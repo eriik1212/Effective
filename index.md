@@ -55,6 +55,6 @@ Chising Joaquin Lien Cong
 * Art/Q&A
 * Github: [Noche39](https://github.com/Noche39)
 
-### For more information you can check our [wiki](https://github.com/eriik1212/Effective/wiki)
-### Download our TMNT arcade tribute's [lastest version](https://github.com/eriik1212/Effective/releases/tag/0.5)
-### Check our project's repository on [Github](https://github.com/eriik1212/Effective)
+### For more information you can check our [wiki](https://github.com/eriik1212/Effective/wiki).
+### Download our TMNT arcade tribute's [lastest version](https://github.com/eriik1212/Effective/releases/tag/0.5).
+### Check our project's repository on [Github](https://github.com/eriik1212/Effective).
