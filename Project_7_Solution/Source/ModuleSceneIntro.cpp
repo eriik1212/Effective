@@ -1,5 +1,8 @@
 #include "ModuleSceneIntro.h"
 
+#include "SDL/include/SDL.h"
+#pragma comment( lib, "SDL/libx86/SDL2.lib")
+#pragma comment( lib, "SDL/libx86/SDL2main.lib")
 #include "Application.h"
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
@@ -33,11 +36,6 @@ ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 	sewer.w = 60;
 	sewer.h = 28;
 
-	littleLight.x = 252;
-	littleLight.y = 579;
-	littleLight.w = 64;
-	littleLight.h = 21;
-
 	cloud1.PushBack({ 20, 539, 207, 29 });
 	cloud1.loop = true;
 	cloud1.speed = 0.15f;
@@ -45,6 +43,27 @@ ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 	cloud2.PushBack({ 119, 461, 88, 26 });
 	cloud2.loop = true;
 	cloud2.speed = 0.15f;
+
+	littleLightAnim.PushBack({ 252, 579, 64, 21 });
+	littleLightAnim.PushBack({ 252, 600, 64, 21 });
+	littleLightAnim.loop = true;
+	littleLightAnim.speed = 1.0f;
+
+	bigLightUpAnim.PushBack({ 573, 1733, 64, 242 });
+	bigLightUpAnim.PushBack({ 492, 1733, 64, 242 });
+	bigLightUpAnim.PushBack({ 413, 1733, 64, 242 });
+	bigLightUpAnim.PushBack({ 336, 1733, 64, 242 });
+	bigLightUpAnim.PushBack({ 255, 1733, 64, 242 });
+	bigLightUpAnim.PushBack({ 181, 1733, 64, 242 });
+	bigLightUpAnim.PushBack({ 100, 1733, 64, 242 });
+	bigLightUpAnim.PushBack({ 19, 1733, 64, 242 });
+	bigLightUpAnim.loop = false;
+	bigLightUpAnim.speed = 1.0f;
+
+	bigLightAnim.PushBack({ 19, 1733, 64, 242 });
+	bigLightAnim.PushBack({ 252, 600, 64, 21 });
+	bigLightAnim.loop = true;
+	bigLightAnim.speed = 1.0f;
 
 	//PATH Cloud1
 	pathCloud1.PushBack({ -0.3f, 0.0f }, 300, &cloud1);
@@ -59,6 +78,7 @@ ModuleSceneIntro::~ModuleSceneIntro() {}
 // Load assets
 bool ModuleSceneIntro::Start()
 {
+	
 	counter = 0;
 
 	App->render->camera.x = 0;
@@ -70,6 +90,8 @@ bool ModuleSceneIntro::Start()
 	pathCloud2.ResetRelativePosition();
 	spawnPosCloud2 = iPoint((int)10, (int)28);
 
+	bigLightUpAnim.Reset();
+
 	introBackground = App->textures->Load("Assets/Introduction/introduction.png");	
 
 	App->audio->StopMusic();
@@ -79,6 +101,11 @@ bool ModuleSceneIntro::Start()
 
 update_status ModuleSceneIntro::Update()
 {
+	SDL_GetTicks();
+
+	littleLightAnim.Update();
+	currentAnimLight = &littleLightAnim;
+
 	counter++;
 	if (counter == 80)
 	{
@@ -98,6 +125,18 @@ update_status ModuleSceneIntro::Update()
 	positionCloud2 = spawnPosCloud2 + pathCloud2.GetRelativePosition();
 	currentAnimCloud2 = pathCloud2.GetCurrentAnimation();
 
+
+	if (SDL_GetTicks() > 8000)
+	{
+		bigLightUpAnim.Update();
+		currentAnimLight = &bigLightUpAnim;
+	}
+
+	if (SDL_GetTicks() > 8150)
+	{
+		bigLightAnim.Update();
+		currentAnimLight = &bigLightAnim;
+	}
 
 
 	// ScanCodes
@@ -139,8 +178,22 @@ update_status ModuleSceneIntro::PostUpdate()
 	//Floor
 	App->render->Blit(introBackground, 0, 915 + (64 * 12), &floor, 7, true);
 
+	//LittleLight Sewer
+	if (SDL_GetTicks() > 7000 && SDL_GetTicks() < 8000)
+	{
+		App->render->Blit(introBackground, 127, 2138, &(currentAnimLight->GetCurrentFrame()), 7, true);
+	}
+
+	if (SDL_GetTicks() > 8000)
+	{
+		App->render->Blit(introBackground, 127, 1916, &(currentAnimLight->GetCurrentFrame()), 7, true);
+	}
+
 	//Sewer (Alcantarilla)
-	App->render->Blit(introBackground, 128, 2125, &sewer, 7, true);
+	if (SDL_GetTicks() < 8000)
+	{
+		App->render->Blit(introBackground, 129, 2125, &sewer, 7, true);
+	}
 
 
 	//Camera Limit
@@ -151,6 +204,8 @@ update_status ModuleSceneIntro::PostUpdate()
 
 	if (currentAnimCloud2 != nullptr)
 		App->render->Blit(introBackground, positionCloud2.x, positionCloud2.y, &(currentAnimCloud2->GetCurrentFrame()), 2, true);
+
+
 
 	return update_status::UPDATE_CONTINUE;
 }

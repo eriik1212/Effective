@@ -40,8 +40,7 @@ public:
 		frontBuildings,
 		buildingLights,
 		floor,
-		sewer,
-		littleLight;
+		sewer;
 
 	SDL_Texture* introBackground;
 
@@ -54,8 +53,13 @@ public:
 
 	Animation* currentAnimCloud2 = nullptr;
 
+	Animation* currentAnimLight = nullptr;
+
 	Animation cloud1,
-		cloud2;
+		cloud2,
+		littleLightAnim,
+		bigLightUpAnim,
+		bigLightAnim;
 
 	// The current position in the world
 	iPoint positionCloud1,
