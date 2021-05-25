@@ -80,6 +80,7 @@
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Enemy_Ball.h" />
     <ClInclude Include="Enemy_Boss.h" />
+    <ClInclude Include="Enemy_Orange.h" />
     <ClInclude Include="Enemy_Purple.h" />
     <ClInclude Include="Enemy_White.h" />
     <ClInclude Include="ModuleAudio.h" />
@@ -112,6 +113,7 @@
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Enemy_Ball.cpp" />
     <ClCompile Include="Enemy_Boss.cpp" />
+    <ClCompile Include="Enemy_Orange.cpp" />
     <ClCompile Include="Enemy_Purple.cpp" />
     <ClCompile Include="Enemy_White.cpp" />
     <ClCompile Include="Globals.cpp" />

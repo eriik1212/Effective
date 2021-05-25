@@ -10,6 +10,7 @@
 
 #include "Enemy.h"
 #include "Enemy_Purple.h"
+#include "Enemy_Orange.h"
 #include "Enemy_White.h"
 #include "Enemy_Boss.h"
 #include "Enemy_Ball.h"
@@ -34,6 +35,7 @@ bool ModuleEnemies::Start()
 
 	white = App->textures->Load("Assets/Enemies/white_enemy.png");
 	purple = App->textures->Load("Assets/Enemies/purple_enemy.png");
+	orange = App->textures->Load("Assets(Enemies/orange_enemy.png");
 	boss = App->textures->Load("Assets/Enemies/white_enemy.png");
 	ball = App->textures->Load("Assets/Enemies/purple_enemy.png");
 
@@ -172,6 +174,11 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					enemies[i]->damageFX = enemyDamageFX;
 					break;
+				case ENEMY_TYPE::ORANGE_ENEMY:
+					enemies[i] = new Enemy_Orange(info.x, info.y);
+					enemies[i]->texture = orange;
+					enemies[i]->destroyedFx = enemyDestroyedFx;
+					enemies[i]->damageFX = enemyDamageFX;
 				case ENEMY_TYPE::BOSS_ENEMY:
 					enemies[i] = new Enemy_Boss(info.x, info.y);
 					enemies[i]->texture = boss;

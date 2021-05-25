@@ -10,6 +10,7 @@ enum class ENEMY_TYPE
 	NO_TYPE,
 	PURPLE_ENEMY,
 	WHITE_ENEMY,
+	ORANGE_ENEMY,
 	BOSS_ENEMY,
 	BALL_ENEMY,
 };
@@ -74,6 +75,7 @@ private:
 	// The enemies sprite sheet
 	SDL_Texture* white = nullptr;
 	SDL_Texture* purple = nullptr;
+	SDL_Texture* orange = nullptr;
 	SDL_Texture* boss = nullptr;
 	SDL_Texture* ball = nullptr;
 	// The audio fx for destroying an enemy
