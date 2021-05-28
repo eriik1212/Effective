@@ -26,6 +26,11 @@ ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 	buildingLights.w = 304;
 	buildingLights.h = 64;
 
+	secondFloor.x = 1604;
+	secondFloor.y = 646;
+	secondFloor.w = 304;
+	secondFloor.h = 47;
+
 	floor.x = 1604;
 	floor.y = 114;
 	floor.w = 304;
@@ -35,6 +40,35 @@ ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 	sewer.y = 459;
 	sewer.w = 60;
 	sewer.h = 28;
+
+	// Characters
+	raphael.x = 0;
+	raphael.y = 3360;
+	raphael.w = 94;
+	raphael.h = 84;
+
+	michelangelo.x = 0;
+	michelangelo.y = 3117;
+	michelangelo.w = 84;
+	michelangelo.h = 67;
+
+	donatello.x = 0;
+	donatello.y = 3574;
+	donatello.w = 97;
+	donatello.h = 81;
+
+	/*leo.x = 0;
+	leo.y = 4200;
+	leo.w = 94;
+	leo.h = 84;*/
+
+	//Characters ANIMATION
+	leoAnim1.PushBack({ 0, 4200, 94, 84 });
+	leoAnim2.PushBack({ (94 * 1), 4200, 94, 84 });
+	leoAnim3.PushBack({ (94 * 2), 4200, 94, 84 });
+	leoAnim4.PushBack({ (94 * 3), 4200, 94, 84 });
+	leoAnim5.PushBack({ (94 * 4), 4200, 94, 84 });
+	leoAnim6.PushBack({ (94 * 5), 4200, 94, 84 });
 
 	cloud1.PushBack({ 20, 539, 207, 29 });
 	cloud1.loop = true;
@@ -71,6 +105,14 @@ ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 	//PATH Cloud2
 	pathCloud2.PushBack({ 0.3f, 0.0f }, 300, &cloud2);
 
+	//PATH Leo
+	pathLeo.PushBack({ 0.0f, -2.0f }, 10, &leoAnim1);
+	pathLeo.PushBack({ -0.5f, -2.0f }, 10, &leoAnim2);
+	pathLeo.PushBack({ -0.5f, -2.0f }, 10, &leoAnim3);
+	pathLeo.PushBack({ -0.5f, -2.0f }, 10, &leoAnim4);
+	pathLeo.PushBack({ -0.5f, -2.0f }, 10, &leoAnim5);
+	pathLeo.PushBack({ -0.5f, -2.0f }, 10, &leoAnim6);
+
 }
 
 ModuleSceneIntro::~ModuleSceneIntro() {}
@@ -78,7 +120,8 @@ ModuleSceneIntro::~ModuleSceneIntro() {}
 // Load assets
 bool ModuleSceneIntro::Start()
 {
-	
+	SDL_GetTicks();
+
 	counter = 0;
 
 	App->render->camera.x = 0;
@@ -90,9 +133,16 @@ bool ModuleSceneIntro::Start()
 	pathCloud2.ResetRelativePosition();
 	spawnPosCloud2 = iPoint((int)10, (int)28);
 
+	pathLeo.ResetRelativePosition();
+	spawnPosLeo = iPoint((int)110, (int)915 + (64 * 12) + 400);
+
 	bigLightUpAnim.Reset();
 
-	introBackground = App->textures->Load("Assets/Introduction/introduction.png");	
+	introBackground = App->textures->Load("Assets/Introduction/introduction.png");
+	raphaelTexture = App->textures->Load("Assets/Characters/Raphael.png");
+	donatelloTexture = App->textures->Load("Assets/Characters/Donatello.png");
+	leoTexture = App->textures->Load("Assets/Characters/Leonardo.png");
+	michelangeloTexture = App->textures->Load("Assets/Characters/Michelangelo.png");
 
 	App->audio->StopMusic();
 
@@ -101,7 +151,6 @@ bool ModuleSceneIntro::Start()
 
 update_status ModuleSceneIntro::Update()
 {
-	SDL_GetTicks();
 
 	littleLightAnim.Update();
 	currentAnimLight = &littleLightAnim;
@@ -125,6 +174,13 @@ update_status ModuleSceneIntro::Update()
 	positionCloud2 = spawnPosCloud2 + pathCloud2.GetRelativePosition();
 	currentAnimCloud2 = pathCloud2.GetCurrentAnimation();
 
+	if (SDL_GetTicks() > 8500)
+	{
+		pathLeo.Update();
+		positionLeo = spawnPosLeo + pathLeo.GetRelativePosition();
+		leoCurrentAnim = pathLeo.GetCurrentAnimation();
+	}
+	
 
 	if (SDL_GetTicks() > 8000)
 	{
@@ -177,6 +233,17 @@ update_status ModuleSceneIntro::PostUpdate()
 
 	//Floor
 	App->render->Blit(introBackground, 0, 915 + (64 * 12), &floor, 7, true);
+
+	//---------------------------------------------------------------------------------------------------Characters
+	App->render->Blit(raphaelTexture, 115, 915 + (64 * 12) + 410, &raphael, 7, true); //Rafa
+	App->render->Blit(michelangeloTexture, 115, 915 + (64 * 12) + 420, &michelangelo, 7, true); //Mikel
+	App->render->Blit(donatelloTexture, 110, 915 + (64 * 12) + 420, &donatello, 7, true); //Dona
+
+	if (leoCurrentAnim != nullptr)
+	App->render->Blit(leoTexture, positionLeo.x, positionLeo.y, &(leoCurrentAnim->GetCurrentFrame()), 7, true); //Leo
+
+	// SecondFloor
+	//App->render->Blit(introBackground, 0, 915 + (64 * 12) + 456, &secondFloor, 7, true);
 
 	//LittleLight Sewer
 	if (SDL_GetTicks() > 7000 && SDL_GetTicks() < 8000)
