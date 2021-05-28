@@ -7,160 +7,193 @@
 
 Enemy_Orange::Enemy_Orange(int x, int y) : Enemy(x, y)
 {
-	// RIGHT pixels pendents
-	rightAnimO.PushBack({ 0, 453, 86, 90 });
-	rightAnimO.PushBack({ 86, 453, 86, 90 });
-	rightAnimO.PushBack({ 86 * 2, 453, 86, 90 });
-	rightAnimO.PushBack({ 86 * 3, 453, 86, 90 });
-	rightAnimO.PushBack({ 86 * 4, 453, 86, 90 });
-	rightAnimO.PushBack({ 86 * 5, 453, 86, 90 });
-	rightAnimO.PushBack({ 86 * 6, 453, 86, 90 });
-	rightAnimO.PushBack({ 86 * 7, 453, 86, 90 });
+	// RIGHT 
+	rightAnimO.PushBack({ 0, 830, 88, 69 });
+	rightAnimO.PushBack({ 88, 830, 88, 69 });
+	rightAnimO.PushBack({ 88 * 2, 830, 88, 69 });
+	rightAnimO.PushBack({ 88 * 3, 830, 88, 69 });
+	rightAnimO.PushBack({ 88 * 4, 830, 88, 69 });
+	rightAnimO.PushBack({ 88 * 5, 830, 88, 69 });
+	rightAnimO.PushBack({ 88 * 6, 830,88, 69 });
+	rightAnimO.PushBack({ 88 * 7, 830, 88, 69 });
 	rightAnimO.loop = true;
 	rightAnimO.speed = 0.15f;
 
-	//LEFT pixels pendents
-	leftAnimO.PushBack({ 1032,1890,86,90 });
-	leftAnimO.PushBack({ 1032 - 86,1890,86,90 });
-	leftAnimO.PushBack({ 1032 - 86 * 2,1890,86,90 });
-	leftAnimO.PushBack({ 1032 - 86 * 3,1890,86,90 });
-	leftAnimO.PushBack({ 1032 - 86 * 4,1890,86,90 });
-	leftAnimO.PushBack({ 1032 - 86 * 5,1890,86,90 });
-	leftAnimO.PushBack({ 1032 - 86 * 6,1890,86,90 });
-	leftAnimO.PushBack({ 1032 - 86 * 7,1890,86,90 });
+	//LEFT 
+	leftAnimO.PushBack({ 1055,2140,88, 69 });
+	leftAnimO.PushBack({ 1055 - 88,2140,88, 69 });
+	leftAnimO.PushBack({ 1055 - 88 * 2,2140,88, 69 });
+	leftAnimO.PushBack({ 1055 - 88 * 3,2140,88, 69 });
+	leftAnimO.PushBack({ 1055 - 88 * 4,2140,88, 69 });
+	leftAnimO.PushBack({ 1055 - 88 * 5,2140,88, 69 });
+	leftAnimO.PushBack({ 1055 - 88 * 6,2140,88, 69 });
+	leftAnimO.PushBack({ 1055 - 88 * 7,2140,88, 69 });
 	leftAnimO.loop = true;
 	leftAnimO.speed = 0.15f;
 
-	//UP LEFT pixels pendents
-	upAnimLO.PushBack({ 1032,1980,86,90 });
-	upAnimLO.PushBack({ 1032 - 86,1980,86,90 });
-	upAnimLO.PushBack({ 1032 - 86 * 2,1980,86,90 });
-	upAnimLO.PushBack({ 1032 - 86 * 3,1980,86,90 });
-	upAnimLO.PushBack({ 1032 - 86 * 4,1980,86,90 });
-	upAnimLO.PushBack({ 1032 - 86 * 5,1980,86,90 });
-	upAnimLO.PushBack({ 1032 - 86 * 6,1980,86,90 });
-	upAnimLO.PushBack({ 1032 - 86 * 7,1980,86,90 });
+	//UP LEFT
+	upAnimLO.PushBack({ 1055,2209,88, 69 });
+	upAnimLO.PushBack({ 1055 - 88,2209,88, 69 });
+	upAnimLO.PushBack({ 1055 - 88 * 2,2209,88, 69 });
+	upAnimLO.PushBack({ 1055 - 88 * 3,2209,88, 69 });
+	upAnimLO.PushBack({ 1055 - 88 * 4,2209,88, 69 });
+	upAnimLO.PushBack({ 1055 - 88 * 5,2209,88, 69 });
+	upAnimLO.PushBack({ 1055 - 88 * 6,2209,88, 69 });
+	upAnimLO.PushBack({ 1055 - 88 * 7,2209,88, 69 });
 	upAnimLO.loop = true;
 	upAnimLO.speed = 0.15f;
 
-	//UP RIGHT pixels pendents
-	upAnimRO.PushBack({ 0, 540, 86, 90 });
-	upAnimRO.PushBack({ 86, 540, 86, 90 });
-	upAnimRO.PushBack({ 86 * 2, 540, 86, 90 });
-	upAnimRO.PushBack({ 86 * 3, 540, 86, 90 });
-	upAnimRO.PushBack({ 86 * 4, 540, 86, 90 });
-	upAnimRO.PushBack({ 86 * 5, 540, 86, 90 });
-	upAnimRO.PushBack({ 86 * 6, 540, 86, 90 });
-	upAnimRO.PushBack({ 86 * 7, 540, 86, 90 });
+	//UP RIGHT
+	upAnimRO.PushBack({ 0, 897, 88, 69 });
+	upAnimRO.PushBack({ 88, 897, 88, 69 });
+	upAnimRO.PushBack({ 88 * 2, 897, 88, 69 });
+	upAnimRO.PushBack({ 88 * 3, 897,88, 69 });
+	upAnimRO.PushBack({ 88 * 4, 897, 88, 69 });
+	upAnimRO.PushBack({ 88 * 5, 897, 88, 69 });
+	upAnimRO.PushBack({ 88 * 6, 897, 88, 69 });
+	upAnimRO.PushBack({ 88 * 7, 897, 88, 69 });
 	upAnimRO.loop = true;
 	upAnimRO.speed = 0.15f;
 
 
-	//RIGHT KICK pixels pendents
-	kickRO.PushBack({ 0, 90, 86, 90 });
-	kickRO.PushBack({ 86, 90, 86, 90 });
-	kickRO.PushBack({ 86 * 2, 90, 86, 90 });
-	kickRO.PushBack({ 86 * 3, 90, 86, 90 });
+	//RIGHT KICK
+	kickRO.PushBack({ 0, 552, 88, 69 });
+	kickRO.PushBack({ 88, 552, 88, 69 });
+	kickRO.PushBack({ 88 * 2, 552, 88, 69 });
+	kickRO.PushBack({ 88 * 3, 552, 88, 69 });
 	kickRO.loop = true; //it can be true
 	kickRO.speed = 0.15f;
 
-	//LEFT KICK pixels pendents
-	kickLO.PushBack({ 1032,1530,86,90 });
-	kickLO.PushBack({ 1032 - 86,1530,86,90 });
-	kickLO.PushBack({ 1032 - 86 * 2,1530,86,90 });
-	kickLO.PushBack({ 1032 - 86 * 3,1530,86,90 });
+	//LEFT KICK
+	kickLO.PushBack({ 1055,1863,88, 69 });
+	kickLO.PushBack({ 1055 - 88,1863,88, 69 });
+	kickLO.PushBack({ 1055 - 88 * 2,1863,88, 69 });
+	kickLO.PushBack({ 1055 - 88 * 3,1863,88, 69 });
 	kickLO.loop = false; //it can be true
 	kickLO.speed = 0.15f;
 
-	//LEFT PUNCH pixels pendents
-	punchLO.PushBack({ 1032, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86 * 2, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86 * 3, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86 * 4, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86 * 5, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86 * 6, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86 * 7, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86 * 8, 2790, 86, 90 });
-	punchLO.PushBack({ 1032 - 86 * 9, 2790, 86, 90 });
+	//LEFT PUNCH
+	punchLO.PushBack({ 1055, 2346, 88, 69 });
+	punchLO.PushBack({ 1055 - 88, 2346, 88, 69 });
+	punchLO.PushBack({ 1055 - 88 * 2, 2346, 88, 69 });
+	punchLO.PushBack({ 1055 - 88 * 3, 2346, 88, 69 });
 	punchLO.loop = true; //it can be true
 	punchLO.speed = 0.15f;
 
-	//RIGHT PUNCH pixels pendents
-	punchRO.PushBack({ 0, 1350, 86, 90 });
-	punchRO.PushBack({ 86, 1350, 86, 90 });
-	punchRO.PushBack({ 86 * 2, 1350, 86, 90 });
-	punchRO.PushBack({ 86 * 3, 1350, 86, 90 });
-	punchRO.PushBack({ 86 * 4, 1350, 86, 90 });
-	punchRO.PushBack({ 86 * 5, 1350, 86, 90 });
-	punchRO.PushBack({ 86 * 6, 1350, 86, 90 });
-	punchRO.PushBack({ 86 * 7, 1350, 86, 90 });
-	punchRO.PushBack({ 86 * 8, 1350, 86, 90 });
-	punchRO.PushBack({ 86 * 9, 1350, 86, 90 });
+	//RIGHT PUNCH 
+	punchRO.PushBack({ 0, 1035, 88, 69 });
+	punchRO.PushBack({ 88, 1035, 88, 69 });
+	punchRO.PushBack({ 88 * 2, 1035, 88, 69 });
+	punchRO.PushBack({ 88 * 3, 1035, 88, 69 });
 	punchRO.loop = true; //it can be true
 	punchRO.speed = 0.15f;
 
-	//RIGHT JUMP pixels pendents
-	jumpRO.PushBack({ 0, 900, 86, 90 });
-	jumpRO.PushBack({ 86, 900, 86, 90 });
-	jumpRO.PushBack({ 86 * 2, 900, 86, 90 });
-	jumpRO.PushBack({ 86 * 3, 900, 86, 90 });
-	jumpRO.PushBack({ 86 * 4, 900, 86, 90 });
-	jumpRO.PushBack({ 86 * 5, 900, 86, 90 });
-	jumpRO.PushBack({ 86 * 6, 900, 86, 90 });
+	//RIGHT JUMP
+	jumpRO.PushBack({ 0, 759, 88, 69 });
+	jumpRO.PushBack({ 88, 759, 88, 69 });
+	jumpRO.PushBack({ 88 * 2, 759, 88, 69 });
+	jumpRO.PushBack({ 88 * 3, 759, 88, 69 });
+	jumpRO.PushBack({ 88 * 4, 759, 88, 69 });
 	jumpRO.loop = false; //it can be true
 	jumpRO.speed = 0.15f;
 
-	//LEFT JUMP pixels pendents
-	jumpLO.PushBack({ 1032,2340,86,90 });
-	jumpLO.PushBack({ 1032 - 86,2340,86,90 });
-	jumpLO.PushBack({ 1032 - 86 * 2,2340,86,90 });
-	jumpLO.PushBack({ 1032 - 86 * 3,2340,86,90 });
-	jumpLO.PushBack({ 1032 - 86 * 4,2340,86,90 });
-	jumpLO.PushBack({ 1032 - 86 * 5,2340,86,90 });
-	jumpLO.PushBack({ 1032 - 86 * 6,2340,86,90 });
+	//LEFT JUMP
+	jumpLO.PushBack({ 1055,2070,88, 69 });
+	jumpLO.PushBack({ 1055 - 88,2070,88, 69 });
+	jumpLO.PushBack({ 1055 - 88 * 2,2070,88, 69 });
+	jumpLO.PushBack({ 1055 - 88 * 3,2070,88, 69 });
+	jumpLO.PushBack({ 1055 - 88 * 4,2070,88, 69 });
 	jumpLO.loop = true; //it can be true
 	jumpLO.speed = 0.15f;
 
-	//FROM LEFT HIT pixels pendents
-	hitLO.PushBack({ 1032,1440,86,90 });
-	hitLO.PushBack({ 1032 - 86,1440,86,90 });
-	hitLO.PushBack({ 1032 - 86 * 2,1440,86,90 });
-	hitLO.PushBack({ 1032 - 87 * 3,1440,86,90 });
+	//FROM LEFT HIT
+	hitLO.PushBack({ 1055,1794,88, 69 });
+	hitLO.PushBack({ 1055 - 88,1794,88, 69 });
+	hitLO.PushBack({ 1055 - 88 * 2,1794,88, 69 });
+	hitLO.PushBack({ 1055 - 88 * 3,1794,88, 69 });
 	hitLO.loop = false;
 	hitLO.speed = 0.15f;
 
-	//FROM RIGHT HIT pixels pendents
-	hitRO.PushBack({ 0,0,86,90 });
-	hitRO.PushBack({ 86,0,86,90 });
-	hitRO.PushBack({ 86 * 2,0,86,90 });
-	hitRO.PushBack({ 86 * 3,0,86,90 });
+	//FROM RIGHT HIT
+	hitRO.PushBack({ 0,552,88, 69 });
+	hitRO.PushBack({ 88,552,88, 69 });
+	hitRO.PushBack({ 88 * 2,552,88, 69 });
+	hitRO.PushBack({ 88 * 3,0,552, 69 });
 	hitRO.loop = false;
 	hitRO.speed = 0.15f;
 
-	//DIE FACE FORWARD TO LEFT pixels pendents
-	dieFacefwLO.PushBack({ 0,270,86,90 });
-	dieFacefwLO.PushBack({ 86,270,86,90 });
-	dieFacefwLO.PushBack({ 86 * 2,270,86,90 });
-	dieFacefwLO.PushBack({ 86 * 3,270,86,90 });
-	dieFacefwLO.PushBack({ 86 * 4,270,86,90 });
-	dieFacefwLO.PushBack({ 86 * 5,270,86,90 });
-	dieFacefwLO.PushBack({ 86 * 6,270,86,90 });
+	//DIE FACE FORWARD TO RIGHT
+	dieFacefwLO.PushBack({ 0,690,88, 69 });
+	dieFacefwLO.PushBack({ 88,690,88, 69 });
+	dieFacefwLO.PushBack({ 88 * 2,690,88, 69 });
+	dieFacefwLO.PushBack({ 88 * 3,690,88, 69 });
+	dieFacefwLO.PushBack({ 88 * 4,690,88, 69 });
+	dieFacefwLO.PushBack({ 88 * 5,690,88, 69 });
+	dieFacefwLO.PushBack({ 88 * 6,690,88, 69 });
 	dieFacefwLO.loop = false;
 	dieFacefwLO.speed = 0.15f;
 
-	//DIE FACE FORWARD TO RIGHT pixels pendents
-	dieFacefwRO.PushBack({ 1032,1710,86,90 });
-	dieFacefwRO.PushBack({ 1032 - 86,1710,86,90 });
-	dieFacefwRO.PushBack({ 1032 - 86 * 2,1710,86,90 });
-	dieFacefwRO.PushBack({ 1032 - 86 * 3,1710,86,90 });
-	dieFacefwRO.PushBack({ 1032 - 86 * 4,1710,86,90 });
-	dieFacefwRO.PushBack({ 1032 - 86 * 5,1710,86,90 });
-	dieFacefwRO.PushBack({ 1032 - 86 * 6,1710,86,90 });
+	//DIE FACE FORWARD TO LEFT
+	dieFacefwRO.PushBack({ 1055,2001,88, 69 });
+	dieFacefwRO.PushBack({ 1055 - 88,2001,88, 69 });
+	dieFacefwRO.PushBack({ 1055 - 88 * 2,2001,88, 69 });
+	dieFacefwRO.PushBack({ 1055 - 88 * 3,2001,88, 69 });
+	dieFacefwRO.PushBack({ 1055 - 88 * 4,2001,88, 69 });
+	dieFacefwRO.PushBack({ 1055 - 88 * 5,2001,88, 69 });
+	dieFacefwRO.PushBack({ 1055 - 88 * 6,2001,88, 69 });
 	dieFacefwRO.loop = false;
 	dieFacefwRO.speed = 0.15f;
 
+	//THROW SHURIKEN TO RIGHT
+	throwShurikenRO.PushBack({ 0,966,88,69 });
+	throwShurikenRO.PushBack({ 88,966,88,69 });
+	throwShurikenRO.PushBack({ 88*2,966,88,69 });
+	throwShurikenRO.PushBack({ 88*3,966,88,69 });
+	throwShurikenRO.PushBack({ 88*4,966,88,69 });
+	throwShurikenRO.PushBack({ 88*5,966,88,69 });
+	throwShurikenRO.loop = false;
+	throwShurikenRO.speed = 0.15f;
+
+	//THROW SHURIKEN TO LEFT
+	throwShurikenLO.PushBack({ 1055,2277,88,69 });
+	throwShurikenLO.PushBack({ 1055 - 88,2277,88,69 });
+	throwShurikenLO.PushBack({ 1055 - 88 * 2,2277,88,69 });
+	throwShurikenLO.PushBack({ 1055 - 88 * 3,2277,88,69 });
+	throwShurikenLO.PushBack({ 1055 - 88 * 4,2277,88,69 });
+	throwShurikenLO.PushBack({ 1055 - 88 * 5,2277,88,69 });
+	throwShurikenLO.loop = false;
+	throwShurikenLO.speed = 0.15f;
+
+
+	//DIE BACKWARDS TO LEFT
+	dieBackwLO.PushBack({0,621,88,69});
+	dieBackwLO.PushBack({ 88,621,88,69 });
+	dieBackwLO.PushBack({ 88*2,621,88,69 });
+	dieBackwLO.loop = false;
+	dieBackwLO.speed = 0.15f;
+
+
+	//DIE BACKDARDS TO RIGHT
+	dieBackwRO.PushBack({ 1055 - 0,1863,88,69 });
+	dieBackwRO.PushBack({ 1055 - 88,621,1863,69 });
+	dieBackwRO.PushBack({ 1055 - 88 * 2,621,1863,69 });
+	dieBackwRO.loop = false;
+	dieBackwRO.speed = 0.15f;
+
+
+
+	//HERE STARTS WEAPON ANIMATION
+
+
+
+
+
+
+
+
 	//PATH
+
+
 
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
