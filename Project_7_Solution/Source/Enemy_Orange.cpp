@@ -164,6 +164,33 @@ Enemy_Orange::Enemy_Orange(int x, int y) : Enemy(x, y)
 	throwShurikenLO.loop = false;
 	throwShurikenLO.speed = 0.15f;
 
+
+	//DIE BACKWARDS TO LEFT
+	dieBackwLO.PushBack({0,621,88,69});
+	dieBackwLO.PushBack({ 88,621,88,69 });
+	dieBackwLO.PushBack({ 88*2,621,88,69 });
+	dieBackwLO.loop = false;
+	dieBackwLO.speed = 0.15f;
+
+
+	//DIE BACKDARDS TO RIGHT
+	dieBackwRO.PushBack({ 1055 - 0,1863,88,69 });
+	dieBackwRO.PushBack({ 1055 - 88,621,1863,69 });
+	dieBackwRO.PushBack({ 1055 - 88 * 2,621,1863,69 });
+	dieBackwRO.loop = false;
+	dieBackwRO.speed = 0.15f;
+
+
+
+	//HERE STARTS WEAPON ANIMATION
+
+
+
+
+
+
+
+
 	//PATH
 
 
