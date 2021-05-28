@@ -40,6 +40,8 @@ private:
 		hitRO,
 		dieFacefwLO,
 		dieFacefwRO,
+		dieBackwLO,
+		dieBackwRO,
 		throwShurikenRO,
 		throwShurikenLO;
 
