@@ -41,13 +41,12 @@ public:
 		buildingLights,
 		secondFloor,
 		floor,
-		leo,
-		michelangelo,
-		donatello,
-		raphael,
-		sewer;
+		sewer,
+		drawColorScreen,
+		text;
 
 	SDL_Texture* introBackground;
+	SDL_Texture* titleScreen;
 	SDL_Texture* raphaelTexture;
 	SDL_Texture* leoTexture;
 	SDL_Texture* donatelloTexture;
@@ -57,9 +56,15 @@ public:
 	Path pathCloud1,
 		pathCloud2,
 		pathLeo,
+		pathLeoImage,
 		pathMichelangelo,
+		pathMichelangeloImage,
 		pathDonatello,
-		pathRaphael;
+		pathDonatelloImage,
+		pathRaphael,
+		pathRaphaelImage,
+		pathTMNRect,
+		pathTurtlesRect;
 
 	// A ptr to the current animation
 	Animation* currentAnimCloud1 = nullptr;
@@ -76,6 +81,18 @@ public:
 
 	Animation* michelangeloCurrentAnim = nullptr;
 
+	Animation* leoImageCurrentAnim = nullptr;
+
+	Animation* raphaelImageCurrentAnim = nullptr;
+
+	Animation* donatelloImageCurrentAnim = nullptr;
+
+	Animation* michelangeloImageCurrentAnim = nullptr;
+
+	Animation* TMNRectCurrentAnim = nullptr;
+
+	Animation* TurtlesRectCurrentAnim = nullptr;
+
 	Animation cloud1,
 		cloud2,
 		littleLightAnim,
@@ -88,6 +105,7 @@ public:
 		leoAnim4,
 		leoAnim5,
 		leoAnim6,
+		leoImage,
 
 		raphaelAnim1,
 		raphaelAnim2,
@@ -95,6 +113,7 @@ public:
 		raphaelAnim4,
 		raphaelAnim5,
 		raphaelAnim6,
+		raphaelImage,
 
 		donatelloAnim1,
 		donatelloAnim2,
@@ -102,31 +121,52 @@ public:
 		donatelloAnim4,
 		donatelloAnim5,
 		donatelloAnim6,
+		donatelloImage,
 
 		michelangeloAnim1,
 		michelangeloAnim2,
 		michelangeloAnim3,
 		michelangeloAnim4,
 		michelangeloAnim5,
-		michelangeloAnim6;
+		michelangeloAnim6,
+		michelangeloImage,
+		
+		TMNRectAnim,
+		TurtlesRectAnim;
 
 	// The current position in the world
 	iPoint positionCloud1,
 		positionCloud2,
+
 		positionLeo,
+		positionLeoImage,
 		positionMichelangelo,
+		positionMichelangeloImage,
 		positionDonatello,
-		positionRaphael;
+		positionDonatelloImage,
+		positionRaphael,
+		positionRaphaelImage,
+		
+		positionTMNRect,
+		positionTurtlesRect;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPosCloud1,
 		spawnPosCloud2,
-		spawnPosLeo,
-		spawnPosMichelangelo,
-		spawnPosDonatello,
-		spawnPosRaphael;
 
-	// Counter for camera movement and audio
+		spawnPosLeo,
+		spawnPosLeoImage,
+		spawnPosMichelangelo,
+		spawnPosMichelangeloImage,
+		spawnPosDonatello,
+		spawnPosDonatelloImage,
+		spawnPosRaphael,
+		spawnPosRaphaelImage,
+		
+		spawnPosTMNRect,
+		spawnPosTurtlesRect;
+
+	// Counter for camera movement, audio and intro events
 	int counter;
 };
 

@@ -32,7 +32,7 @@ public:
 	// First loads the music file into the Mix_Music structure
 	// Then plays the music indefinetely
 	// Mix_Music* music is used for handling the current playing music
-	bool PlayMusic(const char* path, float fade_time = DEFAULT_MUSIC_FADE_TIME);
+	bool PlayMusic(const char* path, float fade_time = DEFAULT_MUSIC_FADE_TIME, int loops = -1);
 	bool StopMusic();
 
 	// Loads a sound fx (WAV) file in memory
