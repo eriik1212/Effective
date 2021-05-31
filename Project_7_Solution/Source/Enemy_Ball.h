@@ -15,6 +15,8 @@ public:
 	float coolTime = 0.0f;
 	float velociti = 1.0f;
 
+
+
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
 	void Update() override;
@@ -25,6 +27,9 @@ private:
 
 	iPoint positionEnemy;
 
+	
+
+	
 	// Enemy animations
 	Animation leftAnimP,
 		rightAnimP,

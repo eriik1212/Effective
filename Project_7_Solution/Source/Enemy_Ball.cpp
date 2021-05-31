@@ -3,6 +3,8 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
+
 
 Enemy_Ball::Enemy_Ball(int x, int y) : Enemy(x, y)
 {
@@ -25,11 +27,10 @@ Enemy_Ball::Enemy_Ball(int x, int y) : Enemy(x, y)
 
 
 	//PATH
-	path.PushBack({ 0.0f, 0.0f }, 45, &jumpLP);
+	
 	
 
 
-	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 
 }
@@ -37,10 +38,24 @@ Enemy_Ball::Enemy_Ball(int x, int y) : Enemy(x, y)
 void Enemy_Ball::Update()
 {
 	
-	path.Update();
-	position = spawnPos + path.GetRelativePosition();
-	currentAnim = path.GetCurrentAnimation();
+	if (App->collisions->GodMode == true) {
 
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+
+		if (coolTime >= coolDown) {
+			
+			
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+
+		}
+		else
+			coolTime += 0.1f;
+
+	}
+	
+	
+	
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();

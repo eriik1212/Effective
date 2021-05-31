@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
 Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 {
@@ -163,13 +164,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	
 
 
-	//PATH
-	path.PushBack({ -1.2f, 0.0f }, 45, &jumpLP);
-	path.PushBack({ -1.0f, 1.0f }, 47, & leftAnimP);
-	path.PushBack({ 0.0f, 0.0f }, 68, & punchLP);
-	path.PushBack({1.35f, -0.5f}, 95, &upAnimRP);
-	path.PushBack({ 0.0f, 0.0f }, 25, & kickRP);
-	path.PushBack({ -1.2f, 0.0f }, 20, & leftAnimP);
+
 	
 
 	collider = App->collisions->AddCollider({0, 0, 38, 16}, Collider::Type::ENEMY, (Module*)App->enemies);
@@ -179,6 +174,44 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 
 void Enemy_Purple::Update()
 {
+	//-----------------------------------------------------------------------AI
+	if (position.x < App->player->position.x+20 && currentAnim != &kickRP) {
+		position.x += velociti;
+		direcction = 1;
+		currentAnim = &rightAnimP;
+		
+	}
+	if (position.x > App->player->position.x - 20 && currentAnim != &kickRP) {
+		position.x -= velociti;
+		direcction = 0;
+		currentAnim = &leftAnimP;
+		
+	
+	}
+	if (position.y < App->player->position.y && currentAnim != &kickRP) {
+
+		position.y += velociti;
+		
+
+	}
+	if (position.y > App->player->position.y && currentAnim != &kickRP) {
+		position.y -= velociti;
+		if (position.x > App->player->position.x)
+		{
+			direcction = 0;
+			currentAnim = &upAnimLP;
+		}
+
+		else if (position.x < App->player->position.x && currentAnim != &kickRP)
+		{
+			direcction = 1;
+			currentAnim = &upAnimRP;
+		}
+
+		
+	}
+
+
 	//------------------------------------------------------------LEFT direcction
 	if (currentAnim == &jumpLP)direcction = 0;
 	if (currentAnim == &leftAnimP)direcction = 0;
@@ -196,16 +229,19 @@ void Enemy_Purple::Update()
 
 		if (coolTime >= coolDown) {
 
-			if (currentAnim == &punchLP)
+			if (position.x == App->player->position.x && position.y == App->player->position.y)
 			{
+				currentAnim = &kickLP;
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
 				coolTime = 0.0f;
-
+			
 			}
 			else if (currentAnim == &kickRP)
 			{
+				currentAnim = &kickRP;
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
 				coolTime = 0.0f;
+				
 			}
 			else
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
@@ -214,9 +250,8 @@ void Enemy_Purple::Update()
 			coolTime += 0.1f;
 
 	}
-	path.Update();
-	position = spawnPos + path.GetRelativePosition();
-	currentAnim = path.GetCurrentAnimation();
+
+	
 	
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
