@@ -142,45 +142,45 @@ ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 	pathCloud2.PushBack({ 0.3f, 0.0f }, 300, &cloud2);
 
 	//PATH Donatello
-	pathDonatello.PushBack({ 0.0f, -2.0f }, 14, & donatelloAnim1);
-	pathDonatello.PushBack({ -1.5f, -2.0f }, 14, & donatelloAnim2);
-	pathDonatello.PushBack({ -1.5f, -2.0f }, 14, & donatelloAnim3);
-	pathDonatello.PushBack({ -1.5f, -2.0f }, 14, & donatelloAnim4);
-	pathDonatello.PushBack({ -1.5f, -2.0f }, 14, & donatelloAnim5);
-	pathDonatello.PushBack({ -1.5f, -2.0f }, 14, & donatelloAnim6);
+	pathDonatello.PushBack({ 0.0f, -1.8f }, 14, & donatelloAnim1);
+	pathDonatello.PushBack({ -1.5f, -1.8f }, 14, & donatelloAnim2);
+	pathDonatello.PushBack({ -1.5f, -1.8f }, 14, & donatelloAnim3);
+	pathDonatello.PushBack({ -1.5f, -1.8f }, 14, & donatelloAnim4);
+	pathDonatello.PushBack({ -1.5f, -1.8f }, 14, & donatelloAnim5);
+	pathDonatello.PushBack({ -1.5f, -1.8f }, 14, & donatelloAnim6);
 
 	pathDonatelloImage.PushBack({ -3.55f, 2.625f }, 42, &donatelloImage);
 	pathDonatelloImage.PushBack({ 0.0f, 0.0f }, 1000, & donatelloImage);
 
 	//PATH Leo
-	pathLeo.PushBack({ 0.0f, -2.0f }, 14, &leoAnim1);
-	pathLeo.PushBack({ -0.5f, -2.0f }, 14, &leoAnim2);
-	pathLeo.PushBack({ -0.5f, -2.0f }, 14, &leoAnim3);
-	pathLeo.PushBack({ -0.5f, -2.0f }, 14, &leoAnim4);
-	pathLeo.PushBack({ -0.5f, -2.0f }, 14, &leoAnim5);
-	pathLeo.PushBack({ -0.5f, -2.0f }, 14, &leoAnim6);
+	pathLeo.PushBack({ 0.0f, -1.8f }, 14, &leoAnim1);
+	pathLeo.PushBack({ -0.5f, -1.8f }, 14, &leoAnim2);
+	pathLeo.PushBack({ -0.5f, -1.8f }, 14, &leoAnim3);
+	pathLeo.PushBack({ -0.5f, -1.8f }, 14, &leoAnim4);
+	pathLeo.PushBack({ -0.5f, -1.8f }, 14, &leoAnim5);
+	pathLeo.PushBack({ -0.5f, -1.8f }, 14, &leoAnim6);
 
 	pathLeoImage.PushBack({ 3.55f, 2.625f }, 42, &leoImage);
 	pathLeoImage.PushBack({ 0.0f, 0.0f }, 1000, & leoImage);
 
 	//PATH Mikel
-	pathMichelangelo.PushBack({ 0.0f, -2.0f }, 14, & michelangeloAnim1);
-	pathMichelangelo.PushBack({ 0.5f, -2.0f }, 14, & michelangeloAnim2);
-	pathMichelangelo.PushBack({ 0.5f, -2.0f }, 14, & michelangeloAnim3);
-	pathMichelangelo.PushBack({ 0.5f, -2.0f }, 14, & michelangeloAnim4);
-	pathMichelangelo.PushBack({ 0.5f, -2.0f }, 14, & michelangeloAnim5);
-	pathMichelangelo.PushBack({ 0.5f, -2.0f }, 14, & michelangeloAnim6);
+	pathMichelangelo.PushBack({ 0.0f, -1.8f }, 14, & michelangeloAnim1);
+	pathMichelangelo.PushBack({ 0.5f, -1.8f }, 14, & michelangeloAnim2);
+	pathMichelangelo.PushBack({ 0.5f, -1.8f }, 14, & michelangeloAnim3);
+	pathMichelangelo.PushBack({ 0.5f, -1.8f }, 14, & michelangeloAnim4);
+	pathMichelangelo.PushBack({ 0.5f, -1.8f }, 14, & michelangeloAnim5);
+	pathMichelangelo.PushBack({ 0.5f, -1.8f }, 14, & michelangeloAnim6);
 
 	pathMichelangeloImage.PushBack({ 3.55f, -2.625f }, 42, &michelangeloImage);
 	pathMichelangeloImage.PushBack({ 0.0f, 0.0f }, 1000, & michelangeloImage);
 
 	//PATH Rafa
-	pathRaphael.PushBack({ 0.0f, -2.0f }, 14, & raphaelAnim1);
-	pathRaphael.PushBack({ 1.5f, -2.0f }, 14, & raphaelAnim2);
-	pathRaphael.PushBack({ 1.5f, -2.0f }, 14, & raphaelAnim3);
-	pathRaphael.PushBack({ 1.5f, -2.0f }, 14, & raphaelAnim4);
-	pathRaphael.PushBack({ 1.5f, -2.0f }, 14, & raphaelAnim5);
-	pathRaphael.PushBack({ 1.5f, -2.0f }, 14, & raphaelAnim6);
+	pathRaphael.PushBack({ 0.0f, -1.8f }, 14, & raphaelAnim1);
+	pathRaphael.PushBack({ 1.5f, -1.8f }, 14, & raphaelAnim2);
+	pathRaphael.PushBack({ 1.5f, -1.8f }, 14, & raphaelAnim3);
+	pathRaphael.PushBack({ 1.5f, -1.8f }, 14, & raphaelAnim4);
+	pathRaphael.PushBack({ 1.5f, -1.8f }, 14, & raphaelAnim5);
+	pathRaphael.PushBack({ 1.5f, -1.8f }, 14, & raphaelAnim6);
 
 	pathRaphaelImage.PushBack({ -3.55f, -2.625f }, 42, & raphaelImage);
 	pathRaphaelImage.PushBack({ 0.0f, 0.0f }, 1000, & raphaelImage);
@@ -216,16 +216,16 @@ bool ModuleSceneIntro::Start()
 	spawnPosCloud2 = iPoint((int)10, (int)28);
 
 	pathLeo.ResetRelativePosition();
-	spawnPosLeo = iPoint((int)110, (int)915 + (64 * 12) + 404);
+	spawnPosLeo = iPoint((int)110, (int)915 + (64 * 12) + 410);
 
 	pathRaphael.ResetRelativePosition();
-	spawnPosRaphael = iPoint((int)110, (int)915 + (64 * 12) + 406);
+	spawnPosRaphael = iPoint((int)110, (int)915 + (64 * 12) + 412);
 
 	pathMichelangelo.ResetRelativePosition();
-	spawnPosMichelangelo = iPoint((int)110, (int)915 + (64 * 12) + 420);
+	spawnPosMichelangelo = iPoint((int)110, (int)915 + (64 * 12) + 426);
 
 	pathDonatello.ResetRelativePosition();
-	spawnPosDonatello = iPoint((int)110, (int)915 + (64 * 12) + 418);
+	spawnPosDonatello = iPoint((int)110, (int)915 + (64 * 12) + 416);
 
 	pathDonatelloImage.ResetRelativePosition();
 	spawnPosDonatelloImage = iPoint((int)(SCREEN_WIDTH), (int)-110);

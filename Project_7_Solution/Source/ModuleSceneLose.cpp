@@ -18,7 +18,7 @@ bool ModuleSceneLose::Start()
 	countDown = 0;
 
 	gameOverTexture = App->textures->Load("Assets/UI & HUD/game_over.png");
-	App->audio->PlayMusic("Assets/Audio/08_game_over", 1.0f);
+	App->audio->PlayMusic("Assets/Audio/08_game_over.ogg", 1.0f);
 	return true;
 }
 
@@ -32,7 +32,7 @@ update_status ModuleSceneLose::Update()
 		CleanUp();
 		App->scene->Disable();
 		App->scene->CleanUp();
-		App->sceneIntro->Enable();
+		App->members->Enable();
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
@@ -41,7 +41,7 @@ update_status ModuleSceneLose::Update()
 		CleanUp();
 		App->scene->Disable();
 		App->scene->CleanUp();
-		App->sceneIntro->Enable();
+		App->members->Enable();
 	}
 
 	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)

@@ -30,14 +30,14 @@ update_status ModuleSceneWin::Update()
 	{
 		this->Disable();
 		CleanUp();
-		App->sceneIntro->Enable();
+		App->members->Enable();
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_R] == KEY_STATE::KEY_DOWN)
 	{
 		this->Disable();
 		CleanUp();
-		App->sceneIntro->Enable();
+		App->members->Enable();
 	}
 
 	if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
