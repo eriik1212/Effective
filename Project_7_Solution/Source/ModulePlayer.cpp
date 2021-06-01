@@ -1657,6 +1657,7 @@ update_status ModulePlayer::PostUpdate()
 	}
 
 	else if (lifesP1[0] == 0 && App->HUD->lifes == 0 && lastPosition == 0) {
+		App->audio->PlayFx(lifeLost);
 		if (deathAnimR.loopCount > DEAD_LOOP)
 		{
 			App->player->HIT->pendingToDelete = true;
@@ -1698,6 +1699,7 @@ update_status ModulePlayer::PostUpdate()
 	}
 
 	else if (lifesP1[0] == 0 && App->HUD->lifes == 0 && lastPosition == 1) {
+		App->audio->PlayFx(lifeLost);
 		if (deathAnimL.loopCount > DEAD_LOOP)
 		{
 			App->player->HIT->pendingToDelete = true;
