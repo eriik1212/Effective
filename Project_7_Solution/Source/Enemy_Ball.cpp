@@ -9,25 +9,23 @@
 Enemy_Ball::Enemy_Ball(int x, int y) : Enemy(x, y)
 {
 
-	// RIGHT
-	rightAnimP.PushBack({ 0, 453, 86, 90 });
-	rightAnimP.PushBack({ 86, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 2, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 3, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 4, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 5, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 6, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 7, 453, 86, 90 });
-	rightAnimP.loop = true;
-	rightAnimP.speed = 0.15f;
-
+	// Ball animation
+	animBall.PushBack({ 113, 232, 37, 34 });
+	animBall.PushBack({ 150, 232, 37, 34 });
+	animBall.loop = false;
+	animBall.speed = 0.15f;
+	
 	
 
 
 
 
 	//PATH
-	
+	path.PushBack({ -1.0f, 0.0f }, 20, &animBall);
+	path.PushBack({ 0.0f, 0.0f }, 40, &animBall);
+	path.PushBack({ -1.0f, 0.0f }, 130, &animBall);
+	path.PushBack({ 1.0f,0.0f }, 150, &animBall);
+	path.PushBack({ 0.0f, 0.0f }, 40, &animBall);
 	
 
 

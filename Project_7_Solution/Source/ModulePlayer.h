@@ -66,7 +66,7 @@ public:
 		smallFire,
 		smoke,
 		AttackQuote;
-	
+
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
 	Animation* currentAnimation = nullptr;
@@ -88,14 +88,14 @@ public:
 
 		hitAirAnim1R,
 		hitAirAnim2R,
-	
+
 
 		hitAirAnim1L,
 		hitAirAnim2L,
 
 		hitKickAnimR,
 		hitKickAnimRFinal,
-		
+
 		hitKickAnimL,
 		hitKickAnimLFinal,
 
@@ -115,15 +115,15 @@ public:
 		hitJumpSwordAnimL,
 		hitJumpDownAnimR,
 		hitJumpDownAnimL,
-		
+
 		hittedLowAnim1R,
 		hittedLowAnim1L,
 		hittedLowAnim2R,
 		hittedLowAnim2L,
-		
+
 		hittedMediumAnimR,
 		hittedMediumAnimL,
-		
+
 		hittedHighAnimR,
 		hittedHighAnimL,
 
@@ -138,7 +138,7 @@ public:
 
 		hittedGrabbedAnimR,
 		hittedGrabbedAnimL,
-		
+
 		deathAnimR,
 		deathAnimL;
 
@@ -160,7 +160,18 @@ public:
 	uint EnemyDie = 0;
 	uint Scream1 = 0;
 	uint lifeIncrease = 0;
-	
+	uint lifeLost = 0;
+
+	// Font score index
+	uint scoreP1 = 000;
+	uint scoreP234 = 000;
+	uint lifes = 000;
+	int scoreFont = -1;
+	int lifeFont = -1;
+	char scoreTextP1[10] = { "\0" };
+	char scoreTextP234[10] = { "\0" };
+	char lifeText[10] = { "\0" };
+
 };
 
 #endif //!__MODULE_PLAYER_H__

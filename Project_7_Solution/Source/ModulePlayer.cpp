@@ -664,6 +664,7 @@ bool ModulePlayer::Start()
 	PunchHit = App->audio->LoadFx("Assets/Fx/punch_2.wav");
 	Scream1 = App->audio->LoadFx("Assets/FX/atack_scream.wav");
 	lifeIncrease = App->audio->LoadFx("Assets/FX/01_cowabunga.wav");
+	lifeLost = App->audio->LoadFx("Assets/FX/lost_life.wav");
 
 	// ----------------------------------------------------------------- COLLIDERS
 	HIT = App->collisions->AddCollider({ position.x , position.y, 20, 16 }, Collider::Type::PLAYER_SHOT,this);
@@ -711,7 +712,7 @@ update_status ModulePlayer::Update()
 	// ------------------------------------------------------Hits RIGHT
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0 && blockAnim == false)
 	{
-		
+
 		int x = (rand() % 2);
 
 		switch (x)
@@ -748,9 +749,9 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	else if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN 
+	else if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN
 		&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
-		&& lastPosition == 0 
+		&& lastPosition == 0
 		&& blockAnim == false)
 	{
 
@@ -1188,7 +1189,7 @@ update_status ModulePlayer::Update()
 
 
 	// UP & RIGHT MOVEMENT
-	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 	&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
@@ -1206,7 +1207,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// DOWN & RIGHT MOVEMENT
-	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 	&& App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
@@ -1226,7 +1227,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// LEFT & UP MOVEMENT
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
 	&& App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
@@ -1244,7 +1245,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// LEFT & DOWN
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
 	&& App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
@@ -1262,7 +1263,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// LEFT & RIGHT PRESSED
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
 	&& App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
@@ -1295,12 +1296,12 @@ update_status ModulePlayer::Update()
 
 	// UP
 	// ---------------------------------------------------------UP LEFT
-	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_UP] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
-	&& lastPosition == 1 
+	&& lastPosition == 1
 	&& blockAnim == false)
 	{
 		position.y -= speed;
@@ -1330,7 +1331,7 @@ update_status ModulePlayer::Update()
 
 
 	// LEFT
-	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_LEFT] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
@@ -1347,7 +1348,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// RIGHT
-	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_RIGHT] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
@@ -1371,7 +1372,7 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
-	&& lastPosition == 1 
+	&& lastPosition == 1
 	&& blockAnim == false)
 	{
 	position.y += speed;
@@ -1383,7 +1384,7 @@ update_status ModulePlayer::Update()
 	}
 
 	// --------------------------------------------------------DOWN RIGHT
-	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT 
+	else if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_REPEAT
 	&& currentAnimation != &hitAirAnim1R
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
@@ -1401,7 +1402,7 @@ update_status ModulePlayer::Update()
 
 	//---------------------------------------------------------GOD MODE
 
-	
+
 
 	// If no movement detected, set the current animation back to idle
 	if (App->input->keys[SDL_SCANCODE_DOWN] == KEY_STATE::KEY_IDLE
@@ -1492,7 +1493,7 @@ update_status ModulePlayer::Update()
 		App->audio->StopMusic();
 		App->player->Disable();
 		App->enemies->Disable();
-		App->scene->Disable();  
+		App->scene->Disable();
 		App->level2->Disable();
 		App->members->Enable();
 	}
@@ -1501,7 +1502,7 @@ update_status ModulePlayer::Update()
 	{
 		destroyedCountdown--;
 		if (destroyedCountdown <= 0)
-		
+
 			return update_status::UPDATE_STOP;
 	}
 
@@ -1645,17 +1646,20 @@ update_status ModulePlayer::PostUpdate()
 
 	// ---------------------------------------------------------------- RIGHT
 	if (lifesP1[0] == 0 && App->HUD->lifes != 0 && lastPosition == 0) {
+		App->audio->PlayFx(lifeLost);
 		if (deathAnimR.loopCount > DEAD_LOOP)
 		{
 			App->HUD->lifes--;
 			position.x = 5;
 			position.y = 112;
 
+
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
 			App->HUD->lifeP1.Reset();
 
 			blockAnim = false;
+
 			// Load Lifes P1 Again
 			for (int i = 0; i < MAX_LIFE; ++i) {
 				lifesP1[i] = 1;
@@ -1684,11 +1688,13 @@ update_status ModulePlayer::PostUpdate()
 
 	// ---------------------------------------------------------------- LEFT
 	if (lifesP1[0] == 0 && App->HUD->lifes != 0 && lastPosition == 1) {
+			App->audio->PlayFx(lifeLost);
 		if (deathAnimL.loopCount > DEAD_LOOP)
 		{
 			App->HUD->lifes--;
 			position.x = 5;
 			position.y = 112;
+
 
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
@@ -1719,7 +1725,7 @@ update_status ModulePlayer::PostUpdate()
 			App->sceneLose->Enable();
 		}
 	}
-	
+
 	if (deathAnimL.loopCount > DEAD_LOOP
 		|| deathAnimR.loopCount > DEAD_LOOP)
 	{
@@ -1872,9 +1878,9 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 	}
-	
 
-	
+
+
 		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
 			App->HUD->scoreP1 ++;

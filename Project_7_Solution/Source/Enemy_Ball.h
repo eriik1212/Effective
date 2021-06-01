@@ -31,20 +31,7 @@ private:
 
 	
 	// Enemy animations
-	Animation leftAnimP,
-		rightAnimP,
-		upAnimRP,
-		upAnimLP,
-		kickLP,
-		kickRP,
-		punchLP,
-		punchRP,
-		jumpLP,
-		jumpRP,
-		hitLP,
-		hitRP,
-		dieFacefwLP,
-		dieFacefwRP;
+	Animation animBall;
 
 
 
