@@ -43,7 +43,18 @@ private:
 		dieBackwLO,
 		dieBackwRO,
 		throwShurikenRO,
-		throwShurikenLO;
+		throwShurikenLO,
+		leftOW,
+		rightOW,
+		upOLW,
+		upORW,
+		meleeOWR,
+		meleeOWL,
+		shootOL,
+		shootOR,
+		hitOWR,
+		hitOWL;
+
 
 
 

@@ -184,6 +184,109 @@ Enemy_Orange::Enemy_Orange(int x, int y) : Enemy(x, y)
 
 	//HERE STARTS WEAPON ANIMATION
 
+	//WALKING RIGHT
+	rightOW.PushBack({ 0,207,88,69 });
+	rightOW.PushBack({ 88,207,88,69 });
+	rightOW.PushBack({ 88 * 2,207,88,69 });
+	rightOW.PushBack({ 88 * 3,207,88,69 });
+	rightOW.PushBack({ 88 * 4,207,88,69 });
+	rightOW.PushBack({ 88 * 5,207,88,69 });
+	rightOW.PushBack({ 88 * 6,207,88,69 });
+	rightOW.loop = true;
+	rightOW.speed = 0.15f;
+
+	//WALKING UP RIGHT
+	upORW.PushBack({ 0,276,88,69 });
+	upORW.PushBack({ 88,276,88,69 });
+	upORW.PushBack({ 88 * 2,276,88,69 });
+	upORW.PushBack({ 88 * 3,276,88,69 });
+	upORW.PushBack({ 88 * 4,276,88,69 });
+	upORW.PushBack({ 88 * 5,276,88,69 });
+	upORW.PushBack({ 88 * 6,276,88,69 });
+	upORW.PushBack({ 88 * 7,276,88,69 });
+	upORW.loop = true;
+	upORW.speed = 0.15f;
+
+	//WALKING LEFT
+	leftOW.PushBack({ 1055,1518,88,69 });
+	leftOW.PushBack({ 1055 - 88,1518,88,69 });
+	leftOW.PushBack({ 1055 - 88 * 2,1518,88,69 });
+	leftOW.PushBack({ 1055 - 88 * 3,1518,88,69 });
+	leftOW.PushBack({ 1055 - 88 * 4,1518,88,69 });
+	leftOW.PushBack({ 1055 - 88 * 5,1518,88,69 });
+	leftOW.PushBack({ 1055 - 88 * 6,1518,88,69 });
+	leftOW.loop = true;
+	leftOW.speed = 0.15f;
+	
+	//WALKING UP LEFT
+	upOLW.PushBack({ 1055,1587,88,69 });
+	upOLW.PushBack({ 1055 - 88,1587,88,69 });
+	upOLW.PushBack({ 1055 - 88 * 2,1587,88,69 });
+	upOLW.PushBack({ 1055 - 88 * 3,1587,88,69 });
+	upOLW.PushBack({ 1055 - 88 * 4,1587,88,69 });
+	upOLW.PushBack({ 1055 - 88 * 5,1587,88,69 });
+	upOLW.PushBack({ 1055 - 88 * 6,1587,88,69 });
+	upOLW.PushBack({ 1055 - 88 * 7,1587,88,69 });
+	upOLW.loop = true;
+	upOLW.speed = 0.15f;
+
+	//MELEE TO RIGHT
+	meleeOWR.PushBack({ 0,69,88,69 });
+	meleeOWR.PushBack({ 88,69,88,69 });
+	meleeOWR.PushBack({ 88 * 2,69,88,69 });
+	meleeOWR.PushBack({ 88 * 3,69,88,69 });
+	meleeOWR.PushBack({ 88 * 4,69,88,69 });
+	meleeOWR.loop = false;
+	meleeOWR.speed = 0.15f;
+
+	//MELEE TO LEFT
+	meleeOWL.PushBack({ 1055,1380,88,69 });
+	meleeOWL.PushBack({ 1055 - 88,1380,88,69 });
+	meleeOWL.PushBack({ 1055 - 88 * 2,1380,88,69 });
+	meleeOWL.PushBack({ 1055 - 88 * 3,1380,88,69 });
+	meleeOWL.PushBack({ 1055 - 88 * 4,1380,88,69 });
+	meleeOWL.loop = false;
+	meleeOWL.speed = 0.15f;
+
+	//SHOOT TO RIGHT 
+	shootOR.PushBack({ 0,138,88,69 });
+	shootOR.PushBack({ 88,138,88,69 });
+	shootOR.PushBack({ 88 * 2,138,88,69 });
+	shootOR.PushBack({ 88 * 3,138,88,69 });
+	shootOR.PushBack({ 88 * 4,138,88,69 });
+	shootOR.PushBack({ 88 * 5,138,88,69 });
+	shootOR.PushBack({ 88 * 6,138,88,69 });
+	shootOR.loop = false;
+	shootOR.speed = 0.15f;
+
+	//SHOOT TO LEFT
+	shootOL.PushBack({ 1055,1449,88,69 });
+	shootOL.PushBack({ 1055 - 88,1449,88,69 });
+	shootOL.PushBack({ 1055 - 88 * 2,1449,88,69 });
+	shootOL.PushBack({ 1055 - 88 * 3,1449,88,69 });
+	shootOL.PushBack({ 1055 - 88 * 4,1449,88,69 });
+	shootOL.PushBack({ 1055 - 88 * 5,1449,88,69 });
+	shootOL.loop = false;
+	shootOL.speed = 0.15f;
+
+	//HIT FROM RIGHT
+	hitOWR.PushBack({ 0,0,88,69 });
+	hitOWR.PushBack({ 88,0,88,69 });
+	hitOWR.PushBack({ 88 * 2,0,88,69 });
+	hitOWR.PushBack({ 88 * 3,0,88,69 });
+	hitOWR.loop = false;
+	hitOWR.speed = 0.15f;
+
+	//HIT FROM LEFT
+	hitOWL.PushBack({ 1055,1311,88,69 });
+	hitOWL.PushBack({ 1055 -88,1311,88,69 });
+	hitOWL.PushBack({ 1055 -88 * 2,1311,88,69 });
+	hitOWL.PushBack({ 1055 -88 * 3,1311,88,69 });
+	hitOWL.loop = false;
+	hitOWL.speed = 0.15f;
+
+
+
 
 
 
