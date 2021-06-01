@@ -65,13 +65,7 @@ public:
 	Animation frontFire,
 		smallFire,
 		smoke,
-		HUDP1,
-		HUDP234,
-		insertCoinP2,
-		insertCoinP3,
-		insertCoinP4,
-		AttackQuote,
-		lifeP1;
+		AttackQuote;
 	
 	// The pointer to the current player animation
 	// It will be switched depending on the player's movement direction
@@ -166,16 +160,6 @@ public:
 	uint EnemyDie = 0;
 	uint Scream1 = 0;
 	uint lifeIncrease = 0;
-
-	// Font score index
-	uint scoreP1 = 000;
-	uint scoreP234 = 000;
-	uint lifes = 000;
-	int scoreFont = -1;
-	int lifeFont = -1;
-	char scoreTextP1[10] = { "\0" };
-	char scoreTextP234[10] = { "\0" };
-	char lifeText[10] = { "\0" };
 	
 };
 

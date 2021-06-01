@@ -8,6 +8,7 @@
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
+#include "ModuleSceneCharacter.h"
 
 ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 {
@@ -356,11 +357,11 @@ update_status ModuleSceneIntro::Update()
 
 
 	// ScanCodes
-	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 800)
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 850)
 	{
 		this->Disable();
 		CleanUp();
-		App->scene->Enable();
+		App->sceneCharacter->Enable();
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)

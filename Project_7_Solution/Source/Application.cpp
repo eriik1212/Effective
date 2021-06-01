@@ -18,6 +18,8 @@
 #include "ModuleRender.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleMembers.h"
+#include "ModuleSceneCharacter.h"
+#include "ModuleHUD.h"
 
 Application::Application()
 {
@@ -31,18 +33,20 @@ Application::Application()
 
 	modules[4] = members = new ModuleMembers(true);
 	modules[5] = sceneIntro = new ModuleSceneIntro(false);
-	modules[6] = scene = new ModuleScene(false);
-	modules[7] = level2 = new ModuleLevel2(false);
-	modules[8] = sceneWin = new ModuleSceneWin(false);
-	modules[9] = sceneLose = new ModuleSceneLose(false);
-	modules[10] = player = new ModulePlayer(false);
-	modules[11] = particles = new ModuleParticles(true);
-	modules[12] = enemies = new ModuleEnemies(false);
+	modules[6] = sceneCharacter = new ModuleSceneCharacter(false);
+	modules[7] = scene = new ModuleScene(false);
+	modules[8] = level2 = new ModuleLevel2(false);
+	modules[9] = sceneWin = new ModuleSceneWin(false);
+	modules[10] = sceneLose = new ModuleSceneLose(false);
+	modules[11] = player = new ModulePlayer(false);
+	modules[12] = particles = new ModuleParticles(true);
+	modules[13] = enemies = new ModuleEnemies(false);
+	modules[14] = HUD = new ModuleHUD(false);
 
-	modules[13] = collisions = new ModuleCollisions(true);
-	modules[14] = fade = new ModuleFadeToBlack(true);
-	modules[15] = fonts = new ModuleFonts(true);
-	modules[16] = render = new ModuleRender(true);
+	modules[15] = collisions = new ModuleCollisions(true);
+	modules[16] = fade = new ModuleFadeToBlack(true);
+	modules[17] = fonts = new ModuleFonts(true);
+	modules[18] = render = new ModuleRender(true);
 
 
 

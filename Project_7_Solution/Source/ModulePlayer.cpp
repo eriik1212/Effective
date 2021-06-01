@@ -12,13 +12,15 @@
 #include "ModuleSceneLose.h"
 #include "ModuleLevel2.h"
 #include "ModuleMembers.h"
+#include "ModuleSceneCharacter.h"
+#include "ModuleHUD.h"
 
 #include <stdio.h>
 
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
 
-#define DEAD_LOOP 10
+#define DEAD_LOOP 8
 
 
 ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
@@ -34,69 +36,6 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		AttackQuote.PushBack({ 0, 296, 64, 32 });
 		AttackQuote.speed = 0.015f;
 		AttackQuote.loop = false;
-
-		// Life's Animation
-		lifeP1.PushBack({ 6, 233, 31, 11 });
-		lifeP1.PushBack({ 40, 233, 31, 11 });
-		lifeP1.PushBack({ 74, 233, 31, 11 });
-		lifeP1.PushBack({ 108, 233, 31, 11 });
-		lifeP1.PushBack({ 143, 233, 31, 11 });
-		lifeP1.PushBack({ 177, 233, 31, 11 });
-		lifeP1.PushBack({ 211, 233, 31, 11 });
-		lifeP1.PushBack({ 246, 233, 31, 11 });
-		lifeP1.PushBack({ 280, 233, 31, 11 });
-		lifeP1.PushBack({ 314, 233, 31, 11 });
-		lifeP1.PushBack({ 360, 233, 31, 11 });
-		lifeP1.loop = false;
-
-		// HUD Player1
-		HUDP1.PushBack({ 5, 0, 72, 32 });
-
-		// HUD Player2,3,4
-		HUDP234.PushBack({ 77, 107, 213, 32 });
-
-		// INSERT COIN Anim for P2, P3, P4
-		// P2
-		insertCoinP2.PushBack({ 6, 167, 71, 13 });
-		insertCoinP2.PushBack({ 83, 167, 71, 13 });
-		insertCoinP2.PushBack({ 160, 167, 71, 13 });
-		insertCoinP2.PushBack({ 238, 167, 71, 13 });
-		insertCoinP2.PushBack({ 315, 167, 71, 13 });
-		insertCoinP2.PushBack({ 6, 187, 71, 13 });
-		insertCoinP2.PushBack({ 83, 187, 71, 13 });
-		insertCoinP2.PushBack({ 160, 187, 71, 13 });
-		insertCoinP2.PushBack({ 238, 187, 71, 13 });
-		insertCoinP2.PushBack({ 315, 187, 71, 13 });
-		insertCoinP2.speed = 0.15f;
-		insertCoinP2.loop = true;
-
-		// P3
-		insertCoinP3.PushBack({ 83, 167, 71, 13 });
-		insertCoinP3.PushBack({ 160, 167, 71, 13 });
-		insertCoinP3.PushBack({ 238, 167, 71, 13 });
-		insertCoinP3.PushBack({ 315, 167, 71, 13 });
-		insertCoinP3.PushBack({ 6, 187, 71, 13 });
-		insertCoinP3.PushBack({ 83, 187, 71, 13 });
-		insertCoinP3.PushBack({ 160, 187, 71, 13 });
-		insertCoinP3.PushBack({ 238, 187, 71, 13 });
-		insertCoinP3.PushBack({ 315, 187, 71, 13 });
-		insertCoinP3.PushBack({ 6, 167, 71, 13 });
-		insertCoinP3.speed = 0.15f;
-		insertCoinP3.loop = true;
-
-		// P4
-		insertCoinP4.PushBack({ 160, 167, 71, 13 });
-		insertCoinP4.PushBack({ 238, 167, 71, 13 });
-		insertCoinP4.PushBack({ 315, 167, 71, 13 });
-		insertCoinP4.PushBack({ 6, 187, 71, 13 });
-		insertCoinP4.PushBack({ 83, 187, 71, 13 });
-		insertCoinP4.PushBack({ 160, 187, 71, 13 });
-		insertCoinP4.PushBack({ 238, 187, 71, 13 });
-		insertCoinP4.PushBack({ 315, 187, 71, 13 });
-		insertCoinP4.PushBack({ 6, 167, 71, 13 });
-		insertCoinP4.PushBack({ 83, 167, 71, 13 });
-		insertCoinP4.speed = 0.15f;
-		insertCoinP4.loop = true;
 
 		// FrontFire animation
 		frontFire.PushBack({ 335, 430, 304, 62 });
@@ -702,10 +641,8 @@ bool ModulePlayer::Start()
 	bool ret = true;
 
 	blockAnim = false;
-	scoreP1 = 0;
-	lifes = 0;
 
-	lifeP1.Reset();
+	App->HUD->lifeP1.Reset();
 	AttackQuote.Reset();
 
 	// ----------------------------------------------------------------- LIFE ELEMENTS
@@ -717,8 +654,8 @@ bool ModulePlayer::Start()
 	// ----------------------------------------------------------------- TEXTURES
 	texture = App->textures->Load("Assets/Characters/leonardo.png");
 	fireTexture = App->textures->Load("Assets/Tilesets/fire.png");
-	smokeTexture = App->textures->Load("Assets/Tilesets/tile_map_stage_1.png");
 	HUDTexture = App->textures->Load("Assets/UI & HUD/HUD.png");
+	smokeTexture = App->textures->Load("Assets/Tilesets/tile_map_stage_1.png");
 	AttackQuoteTexture = App->textures->Load("Assets/UI & HUD/quotes.png");
 	currentAnimation = &idleAnimR;
 
@@ -732,11 +669,6 @@ bool ModulePlayer::Start()
 	HIT = App->collisions->AddCollider({ position.x , position.y, 20, 16 }, Collider::Type::PLAYER_SHOT,this);
 	collider = App->collisions->AddCollider({ position.x, position.y, 38, 16 }, Collider::Type::PLAYER, this);
 
-	// ----------------------------------------------------------------- FONTS
-	char lookupTable[] = { "0123456789 " };
-	scoreFont = App->fonts->Load("Assets/UI & HUD/fonts.png", lookupTable, 1);
-	lifeFont = App->fonts->Load("Assets/UI & HUD/num_lifes_font.png", lookupTable, 1);
-
 	return ret;
 }
 
@@ -747,9 +679,6 @@ update_status ModulePlayer::Update()
 	smoke.Update();
 	smallFire.Update();
 	AttackQuote.Update();
-	insertCoinP2.Update();
-	insertCoinP3.Update();
-	insertCoinP4.Update();
 
 	// Camera Movement
 	if (position.x > (App->render->playerLimitR))
@@ -771,9 +700,9 @@ update_status ModulePlayer::Update()
 	// ------------------------------- Life's Increment
 	if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_STATE::KEY_DOWN)
 	{
-		if (lifes < 998)
+		if (App->HUD->lifes < 998)
 		{
-			lifes += 2;
+			App->HUD->lifes += 2;
 			App->audio->PlayFx(lifeIncrease);
 		}
 
@@ -1715,16 +1644,16 @@ update_status ModulePlayer::PostUpdate()
 	}
 
 	// ---------------------------------------------------------------- RIGHT
-	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
+	if (lifesP1[0] == 0 && App->HUD->lifes != 0 && lastPosition == 0) {
 		if (deathAnimR.loopCount > DEAD_LOOP)
 		{
-			lifes--;
+			App->HUD->lifes--;
 			position.x = 5;
 			position.y = 112;
 
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
-			lifeP1.Reset();
+			App->HUD->lifeP1.Reset();
 
 			blockAnim = false;
 			// Load Lifes P1 Again
@@ -1734,7 +1663,7 @@ update_status ModulePlayer::PostUpdate()
 		}
 	}
 
-	else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 0) {
+	else if (lifesP1[0] == 0 && App->HUD->lifes == 0 && lastPosition == 0) {
 		if (deathAnimR.loopCount > DEAD_LOOP)
 		{
 			App->player->HIT->pendingToDelete = true;
@@ -1745,6 +1674,8 @@ update_status ModulePlayer::PostUpdate()
 
 			App->enemies->Disable();
 			App->enemies->CleanUp();
+
+			App->HUD->Disable();
 
 			App->sceneLose->Enable();
 		}
@@ -1752,16 +1683,16 @@ update_status ModulePlayer::PostUpdate()
 
 
 	// ---------------------------------------------------------------- LEFT
-	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
+	if (lifesP1[0] == 0 && App->HUD->lifes != 0 && lastPosition == 1) {
 		if (deathAnimL.loopCount > DEAD_LOOP)
 		{
-			lifes--;
+			App->HUD->lifes--;
 			position.x = 5;
 			position.y = 112;
 
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
-			lifeP1.Reset();
+			App->HUD->lifeP1.Reset();
 
 			blockAnim = false;
 			// Load Lifes P1 Again
@@ -1771,7 +1702,7 @@ update_status ModulePlayer::PostUpdate()
 		}
 	}
 
-	else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+	else if (lifesP1[0] == 0 && App->HUD->lifes == 0 && lastPosition == 1) {
 		if (deathAnimL.loopCount > DEAD_LOOP)
 		{
 			App->player->HIT->pendingToDelete = true;
@@ -1782,6 +1713,8 @@ update_status ModulePlayer::PostUpdate()
 
 			App->enemies->Disable();
 			App->enemies->CleanUp();
+
+			App->HUD->Disable();
 
 			App->sceneLose->Enable();
 		}
@@ -1794,7 +1727,10 @@ update_status ModulePlayer::PostUpdate()
 		deathAnimL.loopCount = 0;
 	}
 
-	App->render->Blit(AttackQuoteTexture, position.x, position.y - 10, &(AttackQuote.GetCurrentFrame()), 0); // HUD animation
+	if (App->scene->Enabled())
+	{
+		App->render->Blit(AttackQuoteTexture, position.x, position.y - 10, &(AttackQuote.GetCurrentFrame()), 0);
+	}
 
 	if (App->render->camera.x == 0)
 	{
@@ -1803,13 +1739,15 @@ update_status ModulePlayer::PostUpdate()
 
 	}
 
-
-	App->render->Blit(fireTexture, 0, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
-	App->render->Blit(fireTexture, 256, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
-	App->render->Blit(fireTexture, 512, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
-	App->render->Blit(fireTexture, 768, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
-	App->render->Blit(fireTexture, 1024, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
-	App->render->Blit(fireTexture, 1280, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	if (App->scene->Enabled() || App->level2->Enabled())
+	{
+		App->render->Blit(fireTexture, 0, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+		App->render->Blit(fireTexture, 256, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+		App->render->Blit(fireTexture, 512, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+		App->render->Blit(fireTexture, 768, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+		App->render->Blit(fireTexture, 1024, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+		App->render->Blit(fireTexture, 1280, 162, &(frontFire.GetCurrentFrame()), 1); // FrontFire animation
+	}
 
 
 	if (App->scene->Disabled() && App->level2->Enabled())
@@ -1820,32 +1758,6 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(smokeTexture, 237, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
 		App->render->Blit(smokeTexture, 316, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
 	}
-
-		// -------------------------------------------------------------------------------------------- HUD
-
-	App->render->Blit(HUDTexture, 8, 0, &(HUDP1.GetCurrentFrame()), 0); // HUD Square Player1
-	App->render->Blit(HUDTexture, 80, 0, &(HUDP234.GetCurrentFrame()), 0); // HUD Square Player2,3,4
-
-	App->render->Blit(HUDTexture, 80, 16, &(insertCoinP2.GetCurrentFrame()), 0); // INSERT COIN Player2
-	App->render->Blit(HUDTexture, 151, 16, &(insertCoinP3.GetCurrentFrame()), 0); // INSERT COIN Player3
-	App->render->Blit(HUDTexture, 222, 16, &(insertCoinP4.GetCurrentFrame()), 0); // INSERT COIN Player4
-
-	App->render->Blit(HUDTexture, 41, 16, &(lifeP1.GetCurrentFrame()), 0); // Full life P1
-
-	// Draw UI (score) --------------------------------------
-	sprintf_s(scoreTextP1, 10, "%3d", scoreP1); //P1
-	sprintf_s(scoreTextP234, 10, "%3d", scoreP234); //P234
-
-	App->fonts->BlitText(45, 8, scoreFont, scoreTextP1); // P1
-	App->fonts->BlitText(116, 8, scoreFont, scoreTextP234); // P2
-	App->fonts->BlitText(187, 8, scoreFont, scoreTextP234); // P3
-	App->fonts->BlitText(258, 8, scoreFont, scoreTextP234); // P4
-
-
-	// Draw UI (NumLifes) --------------------------------------
-	sprintf_s(lifeText, 10, "%3d", lifes);
-
-	App->fonts->BlitText(17, 16, lifeFont, lifeText);
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -1867,25 +1779,25 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
-		lifeP1.Update();
-		lifeP1.Update();
+		App->HUD->lifeP1.Update();
+		App->HUD->lifeP1.Update();
 		updateLifeIndicatorPlayer1(lifesP1, 2);
 
 		// ---------------------------------------------------------------- RIGHT
-		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
+		if (lifesP1[0] == 0 && App->HUD->lifes != 0 && lastPosition == 0) {
 			deathAnimR.Reset();
 			currentAnimation = &deathAnimR;
 			blockAnim = true;
 
 			if (deathAnimR.loopCount > DEAD_LOOP)
 			{
-				lifes--;
+				App->HUD->lifes--;
 				position.x = 5;
 				position.y = 112;
 
 				idleAnimR.Reset();
 				currentAnimation = &idleAnimR;
-				lifeP1.Reset();
+				App->HUD->lifeP1.Reset();
 
 				blockAnim = false;
 				// Load Lifes P1 Again
@@ -1895,7 +1807,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 
-		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 0) {
+		else if (lifesP1[0] == 0 && App->HUD->lifes == 0 && lastPosition == 0) {
 			deathAnimR.Reset();
 			currentAnimation = &deathAnimR;
 			blockAnim = true;
@@ -1917,20 +1829,20 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 
 		// ---------------------------------------------------------------- LEFT
-		if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
+		if (lifesP1[0] == 0 && App->HUD->lifes != 0 && lastPosition == 1) {
 			deathAnimL.Reset();
 			currentAnimation = &deathAnimL;
 			blockAnim = true;
 
 			if (deathAnimL.loopCount > DEAD_LOOP)
 			{
-				lifes--;
+				App->HUD->lifes--;
 				position.x = 5;
 				position.y = 112;
 
 				idleAnimR.Reset();
 				currentAnimation = &idleAnimR;
-				lifeP1.Reset();
+				App->HUD->lifeP1.Reset();
 
 				blockAnim = false;
 				// Load Lifes P1 Again
@@ -1940,7 +1852,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			}
 		}
 
-		else if (lifesP1[0] == 0 && lifes == 0 && lastPosition == 1) {
+		else if (lifesP1[0] == 0 && App->HUD->lifes == 0 && lastPosition == 1) {
 			deathAnimL.Reset();
 			currentAnimation = &deathAnimL;
 			blockAnim = true;
@@ -1965,6 +1877,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	
 		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
-			scoreP1 ++;
+			App->HUD->scoreP1 ++;
 		}
 }

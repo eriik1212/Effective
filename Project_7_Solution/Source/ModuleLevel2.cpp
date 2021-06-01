@@ -13,6 +13,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneWin.h"
 #include "ModuleSceneLose.h"
+#include "ModuleHUD.h"
 
 
 ModuleLevel2::ModuleLevel2(bool enabled) : Module(enabled)
@@ -39,6 +40,7 @@ bool ModuleLevel2::Start()
 	countDown = 0;
 
 	App->player->Enable();
+	App->HUD->Enable();
 	App->enemies->Enable();
 
 	App->player->position.x = 5;
@@ -108,6 +110,8 @@ update_status ModuleLevel2::Update()
 			App->enemies->Disable();
 			App->enemies->CleanUp();
 
+			App->HUD->Disable();
+
 			App->sceneWin->Enable();
 		}
 	}
@@ -124,6 +128,8 @@ update_status ModuleLevel2::Update()
 		App->enemies->Disable();
 		App->enemies->CleanUp();
 
+		App->HUD->Disable();
+
 		App->sceneWin->Enable();
 	}
 	else if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
@@ -135,6 +141,8 @@ update_status ModuleLevel2::Update()
 
 		App->enemies->Disable();
 		App->enemies->CleanUp();
+
+		App->HUD->Disable();
 
 		App->sceneLose->Enable();
 	}
@@ -148,6 +156,8 @@ update_status ModuleLevel2::Update()
 
 		App->enemies->Disable();
 		App->enemies->CleanUp();
+
+		App->HUD->Disable();
 
 		App->scene->Enable();
 	}

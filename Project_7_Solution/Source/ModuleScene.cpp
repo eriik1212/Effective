@@ -13,6 +13,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModuleSceneWin.h"
 #include "ModuleSceneLose.h"
+#include "ModuleHUD.h"
 
 
 ModuleScene::ModuleScene(bool enabled) : Module(enabled)
@@ -96,6 +97,7 @@ bool ModuleScene::Start()
 	countDown = 0;
 
 	App->player->Enable();
+	App->HUD->Enable();
 	App->enemies->Enable();
 
 	doorBreak.Reset();
@@ -218,6 +220,8 @@ update_status ModuleScene::Update()
 			App->enemies->Disable();
 			App->enemies->CleanUp();
 
+			App->HUD->Disable();
+
 			App->level2->Enable();
 		}
 	}
@@ -234,6 +238,8 @@ update_status ModuleScene::Update()
 		App->enemies->Disable();
 		App->enemies->CleanUp();
 
+		App->HUD->Disable();
+
 		App->sceneWin->Enable();
 	}
 	else if (App->input->keys[SDL_SCANCODE_F3] == KEY_STATE::KEY_DOWN)
@@ -246,6 +252,8 @@ update_status ModuleScene::Update()
 		App->enemies->Disable();
 		App->enemies->CleanUp();
 
+		App->HUD->Disable();
+
 		App->sceneLose->Enable();
 	}
 	else if (App->input->keys[SDL_SCANCODE_F6] == KEY_STATE::KEY_DOWN)
@@ -257,6 +265,8 @@ update_status ModuleScene::Update()
 
 		App->enemies->Disable();
 		App->enemies->CleanUp();
+
+		App->HUD->Disable();
 
 		App->level2->Enable();
 	}
