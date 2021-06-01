@@ -727,6 +727,7 @@ bool ModulePlayer::Start()
 	PunchHit = App->audio->LoadFx("Assets/Fx/punch_2.wav");
 	Scream1 = App->audio->LoadFx("Assets/FX/atack_scream.wav");
 	lifeIncrease = App->audio->LoadFx("Assets/FX/01_cowabunga.wav");
+	lifeLost = App->audio->LoadFx("Assets/FX/lost_life.wav");
 
 	// ----------------------------------------------------------------- COLLIDERS
 	HIT = App->collisions->AddCollider({ position.x , position.y, 20, 16 }, Collider::Type::PLAYER_SHOT,this);
@@ -1716,17 +1717,21 @@ update_status ModulePlayer::PostUpdate()
 
 	// ---------------------------------------------------------------- RIGHT
 	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 0) {
+		App->audio->PlayFx(lifeLost);
 		if (deathAnimR.loopCount > DEAD_LOOP)
 		{
+			
 			lifes--;
 			position.x = 5;
 			position.y = 112;
+			
 
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
 			lifeP1.Reset();
 
 			blockAnim = false;
+			
 			// Load Lifes P1 Again
 			for (int i = 0; i < MAX_LIFE; ++i) {
 				lifesP1[i] = 1;
@@ -1753,11 +1758,14 @@ update_status ModulePlayer::PostUpdate()
 
 	// ---------------------------------------------------------------- LEFT
 	if (lifesP1[0] == 0 && lifes != 0 && lastPosition == 1) {
+		App->audio->PlayFx(lifeLost);
 		if (deathAnimL.loopCount > DEAD_LOOP)
 		{
+			
 			lifes--;
 			position.x = 5;
 			position.y = 112;
+		
 
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
