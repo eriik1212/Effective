@@ -181,8 +181,7 @@ Enemy_Orange::Enemy_Orange(int x, int y) : Enemy(x, y)
 	dieBackwRO.speed = 0.15f;
 
 
-
-	//HERE STARTS WEAPON ANIMATION
+//---------------------------------------------------HERE STARTS WEAPON ANIMATION
 
 	//WALKING RIGHT
 	rightOW.PushBack({ 0,207,88,69 });
@@ -284,13 +283,6 @@ Enemy_Orange::Enemy_Orange(int x, int y) : Enemy(x, y)
 	hitOWL.PushBack({ 1055 -88 * 3,1311,88,69 });
 	hitOWL.loop = false;
 	hitOWL.speed = 0.15f;
-
-
-
-
-
-
-
 
 
 
