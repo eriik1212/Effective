@@ -698,17 +698,6 @@ update_status ModulePlayer::Update()
 		}
 	}
 
-	// ------------------------------- Life's Increment
-	if (App->input->keys[SDL_SCANCODE_LSHIFT] == KEY_STATE::KEY_DOWN)
-	{
-		if (App->HUD->lifes < 998)
-		{
-			App->HUD->lifes += 2;
-			App->audio->PlayFx(lifeIncrease);
-		}
-
-	}
-
 	// ------------------------------------------------------Hits RIGHT
 	if (App->input->keys[SDL_SCANCODE_X] == KEY_STATE::KEY_DOWN && lastPosition == 0 && blockAnim == false)
 	{
