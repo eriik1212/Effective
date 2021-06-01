@@ -53,12 +53,12 @@ ModuleSceneIntro::ModuleSceneIntro(bool enabled) : Module(enabled)
 	text.h = 108;
 
 	//Characters ANIMATION
-	leoAnim1.PushBack({ 0, 4200, 94, 84 });
-	leoAnim2.PushBack({ (94 * 1), 4200, 94, 84 });
-	leoAnim3.PushBack({ (94 * 2), 4200, 94, 84 });
-	leoAnim4.PushBack({ (94 * 3), 4200, 94, 84 });
-	leoAnim5.PushBack({ (94 * 4), 4200, 94, 84 });
-	leoAnim6.PushBack({ (94 * 5), 4200, 94, 84 });
+	leoAnim1.PushBack({ 1222, 3917, 94, 84 });
+	leoAnim2.PushBack({ 1222 + (94 * 1), 3917, 94, 84 });
+	leoAnim3.PushBack({ 1222 + (94 * 2), 3917, 94, 84 });
+	leoAnim4.PushBack({ 1222 + (94 * 3), 3917, 94, 84 });
+	leoAnim5.PushBack({ 1222 + (94 * 4), 3917, 94, 84 });
+	leoAnim6.PushBack({ 1222 + (94 * 5), 3917, 94, 84 });
 
 	leoImage.PushBack({ 14, 658, 124, 110 });
 

@@ -20,6 +20,9 @@ ModuleMembers::~ModuleMembers()
 // Load assets
 bool ModuleMembers::Start()
 {
+	App->render->camera.x = 0;
+	App->render->camera.y = 0;
+
 	// Members Texture
 	introMembers = App->textures->Load("Assets/Introduction/intro_members.png");
 
