@@ -18,10 +18,13 @@ This is our first project as videogame design and developement students at CITM.
 
 **Additional Controls**
 - Next Screen - Spacebar
+- Start - Enter
 - Colliders Mode - F1
 - Instant Win - F2
 - Instant Lose - F3
 - God Mode - F4
+- Level 1 - F5
+- Level 2 - F6
 - Restart - R
 - Exit game - Escape
 
