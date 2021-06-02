@@ -14,6 +14,7 @@
 #include "ModuleSceneWin.h"
 #include "ModuleSceneLose.h"
 #include "ModuleHUD.h"
+#include"ModuleFonts.h"
 
 
 ModuleScene::ModuleScene(bool enabled) : Module(enabled)
@@ -240,6 +241,7 @@ update_status ModuleScene::Update()
 		App->enemies->CleanUp();
 
 		App->HUD->Disable();
+		App->fonts->UnLoad(-1);
 
 		App->sceneWin->Enable();
 	}
@@ -252,6 +254,7 @@ update_status ModuleScene::Update()
 
 		App->enemies->Disable();
 		App->enemies->CleanUp();
+		App->fonts->UnLoad(-1);
 
 		App->HUD->Disable();
 

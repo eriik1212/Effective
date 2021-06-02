@@ -20,7 +20,7 @@
 #include "SDL/include/SDL_scancode.h"
 #include "SDL/include/SDL.h"
 
-#define DEAD_LOOP 8
+#define DEAD_LOOP 6
 
 
 ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
@@ -1484,6 +1484,8 @@ update_status ModulePlayer::Update()
 		App->enemies->Disable();
 		App->scene->Disable();
 		App->level2->Disable();
+		App->HUD->Disable();
+		App->fonts->UnLoad(-1);
 		App->members->Enable();
 	}
 
@@ -1669,6 +1671,8 @@ update_status ModulePlayer::PostUpdate()
 			App->enemies->Disable();
 			App->enemies->CleanUp();
 
+			App->fonts->UnLoad(-1);
+
 			App->HUD->Disable();
 
 			App->sceneLose->Enable();
@@ -1710,6 +1714,8 @@ update_status ModulePlayer::PostUpdate()
 
 			App->enemies->Disable();
 			App->enemies->CleanUp();
+
+			App->fonts->UnLoad(-1);
 
 			App->HUD->Disable();
 
@@ -1814,6 +1820,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				App->player->HIT->pendingToDelete = true;
 				App->player->collider->pendingToDelete = true;
 
+				App->fonts->UnLoad(-1);
+
 				App->player->Disable();
 				App->player->CleanUp();
 
@@ -1858,6 +1866,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			{
 				App->player->HIT->pendingToDelete = true;
 				App->player->collider->pendingToDelete = true;
+
+				App->fonts->UnLoad(-1);
 
 				App->player->Disable();
 				App->player->CleanUp();

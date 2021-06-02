@@ -4,6 +4,7 @@
 #include "ModuleTextures.h"
 #include "ModuleRender.h"
 #include "ModuleAudio.h"
+#include "ModuleFonts.h"
 
 ModuleSceneLose::ModuleSceneLose(bool enabled) : Module(enabled)
 {
