@@ -36,7 +36,7 @@ bool ModuleSceneCharacter::Start()
 
 	characterTexture = App->textures->Load("Assets/Introduction/introduction.png");
 
-	App->audio->PlayMusic("Assets/Audio/02_character_selection.ogg", 0.0f, 0);
+	App->audio->PlayMusic("Assets/Audio/02_character_selection.ogg", 0.0f, -1);
 
 	return true;
 }
@@ -45,7 +45,7 @@ update_status ModuleSceneCharacter::Update()
 {
 
 	// ScanCodes
-	if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN))
+	if ((App->input->keys[SDL_SCANCODE_RETURN] == KEY_STATE::KEY_DOWN) && App->HUD->lifes > 0)
 	{
 		this->Disable();
 		CleanUp();

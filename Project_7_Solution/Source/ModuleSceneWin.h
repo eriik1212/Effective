@@ -8,6 +8,7 @@
 #include "ModuleMembers.h"
 #include "ModulePlayer.h"
 #include "ModuleEnemies.h"
+#include "ModuleHUD.h"
 
 struct SDL_Texture;
 

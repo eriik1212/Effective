@@ -33,18 +33,27 @@ public:
 	bool CleanUp();
 
 public:
-	SDL_Rect background;
+	SDL_Rect background,
+		konami,
+		konami1989,
+		bigTurtle;
 
 	SDL_Texture* HUDTexture = nullptr;
+
+	SDL_Texture* introTexture = nullptr;
 
 	// HUD & Foreground Animations
 	Animation 
 		HUDP1,
+		HUDP1InsertCoins,
 		HUDP234,
+		insertCoinP1,
 		insertCoinP2,
 		insertCoinP3,
 		insertCoinP4,
-		lifeP1;
+		lifeP1,
+		smallTurtle,
+		pressStart;
 
 	// Font score index
 	uint scoreP1 = 000;

@@ -357,7 +357,7 @@ update_status ModuleSceneIntro::Update()
 
 
 	// ScanCodes
-	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 850)
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 950)
 	{
 		this->Disable();
 		CleanUp();

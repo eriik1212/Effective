@@ -30,6 +30,8 @@ update_status ModuleSceneLose::Update()
 	{
 		this->Disable();
 		CleanUp();
+		App->HUD->Disable();
+		App->HUD->CleanUp();
 		App->scene->Disable();
 		App->scene->CleanUp();
 		App->members->Enable();
@@ -39,6 +41,8 @@ update_status ModuleSceneLose::Update()
 	{
 		this->Disable();
 		CleanUp();
+		App->HUD->Disable();
+		App->HUD->CleanUp();
 		App->scene->Disable();
 		App->scene->CleanUp();
 		App->members->Enable();
