@@ -62,7 +62,7 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 	kickRP.PushBack({ 86, 90, 86, 90 });
 	kickRP.PushBack({ 86 * 2, 90, 86, 90 });
 	kickRP.PushBack({ 86 * 3, 90, 86, 90 });
-	kickRP.loop = true; //it can be true
+	kickRP.loop = false; //it can be true
 	kickRP.speed = 0.15f;
 
 	//LEFT KICK
@@ -175,34 +175,50 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 void Enemy_Purple::Update()
 {
 	//-----------------------------------------------------------------------AI
-	if (position.x < App->player->position.x+20 && currentAnim != &kickRP) {
+	if (position.x < App->player->position.x  && coolTime < coolDown) 
+	{
 		position.x += velociti;
 		direcction = 1;
 		currentAnim = &rightAnimP;
 		
 	}
-	if (position.x > App->player->position.x - 20 && currentAnim != &kickRP) {
+	if (position.x > App->player->position.x  && coolTime < coolDown)
+	{
 		position.x -= velociti;
 		direcction = 0;
 		currentAnim = &leftAnimP;
 		
 	
 	}
-	if (position.y < App->player->position.y && currentAnim != &kickRP) {
+	if (position.y < App->player->position.y && coolTime < coolDown)
+	{
 
 		position.y += velociti;
+		if (position.x > App->player->position.x && coolTime < coolDown)
+		{
+			direcction = 0;
 		
+		}
+
+		else if (position.x < App->player->position.x && coolTime < coolDown)
+		{
+			direcction = 1;
+		
+		}
 
 	}
-	if (position.y > App->player->position.y && currentAnim != &kickRP) {
+	if (position.y > App->player->position.y && coolTime < coolDown)
+	{
 		position.y -= velociti;
-		if (position.x > App->player->position.x)
+		if (position.x > App->player->position.x && coolTime < coolDown)
 		{
 			direcction = 0;
 			currentAnim = &upAnimLP;
 		}
 
-		else if (position.x < App->player->position.x && currentAnim != &kickRP)
+		
+
+		else if (position.x < App->player->position.x && coolTime < coolDown)
 		{
 			direcction = 1;
 			currentAnim = &upAnimRP;
@@ -216,7 +232,8 @@ void Enemy_Purple::Update()
 	if (currentAnim == &jumpLP)direcction = 0;
 	if (currentAnim == &leftAnimP)direcction = 0;
 	if (currentAnim == &punchLP)direcction = 0;
-
+	if (currentAnim == &kickLP)direcction = 0;
+	if (currentAnim == &upAnimLP)direcction = 0;
 	//------------------------------------------------------------LEFT ANIM direction
 	if (currentAnim == &upAnimRP)direcction = 1;
 	if (currentAnim == &kickRP)direcction = 1;
@@ -229,14 +246,14 @@ void Enemy_Purple::Update()
 
 		if (coolTime >= coolDown) {
 
-			if (position.x == App->player->position.x && position.y == App->player->position.y)
+			if (direcction==0 && currentAnim != &kickLP)
 			{
 				currentAnim = &kickLP;
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
 				coolTime = 0.0f;
 			
 			}
-			else if (currentAnim == &kickRP)
+			else if (direcction == 1 && currentAnim != &kickRP)
 			{
 				currentAnim = &kickRP;
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
