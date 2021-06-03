@@ -87,6 +87,9 @@ bool ModuleSceneCinematic::Start()
 	leoTexture = App->textures->Load("Assets/Characters/Leonardo.png");
 	michelangeloTexture = App->textures->Load("Assets/Characters/Michelangelo.png");
 
+	// ----------------------------------------------------------------- AUDIO
+	Scream1 = App->audio->LoadFx("Assets/FX/atack_scream.wav");
+
 	return true;
 }
 
@@ -137,7 +140,6 @@ update_status ModuleSceneCinematic::PostUpdate()
 	if (counter > 30 && counter < 80)
 	{
 		App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 0.0f, 0);
-
 		App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 123, 116, &fireComment, NULL); //FireComment
 	}
 	//---------------------------------------------------------------------------------------------------Characters

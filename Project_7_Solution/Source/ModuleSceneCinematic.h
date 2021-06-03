@@ -90,6 +90,9 @@ public:
 		spawnPosDonatello,
 		spawnPosRaphael;
 
+	// Sound effects indices
+	uint Scream1 = 0;
+
 	// Counter for camera movement, audio and intro events
 	int counter;
 };
