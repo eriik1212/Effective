@@ -20,6 +20,7 @@
 #include "ModuleMembers.h"
 #include "ModuleSceneCharacter.h"
 #include "ModuleHUD.h"
+#include "ModuleSceneCinematic.h"
 
 Application::Application()
 {
@@ -34,19 +35,20 @@ Application::Application()
 	modules[4] = members = new ModuleMembers(true);
 	modules[5] = sceneIntro = new ModuleSceneIntro(false);
 	modules[6] = sceneCharacter = new ModuleSceneCharacter(false);
-	modules[7] = scene = new ModuleScene(false);
-	modules[8] = level2 = new ModuleLevel2(false);
-	modules[9] = sceneWin = new ModuleSceneWin(false);
-	modules[10] = sceneLose = new ModuleSceneLose(false);
-	modules[11] = player = new ModulePlayer(false);
-	modules[12] = particles = new ModuleParticles(true);
-	modules[13] = enemies = new ModuleEnemies(false);
-	modules[14] = HUD = new ModuleHUD(false);
+	modules[7] = sceneCinematic = new ModuleSceneCinematic(false);
+	modules[8] = scene = new ModuleScene(false);
+	modules[9] = level2 = new ModuleLevel2(false);
+	modules[10] = sceneWin = new ModuleSceneWin(false);
+	modules[11] = sceneLose = new ModuleSceneLose(false);
+	modules[12] = player = new ModulePlayer(false);
+	modules[13] = particles = new ModuleParticles(true);
+	modules[14] = enemies = new ModuleEnemies(false);
+	modules[15] = HUD = new ModuleHUD(false);
 
-	modules[15] = collisions = new ModuleCollisions(true);
-	modules[16] = fade = new ModuleFadeToBlack(true);
-	modules[17] = fonts = new ModuleFonts(true);
-	modules[18] = render = new ModuleRender(true);
+	modules[16] = collisions = new ModuleCollisions(true);
+	modules[17] = fade = new ModuleFadeToBlack(true);
+	modules[18] = fonts = new ModuleFonts(true);
+	modules[19] = render = new ModuleRender(true);
 
 
 

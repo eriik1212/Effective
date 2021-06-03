@@ -4,7 +4,7 @@
 #include "Globals.h"
 #include <time.h>
 
-#define NUM_MODULES 19
+#define NUM_MODULES 20
 
 class Module;
 class ModuleWindow;
@@ -18,6 +18,7 @@ class ModuleHUD;
 class ModuleMembers;
 class ModuleSceneIntro;
 class ModuleSceneCharacter;
+class ModuleSceneCinematic;
 class ModuleSceneWin;
 class ModuleSceneLose;
 class ModuleParticles;
@@ -64,6 +65,7 @@ public:
 	ModuleSceneIntro* sceneIntro = nullptr;
 	ModuleHUD* HUD = nullptr;
 	ModuleSceneCharacter* sceneCharacter = nullptr;
+	ModuleSceneCinematic* sceneCinematic = nullptr;
 	ModuleSceneWin* sceneWin = nullptr;
 	ModuleSceneLose* sceneLose = nullptr;
 	ModuleEnemies* enemies = nullptr;

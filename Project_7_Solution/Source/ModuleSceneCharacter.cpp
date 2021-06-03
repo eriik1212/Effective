@@ -12,6 +12,7 @@
 #include "ModuleSceneIntro.h"
 #include "ModulePlayer.h"
 #include "ModuleHUD.h"
+#include "ModuleSceneCinematic.h"
 
 #include<stdio.h>
 
@@ -50,7 +51,7 @@ update_status ModuleSceneCharacter::Update()
 		this->Disable();
 		CleanUp();
 		App->HUD->Disable();
-		App->scene->Enable();
+		App->sceneCinematic->Enable();
 	}
 
 	else if (App->input->keys[SDL_SCANCODE_ESCAPE] == KEY_STATE::KEY_DOWN)
