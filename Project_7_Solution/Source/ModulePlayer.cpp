@@ -661,7 +661,7 @@ bool ModulePlayer::Start()
 
 	// ----------------------------------------------------------------- AUDIO
 	PunchMiss = App->audio->LoadFx("Assets/FX/punch_1.wav");
-	PunchHit = App->audio->LoadFx("Assets/Fx/punch_2.wav");
+	PunchHit = App->audio->LoadFx("Assets/FX/punch_2.wav");
 	Scream1 = App->audio->LoadFx("Assets/FX/atack_scream.wav");
 	lifeIncrease = App->audio->LoadFx("Assets/FX/01_cowabunga.wav");
 	lifeLost = App->audio->LoadFx("Assets/FX/lost_life.wav");
