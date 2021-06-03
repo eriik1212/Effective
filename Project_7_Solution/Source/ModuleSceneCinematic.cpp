@@ -58,6 +58,11 @@ ModuleSceneCinematic::ModuleSceneCinematic(bool enabled) : Module(enabled)
 	fireComment.w = 64;
 	fireComment.h = 32;
 
+	hangOnComment.x = 483;
+	hangOnComment.y = 1196;
+	hangOnComment.w = 64;
+	hangOnComment.h = 32;
+
 	fireAnim.PushBack({ 1430, 1169, 69, 153 });
 	fireAnim.PushBack({ 1335, 1169, 69, 153 });
 	fireAnim.PushBack({ 1242, 1170, 69, 153 });
@@ -88,7 +93,8 @@ bool ModuleSceneCinematic::Start()
 	michelangeloTexture = App->textures->Load("Assets/Characters/Michelangelo.png");
 
 	// ----------------------------------------------------------------- AUDIO
-	Scream1 = App->audio->LoadFx("Assets/FX/atack_scream.wav");
+	Fire = App->audio->LoadFx("Assets/FX/02_aprilsfire.wav");
+	HangOn = App->audio->LoadFx("Assets/FX/03_hang_on_april.wav"); 
 
 	return true;
 }
@@ -136,17 +142,12 @@ update_status ModuleSceneCinematic::PostUpdate()
 
 	if (fireCurrentAnim != nullptr)
 	App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 187, 0, &(fireCurrentAnim->GetCurrentFrame()), NULL); //Fire
-	
-	if (counter > 30 && counter < 80)
-	{
-		App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 0.0f, 0);
-		App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 123, 116, &fireComment, NULL); //FireComment
-	}
+
 	//---------------------------------------------------------------------------------------------------Characters
 	//Splinter
 	if (splinterCurrentAnim != nullptr)
 		App->render->Blit(cinematicBackground, 56, SCREEN_HEIGHT - 70, &(splinterCurrentAnim->GetCurrentFrame()), NULL);
-	
+
 	//Leo
 	App->render->Blit(charactersTexture, SCREEN_WIDTH - 122, SCREEN_HEIGHT - leo.h - 3, &leo, NULL);
 
@@ -154,11 +155,37 @@ update_status ModuleSceneCinematic::PostUpdate()
 	App->render->Blit(charactersTexture, SCREEN_WIDTH - 120 - leo.w, SCREEN_HEIGHT - michelangelo.h - 13, &michelangelo, NULL);
 
 	//Donatello
-	App->render->Blit(charactersTexture, SCREEN_WIDTH - 122 - leo.w - michelangelo.w, SCREEN_HEIGHT - donatello. h - 13, &donatello, NULL);
+	App->render->Blit(charactersTexture, SCREEN_WIDTH - 122 - leo.w - michelangelo.w, SCREEN_HEIGHT - donatello.h - 13, &donatello, NULL);
 
 	//Rafa
 	App->render->Blit(charactersTexture, SCREEN_WIDTH - 118 - leo.w - michelangelo.w - donatello.w, SCREEN_HEIGHT - raphael.h - 32, &raphael, NULL);
 
+
+	if (counter == 10)
+	{
+		App->audio->PlayFx(Fire);
+	}
+
+	if (counter == 80)
+	{
+		App->audio->PlayMusic("Assets/Audio/01_opening_demo.ogg", 0.0f, 0);
+	}
+
+	if (counter > 30 && counter < 80)
+	{
+		App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 123, 116, &fireComment, NULL); //FireComment
+	}
+
+	if (counter > 100 && counter < 160)
+	{
+		App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 28, 120, &hangOnComment, NULL); //FireComment
+	}
+
+	if (counter == 20)
+	{
+		App->audio->PlayFx(HangOn);
+	}
+	
 
 
 	return update_status::UPDATE_CONTINUE;

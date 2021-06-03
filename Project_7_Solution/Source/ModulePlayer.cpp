@@ -1758,7 +1758,6 @@ update_status ModulePlayer::PostUpdate()
 	{
 		App->audio->PlayFx(Scream1);
 		App->render->camera.x += 1;
-
 	}
 
 	if (App->scene->Enabled() || App->level2->Enabled())

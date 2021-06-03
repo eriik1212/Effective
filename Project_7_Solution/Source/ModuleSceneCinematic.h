@@ -41,7 +41,10 @@ public:
 		raphael,
 		donatello,
 		michelangelo,
+
 		fireComment,
+		hangOnComment,
+
 		drawColorScreen;
 
 	SDL_Texture* cinematicBackground;
@@ -91,7 +94,8 @@ public:
 		spawnPosRaphael;
 
 	// Sound effects indices
-	uint Scream1 = 0;
+	uint Fire = 0;
+	uint HangOn = 0;
 
 	// Counter for camera movement, audio and intro events
 	int counter;
