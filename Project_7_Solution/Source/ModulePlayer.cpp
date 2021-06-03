@@ -1802,7 +1802,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
-		
+		App->audio->PlayFx(getsHit);
 		App->HUD->lifeP1.Update();
 		App->HUD->lifeP1.Update();	
 		updateLifeIndicatorPlayer1(lifesP1, 2);
