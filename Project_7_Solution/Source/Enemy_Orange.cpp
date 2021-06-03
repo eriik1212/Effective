@@ -137,7 +137,7 @@ Enemy_Orange::Enemy_Orange(int x, int y) : Enemy(x, y)
 	dieFacefwRO.PushBack({ 1055,2001,88, 69 });
 	dieFacefwRO.PushBack({ 1055 - 88,2001,88, 69 });
 	dieFacefwRO.PushBack({ 1055 - 88 * 2,2001,88, 69 });
-	dieFacefwRO.PushBack({ 1055 - 88 * 3,2001,88, 69 });
+	dieFacefwRO.PushBack({ 1055 - 88 * 3,2001,88, 69 }); 
 	dieFacefwRO.PushBack({ 1055 - 88 * 4,2001,88, 69 });
 	dieFacefwRO.PushBack({ 1055 - 88 * 5,2001,88, 69 });
 	dieFacefwRO.PushBack({ 1055 - 88 * 6,2001,88, 69 });

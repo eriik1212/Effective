@@ -510,7 +510,7 @@ ModulePlayer::ModulePlayer(bool enabled) : Module(enabled)
 		hittedBackLowAnimL.PushBack({ 1692, 3024, 94, 84 });
 		hittedBackLowAnimL.PushBack({ 1594, 3024, 94, 84 });
 		hittedBackLowAnimL.PushBack({ 1525, 3024, 80, 84 });
-		hittedBackLowAnimL.loop = false;
+		hittedBackLowAnimL.loop = true;
 		hittedBackLowAnimL.speed = 0.1f;
 
 		// 6R
@@ -665,6 +665,7 @@ bool ModulePlayer::Start()
 	Scream1 = App->audio->LoadFx("Assets/FX/atack_scream.wav");
 	lifeIncrease = App->audio->LoadFx("Assets/FX/01_cowabunga.wav");
 	lifeLost = App->audio->LoadFx("Assets/FX/lost_life.wav");
+	getsHit = App->audio->LoadFx("Assets/FX/enemy_punch.wav");
 
 	// ----------------------------------------------------------------- COLLIDERS
 	HIT = App->collisions->AddCollider({ position.x , position.y, 20, 16 }, Collider::Type::PLAYER_SHOT,this);
@@ -1423,7 +1424,10 @@ update_status ModulePlayer::Update()
 			&& currentAnimation != &jumpAnimR
 			&& currentAnimation != &jumpAnimL
 			&& currentAnimation != &deathAnimR
-			&& currentAnimation != &deathAnimL)
+			&& currentAnimation != &deathAnimL
+			&& currentAnimation != &hittedBackMediumAnimL
+			&& currentAnimation != &hittedBackLowAnimL
+			&& currentAnimation != &hittedBackLowAnimR)
 		{
 			switch (lastPosition) {
 
@@ -1614,7 +1618,19 @@ update_status ModulePlayer::PostUpdate()
 			idleAnimR.Reset();
 			currentAnimation = &idleAnimR;
 		}
+		
+		//Gets hit
+		else if (hittedBackLowAnimL.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
 
+		else if (hittedBackLowAnimR.loopCount > 0)
+		{
+			idleAnimR.Reset();
+			currentAnimation = &idleAnimR;
+		}
 		// Return de LoopCount to 0
 
 		hitKickAnimL.loopCount = 0;
@@ -1633,6 +1649,9 @@ update_status ModulePlayer::PostUpdate()
 		hitAirAnim2R.loopCount = 0;
 		hitAirAnim1L.loopCount = 0;
 		hitAirAnim2L.loopCount = 0;
+		hittedBackLowAnimL.loopCount = 0;
+		hittedBackLowAnimR.loopCount = 0;
+
 	}
 
 	// ---------------------------------------------------------------- RIGHT
@@ -1767,6 +1786,7 @@ update_status ModulePlayer::PostUpdate()
 
 void updateLifeIndicatorPlayer1(unsigned short* lifeIndicatorP1, unsigned short damage)
 {
+	
 	for (int i = (MAX_LIFE - 1); i >= 0; --i) {
 
 		if (*(lifeIndicatorP1 + i) == 0) {
@@ -1782,10 +1802,23 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 {
 	if (c1 == collider && destroyed == false)
 	{
+		
 		App->HUD->lifeP1.Update();
-		App->HUD->lifeP1.Update();
+		App->HUD->lifeP1.Update();	
 		updateLifeIndicatorPlayer1(lifesP1, 2);
 
+		if (lastPosition == 1)
+		{
+			
+			hittedBackLowAnimL.Reset();
+			currentAnimation = &hittedBackLowAnimL;
+		}
+
+		if (lastPosition == 0)
+		{
+			hittedBackLowAnimR.Reset();
+			currentAnimation = &hittedBackLowAnimR;
+		}
 		// ---------------------------------------------------------------- RIGHT
 		if (lifesP1[0] == 0 && App->HUD->lifes != 0 && lastPosition == 0) {
 			deathAnimR.Reset();
