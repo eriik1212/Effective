@@ -161,6 +161,7 @@ public:
 	uint Scream1 = 0;
 	uint lifeIncrease = 0;
 	uint lifeLost = 0;
+	uint getsHit = 0;
 
 	// Font score index
 	uint scoreP1 = 000;
