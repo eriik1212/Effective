@@ -11,7 +11,7 @@ public:
 	// Creates animation and movement data and the collider
 	Enemy_Purple(int x, int y);
 
-	float coolDown = 8.0f;
+	float coolDown = 20.0f;
 	float coolTime = 0.0f;
 	float velociti = 1.0f;
 

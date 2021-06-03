@@ -175,57 +175,75 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 void Enemy_Purple::Update()
 {
 	//-----------------------------------------------------------------------AI
-	if (position.x < App->player->position.x  && coolTime < coolDown) 
-	{
-		position.x += velociti;
-		direcction = 1;
-		currentAnim = &rightAnimP;
-		
+
+	if ( coolTime < coolDown && time <= 0) {
+
+		if (position.x + 10 == App->player->position.x)
+		{
+			App->player->position.x - 100;
+			position.x -= velociti;
+
+		}
+		if (position.x - 10 == App->player->position.x)
+		{
+			App->player->position.x + 100;
+			position.x += velociti;
+
+		}
+
+		if (position.x + 10 < App->player->position.x)
+		{
+			position.x += velociti;
+			direcction = 1;
+			currentAnim = &rightAnimP;
+
+		}
+		if (position.x - 10 > App->player->position.x)
+		{
+			position.x -= velociti;
+			direcction = 0;
+			currentAnim = &leftAnimP;
+
+
+		}
+		if (position.y < App->player->position.y)
+		{
+
+			position.y += velociti;
+			if (position.x + 10 > App->player->position.x)
+			{
+				direcction = 0;
+
+			}
+
+			else if (position.x - 10 < App->player->position.x)
+			{
+				direcction = 1;
+
+			}
+
+		}
+		if (position.y > App->player->position.y)
+		{
+			position.y -= velociti;
+			if (position.x + 20 > App->player->position.x)
+			{
+				direcction = 0;
+				currentAnim = &upAnimLP;
+			}
+
+
+
+			else if (position.x - 20 < App->player->position.x)
+			{
+				direcction = 1;
+				currentAnim = &upAnimRP;
+			}
+
+
+		}
 	}
-	if (position.x > App->player->position.x  && coolTime < coolDown)
-	{
-		position.x -= velociti;
-		direcction = 0;
-		currentAnim = &leftAnimP;
-		
 	
-	}
-	if (position.y < App->player->position.y && coolTime < coolDown)
-	{
-
-		position.y += velociti;
-		if (position.x > App->player->position.x && coolTime < coolDown)
-		{
-			direcction = 0;
-		
-		}
-
-		else if (position.x < App->player->position.x && coolTime < coolDown)
-		{
-			direcction = 1;
-		
-		}
-
-	}
-	if (position.y > App->player->position.y && coolTime < coolDown)
-	{
-		position.y -= velociti;
-		if (position.x > App->player->position.x && coolTime < coolDown)
-		{
-			direcction = 0;
-			currentAnim = &upAnimLP;
-		}
-
-		
-
-		else if (position.x < App->player->position.x && coolTime < coolDown)
-		{
-			direcction = 1;
-			currentAnim = &upAnimRP;
-		}
-
-		
-	}
 
 
 	//------------------------------------------------------------LEFT direcction
@@ -238,34 +256,42 @@ void Enemy_Purple::Update()
 	if (currentAnim == &upAnimRP)direcction = 1;
 	if (currentAnim == &kickRP)direcction = 1;
 
+
 	if (App->collisions->GodMode == true) {
 
 
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		
 
-		if (coolTime >= coolDown) {
+		if (coolTime >= coolDown && time <= 0.0f || coolTime >= coolDown &&
+            position.x + 10 == App->player->position.x  && position.x - 10 == App->player->position.x &&
+			position.y + 10 == App->player->position.y && position.y - 10 == App->player->position.y) {
 
 			if (direcction==0 && currentAnim != &kickLP)
 			{
 				currentAnim = &kickLP;
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
 				coolTime = 0.0f;
-			
+				kickLP.Reset();
+				time = 2.0f;
 			}
+
 			else if (direcction == 1 && currentAnim != &kickRP)
 			{
 				currentAnim = &kickRP;
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
 				coolTime = 0.0f;
-				
+				kickRP.Reset();
+				time = 2.0f;
 			}
 			else
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		}
-		else
+		else {
 			coolTime += 0.1f;
-
+			time -= 0.1f;
+		}
+			
 	}
 
 	
