@@ -28,6 +28,16 @@ ModuleSceneCinematic::ModuleSceneCinematic(bool enabled) : Module(enabled)
 	backGround2.w = 256;
 	backGround2.h = 224;
 
+	backGround3.x = 1542;
+	backGround3.y = 1169;
+	backGround3.w = 320;
+	backGround3.h = 224;
+
+	finalDoor.x = 1798;
+	finalDoor.y = 1169;
+	finalDoor.w = 64;
+	finalDoor.h = 224;
+
 	frontBuilding.x = 1542;
 	frontBuilding.y = 1410;
 	frontBuilding.w = 256;
@@ -72,8 +82,19 @@ ModuleSceneCinematic::ModuleSceneCinematic(bool enabled) : Module(enabled)
 	fireAnim.PushBack({ 1335, 1169, 69, 153 });
 	fireAnim.PushBack({ 1242, 1170, 69, 153 });
 	fireAnim.loop = true;
-	fireAnim.speed = 0.1f;
+	fireAnim.speed = 0.15f;
 
+	secondFireAnim.PushBack({ 16, 1490, 158, 224 });
+	secondFireAnim.PushBack({ 213, 1490, 158, 224 });
+	secondFireAnim.PushBack({ 410, 1490, 158, 224 });
+	secondFireAnim.PushBack({ 605, 1490, 158, 224 });
+	secondFireAnim.PushBack({ 793, 1490, 158, 224 });
+	secondFireAnim.PushBack({ 980, 1490, 158, 224 });
+	secondFireAnim.PushBack({ 1161, 1490, 158, 224 });
+	secondFireAnim.loop = true;
+	secondFireAnim.speed = 0.15f;
+
+	//Characters Jump Anim
 	leoJumpAnim.PushBack({ 30, 148, 46, 60 });
 
 	michelangeloJumpAnim.PushBack({ 127, 148, 46, 60 });
@@ -110,6 +131,7 @@ ModuleSceneCinematic::ModuleSceneCinematic(bool enabled) : Module(enabled)
 	pathMichelangelo.PushBack({ 0.7f, 2.0f }, 15, &michelangeloJumpAnim);
 	pathMichelangelo.PushBack({ 0.7f, 4.0f }, 80, &michelangeloJumpAnim);
 
+	//Characters Fall Anim
 	leoFallAnim1.PushBack({ 0, 312 + (104 * 3), 95, 104 });
 	leoFallAnim2.PushBack({ 0, 312 + (104 * 2), 95, 104 });
 	leoFallAnim3.PushBack({ 0, 312 + (104 * 1), 95, 104 });
@@ -133,10 +155,99 @@ ModuleSceneCinematic::ModuleSceneCinematic(bool enabled) : Module(enabled)
 	//PATH FALL Leo
 	pathLeo2.PushBack({ 0.0f, 2.0f }, 20, & leoFallAnim1);
 	pathLeo2.PushBack({ 0.0f, 2.0f }, 20, & leoFallAnim2);
-	pathLeo2.PushBack({ 0.0f, 2.0f }, 20, & leoFallAnim3);
-	pathLeo2.PushBack({ 0.0f, 2.0f }, 20, & leoFallAnim4);
+	pathLeo2.PushBack({ 0.0f, 3.0f }, 20, & leoFallAnim3);
+	pathLeo2.PushBack({ 0.0f, 3.0f }, 20, & leoFallAnim4);
 
+	//PATH FALL Mikel
+	pathMichelangelo2.PushBack({ 0.0f, 2.0f }, 20, & michelangeloFallAnim1);
+	pathMichelangelo2.PushBack({ -0.3f, 2.0f }, 20, & michelangeloFallAnim2);
+	pathMichelangelo2.PushBack({ -0.3f, 3.0f }, 20, & michelangeloFallAnim3);
+	pathMichelangelo2.PushBack({ -0.3f, 3.0f }, 20, & michelangeloFallAnim4);
 
+	//PATH FALL Dona
+	pathDonatello2.PushBack({ 0.0f, 2.0f }, 20, & donatelloFallAnim1);
+	pathDonatello2.PushBack({ -0.5f, 2.0f }, 20, & donatelloFallAnim2);
+	pathDonatello2.PushBack({ -0.5f, 3.0f }, 20, & donatelloFallAnim3);
+	pathDonatello2.PushBack({ -0.5f, 3.0f }, 20, & donatelloFallAnim4);
+
+	//PATH FALL Rafa
+	pathRaphael2.PushBack({ 0.0f, 2.0f }, 20, & raphaelFallAnim1);
+	pathRaphael2.PushBack({ 0.5f, 2.0f }, 20, & raphaelFallAnim2);
+	pathRaphael2.PushBack({ 0.5f, 3.0f }, 20, & raphaelFallAnim3);
+	pathRaphael2.PushBack({ 0.5f, 3.0f }, 20, & raphaelFallAnim4);
+
+	//Characters Final Anim
+	leoFinalAnim1.PushBack({ 837, 588, 94, 84 });
+	leoFinalAnim2.PushBack({ 0, 924, 94, 84 });
+	leoFinalAnim3.PushBack({ 0, 924, 94, 84 });
+	leoFinalAnim3.PushBack({ 94, 924, 94, 84 });
+	leoFinalAnim3.PushBack({ 188, 924, 94, 84 });
+	leoFinalAnim3.PushBack({ 282, 924, 94, 84 });
+	leoFinalAnim3.PushBack({ 376, 924, 94, 84 });
+	leoFinalAnim3.PushBack({ 470, 924, 94, 84 });
+	leoFinalAnim3.PushBack({ 564, 924, 94, 84 });
+	leoFinalAnim3.PushBack({ 658, 924, 94, 84 });
+	leoFinalAnim3.loop = true;
+	leoFinalAnim3.speed = 0.25f;
+
+	michelangeloFinalAnim1.PushBack({ 731, 545, 94, 84 });
+	michelangeloFinalAnim2.PushBack({ 898, 1383, 94, 94});
+	michelangeloFinalAnim2.PushBack({ 992, 1383, 94, 94 });
+	michelangeloFinalAnim2.PushBack({ 1086, 1383, 94, 94 });
+	michelangeloFinalAnim2.speed = 0.03f;
+	michelangeloFinalAnim3.PushBack({ 0, 890, 80, 84 });
+	michelangeloFinalAnim3.PushBack({ 10 + (80 * 1), 890, 80, 84 });
+	michelangeloFinalAnim3.PushBack({ 10 + (80 * 2), 890, 80, 84 });
+	michelangeloFinalAnim3.PushBack({ 10 + (80 * 3), 890, 80, 84 });
+	michelangeloFinalAnim3.PushBack({ 10 + (80 * 4), 890, 80, 84 });
+	michelangeloFinalAnim3.PushBack({ 10 + (80 * 5), 890, 80, 84 });
+	michelangeloFinalAnim3.PushBack({ 10 + (80 * 6), 890, 80, 84 });
+	michelangeloFinalAnim3.loop = true;
+	michelangeloFinalAnim3.speed = 0.25f;
+
+	donatelloFinalAnim1.PushBack({ 932, 648, 94, 84 });
+	donatelloFinalAnim2.PushBack({ 0, 1012, 103, 84 });
+	donatelloFinalAnim3.PushBack({ 0, 1012, 103, 84 });
+	donatelloFinalAnim3.PushBack({ 0 + (103 * 1), 1012, 103, 84 });
+	donatelloFinalAnim3.PushBack({ 0 + (103 * 2), 1012, 103, 84 });
+	donatelloFinalAnim3.PushBack({ 0 + (103 * 3), 1012, 103, 84 });
+	donatelloFinalAnim3.PushBack({ 0 + (103 * 4), 1012, 103, 84 });
+	donatelloFinalAnim3.PushBack({ 0 + (103 * 5), 1012, 103, 84 });
+	donatelloFinalAnim3.PushBack({ 0 + (103 * 6), 1012, 103, 84 });
+	donatelloFinalAnim3.loop = true;
+	donatelloFinalAnim3.speed = 0.25f;
+
+	raphaelFinalAnim1.PushBack({ 940, 588, 94, 84 });
+	raphaelFinalAnim2.PushBack({ 0, 924, 94, 84 });
+	raphaelFinalAnim3.PushBack({ 0, 924, 94, 84 });
+	raphaelFinalAnim3.PushBack({ 0 + (94 * 1), 924, 94, 84 });
+	raphaelFinalAnim3.PushBack({ 0 + (94 * 2), 924, 94, 84 });
+	raphaelFinalAnim3.PushBack({ 0 + (94 * 3), 924, 94, 84 });
+	raphaelFinalAnim3.PushBack({ 0 + (94 * 4), 924, 94, 84 });
+	raphaelFinalAnim3.PushBack({ 0 + (94 * 5), 924, 94, 84 });
+	raphaelFinalAnim3.PushBack({ 0 + (94 * 6), 924, 94, 84 });
+	raphaelFinalAnim3.loop = true;
+	raphaelFinalAnim3.speed = 0.25f;
+
+	//FINAL PATH Leo
+	pathLeo3.PushBack({ 2.0f, 6.0f }, 30, & leoFinalAnim1);
+	pathLeo3.PushBack({ 0.0f, 0.0f }, 30, & leoFinalAnim2);
+	pathLeo3.PushBack({ 2.0f, 0.0f }, 400, & leoFinalAnim3);
+
+	//FINAL PATH Mikel
+	pathMichelangelo3.PushBack({ 2.0f, 6.0f }, 30, & michelangeloFinalAnim1);
+	pathMichelangelo3.PushBack({ 0.0f, 0.0f }, 105, & michelangeloFinalAnim2);
+	pathMichelangelo3.PushBack({ 2.0f, 0.0f }, 400, & michelangeloFinalAnim3);
+
+	//FINAL PATH Dona
+	pathDonatello3.PushBack({ 2.0f, 6.0f }, 30, & donatelloFinalAnim1);
+	pathDonatello3.PushBack({ 0.0f, 0.0f }, 30, & donatelloFinalAnim2);
+	pathDonatello3.PushBack({ 2.0f, 0.0f }, 400, & donatelloFinalAnim3);
+
+	//FINAL PATH Rafa
+	pathRaphael3.PushBack({ 2.0f, 6.0f }, 30, & raphaelFinalAnim1);
+	pathRaphael3.PushBack({ 0.0f, 0.0f }, 30, & raphaelFinalAnim2);
+	pathRaphael3.PushBack({ 2.0f, 0.0f }, 400, & raphaelFinalAnim3);
 }
 
 ModuleSceneCinematic::~ModuleSceneCinematic() {}
@@ -158,6 +269,16 @@ bool ModuleSceneCinematic::Start()
 	pathMichelangelo.Reset();
 
 	pathLeo2.Reset();
+	pathDonatello2.Reset();
+	pathRaphael2.Reset();
+	pathMichelangelo2.Reset();
+
+	pathLeo3.Reset();
+	pathDonatello3.Reset();
+	pathRaphael3.Reset();
+	pathMichelangelo3.Reset();
+
+	michelangeloFinalAnim2.Reset();
 
 	//Spawn ALL Paths
 	//Jump Paths
@@ -176,6 +297,28 @@ bool ModuleSceneCinematic::Start()
 	//Fall Paths
 	pathLeo2.ResetRelativePosition();
 	spawnPosLeo2 = iPoint((int)((SCREEN_WIDTH / 2 - 40)), (int)(-10));
+
+	pathDonatello2.ResetRelativePosition();
+	spawnPosDonatello2 = iPoint((int)((SCREEN_WIDTH / 2 - 50)), (int)(-30));
+
+	pathRaphael2.ResetRelativePosition();
+	spawnPosRaphael2 = iPoint((int)((SCREEN_WIDTH / 2 - 50)), (int)(-30));
+
+	pathMichelangelo2.ResetRelativePosition();
+	spawnPosMichelangelo2 = iPoint((int)((SCREEN_WIDTH / 2 - 50)), (int)(-30));
+
+	//Final Paths
+	pathLeo3.ResetRelativePosition();
+	spawnPosLeo3 = iPoint((int)(50), (int)(-100));
+
+	pathDonatello3.ResetRelativePosition();
+	spawnPosDonatello3 = iPoint((int)(50), (int)(-100));
+
+	pathRaphael3.ResetRelativePosition();
+	spawnPosRaphael3 = iPoint((int)(50), (int)(-100));
+
+	pathMichelangelo3.ResetRelativePosition();
+	spawnPosMichelangelo3 = iPoint((int)(50), (int)(-100));
 
 	cinematicBackground = App->textures->Load("Assets/Introduction/introduction.png");
 	charactersTexture = App->textures->Load("Assets/Characters/Introduction.png");
@@ -206,6 +349,12 @@ update_status ModuleSceneCinematic::Update()
 	fireCurrentAnim = &fireAnim;
 	fireAnim.Update();
 
+	//Walk Update
+	leoFinalAnim3.Update();
+	donatelloFinalAnim3.Update();
+	raphaelFinalAnim3.Update();
+	michelangeloFinalAnim3.Update();
+
 	//----------------------------------------------------------------------------------------Initialize Positions
 	//Jump Pos
 	positionLeo = spawnPosLeo + pathLeo.GetRelativePosition();
@@ -219,15 +368,6 @@ update_status ModuleSceneCinematic::Update()
 
 	positionMichelangelo = spawnPosMichelangelo + pathMichelangelo.GetRelativePosition();
 	michelangeloCurrentAnim = pathMichelangelo.GetCurrentAnimation();
-
-	//Fall Pos
-	positionLeo2 = spawnPosLeo2 + pathLeo2.GetRelativePosition();
-	if (counter > 270)
-	{
-		leoCurrentAnim = pathLeo2.GetCurrentAnimation();
-		pathLeo2.Update();
-	}
-
 
 	if (counter > 80)
 	{
@@ -248,8 +388,78 @@ update_status ModuleSceneCinematic::Update()
 	{
 		pathRaphael.Update();
 	}
+
+
+	//Fall Pos
+	positionLeo2 = spawnPosLeo2 + pathLeo2.GetRelativePosition();
+	if (counter > 270)
+	{
+		leoCurrentAnim = pathLeo2.GetCurrentAnimation();
+		pathLeo2.Update();
+	}
+
+	positionMichelangelo2 = spawnPosMichelangelo2 + pathMichelangelo2.GetRelativePosition();
+	if (counter > 300)
+	{
+		michelangeloCurrentAnim = pathMichelangelo2.GetCurrentAnimation();
+		pathMichelangelo2.Update();
+	}
+
+	positionDonatello2 = spawnPosDonatello2 + pathDonatello2.GetRelativePosition();
+	if (counter > 330)
+	{
+		donatelloCurrentAnim = pathDonatello2.GetCurrentAnimation();
+		pathDonatello2.Update();
+	}
+
+	positionRaphael2 = spawnPosRaphael2 + pathRaphael2.GetRelativePosition();
+	if (counter > 360)
+	{
+		raphaelCurrentAnim = pathRaphael2.GetCurrentAnimation();
+		pathRaphael2.Update();
+	}
+
+	if (counter > 450)
+	{
+		fireCurrentAnim = &secondFireAnim;
+		secondFireAnim.Update();
+	}
+
+	//Final Pos
+	positionLeo3 = spawnPosLeo3 + pathLeo3.GetRelativePosition();
+	if (counter > 460)
+	{
+		leoCurrentAnim = pathLeo3.GetCurrentAnimation();
+		pathLeo3.Update();
+	}
+
+	positionMichelangelo3 = spawnPosMichelangelo3 + pathMichelangelo3.GetRelativePosition();
+	if (counter > 490)
+	{
+		michelangeloCurrentAnim = pathMichelangelo3.GetCurrentAnimation();
+		pathMichelangelo3.Update();
+	}
+	if (counter > 530)
+	{
+		michelangeloFinalAnim2.Update();
+	}
+
+	positionDonatello3 = spawnPosDonatello3 + pathDonatello3.GetRelativePosition();
+	if (counter > 520)
+	{
+		donatelloCurrentAnim = pathDonatello3.GetCurrentAnimation();
+		pathDonatello3.Update();
+	}
+
+	positionRaphael3 = spawnPosRaphael3 + pathRaphael3.GetRelativePosition();
+	if (counter > 550)
+	{
+		raphaelCurrentAnim = pathRaphael3.GetCurrentAnimation();
+		pathRaphael3.Update();
+	}
+
 	// ScanCodes
-	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 950)
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 800)
 	{
 		this->Disable();
 		CleanUp();
@@ -267,18 +477,22 @@ update_status ModuleSceneCinematic::Update()
 // Update: draw background
 update_status ModuleSceneCinematic::PostUpdate()
 {
+	//---------------------------------------------------------------------------------------------------------------BLACK SCREEN
 	if (counter < 10)
 	{
 		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 		SDL_RenderFillRect(App->render->renderer, &drawColorScreen);
 	}
 
-	App->render->Blit(cinematicBackground, ((SCREEN_WIDTH/2) - (backGround.w/2)), 0, &backGround, NULL); //BackGround
+	//----------------------------------------------------------------------------------------------------------------------FIRST BACKGROUND
+	//BackGround
+	App->render->Blit(cinematicBackground, ((SCREEN_WIDTH/2) - (backGround.w/2)), 0, &backGround, NULL); 
 
+	//Fire
 	if (fireCurrentAnim != nullptr)
-	App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 187, 0, &(fireCurrentAnim->GetCurrentFrame()), NULL); //Fire
+	App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 187, 0, &(fireCurrentAnim->GetCurrentFrame()), NULL); 
 
-	//---------------------------------------------------------------------------------------------------Characters
+	//---------------------------------------------------------------------------Characters
 	
 	if (counter < 80)
 	{
@@ -369,12 +583,14 @@ update_status ModuleSceneCinematic::PostUpdate()
 		App->audio->PlayFx(HangOn);
 	}
 
+	//---------------------------------------------------------------------------------------------------------------BLACK SCREEN
 	if (counter > 240 && counter < 260)
 	{
 		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 		SDL_RenderFillRect(App->render->renderer, &drawColorScreen);
 	}
 
+	//---------------------------------------------------------------------------------------------------------------SECOND BACKGROUND
 	if (counter > 250)
 	{
 		//SecondBackground
@@ -387,8 +603,79 @@ update_status ModuleSceneCinematic::PostUpdate()
 		if (leoCurrentAnim != nullptr)
 			App->render->Blit(charactersTexture, positionLeo2.x, positionLeo2.y, &(leoCurrentAnim->GetCurrentFrame()), NULL);
 	}
-	
 
+	if (counter > 300)
+	{
+		//Michelangelo
+		if (michelangeloCurrentAnim != nullptr)
+			App->render->Blit(charactersTexture, positionMichelangelo2.x, positionMichelangelo2.y, &(michelangeloCurrentAnim->GetCurrentFrame()), NULL);
+	}
+
+	if (counter > 330)
+	{
+		//Donatello
+		if (donatelloCurrentAnim != nullptr)
+			App->render->Blit(charactersTexture, positionDonatello2.x, positionDonatello2.y, &(donatelloCurrentAnim->GetCurrentFrame()), NULL);
+	}
+
+	if (counter > 360)
+	{
+		//Raphael
+		if (raphaelCurrentAnim != nullptr)
+			App->render->Blit(charactersTexture, positionRaphael2.x, positionRaphael2.y, &(raphaelCurrentAnim->GetCurrentFrame()), NULL);
+	}
+	
+	//---------------------------------------------------------------------------------------------------------------BLACK SCREEN
+	if (counter > 440 && counter < 460)
+	{
+		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
+		SDL_RenderFillRect(App->render->renderer, &drawColorScreen);
+	}
+
+	//---------------------------------------------------------------------------------------------------------------THIRD BACKGROUND
+	if (counter > 450)
+	{
+		//SecondBackground
+		App->render->Blit(cinematicBackground, -2, 0, &backGround3, NULL); //SecondBackGround
+
+		//Fire
+		if (fireCurrentAnim != nullptr)
+			App->render->Blit(cinematicBackground, 0, 0, &(fireCurrentAnim->GetCurrentFrame()), NULL);
+	}
+
+	if (counter > 550)
+	{
+		//Rafa
+		if (raphaelCurrentAnim != nullptr)
+			App->render->Blit(raphaelTexture, positionRaphael3.x, positionRaphael3.y, &(raphaelCurrentAnim->GetCurrentFrame()), NULL);
+	}
+
+	if (counter > 520)
+	{
+		//Donatello
+		if (donatelloCurrentAnim != nullptr)
+			App->render->Blit(donatelloTexture, positionDonatello3.x, positionDonatello3.y, &(donatelloCurrentAnim->GetCurrentFrame()), NULL);
+	}
+
+	if (counter > 490)
+	{
+		//Mikel
+		if (michelangeloCurrentAnim != nullptr)
+			App->render->Blit(michelangeloTexture, positionMichelangelo3.x, positionMichelangelo3.y, &(michelangeloCurrentAnim->GetCurrentFrame()), NULL);
+	}
+
+	if (counter > 460)
+	{
+		//Leo
+		if (leoCurrentAnim != nullptr)
+			App->render->Blit(leoTexture, positionLeo3.x, positionLeo3.y, &(leoCurrentAnim->GetCurrentFrame()), NULL);
+	}
+
+	if (counter > 450)
+	{
+		//Final Door
+		App->render->Blit(cinematicBackground, 254, 0, &finalDoor, NULL); //SecondBackGround
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }

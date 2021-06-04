@@ -37,7 +37,9 @@ public:
 public:
 	SDL_Rect backGround,
 		backGround2,
+		backGround3,
 		frontBuilding,
+
 		leo,
 		raphael,
 		donatello,
@@ -45,6 +47,8 @@ public:
 
 		fireComment,
 		hangOnComment,
+
+		finalDoor,
 
 		drawColorScreen;
 
@@ -109,8 +113,24 @@ public:
 		leoFallAnim4,
 		michelangeloFallAnim4,
 		raphaelFallAnim4,
+
+		leoFinalAnim1,
+		michelangeloFinalAnim1,
+		donatelloFinalAnim1,
+		raphaelFinalAnim1,
+
+		leoFinalAnim2,
+		michelangeloFinalAnim2,
+		donatelloFinalAnim2,
+		raphaelFinalAnim2,
+
+		leoFinalAnim3,
+		michelangeloFinalAnim3,
+		donatelloFinalAnim3,
+		raphaelFinalAnim3,
 		
-		fireAnim;
+		fireAnim,
+		secondFireAnim;
 
 	// The current position in the world
 	iPoint positionDonatello,
@@ -121,7 +141,12 @@ public:
 		positionDonatello2,
 		positionLeo2,
 		positionMichelangelo2,
-		positionRaphael2;
+		positionRaphael2,
+		
+		positionDonatello3,
+		positionLeo3,
+		positionMichelangelo3,
+		positionRaphael3;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPosLeo,
@@ -132,7 +157,12 @@ public:
 		spawnPosLeo2,
 		spawnPosMichelangelo2,
 		spawnPosDonatello2,
-		spawnPosRaphael2;
+		spawnPosRaphael2,
+		
+		spawnPosLeo3,
+		spawnPosMichelangelo3,
+		spawnPosDonatello3,
+		spawnPosRaphael3;
 
 	// Sound effects indices
 	uint Fire = 0;
