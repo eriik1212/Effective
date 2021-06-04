@@ -10,6 +10,7 @@
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneCharacter.h"
 #include "ModuleFonts.h"
+#include "ModuleHUD.h"
 #include <stdio.h>
 
 ModuleSceneCinematic::ModuleSceneCinematic(bool enabled) : Module(enabled)
@@ -336,6 +337,8 @@ bool ModuleSceneCinematic::Start()
 	//------------------------------------------------------------------ TEXT
 	char lookupTable[] = { "! @abcdefghijklmnop rstuvwxyz." };
 	tmntFont = App->fonts->Load("Assets/Fonts/tmnt_font.png", lookupTable, 2);
+	char lookupTableNumbers[] = { "0123456789 " };
+	numbersFont = App->fonts->Load("Assets/Fonts/fonts.png", lookupTableNumbers, 1);
 
 	return true;
 }
@@ -464,11 +467,18 @@ update_status ModuleSceneCinematic::Update()
 		pathRaphael3.Update();
 	}
 
+	if (counter > 680) App->HUD->Enable();
+
 	// ScanCodes
-	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 900)
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 800)
 	{
 		this->Disable();
 		CleanUp();
+		if (App->HUD->Enabled())
+		{
+			App->HUD->Disable();
+		}
+
 		App->scene->Enable();
 	}
 
@@ -684,155 +694,159 @@ update_status ModuleSceneCinematic::PostUpdate()
 	}
 
 	//---------------------------------------------------------------------------------------------------------------BLACK SCREEN
-	if (counter > 700)
+	if (counter > 680)
 	{
 		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
 		SDL_RenderFillRect(App->render->renderer, &drawColorScreen);
 
 		// Blit the text
-		if (counter > 705)
+		if (counter > 682)
 		{
-			App->fonts->BlitText(SCREEN_WIDTH/2, 0, tmntFont, "s");
+			App->fonts->BlitText((SCREEN_WIDTH/2) - 32 , 62, tmntFont, "s");
 		}
-		if (counter > 710)
+		if (counter > 682 + (2 * 1))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "e");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 32 + (8 * 1), 62, tmntFont, "c");
 		}
-		if (counter > 715)
+		if (counter > 682 + (2 * 2))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "n");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 32 + (8 * 2), 62, tmntFont, "e");
 		}
-		if (counter > 720)
+		if (counter > 682 + (2 * 3))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "e");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 32 + (8 * 3), 62, tmntFont, "n");
 		}
-		if (counter > 725)
+		if (counter > 682 + (2 * 4))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, " ");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 32 + (8 * 4), 62, tmntFont, "e");
 		}
-		if (counter > 730)
+		if (counter > 682 + (2 * 5))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "1");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 32 + (8 * 5), 62, tmntFont, " ");
 		}
-		if (counter > 735)
+		if (counter > 682 + (2 * 6))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "f");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 32 + (8 * 6), 62, numbersFont, "1");
 		}
-		if (counter > 740)
+		if (counter > 682 + (2 * 7))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "i");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120, 92, tmntFont, "f");
 		}
-		if (counter > 745)
+		if (counter > 682 + (2 * 8))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "r");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 1), 92, tmntFont, "i");
 		}
-		if (counter > 750)
+		if (counter > 682 + (2 * 9))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "e");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 2), 92, tmntFont, "r");
 		}
-		if (counter > 755)
+		if (counter > 682 + (2 * 10))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "!");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 3), 92, tmntFont, "e");
 		}
-		if (counter > 760)
+		if (counter > 682 + (2 * 11))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, " ");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 4), 92, tmntFont, "!");
 		}
-		if (counter > 765)
+		if (counter > 682 + (2 * 12))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "w");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 5), 92, tmntFont, " ");
 		}
-		if (counter > 770)
+		if (counter > 682 + (2 * 13))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "e");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 6), 92, tmntFont, "w");
 		}
-		if (counter > 775)
+		if (counter > 682 + (2 * 14))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, " ");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 7), 92, tmntFont, "e");
 		}
-		if (counter > 780)
+		if (counter > 682 + (2 * 15))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "g");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 8), 92, tmntFont, " ");
 		}
-		if (counter > 785)
+		if (counter > 682 + (2 * 16))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "o");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 9), 92, tmntFont, "g");
 		}
-		if (counter > 790)
+		if (counter > 682 + (2 * 17))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "t");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 10), 92, tmntFont, "o");
 		}
-		if (counter > 795)
+		if (counter > 682 + (2 * 18))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "t");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 11), 92, tmntFont, "t");
 		}
-		if (counter > 800)
+		if (counter > 682 + (2 * 19))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "a");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 12), 92, tmntFont, "t");
 		}
-		if (counter > 805)
+		if (counter > 682 + (2 * 20))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, " ");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 13), 92, tmntFont, "a");
 		}
-		if (counter > 810)
+		if (counter > 682 + (2 * 21))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "g");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 14), 92, tmntFont, " ");
 		}
-		if (counter > 815)
+		if (counter > 682 + (2 * 22))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "e");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 15), 92, tmntFont, "g");
 		}
-		if (counter > 820)
+		if (counter > 682 + (2 * 23))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "t");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 16), 92, tmntFont, "e");
 		}
-		if (counter > 825)
+		if (counter > 682 + (2 * 24))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, " ");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 17), 92, tmntFont, "t");
 		}
-		if (counter > 830)
+		if (counter > 682 + (2 * 25))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "a");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 18), 92, tmntFont, " ");
 		}
-		if (counter > 835)
+		if (counter > 682 + (2 * 26))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "p");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 19), 92, tmntFont, "a");
 		}
-		if (counter > 840)
+		if (counter > 682 + (2 * 27))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "r");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 20), 92, tmntFont, "p");
 		}
-		if (counter > 845)
+		if (counter > 682 + (2 * 28))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "i");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 21), 92, tmntFont, "r");
 		}
-		if (counter > 850)
+		if (counter > 682 + (2 * 29))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "l");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 22), 92, tmntFont, "i");
 		}
-		if (counter > 855)
+		if (counter > 682 + (2 * 30))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, " ");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 23), 92, tmntFont, "l");
 		}
-		if (counter > 860)
+		if (counter > 682 + (2 * 31))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "o");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 24), 92, tmntFont, " ");
 		}
-		if (counter > 865)
+		if (counter > 682 + (2 * 32))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "u");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 25), 92, tmntFont, "o");
 		}
-		if (counter > 890)
+		if (counter > 682 + (2 * 33))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "t");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 26), 92, tmntFont, "u");
 		}
-		if (counter > 895)
+		if (counter > 682 + (2 * 34))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "!");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 27), 92, tmntFont, "t");
 		}
-		if (counter > 900)
+		if (counter > 682 + (2 * 35))
 		{
-			App->fonts->BlitText(0, 0, tmntFont, "!");
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 28), 92, tmntFont, "!");
+		}
+		if (counter > 682 + (2 * 36))
+		{
+			App->fonts->BlitText((SCREEN_WIDTH / 2) - 120 + (8 * 29), 92, tmntFont, "!");
 		}
 		
 	}

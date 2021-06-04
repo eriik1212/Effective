@@ -15,6 +15,7 @@
 #include "ModuleSceneLose.h"
 #include "ModuleFonts.h"
 #include "ModuleSceneCharacter.h"
+#include "ModuleSceneCinematic.h"
 
 #include <stdio.h>
 
@@ -143,9 +144,9 @@ bool ModuleHUD::Start()
 	lifeIncrease = App->audio->LoadFx("Assets/FX/01_cowabunga.wav");
 
 	// ----------------------------------------------------------------- FONTS
-	char lookupTable[] = { "0123456789 " };
-	scoreFont = App->fonts->Load("Assets/UI & HUD/fonts.png", lookupTable, 1);
-	lifeFont = App->fonts->Load("Assets/UI & HUD/num_lifes_font.png", lookupTable, 1);
+	char lookupTableNumb[] = { "0123456789 " };
+	scoreFont = App->fonts->Load("Assets/Fonts/fonts.png", lookupTableNumb, 1);
+	lifeFont = App->fonts->Load("Assets/UI & HUD/num_lifes_font.png", lookupTableNumb, 1);
 
 	return ret;
 }
@@ -207,7 +208,7 @@ update_status ModuleHUD::PostUpdate()
 
 		App->render->Blit(introTexture, (SCREEN_WIDTH / 2) - (konami1989.w / 2), (SCREEN_HEIGHT - konami1989.h), &konami1989, 0); // KONAMI1989
 	}
-	else if (App->scene->Enabled() || App->level2->Enabled())
+	else if (App->scene->Enabled() || App->level2->Enabled() || App->sceneCinematic->Enabled())
 	{
 		App->render->Blit(HUDTexture, 8, 0, &(HUDP1.GetCurrentFrame()), 0); // HUD Square Player1
 		App->render->Blit(HUDTexture, 41, 16, &(lifeP1.GetCurrentFrame()), 0); // Full Life Indicator

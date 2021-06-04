@@ -171,6 +171,7 @@ public:
 	// Text
 	uint text = 0;
 	int tmntFont = -1;
+	int numbersFont = -1;
 
 	// Counter for camera movement, audio and intro events
 	int counter;
