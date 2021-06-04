@@ -168,6 +168,10 @@ public:
 	uint Fire = 0;
 	uint HangOn = 0;
 
+	// Text
+	uint text = 0;
+	int tmntFont = -1;
+
 	// Counter for camera movement, audio and intro events
 	int counter;
 };

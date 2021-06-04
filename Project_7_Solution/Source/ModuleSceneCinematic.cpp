@@ -9,6 +9,8 @@
 #include "ModuleAudio.h"
 #include "ModuleFadeToBlack.h"
 #include "ModuleSceneCharacter.h"
+#include "ModuleFonts.h"
+#include <stdio.h>
 
 ModuleSceneCinematic::ModuleSceneCinematic(bool enabled) : Module(enabled)
 {
@@ -331,6 +333,10 @@ bool ModuleSceneCinematic::Start()
 	Fire = App->audio->LoadFx("Assets/FX/02_aprilsfire.wav");
 	HangOn = App->audio->LoadFx("Assets/FX/03_hang_on_april.wav"); 
 
+	//------------------------------------------------------------------ TEXT
+	char lookupTable[] = { "! @abcdefghijklmnop rstuvwxyz." };
+	tmntFont = App->fonts->Load("Assets/Fonts/tmnt_font.png", lookupTable, 2);
+
 	return true;
 }
 
@@ -459,7 +465,7 @@ update_status ModuleSceneCinematic::Update()
 	}
 
 	// ScanCodes
-	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 800)
+	if ((App->input->keys[SDL_SCANCODE_SPACE] == KEY_STATE::KEY_DOWN) || counter > 900)
 	{
 		this->Disable();
 		CleanUp();
@@ -676,6 +682,161 @@ update_status ModuleSceneCinematic::PostUpdate()
 		//Final Door
 		App->render->Blit(cinematicBackground, 254, 0, &finalDoor, NULL); //SecondBackGround
 	}
+
+	//---------------------------------------------------------------------------------------------------------------BLACK SCREEN
+	if (counter > 700)
+	{
+		SDL_SetRenderDrawColor(App->render->renderer, 0, 0, 0, 255);
+		SDL_RenderFillRect(App->render->renderer, &drawColorScreen);
+
+		// Blit the text
+		if (counter > 705)
+		{
+			App->fonts->BlitText(SCREEN_WIDTH/2, 0, tmntFont, "s");
+		}
+		if (counter > 710)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "e");
+		}
+		if (counter > 715)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "n");
+		}
+		if (counter > 720)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "e");
+		}
+		if (counter > 725)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, " ");
+		}
+		if (counter > 730)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "1");
+		}
+		if (counter > 735)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "f");
+		}
+		if (counter > 740)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "i");
+		}
+		if (counter > 745)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "r");
+		}
+		if (counter > 750)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "e");
+		}
+		if (counter > 755)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "!");
+		}
+		if (counter > 760)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, " ");
+		}
+		if (counter > 765)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "w");
+		}
+		if (counter > 770)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "e");
+		}
+		if (counter > 775)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, " ");
+		}
+		if (counter > 780)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "g");
+		}
+		if (counter > 785)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "o");
+		}
+		if (counter > 790)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "t");
+		}
+		if (counter > 795)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "t");
+		}
+		if (counter > 800)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "a");
+		}
+		if (counter > 805)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, " ");
+		}
+		if (counter > 810)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "g");
+		}
+		if (counter > 815)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "e");
+		}
+		if (counter > 820)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "t");
+		}
+		if (counter > 825)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, " ");
+		}
+		if (counter > 830)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "a");
+		}
+		if (counter > 835)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "p");
+		}
+		if (counter > 840)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "r");
+		}
+		if (counter > 845)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "i");
+		}
+		if (counter > 850)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "l");
+		}
+		if (counter > 855)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, " ");
+		}
+		if (counter > 860)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "o");
+		}
+		if (counter > 865)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "u");
+		}
+		if (counter > 890)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "t");
+		}
+		if (counter > 895)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "!");
+		}
+		if (counter > 900)
+		{
+			App->fonts->BlitText(0, 0, tmntFont, "!");
+		}
+		
+	}
+
 
 	return update_status::UPDATE_CONTINUE;
 }
