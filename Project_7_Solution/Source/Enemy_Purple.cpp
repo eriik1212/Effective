@@ -263,9 +263,7 @@ void Enemy_Purple::Update()
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		
 
-		if (coolTime >= coolDown && time <= 0.0f || coolTime >= coolDown &&
-            position.x + 10 == App->player->position.x  && position.x - 10 == App->player->position.x &&
-			position.y + 10 == App->player->position.y && position.y - 10 == App->player->position.y) {
+		if (coolTime >= coolDown && time <= 0.0f && position.x  >= App->player->position.x +38&& position.x+38 <= App->player->position.x || coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x - 38 && position.x - 38 <= App->player->position.x) {
 
 			if (direcction==0 && currentAnim != &kickLP)
 			{

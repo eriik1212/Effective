@@ -14,6 +14,7 @@ public:
 	float coolDown = 20.0f;
 	float coolTime = 0.0f;
 	float velociti = 1.0f;
+	bool attack = false;
 
 	float time = 2.0f;
 
