@@ -3,6 +3,7 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
 
 Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 {
@@ -151,11 +152,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	//aereal kick to right (not for this version)
 
 
-	path.PushBack({ -1.0f, 0.0f }, 20, &leftAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 40, &knifeThrowLW);
-	path.PushBack({ -1.0f, 0.0f }, 130, &leftAnimW);
-	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 40, &knifeMeleeRW);
+	
 
 
 	
@@ -165,14 +162,79 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 void Enemy_White::Update()
 {
-	//------------------------------------------------------------LEFT direcction
-	if (currentAnim == &leftAnimW)direcction = 0;
 
-	//------------------------------------------------------------LEFT ANIM direction
+	//------------------------------------------------------------LEFT  ANIM direcction
+	if (currentAnim == &leftAnimW)direcction = 0;
+	if (currentAnim == &upAnimLW)direcction = 0;
+
+	//------------------------------------------------------------RIGHT ANIM direcction
 	if (currentAnim == &rightAnimW)direcction = 1;
 	if (currentAnim == &knifeMeleeRW)direcction = 1;
+	if (currentAnim == &upAnimRW)direcction = 1;
+	//----------------------------------------------------------------AI
 
-	if (coolTime2 >= coolDown && currentAnim == &knifeThrowLW)
+	//------------------------x
+	
+
+	if (position.x < App->player->position.x)
+	{
+		currentAnim = &rightAnimW;
+		direcction = 1;
+		position.x += velociti;
+
+	}
+	if (position.x  > App->player->position.x)
+	{
+		currentAnim = &leftAnimW;
+		direcction = 0;
+		position.x -= velociti;
+	}
+
+	//----------------------y
+
+	if (position.y  < App->player->position.y - 16)
+	{
+
+		position.y += velociti;
+		if (position.x + 10 > App->player->position.x)
+		{
+			direcction = 0;
+
+		}
+
+		else if (position.x - 10 < App->player->position.x)
+		{
+			direcction = 1;
+
+		}
+
+	}
+
+	if (position.y > App->player->position.y)
+	{
+		position.y -= velociti;
+
+		if (position.x + 20 > App->player->position.x)
+		{
+			direcction = 0;
+			currentAnim = &upAnimLW;
+		}
+
+
+
+		else if (position.x - 20 < App->player->position.x)
+		{
+			direcction = 1;
+			currentAnim = &upAnimRW;
+		}
+
+
+	}
+	
+
+	//-------------------------------------------------------------------------------------------------------
+
+	if (coolTime2 >= coolDown && position.y== App->player->position.y)
 	{
 		coolTime2 = 0;
 		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
@@ -204,10 +266,6 @@ void Enemy_White::Update()
 
 
 
-	path.Update();
-	position = spawnPos + path.GetRelativePosition();
-	currentAnim = path.GetCurrentAnimation();
-	
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

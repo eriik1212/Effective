@@ -175,30 +175,30 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 void Enemy_Purple::Update()
 {
 	//-----------------------------------------------------------------------AI
+	//-----------------------------------------------------x
+	if ( time <= 0 ) {
 
-	if ( coolTime < coolDown && time <= 0) {
-
-		if (position.x + 10 == App->player->position.x)
+		if (position.x + 15 == App->player->position.x)
 		{
 			App->player->position.x - 100;
 			position.x -= velociti;
 
 		}
-		if (position.x - 10 == App->player->position.x)
+		if (position.x - 15 == App->player->position.x)
 		{
 			App->player->position.x + 100;
 			position.x += velociti;
 
 		}
 
-		if (position.x + 10 < App->player->position.x)
+		if (position.x + 15 < App->player->position.x)
 		{
 			position.x += velociti;
 			direcction = 1;
 			currentAnim = &rightAnimP;
 
 		}
-		if (position.x - 10 > App->player->position.x)
+		if (position.x - 15 > App->player->position.x)
 		{
 			position.x -= velociti;
 			direcction = 0;
@@ -206,7 +206,9 @@ void Enemy_Purple::Update()
 
 
 		}
-		if (position.y < App->player->position.y)
+
+		//-----------------------------------------------------y
+		if (position.y  < App->player->position.y - 16)
 		{
 
 			position.y += velociti;
@@ -263,7 +265,8 @@ void Enemy_Purple::Update()
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		
 
-		if (coolTime >= coolDown && time <= 0.0f && position.x  >= App->player->position.x +38&& position.x+38 <= App->player->position.x || coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x - 38 && position.x - 38 <= App->player->position.x) {
+		if (coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x + 38 && position.x + 38 <= App->player->position.x ||
+			coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x - 38 && position.x - 38 <= App->player->position.x) {
 
 			if (direcction==0 && currentAnim != &kickLP)
 			{
@@ -284,6 +287,7 @@ void Enemy_Purple::Update()
 			}
 			else
 				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+
 		}
 		else {
 			coolTime += 0.1f;
