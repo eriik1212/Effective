@@ -37,6 +37,31 @@ public:
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* stage2Texture = nullptr;
 
+	SDL_Texture* aprilTexture = nullptr;
+
+	SDL_Texture* shrederTexture = nullptr;
+
+	// The pointer to the current player animation
+	// It will be switched depending on the player's movement direction
+	Animation* aprilCurrentAnimation = nullptr;
+
+	Animation* shrederCurrentAnimation = nullptr;
+
+	Animation aprilAnim,
+		shrederStandAnim,
+		shrederWalkAnim,
+		shrederGrabAnim,
+		shrederJumpAnim;
+
+	// The path that will define the position in the world
+	Path pathShreder;
+
+	// The current position in the world
+	iPoint positionShreder;
+
+	// Original spawn position. Stored for movement calculations
+	iPoint spawnPosShreder;
+
 	//Animation drill;
 
 	//Initialazing scene audio index
