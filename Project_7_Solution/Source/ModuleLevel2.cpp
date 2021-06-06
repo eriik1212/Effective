@@ -155,7 +155,8 @@ bool ModuleLevel2::Start()
 				App->enemies->enemies[i] = nullptr;
 			}
 		}
-		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 250, 90);
+		//App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 150, 90);
+		App->enemies->AddEnemy(ENEMY_TYPE::BOSS_ENEMY, 250, 90);
 	}
 
 	return ret;

@@ -92,13 +92,13 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	// HITTED LOW LEFT
 	hittedLowLB.PushBack({ 957, 2154, 67, 106 });
 	hittedLowLB.PushBack({ 957, 2154, 67, 106 });
-	hittedLowLB.loop = true;
+	hittedLowLB.loop = false;
 	hittedLowLB.speed = 0.25f;
 
 	// HITTED LOW RIGHT
 	hittedLowRB.PushBack({ 0, 318, 67, 106 });
 	hittedLowRB.PushBack({ 0, 318, 67, 106 });
-	hittedLowRB.loop = true;
+	hittedLowRB.loop = false;
 	hittedLowRB.speed = 0.25f;
 
 	// DIE RIGHT
@@ -116,6 +116,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	dieLB.speed = 0.25f;
 
 
+
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 
@@ -123,6 +124,159 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 
 void Enemy_Boss::Update()
 {
+	//------------------------------------------------------------LEFT direcction
+
+	if (currentAnim == &leftAnimB)direcction = 0;
+	if (currentAnim == &kickLB)direcction = 0;
+	if (currentAnim == &hittedLowLB)direcction = 0;
+	//------------------------------------------------------------LEFT ANIM direction
+	if (currentAnim == &rightAnimB)direcction = 1;
+	if (currentAnim == &kickRB)direcction = 1;
+	if (currentAnim == &hittedLowRB)direcction = 1;
+
+
+
+	//-----------------------------------------------------------------------AI
+
+	//---------------------------------------------------------------------HIT ENEMY
+	if (tocado == true && direcction == 1 && currentAnim != &hittedLowRB && nohit < 0.0f)
+	{
+		position.x -= 40;
+		currentAnim = &hittedLowRB;
+		hittedLowRB.Reset();
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+		nohit = 10.0f;
+	}
+
+	else if (tocado == true && direcction == 0 && currentAnim != &hittedLowLB && nohit < 0.0f)
+	{
+		currentAnim = &hittedLowLB;
+		hittedLowLB.Reset();
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+		position.x += 40;
+		nohit = 10.0f;
+	}
+
+	else
+	{
+		tocado = false;
+		nohit -= 0.1f;
+	}
+
+	//--------------------------------------------------------------- ENEMY MOVE
+	//-----------------------------------------------------x
+	if (time <= 0 && tocado != true && nohit < 0.0f)
+	{
+
+		if (position.x + 15 == App->player->position.x)
+		{
+			App->player->position.x - 100;
+			position.x -= velociti;
+
+		}
+		if (position.x - 15 == App->player->position.x)
+		{
+			App->player->position.x + 100;
+			position.x += velociti;
+
+		}
+
+		if (position.x + 15 < App->player->position.x)
+		{
+			position.x += velociti;
+			direcction = 1;
+			currentAnim = &rightAnimB;
+
+		}
+		if (position.x - 15 > App->player->position.x)
+		{
+			position.x -= velociti;
+			direcction = 0;
+			currentAnim = &rightAnimB;
+
+
+		}
+
+		//-----------------------------------------------------y
+		if (position.y - 16 < App->player->position.y - 16)
+		{
+
+			position.y += velociti;
+			if (position.x + 10 > App->player->position.x)
+			{
+				direcction = 0;
+
+			}
+
+			else if (position.x - 10 < App->player->position.x)
+			{
+				direcction = 1;
+
+			}
+
+		}
+		if (position.y > App->player->position.y)
+		{
+			position.y -= velociti;
+			if (position.x + 20 > App->player->position.x)
+			{
+				direcction = 0;
+				currentAnim = &rightAnimB;
+			}
+
+
+
+			else if (position.x - 20 < App->player->position.x)
+			{
+				direcction = 1;
+				currentAnim = &rightAnimB;
+			}
+
+
+		}
+	}
+
+
+
+
+
+
+	if (App->collisions->GodMode == true) {
+
+
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+
+
+		if (coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x + 38 && position.x + 38 <= App->player->position.x && App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] == false && tocado != true && nohit < 0.0f ||
+			coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x - 38 && position.x - 38 <= App->player->position.x && App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] == false && tocado != true && nohit < 0.0f) {
+
+			if (direcction == 0 && currentAnim != &kickLB)
+			{
+				currentAnim = &kickLB;
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+				kickLB.Reset();
+				time = 2.0f;
+			}
+
+			else if (direcction == 1 && currentAnim != &kickRB)
+			{
+				currentAnim = &kickRB;
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+				kickRB.Reset();
+				time = 2.0f;
+			}
+			else
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+
+		}
+		else {
+			coolTime += 0.1f;
+			time -= 0.1f;
+		}
+
+	}
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
