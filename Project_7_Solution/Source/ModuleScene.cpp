@@ -142,6 +142,20 @@ bool ModuleScene::Start()
 		}
 		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 52);
 		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 110);
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 350, 110);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 450, 110);
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 500, 50);
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 750, 0);
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 800, 80);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 900, 115);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 910, 70);
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 1000, 110);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1030, 110);
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 1050, 70);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 80);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 110);
+		
+
 		//App->enemies->AddEnemy(ENEMY_TYPE::BALL_ENEMY, 495, -75);
 		
 		
