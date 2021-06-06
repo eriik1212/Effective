@@ -163,6 +163,7 @@ public:
 	uint lifeLost = 0;
 	uint getsHit = 0;
 
+	int counter = 0;
 };
 
 #endif //!__MODULE_PLAYER_H__

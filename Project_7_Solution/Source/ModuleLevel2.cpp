@@ -155,7 +155,8 @@ bool ModuleLevel2::Start()
 				App->enemies->enemies[i] = nullptr;
 			}
 		}
-		//App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 150, 90);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 150, 90);
+		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 50, 120);
 		App->enemies->AddEnemy(ENEMY_TYPE::BOSS_ENEMY, 250, 90);
 	}
 
@@ -193,13 +194,12 @@ update_status ModuleLevel2::Update()
 
 		if (countDown > 70) drillAnim.Update();
 
-		//pathShreder.Update();
+		if (countDown > 300) pathShreder.Update();
 		
 		if (countDown == 1) App->audio->PlayFx(drillSound);
 		if (countDown == 200) App->audio->PlayFx(door);
-		if (countDown == 380) App->audio->PlayFx(sayYourPrayers);
 
-		/*if (countDown2 > 200)
+		if (countDown > 500)
 		{
 			this->Disable();
 			CleanUp();
@@ -214,12 +214,7 @@ update_status ModuleLevel2::Update()
 			App->HUD->Disable();
 
 			App->sceneWin->Enable();
-		}*/
-	}
-
-	if (countDown > 390)
-	{
-		App->enemies->AddEnemy(ENEMY_TYPE::BOSS_ENEMY, 200, 52);
+		}
 	}
 
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
@@ -289,9 +284,14 @@ update_status ModuleLevel2::PostUpdate()
 			App->render->Blit(drillTexture, SCREEN_WIDTH - 139, -40, &drill, NULL);
 		}
 
-		// Shreder
-		/*if (shrederCurrentAnimation != nullptr)
-			App->render->Blit(shrederTexture, positionShreder.x, positionShreder.y, &(shrederCurrentAnimation->GetCurrentFrame()), NULL);*/
+		if (countDown > 300)
+		{
+			// Shreder
+			if (shrederCurrentAnimation != nullptr)
+			{
+				App->render->Blit(shrederTexture, positionShreder.x, positionShreder.y, &(shrederCurrentAnimation->GetCurrentFrame()), NULL);
+			}
+		}
 	}
 
 	return update_status::UPDATE_CONTINUE;

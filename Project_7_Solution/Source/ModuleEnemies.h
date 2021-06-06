@@ -5,6 +5,7 @@
 
 #define MAX_ENEMIES 21
 #define MAX_LIFE 5     //enemy lifes
+#define MAX_LIFE_BOSS 15
 
 enum class ENEMY_TYPE
 {
