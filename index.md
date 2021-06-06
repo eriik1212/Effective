@@ -29,7 +29,6 @@ Coming soon!
 
 ```
 
-
 ### Effective studio team members
 ![](https://github.com/eriik1212/Effective/blob/main/Team%20photo.jpeg?raw=true)
 
