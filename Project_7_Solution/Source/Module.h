@@ -2,6 +2,7 @@
 #define __MODULE_H__
 
 #include "Globals.h"
+#include <stdio.h>
 
 struct Collider;
 

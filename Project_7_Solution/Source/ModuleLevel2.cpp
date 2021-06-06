@@ -136,8 +136,6 @@ update_status ModuleLevel2::Update()
 	if (App->player->position.y < 65) App->player->position.y = 65;
 	if (App->player->position.y > 136) App->player->position.y = 136;
 
-	// ------------------------------------------- World Animations Updates
-
 
 	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT_LVL2)
 	{
@@ -220,10 +218,6 @@ update_status ModuleLevel2::PostUpdate()
 {
 	// Draw everything --------------------------------------
 	App->render->Blit(stage2Texture, 0, 0, &background, 1); // Background
-	if (countDown < 100)
-	{
-		App->render->Blit(aprilTexture, background.w / 2 - 50, 85, &(aprilCurrentAnimation->GetCurrentFrame()), 1); // April
-	}
 	
 
 	// Shreder

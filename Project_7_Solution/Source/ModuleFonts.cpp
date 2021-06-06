@@ -85,6 +85,7 @@ void ModuleFonts::UnLoad(int font_id)
 
 void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 {
+
 	if (text == nullptr || font_id < 0 || font_id >= MAX_FONTS || fonts[font_id].texture == nullptr)
 	{
 		LOG("Unable to render text with bmp font id %d", font_id);
@@ -121,5 +122,7 @@ void ModuleFonts::BlitText(int x, int y, int font_id, const char* text) const
 
 		// Advance the position where we blit the next character
 		x += spriteRect.w;
+
+		LOG("Successfully rendered text with bmp font id %d", font_id);
 	}
 }

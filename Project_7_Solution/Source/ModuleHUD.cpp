@@ -185,6 +185,21 @@ update_status ModuleHUD::PostUpdate()
 	// Draw UI (NumLifes) --------------------------------------
 	sprintf_s(lifeText, 10, "%3d", lifes);
 
+
+	App->render->Blit(HUDTexture, 80, 0, &(HUDP234.GetCurrentFrame()), 0); // HUD Square Player2,3,4
+
+	App->render->Blit(HUDTexture, 80, 16, &(insertCoinP2.GetCurrentFrame()), 0); // INSERT COIN Player2
+	App->render->Blit(HUDTexture, 151, 16, &(insertCoinP3.GetCurrentFrame()), 0); // INSERT COIN Player3
+	App->render->Blit(HUDTexture, 222, 16, &(insertCoinP4.GetCurrentFrame()), 0); // INSERT COIN Player4
+
+
+	App->fonts->BlitText(45, 8, scoreFont, scoreTextP1); // P1
+	App->fonts->BlitText(116, 8, scoreFont, scoreTextP234); // P2
+	App->fonts->BlitText(187, 8, scoreFont, scoreTextP234); // P3
+	App->fonts->BlitText(258, 8, scoreFont, scoreTextP234); // P4
+
+	
+
 	// -------------------------------------------------------------------------------------------- HUD
 	if (lifes > 0 && App->sceneCharacter->Enabled())
 	{
@@ -216,17 +231,6 @@ update_status ModuleHUD::PostUpdate()
 	}
 
 
-	App->render->Blit(HUDTexture, 80, 0, &(HUDP234.GetCurrentFrame()), 0); // HUD Square Player2,3,4
-
-	App->render->Blit(HUDTexture, 80, 16, &(insertCoinP2.GetCurrentFrame()), 0); // INSERT COIN Player2
-	App->render->Blit(HUDTexture, 151, 16, &(insertCoinP3.GetCurrentFrame()), 0); // INSERT COIN Player3
-	App->render->Blit(HUDTexture, 222, 16, &(insertCoinP4.GetCurrentFrame()), 0); // INSERT COIN Player4
-
-
-	App->fonts->BlitText(45, 8, scoreFont, scoreTextP1); // P1
-	App->fonts->BlitText(116, 8, scoreFont, scoreTextP234); // P2
-	App->fonts->BlitText(187, 8, scoreFont, scoreTextP234); // P3
-	App->fonts->BlitText(258, 8, scoreFont, scoreTextP234); // P4
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -235,10 +239,15 @@ void  ModuleHUD::Reset()
 {
 	lifes = 0;
 	scoreP1 = 0;
+	lifeP1.Reset();
 }
 
 bool ModuleHUD::CleanUp()
 {
 	bool ret;
+
+	App->fonts->UnLoad(scoreFont);
+	App->fonts->UnLoad(lifeFont);
+
 	return true;
 }

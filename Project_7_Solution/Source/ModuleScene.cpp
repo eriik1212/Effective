@@ -241,7 +241,6 @@ update_status ModuleScene::Update()
 		App->enemies->CleanUp();
 
 		App->HUD->Disable();
-		App->fonts->UnLoad(-1);
 
 		App->sceneWin->Enable();
 	}
@@ -254,7 +253,6 @@ update_status ModuleScene::Update()
 
 		App->enemies->Disable();
 		App->enemies->CleanUp();
-		App->fonts->UnLoad(-1);
 
 		App->HUD->Disable();
 
