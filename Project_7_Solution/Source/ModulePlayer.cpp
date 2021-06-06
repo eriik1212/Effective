@@ -1488,7 +1488,6 @@ update_status ModulePlayer::Update()
 		App->scene->Disable();
 		App->level2->Disable();
 		App->HUD->Disable();
-		App->fonts->UnLoad(-1);
 		App->members->Enable();
 	}
 
@@ -1639,8 +1638,8 @@ update_status ModulePlayer::PostUpdate()
 		//Gets hit
 		else if (hittedBackLowAnimL.loopCount > 0)
 		{
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
 		}
 
 		else if (hittedBackLowAnimR.loopCount > 0)
@@ -1707,8 +1706,6 @@ update_status ModulePlayer::PostUpdate()
 			App->enemies->Disable();
 			App->enemies->CleanUp();
 
-			App->fonts->UnLoad(-1);
-
 			App->HUD->Disable();
 
 			App->sceneLose->Enable();
@@ -1750,8 +1747,6 @@ update_status ModulePlayer::PostUpdate()
 
 			App->enemies->Disable();
 			App->enemies->CleanUp();
-
-			App->fonts->UnLoad(-1);
 
 			App->HUD->Disable();
 
@@ -1869,8 +1864,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				App->player->HIT->pendingToDelete = true;
 				App->player->collider->pendingToDelete = true;
 
-				App->fonts->UnLoad(-1);
-
 				App->player->Disable();
 				App->player->CleanUp();
 
@@ -1915,8 +1908,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			{
 				App->player->HIT->pendingToDelete = true;
 				App->player->collider->pendingToDelete = true;
-
-				App->fonts->UnLoad(-1);
 
 				App->player->Disable();
 				App->player->CleanUp();

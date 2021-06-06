@@ -123,6 +123,9 @@ update_status ModuleLevel2::Update()
 	aprilCurrentAnimation = &aprilAnim;
 	aprilAnim.Update();
 
+	positionShreder = spawnPosShreder + pathShreder.GetRelativePosition();
+	shrederCurrentAnimation = pathShreder.GetCurrentAnimation();
+
 	shrederWalkAnim.Update();
 	shrederGrabAnim.Update();
 
@@ -141,8 +144,7 @@ update_status ModuleLevel2::Update()
 	{
 		//----------------------------------------------------------------------------------------Initialize Positions
 		pathShreder.Update();
-		positionShreder = spawnPosShreder + pathShreder.GetRelativePosition();
-		shrederCurrentAnimation = pathShreder.GetCurrentAnimation();
+		
 
 		countDown++;
 
@@ -219,10 +221,12 @@ update_status ModuleLevel2::PostUpdate()
 	// Draw everything --------------------------------------
 	App->render->Blit(stage2Texture, 0, 0, &background, 1); // Background
 	
-
-	// Shreder
-	if (shrederCurrentAnimation != nullptr)
-		App->render->Blit(shrederTexture, positionShreder.x, positionShreder.y, &(shrederCurrentAnimation->GetCurrentFrame()), NULL);
+	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT_LVL2)
+	{
+		// Shreder
+		if (shrederCurrentAnimation != nullptr)
+			App->render->Blit(shrederTexture, positionShreder.x, positionShreder.y, &(shrederCurrentAnimation->GetCurrentFrame()), NULL);
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }
