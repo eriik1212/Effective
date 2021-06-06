@@ -171,9 +171,20 @@ Enemy_Purple::Enemy_Purple(int x, int y) : Enemy(x, y)
 
 void Enemy_Purple::Update()
 {
+
+	//------------------------------------------------------------LEFT direcction
+	if (currentAnim == &jumpLP)direcction = 0;
+	if (currentAnim == &leftAnimP)direcction = 0;
+	if (currentAnim == &punchLP)direcction = 0;
+	if (currentAnim == &kickLP)direcction = 0;
+	if (currentAnim == &upAnimLP)direcction = 0;
+	//------------------------------------------------------------LEFT ANIM direction
+	if (currentAnim == &upAnimRP)direcction = 1;
+	if (currentAnim == &kickRP)direcction = 1;
+
+
+
 	//-----------------------------------------------------------------------AI
-	if (retirar == true)
-		currentAnim = &dieFacefwRP;
 	
 	//---------------------------------------------------------------------HIT ENEMY
 	if (tocado == true && direcction == 1 && currentAnim != &dieFacefwRP && nohit <0.0f)
@@ -275,15 +286,7 @@ void Enemy_Purple::Update()
 	
 
 
-	//------------------------------------------------------------LEFT direcction
-	if (currentAnim == &jumpLP)direcction = 0;
-	if (currentAnim == &leftAnimP)direcction = 0;
-	if (currentAnim == &punchLP)direcction = 0;
-	if (currentAnim == &kickLP)direcction = 0;
-	if (currentAnim == &upAnimLP)direcction = 0;
-	//------------------------------------------------------------LEFT ANIM direction
-	if (currentAnim == &upAnimRP)direcction = 1;
-	if (currentAnim == &kickRP)direcction = 1;
+	
 
 
 	if (App->collisions->GodMode == true) {
