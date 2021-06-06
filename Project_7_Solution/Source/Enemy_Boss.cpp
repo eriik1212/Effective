@@ -145,7 +145,7 @@ void Enemy_Boss::Update()
 		currentAnim = &hittedLowRB;
 		hittedLowRB.Reset();
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
-		nohit = 10.0f;
+		nohit = 4.0f;
 	}
 
 	else if (tocado == true && direcction == 0 && currentAnim != &hittedLowLB && nohit < 0.0f)
@@ -154,7 +154,7 @@ void Enemy_Boss::Update()
 		hittedLowLB.Reset();
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		position.x += 40;
-		nohit = 10.0f;
+		nohit = 4.0f;
 	}
 
 	else
@@ -174,6 +174,7 @@ void Enemy_Boss::Update()
 			position.x -= velociti;
 
 		}
+
 		if (position.x - 15 == App->player->position.x)
 		{
 			App->player->position.x + 100;
@@ -188,11 +189,13 @@ void Enemy_Boss::Update()
 			currentAnim = &rightAnimB;
 
 		}
+
 		if (position.x - 15 > App->player->position.x)
 		{
+
 			position.x -= velociti;
 			direcction = 0;
-			currentAnim = &rightAnimB;
+			currentAnim = &leftAnimB;
 
 
 		}
@@ -202,6 +205,7 @@ void Enemy_Boss::Update()
 		{
 
 			position.y += velociti;
+
 			if (position.x + 10 > App->player->position.x)
 			{
 				direcction = 0;

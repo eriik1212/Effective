@@ -179,23 +179,37 @@ void Enemy_White::Update()
 	if (currentAnim == &upAnimRW)direcction = 1;
 	if (currentAnim == &dieFacefwRW)direcction = 1;
 	//----------------------------------------------------------------AI
+	
 
-	//------------------------x
-	if (tocado == true && direcction == 1 && currentAnim != &dieFacefwRW && time <= 0)
+	//---------------------------------------------------------------------HIT ENEMY
+	if (tocado == true && direcction == 1 && currentAnim != &dieFacefwRW && nohit < 0.0f)
 	{
+		position.x -= 40;
 		currentAnim = &dieFacefwRW;
 		dieFacefwRW.Reset();
-		time = 2.0f;
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+		nohit = 10.0f;
 	}
-	else if (tocado == true && direcction == 0 && currentAnim != &dieFacefwLW && time <= 0)
+
+	else if (tocado == true && direcction == 0 && currentAnim != &dieFacefwLW && nohit < 0.0f)
 	{
 		currentAnim = &dieFacefwLW;
 		dieFacefwLW.Reset();
-		time = 2.0f;
+		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+		position.x += 40;
+		nohit = 10.0f;
 	}
-	else tocado = false;
+
+	else
+	{
+		tocado = false;
+		nohit -= 0.1f;
+	}
+
+	//------------------------x
 	
-	if (time <= 0)
+	
+	if (time <= 0 && tocado != true && nohit < 0.0f)
 	{
 
 		if (position.x < App->player->position.x)
@@ -258,9 +272,9 @@ void Enemy_White::Update()
 
 	
 
-	if (coolTime2 >= coolDown && position.y      == App->player->position.y && time <= 0 ||
-		coolTime2 >= coolDown && position.y - 26 == App->player->position.y && time <= 0)
-	{
+	if (coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x + 38 && position.x + 38 <= App->player->position.x && App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] == false && tocado != true && nohit < 0.0f ||
+		coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x - 38 && position.x - 38 <= App->player->position.x && App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] == false && tocado != true && nohit < 0.0f) {
+
 		
 		if (direcction == 1 && currentAnim != &knifeThrowRW) {
 			currentAnim = &knifeThrowRW;
