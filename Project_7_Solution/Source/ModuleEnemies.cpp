@@ -36,8 +36,8 @@ bool ModuleEnemies::Start()
 
 	white = App->textures->Load("Assets/Enemies/white_enemy.png");
 	purple = App->textures->Load("Assets/Enemies/purple_enemy.png");
-	orange = App->textures->Load("Assets(Enemies/orange_enemy.png");
-	boss = App->textures->Load("Assets/Enemies/white_enemy.png");
+	orange = App->textures->Load("Assets/Enemies/orange_enemy.png");
+	boss = App->textures->Load("Assets/Enemies/boss.png");
 	ball = App->textures->Load("Assets/Enemies/tile_map_set_stage_1.png.png");
 
 	enemyDamageFX = App->audio->LoadFx("Assets/FX/punch_2.wav");

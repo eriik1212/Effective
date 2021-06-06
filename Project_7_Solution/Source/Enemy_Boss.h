@@ -32,20 +32,23 @@ private:
 	iPoint positionEnemy;
 
 	// Enemy animations
-	Animation leftAnimP,
-		rightAnimP,
-		upAnimRP,
-		upAnimLP,
-		kickLP,
-		kickRP,
-		punchLP,
-		punchRP,
-		jumpLP,
-		jumpRP,
-		hitLP,
-		hitRP,
-		dieFacefwLP,
-		dieFacefwRP;
+	Animation idleAnimLB,
+		idleAnimRB,
+		leftAnimB,
+		rightAnimB,
+		upAnimRB,
+		upAnimLB,
+		kickLB,
+		kickRB,
+		kickGunRB,
+		kickGunLB,
+		embestidaRB,
+		embestidaLB,
+		punchRB,
+		hittedLowLB,
+		hittedLowRB,
+		dieLB,
+		dieRB;
 
 
 
