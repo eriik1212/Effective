@@ -4,6 +4,7 @@
 #include "Module.h"
 
 #define MAX_ENEMIES 4
+#define MAX_LIFE 5     //enemy lifes
 
 enum class ENEMY_TYPE
 {
@@ -64,6 +65,7 @@ public:
 
 	// All spawned enemies in the scene
 	Enemy* enemies[MAX_ENEMIES] = { nullptr };
+	
 private:
 	// Spawns a new enemy using the data from the queue
 	void SpawnEnemy(const EnemySpawnpoint& info);
@@ -81,6 +83,9 @@ private:
 	// The audio fx for destroying an enemy
 	int enemyDestroyedFx = 0;
 	int enemyDamageFX = 0;
+
+
+	
 };
 
 #endif // __MODULE_ENEMIES_H__

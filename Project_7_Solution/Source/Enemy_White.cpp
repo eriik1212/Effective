@@ -156,7 +156,15 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	//HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
+
+	//Enemy must start with max health
+	for (int i = 0; i < MAX_LIFE; i++)
+	{
+		lifes_w[i] = 1;
+	}
 }
+
+
 
 void Enemy_White::Update()
 {
@@ -262,9 +270,21 @@ void Enemy_White::Update()
 		time -= 0.1f;
 	}
 	
-
-
+	
+	
+	
+	/*if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] == true)
+	{
+		updateLifesW(lifes_w, 1);
+		if (lifes_w[0] == 0)
+		{
+			delete 
+		}
+	}*/
+	
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
 }
+
+

@@ -715,6 +715,7 @@ update_status ModulePlayer::Update()
 			currentAnimation = &hitAirAnim1R;
 
 		    App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+			
 			App->audio->PlayFx(PunchMiss);
 
 			}

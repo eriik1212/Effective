@@ -3,7 +3,7 @@
 
 #include "p2Point.h"
 #include "Animation.h"
-
+#define MAX_LIFE 5
 struct SDL_Texture;
 struct Collider;
 
@@ -35,6 +35,7 @@ public:
 	// The current position in the world
 	iPoint position;
 	int direcction = 0;
+	unsigned short lifes[MAX_LIFE];
 	// The enemy's texture
 	SDL_Texture* texture = nullptr;
 

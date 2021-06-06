@@ -196,6 +196,19 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 		}
 	}
 }
+void updateLifes(unsigned short* lifes, unsigned short damage)
+{
+
+	for (int i = (MAX_LIFE - 1); i >= 0; --i) {
+
+		if (*(lifes + i) == 0) {
+			++damage;
+		}
+		else if (*(lifes + i) == 1 && i >= (MAX_LIFE - damage)) {
+			*(lifes + i) = 0;
+		}
+	}
+}
 
 void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 {
@@ -209,8 +222,16 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
+			//---------------------------------------------------------------iNTENT DE VIDES ALS ENEMICS-----------------------------------------------
+			//if (enemies[i]->lifes[0] == 1 && enemies[i]->lifes[1]==0)
+			//{
 				delete enemies[i];
 				enemies[i] = nullptr;
+			//}
+			//else
+			//{
+			//	updateLifes(enemies[i]->lifes, 1);
+			//}
 
 			break;
 		}
