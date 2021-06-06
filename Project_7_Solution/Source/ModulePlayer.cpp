@@ -1548,7 +1548,7 @@ update_status ModulePlayer::PostUpdate()
 		}
 		else if (App->level2->Enabled()) // PAINT PLAYER IN LVL2
 		{
-			if (App->level2->countDown < 100) {
+			if (App->level2->countDown2 < 100) {
 				if (App->player->position.y < 66) {
 					SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
 					App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
@@ -1913,6 +1913,8 @@ update_status ModulePlayer::PostUpdate()
 		App->render->Blit(smokeTexture, 237, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
 		App->render->Blit(smokeTexture, 316, 0, &(smoke.GetCurrentFrame()), 1); // smoke animation
 	}
+
+	if (App->level2->countDown > 390 && App->level2->countDown < 540) App->render->Blit(App->level2->textTexture, SCREEN_WIDTH - 250, 50, &App->level2->sayYourPrayersText, NULL);
 
 	return update_status::UPDATE_CONTINUE;
 }

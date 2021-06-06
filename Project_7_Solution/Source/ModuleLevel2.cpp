@@ -23,6 +23,38 @@ ModuleLevel2::ModuleLevel2(bool enabled) : Module(enabled)
 	background.w = 448;
 	background.h = 224;
 
+	drill.x = 1660;
+	drill.y = 0;
+	drill.w = 84;
+	drill.h = 199;
+
+	sayYourPrayersText.x = 16;
+	sayYourPrayersText.y = 208;
+	sayYourPrayersText.w = 96;
+	sayYourPrayersText.h = 32;
+
+	drillAnim.PushBack({ 0, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 3, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 6, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 9, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 12, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 15, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 18, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 21, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 24, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 27, 199, 83, 200 });
+	drillAnim.PushBack({ 83 * 30, 199, 83, 200 });
+	drillAnim.PushBack({ 0, 0, 83, 200 });
+	drillAnim.PushBack({ 83 * 3, 0, 83, 200 });
+	drillAnim.PushBack({ 83 * 6, 0, 83, 200 });
+	drillAnim.PushBack({ 83 * 9, 0, 83, 200 });
+	drillAnim.PushBack({ 83 * 12, 0, 83, 200 });
+	drillAnim.PushBack({ 83 * 15, 0, 83, 200 });
+	drillAnim.PushBack({ 83 * 18, 0, 83, 200 });
+	drillAnim.PushBack({ 83 * 21, 0, 83, 200 });
+	drillAnim.loop = false;
+	drillAnim.speed = 0.05f;
+
 	aprilAnim.PushBack({ 163, 286, 29, 63 });
 	aprilAnim.PushBack({ 200, 286, 29, 63 });
 	aprilAnim.loop = true;
@@ -85,6 +117,7 @@ bool ModuleLevel2::Start()
 	App->render->playerLimitR = App->render->camera.w - 135;
 	App->render->playerLimitL = App->render->camera.x - 13;
 
+	drillAnim.Reset();
 	pathShreder.Reset();
 
 	//Spawn Schreder Path
@@ -94,6 +127,16 @@ bool ModuleLevel2::Start()
 	stage2Texture = App->textures->Load("Assets/Tilesets/tile_map_stage_1.png");
 	aprilTexture = App->textures->Load("Assets/Tilesets/fire.png");
 	shrederTexture = App->textures->Load("Assets/Enemies/boss.png");
+	drillTexture = App->textures->Load("Assets/Enemies/boss_machine.png");
+	textTexture = App->textures->Load("Assets/UI & HUD/Quotes.png");
+
+	// ----------------------------------------------------------------- AUDIO
+	drillSound = App->audio->LoadFx("Assets/FX/15_drill_2.wav");
+	door = App->audio->LoadFx("Assets/FX/16_drill_and_elevator_doors.wav");
+	glassBreak = App->audio->LoadFx("Assets/FX/20_broken_window.wav");
+	sayYourPrayers = App->audio->LoadFx("Assets/FX/19_say_your_prayers_boss.wav");
+	rinoDamage = App->audio->LoadFx("Assets/FX/23_rino_gets_punched.wav");
+	rinoDead = App->audio->LoadFx("Assets/FX/18_rino_death.wav");
 
 	App->audio->PlayMusic("Assets/Audio/04_aprils_room_scene_1_stage_2.ogg", 1.0f);
 
@@ -124,6 +167,8 @@ update_status ModuleLevel2::Update()
 	aprilCurrentAnimation = &aprilAnim;
 	aprilAnim.Update();
 
+	drillCurrentAnimation = &drillAnim;
+
 	positionShreder = spawnPosShreder + pathShreder.GetRelativePosition();
 	shrederCurrentAnimation = pathShreder.GetCurrentAnimation();
 
@@ -143,13 +188,18 @@ update_status ModuleLevel2::Update()
 
 	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT_LVL2)
 	{
-		//----------------------------------------------------------------------------------------Initialize Positions
-		pathShreder.Update();
-		
-
 		countDown++;
 
-		if (countDown > 200)
+
+		if (countDown > 70) drillAnim.Update();
+
+		//pathShreder.Update();
+		
+		if (countDown == 1) App->audio->PlayFx(drillSound);
+		if (countDown == 200) App->audio->PlayFx(door);
+		if (countDown == 380) App->audio->PlayFx(sayYourPrayers);
+
+		/*if (countDown2 > 200)
 		{
 			this->Disable();
 			CleanUp();
@@ -164,7 +214,12 @@ update_status ModuleLevel2::Update()
 			App->HUD->Disable();
 
 			App->sceneWin->Enable();
-		}
+		}*/
+	}
+
+	if (countDown > 390)
+	{
+		App->enemies->AddEnemy(ENEMY_TYPE::BOSS_ENEMY, 200, 52);
 	}
 
 	if (App->input->keys[SDL_SCANCODE_F2] == KEY_STATE::KEY_DOWN)
@@ -224,9 +279,19 @@ update_status ModuleLevel2::PostUpdate()
 	
 	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT_LVL2)
 	{
+		if (drillCurrentAnimation != nullptr)
+		{
+			App->render->Blit(drillTexture, SCREEN_WIDTH - 138, -40, &(drillCurrentAnimation->GetCurrentFrame()), NULL);
+		}
+			
+		if (countDown > 350)
+		{
+			App->render->Blit(drillTexture, SCREEN_WIDTH - 139, -40, &drill, NULL);
+		}
+
 		// Shreder
-		if (shrederCurrentAnimation != nullptr)
-			App->render->Blit(shrederTexture, positionShreder.x, positionShreder.y, &(shrederCurrentAnimation->GetCurrentFrame()), NULL);
+		/*if (shrederCurrentAnimation != nullptr)
+			App->render->Blit(shrederTexture, positionShreder.x, positionShreder.y, &(shrederCurrentAnimation->GetCurrentFrame()), NULL);*/
 	}
 
 	return update_status::UPDATE_CONTINUE;

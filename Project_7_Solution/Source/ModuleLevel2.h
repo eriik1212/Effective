@@ -32,10 +32,16 @@ public:
 
 public:
 
-	SDL_Rect background;
+	SDL_Rect background,
+		drill,
+		sayYourPrayersText;
 
 	// The scene sprite sheet loaded into an SDL_Texture
 	SDL_Texture* stage2Texture = nullptr;
+
+	SDL_Texture* textTexture = nullptr;
+
+	SDL_Texture* drillTexture = nullptr;
 
 	SDL_Texture* aprilTexture = nullptr;
 
@@ -47,11 +53,15 @@ public:
 
 	Animation* shrederCurrentAnimation = nullptr;
 
+	Animation* drillCurrentAnimation = nullptr;
+
 	Animation aprilAnim,
 		shrederStandAnim,
 		shrederWalkAnim,
 		shrederGrabAnim,
-		shrederJumpAnim;
+		shrederJumpAnim,
+		
+		drillAnim;
 
 	// The path that will define the position in the world
 	Path pathShreder;
@@ -62,12 +72,18 @@ public:
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPosShreder;
 
-	//Animation drill;
-
-	//Initialazing scene audio index
-	//uint drill = 0;
-
 	int countDown = 0;
+	int countDown2 = 0;
+
+	// Sound effects indices
+	uint drillSound = 0;
+	uint door = 0;
+
+	uint glassBreak = 0;
+	uint sayYourPrayers = 0;
+
+	uint rinoDamage = 0;
+	uint rinoDead = 0;
 };
 
 

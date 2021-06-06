@@ -8,28 +8,6 @@
 Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 {
 
-<<<<<<< HEAD
-	
-	// RIGHT
-	rightAnimP.PushBack({ 0, 453, 86, 90 });
-	rightAnimP.PushBack({ 86, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 2, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 3, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 4, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 5, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 6, 453, 86, 90 });
-	rightAnimP.PushBack({ 86 * 7, 453, 86, 90 });
-	rightAnimP.loop = true;
-	rightAnimP.speed = 0.15f;
-
-	
-	//PATH
-
-	
-	
-	
-	
-=======
 	// IDLE RIGHT
 	idleAnimRB.PushBack({ 0, 0, 67, 106 });
 	idleAnimRB.PushBack({ 67, 0, 67, 106 });
@@ -114,13 +92,13 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	// HITTED LOW LEFT
 	hittedLowLB.PushBack({ 957, 2154, 67, 106 });
 	hittedLowLB.PushBack({ 957, 2154, 67, 106 });
-	hittedLowLB.loop = true;
+	hittedLowLB.loop = false;
 	hittedLowLB.speed = 0.25f;
 
 	// HITTED LOW RIGHT
 	hittedLowRB.PushBack({ 0, 318, 67, 106 });
 	hittedLowRB.PushBack({ 0, 318, 67, 106 });
-	hittedLowRB.loop = true;
+	hittedLowRB.loop = false;
 	hittedLowRB.speed = 0.25f;
 
 	// DIE RIGHT
@@ -137,7 +115,7 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 	dieLB.loop = false;
 	dieLB.speed = 0.25f;
 
->>>>>>> 940ac04f51c1bd4fbf227ca701eb4b2c1f7541ca
+
 
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
 	HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
@@ -146,26 +124,34 @@ Enemy_Boss::Enemy_Boss(int x, int y) : Enemy(x, y)
 
 void Enemy_Boss::Update()
 {
+	//------------------------------------------------------------LEFT direcction
 
-<<<<<<< HEAD
+	if (currentAnim == &leftAnimB)direcction = 0;
+	if (currentAnim == &kickLB)direcction = 0;
+	if (currentAnim == &hittedLowLB)direcction = 0;
+	//------------------------------------------------------------LEFT ANIM direction
+	if (currentAnim == &rightAnimB)direcction = 1;
+	if (currentAnim == &kickRB)direcction = 1;
+	if (currentAnim == &hittedLowRB)direcction = 1;
+
+
+
 	//-----------------------------------------------------------------------AI
-	if (retirar == true)
-		//	currentAnim = &dieFacefwRP;
 
 	//---------------------------------------------------------------------HIT ENEMY
-	if (tocado == true && direcction == 1 && currentAnim != &dieFacefwRP && nohit < 0.0f)
+	if (tocado == true && direcction == 1 && currentAnim != &hittedLowRB && nohit < 0.0f)
 	{
 		position.x -= 40;
-			//currentAnim = &dieFacefwRP;
-			//dieFacefwRP.Reset();
+		currentAnim = &hittedLowRB;
+		hittedLowRB.Reset();
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		nohit = 10.0f;
 	}
 
-	else if (tocado == true && direcction == 0 && currentAnim != &dieFacefwLP && nohit < 0.0f)
+	else if (tocado == true && direcction == 0 && currentAnim != &hittedLowLB && nohit < 0.0f)
 	{
-			//currentAnim = &dieFacefwLP;
-			//dieFacefwLP.Reset();
+		currentAnim = &hittedLowLB;
+		hittedLowLB.Reset();
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 		position.x += 40;
 		nohit = 10.0f;
@@ -199,20 +185,20 @@ void Enemy_Boss::Update()
 		{
 			position.x += velociti;
 			direcction = 1;
-				//currentAnim = &rightAnimP;
+			currentAnim = &rightAnimB;
 
 		}
 		if (position.x - 15 > App->player->position.x)
 		{
 			position.x -= velociti;
 			direcction = 0;
-				//currentAnim = &leftAnimP;
+			currentAnim = &rightAnimB;
 
 
 		}
 
 		//-----------------------------------------------------y
-		if (position.y < App->player->position.y - 16)
+		if (position.y - 16 < App->player->position.y - 16)
 		{
 
 			position.y += velociti;
@@ -235,7 +221,7 @@ void Enemy_Boss::Update()
 			if (position.x + 20 > App->player->position.x)
 			{
 				direcction = 0;
-				//currentAnim = &upAnimLP;
+				currentAnim = &rightAnimB;
 			}
 
 
@@ -243,7 +229,7 @@ void Enemy_Boss::Update()
 			else if (position.x - 20 < App->player->position.x)
 			{
 				direcction = 1;
-				//currentAnim = &upAnimRP;
+				currentAnim = &rightAnimB;
 			}
 
 
@@ -252,15 +238,7 @@ void Enemy_Boss::Update()
 
 
 
-	//------------------------------------------------------------LEFT direcction
-	if (currentAnim == &jumpLP)direcction = 0;
-	if (currentAnim == &leftAnimP)direcction = 0;
-	if (currentAnim == &punchLP)direcction = 0;
-	if (currentAnim == &kickLP)direcction = 0;
-	if (currentAnim == &upAnimLP)direcction = 0;
-	//------------------------------------------------------------LEFT ANIM direction
-	if (currentAnim == &upAnimRP)direcction = 1;
-	if (currentAnim == &kickRP)direcction = 1;
+
 
 
 	if (App->collisions->GodMode == true) {
@@ -268,54 +246,38 @@ void Enemy_Boss::Update()
 
 		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 
+
 		if (coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x + 38 && position.x + 38 <= App->player->position.x && App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] == false && tocado != true && nohit < 0.0f ||
 			coolTime >= coolDown && time <= 0.0f && position.x >= App->player->position.x - 38 && position.x - 38 <= App->player->position.x && App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] == false && tocado != true && nohit < 0.0f) {
-			
-			
-				if (direcction == 0 && currentAnim != &kickLP)
-				{
-						//currentAnim = &kickLP;
-					App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
-					coolTime = 0.0f;
-					//	kickLP.Reset();
-					time = 2.0f;
-				
-				}
 
-				else if (direcction == 1 && currentAnim != &kickRP)
-				{
-						//currentAnim = &kickRP;
-					App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
-					coolTime = 0.0f;
-					//	kickRP.Reset();
-					time = 2.0f;
-				
-				}
-				else
-					App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
+			if (direcction == 0 && currentAnim != &kickLB)
+			{
+				currentAnim = &kickLB;
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+				kickLB.Reset();
+				time = 2.0f;
+			}
 
-			
-
-		
-
+			else if (direcction == 1 && currentAnim != &kickRB)
+			{
+				currentAnim = &kickRB;
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
+				coolTime = 0.0f;
+				kickRB.Reset();
+				time = 2.0f;
+			}
+			else
+				App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
 
 		}
 		else {
-		
-			
-			velociti = 1.0f;
 			coolTime += 0.1f;
-		
 			time -= 0.1f;
-			
 		}
 
 	}
 
-
-	
-=======
->>>>>>> 940ac04f51c1bd4fbf227ca701eb4b2c1f7541ca
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position
 	Enemy::Update();
