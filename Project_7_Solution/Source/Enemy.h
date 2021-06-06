@@ -4,6 +4,7 @@
 #include "p2Point.h"
 #include "Animation.h"
 #define MAX_LIFE 5
+#define MAX_LIFE_BOSS 15
 
 struct SDL_Texture;
 struct Collider;
