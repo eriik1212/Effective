@@ -648,7 +648,7 @@ bool ModulePlayer::Start()
 
 	// ----------------------------------------------------------------- LIFE ELEMENTS
 	// Load Lifes P1
-	for (int i = 0; i < MAX_LIFE; ++i) {
+	for (int i = 0; i < MAX_LIFE_PLAYER; ++i) {
 		lifesP1[i] = 1;
 	}
 
@@ -1809,7 +1809,7 @@ update_status ModulePlayer::PostUpdate()
 			blockAnim = false;
 
 			// Load Lifes P1 Again
-			for (int i = 0; i < MAX_LIFE; ++i) {
+			for (int i = 0; i < MAX_LIFE_PLAYER; ++i) {
 				lifesP1[i] = 1;
 			}
 		}
@@ -1851,7 +1851,7 @@ update_status ModulePlayer::PostUpdate()
 
 			blockAnim = false;
 			// Load Lifes P1 Again
-			for (int i = 0; i < MAX_LIFE; ++i) {
+			for (int i = 0; i < MAX_LIFE_PLAYER; ++i) {
 				lifesP1[i] = 1;
 			}
 		}
@@ -1920,12 +1920,12 @@ update_status ModulePlayer::PostUpdate()
 void updateLifeIndicatorPlayer1(unsigned short* lifeIndicatorP1, unsigned short damage)
 {
 	
-	for (int i = (MAX_LIFE - 1); i >= 0; --i) {
+	for (int i = (MAX_LIFE_PLAYER - 1); i >= 0; --i) {
 
 		if (*(lifeIndicatorP1 + i) == 0) {
 			++damage;
 		}
-		else if (*(lifeIndicatorP1 + i) == 1 && i >= (MAX_LIFE - damage)) {
+		else if (*(lifeIndicatorP1 + i) == 1 && i >= (MAX_LIFE_PLAYER - damage)) {
 			*(lifeIndicatorP1 + i) = 0;
 		}
 	}
@@ -1937,8 +1937,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 	{
 		App->audio->PlayFx(getsHit);
 		App->HUD->lifeP1.Update();
-		App->HUD->lifeP1.Update();	
-		updateLifeIndicatorPlayer1(lifesP1, 2);
+		//App->HUD->lifeP1.Update();	
+		updateLifeIndicatorPlayer1(lifesP1, 1 );
 		
 		if (lastPosition == 1)
 		{
@@ -1970,7 +1970,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 				blockAnim = false;
 				// Load Lifes P1 Again
-				for (int i = 0; i < MAX_LIFE; ++i) {
+				for (int i = 0; i < MAX_LIFE_PLAYER; ++i) {
 					lifesP1[i] = 1;
 				}
 			}
@@ -2015,7 +2015,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 				blockAnim = false;
 				// Load Lifes P1 Again
-				for (int i = 0; i < MAX_LIFE; ++i) {
+				for (int i = 0; i < MAX_LIFE_PLAYER; ++i) {
 					lifesP1[i] = 1;
 				}
 			}
@@ -2044,8 +2044,8 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 
 
 
-		if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
+		/*if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT])
 		{
 			App->HUD->scoreP1 ++;
-		}
+		}*/
 }

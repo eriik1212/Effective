@@ -15,6 +15,7 @@
 #include "Enemy_Boss.h"
 #include "Enemy_Ball.h"
 #include "ModuleCollisions.h"
+#include "ModuleHUD.h"
 
 #define SPAWN_MARGIN 50
 
@@ -242,6 +243,7 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			updateLifes(enemies[i]->lifes, 1);
 			if (enemies[i]->lifes[0] == 0)
 			{
+				App->HUD->scoreP1++;
 				delete enemies[i];
 				enemies[i] = nullptr;
 			}

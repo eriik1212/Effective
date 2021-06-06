@@ -6,7 +6,7 @@
 #include "p2Point.h"
 #include "Path.h"
 
-#define MAX_LIFE 10
+#define MAX_LIFE_PLAYER 10
 
 struct SDL_Texture;
 struct Collider;
@@ -48,7 +48,7 @@ public:
 	int lastPosition = 0; //    1 = Left || 0 = Right
 	bool blockAnim = false;
 
-	unsigned short lifesP1[MAX_LIFE];
+	unsigned short lifesP1[MAX_LIFE_PLAYER];
 
 	// The player spritesheet loaded into an SDL_Texture
 	SDL_Texture* texture = nullptr;
