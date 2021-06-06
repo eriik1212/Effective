@@ -171,14 +171,29 @@ void Enemy_White::Update()
 	if (currentAnim == &leftAnimW)direcction = 0;
 	if (currentAnim == &upAnimLW)direcction = 0;
 	if (currentAnim == &knifeThrowLW) direcction = 0;
+	if (currentAnim == &dieFacefwLW)direcction = 1;
 	//------------------------------------------------------------RIGHT ANIM direcction
 	if (currentAnim == &knifeThrowRW) direcction = 1;
 	if (currentAnim == &rightAnimW)direcction = 1;
 	if (currentAnim == &knifeMeleeRW)direcction = 1;
 	if (currentAnim == &upAnimRW)direcction = 1;
+	if (currentAnim == &dieFacefwRW)direcction = 1;
 	//----------------------------------------------------------------AI
 
 	//------------------------x
+	if (tocado == true && direcction == 1 && currentAnim != &dieFacefwRW && time <= 0)
+	{
+		currentAnim = &dieFacefwRW;
+		dieFacefwRW.Reset();
+		time = 2.0f;
+	}
+	else if (tocado == true && direcction == 0 && currentAnim != &dieFacefwLW && time <= 0)
+	{
+		currentAnim = &dieFacefwLW;
+		dieFacefwLW.Reset();
+		time = 2.0f;
+	}
+	else tocado = false;
 	
 	if (time <= 0)
 	{

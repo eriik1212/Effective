@@ -61,7 +61,15 @@ void Enemy::Draw()
 
 void Enemy::OnCollision(Collider* collider)
 {
-	
+	if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT]) {
+		tocado = true;
+	}
+	else tocado = false;
+
+	if (App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER]) {
+		retirar = true;
+	}
+	else retirar = false;
 	
 	App->particles->AddParticle(App->particles->explosion, position.x, position.y);
 	App->audio->PlayFx(damageFX);
