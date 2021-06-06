@@ -2,6 +2,7 @@
 #define __APPLICATION_H__
 
 #include "Globals.h"
+#include <stdio.h>
 #include <time.h>
 
 #define NUM_MODULES 20
@@ -73,10 +74,10 @@ public:
 
 	ModuleCollisions* collisions = nullptr;
 
-	ModuleRender* render = nullptr;
-	ModuleFadeToBlack* fade = nullptr;
-
 	ModuleFonts* fonts = nullptr;
+	ModuleFadeToBlack* fade = nullptr;
+	ModuleRender* render = nullptr;
+
 };
 
 // Global var made extern for Application ---

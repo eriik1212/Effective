@@ -3,6 +3,9 @@
 #include "Application.h"
 #include "ModuleCollisions.h"
 #include "ModuleParticles.h"
+#include "ModulePlayer.h"
+#include "Particle.h"
+
 
 Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 {
@@ -151,63 +154,115 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 	//aereal kick to right (not for this version)
 
 
-	path.PushBack({ -1.0f, 0.0f }, 20, &leftAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 40, &knifeThrowLW);
-	path.PushBack({ -1.0f, 0.0f }, 130, &leftAnimW);
-	path.PushBack({ 1.0f,0.0f }, 150, &rightAnimW);
-	path.PushBack({ 0.0f, 0.0f }, 40, &knifeMeleeRW);
-
-
-	
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
-	HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
+	//HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 }
 
 void Enemy_White::Update()
 {
-	//------------------------------------------------------------LEFT direcction
-	if (currentAnim == &leftAnimW)direcction = 0;
 
-	//------------------------------------------------------------LEFT ANIM direction
+	//------------------------------------------------------------LEFT  ANIM direcction
+	if (currentAnim == &leftAnimW)direcction = 0;
+	if (currentAnim == &upAnimLW)direcction = 0;
+	if (currentAnim == &knifeThrowLW) direcction = 0;
+	//------------------------------------------------------------RIGHT ANIM direcction
+	if (currentAnim == &knifeThrowRW) direcction = 1;
 	if (currentAnim == &rightAnimW)direcction = 1;
 	if (currentAnim == &knifeMeleeRW)direcction = 1;
+	if (currentAnim == &upAnimRW)direcction = 1;
+	//----------------------------------------------------------------AI
 
-	if (coolTime2 >= coolDown && currentAnim == &knifeThrowLW)
+	//------------------------x
+	
+	if (time <= 0)
 	{
-		coolTime2 = 0;
-		App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
+
+		if (position.x < App->player->position.x)
+		{
+			currentAnim = &rightAnimW;
+			direcction = 1;
+			position.x += velociti;
+
+		}
+		if (position.x  > App->player->position.x)
+		{
+			currentAnim = &leftAnimW;
+			direcction = 0;
+			position.x -= velociti;
+		}
+
+		//----------------------y
+
+		if (position.y < App->player->position.y - 16)
+		{
+
+			position.y += velociti;
+			if (position.x + 10 > App->player->position.x)
+			{
+				direcction = 0;
+
+			}
+
+			else if (position.x - 10 < App->player->position.x)
+			{
+				direcction = 1;
+
+			}
+
+		}
+
+		if (position.y > App->player->position.y)
+		{
+			position.y -= velociti;
+
+			if (position.x + 20 > App->player->position.x)
+			{
+				direcction = 0;
+				currentAnim = &upAnimLW;
+			}
+
+
+
+			else if (position.x - 20 < App->player->position.x)
+			{
+				direcction = 1;
+				currentAnim = &upAnimRW;
+			}
+
+
+		}
+
+	}
+	 
+
+	//-------------------------------------------------------------------------------------------------------
+
+	if (coolTime2 >= coolDown && position.y      == App->player->position.y && time <= 0 ||
+		coolTime2 >= coolDown && position.y - 26 == App->player->position.y && time <= 0)
+	{
+		
+		if (direcction == 1 && currentAnim != &knifeThrowRW) {
+			currentAnim = &knifeThrowRW;
+			coolTime2 = 0;
+			time = 4.0f;
+			App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
+		}
+		if (direcction == 0 && currentAnim != &knifeThrowLW) {
+			currentAnim = &knifeThrowLW;
+			coolTime2 = 0;
+			time = 4.0f;
+			App->particles->AddParticle(App->particles->suriken, position.x + 20, position.y + 74, Collider::Type::ENEMY_SHOT);
+		}
 
 	}
 	else
 	{
+	
 		coolTime2 += 0.1;
-	}
-	if (App->collisions->GodMode == true)
-	{
-	
-		App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
-
-		if (coolTime >= coolDown && currentAnim == &knifeMeleeRW)
-		{
-
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = true;
-			coolTime = 0.0f;
-
-		}
-		else
-			App->collisions->matrix[Collider::Type::PLAYER][Collider::Type::ENEMY_HIT] = false;
-	     	coolTime += 0.1f;
+		time -= 0.1f;
 	}
 	
-	
-	
 
-
-
-	path.Update();
-	position = spawnPos + path.GetRelativePosition();
-	currentAnim = path.GetCurrentAnimation();
-	
 
 	// Call to the base class. It must be called at the end
 	// It will update the collider depending on the position

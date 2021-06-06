@@ -23,6 +23,41 @@ ModuleLevel2::ModuleLevel2(bool enabled) : Module(enabled)
 	background.w = 448;
 	background.h = 224;
 
+	aprilAnim.PushBack({ 163, 286, 29, 63 });
+	aprilAnim.PushBack({ 200, 286, 29, 63 });
+	aprilAnim.loop = true;
+	aprilAnim.speed = 0.02f;
+
+	shrederStandAnim.PushBack({ 560, 194, 63, 76 });
+
+	shrederWalkAnim.PushBack({ 623, 194, 63, 76 });
+	shrederWalkAnim.PushBack({ 686, 194, 63, 76 });
+	shrederWalkAnim.PushBack({ 756, 194, 63, 76 });
+	shrederWalkAnim.PushBack({ 821, 194, 63, 76 });
+	shrederWalkAnim.PushBack({ 889, 194, 63, 76 });
+	shrederWalkAnim.PushBack({ 959, 194, 63, 76 });
+
+	shrederWalkAnim.loop = true;
+	shrederWalkAnim.speed = 0.15f;
+
+	shrederGrabAnim.PushBack({ 560, 284, 63, 76 });
+	shrederGrabAnim.PushBack({ 634, 284, 63, 76 });
+
+	shrederGrabAnim.loop = true;
+	shrederGrabAnim.speed = 0.07f;
+
+	shrederJumpAnim.PushBack({ 720, 284, 73, 76 });
+
+	//PATH Shreder
+	pathShreder.PushBack({ 0.0f, 0.0f }, 20, &shrederStandAnim);
+	pathShreder.PushBack({ -2.0f, 0.0f }, 68, &shrederWalkAnim);
+	pathShreder.PushBack({ 0.0f, 0.0f }, 20, &shrederGrabAnim);
+	pathShreder.PushBack({ 2.0f, -0.7f }, 50, &shrederJumpAnim);
+	pathShreder.PushBack({ 2.0f, -0.5f }, 10, &shrederJumpAnim);
+	pathShreder.PushBack({ 2.0f, 0.0f }, 10, &shrederJumpAnim);
+	pathShreder.PushBack({ 2.0f, 0.7f }, 10, &shrederJumpAnim);
+	pathShreder.PushBack({ 2.0f, 1.0f }, 50, &shrederJumpAnim);
+
 }
 
 ModuleLevel2::~ModuleLevel2()
@@ -50,13 +85,17 @@ bool ModuleLevel2::Start()
 	App->render->playerLimitR = App->render->camera.w - 135;
 	App->render->playerLimitL = App->render->camera.x - 13;
 
+	pathShreder.Reset();
+
+	//Spawn Schreder Path
+	pathShreder.ResetRelativePosition();
+	spawnPosShreder = iPoint((int)170, (int)72);
+
 	stage2Texture = App->textures->Load("Assets/Tilesets/tile_map_stage_1.png");
+	aprilTexture = App->textures->Load("Assets/Tilesets/fire.png");
+	shrederTexture = App->textures->Load("Assets/Enemies/boss.png");
 
 	App->audio->PlayMusic("Assets/Audio/04_aprils_room_scene_1_stage_2.ogg", 1.0f);
-
-	// Final wall colliders
-	/*App->collisions->AddCollider({ 1000, 200, 20, 10 }, Collider::Type::WALL);
-	App->collisions->AddCollider({ 1000, 145, 20, 10 }, Collider::Type::WALL);*/
 
 	// Enemies --- CURRENT MAX. ENEMIES == 2 --- 
 	//¡¡IMPORTANT: TO ADD AN ENEMY CHANGE moduleEnemies.h -> #define MAX_ENEMIES 2!!
@@ -81,6 +120,15 @@ bool ModuleLevel2::Start()
 
 update_status ModuleLevel2::Update()
 {
+	aprilCurrentAnimation = &aprilAnim;
+	aprilAnim.Update();
+
+	positionShreder = spawnPosShreder + pathShreder.GetRelativePosition();
+	shrederCurrentAnimation = pathShreder.GetCurrentAnimation();
+
+	shrederWalkAnim.Update();
+	shrederGrabAnim.Update();
+
 	//Handle Camera Limits
 	if (App->render->camera.x > CAMERA_LIMIT_LVL2) App->render->camera.x = CAMERA_LIMIT_LVL2;
 
@@ -91,14 +139,16 @@ update_status ModuleLevel2::Update()
 	if (App->player->position.y < 65) App->player->position.y = 65;
 	if (App->player->position.y > 136) App->player->position.y = 136;
 
-	// ------------------------------------------- World Animations Updates
-
 
 	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT_LVL2)
 	{
+		//----------------------------------------------------------------------------------------Initialize Positions
+		pathShreder.Update();
+		
+
 		countDown++;
 
-		if (countDown > 80)
+		if (countDown > 200)
 		{
 			this->Disable();
 			CleanUp();
@@ -162,9 +212,6 @@ update_status ModuleLevel2::Update()
 		App->scene->Enable();
 	}
 
-	// Draw everything --------------------------------------
-	App->render->Blit(stage2Texture, 0, 0, &background, 1); // Background
-
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -172,8 +219,14 @@ update_status ModuleLevel2::Update()
 update_status ModuleLevel2::PostUpdate()
 {
 	// Draw everything --------------------------------------
-	//App->render->Blit(stage2Texture, 0, 0, NULL, 1); // Background
-
+	App->render->Blit(stage2Texture, 0, 0, &background, 1); // Background
+	
+	if (App->enemies->enemies[0] == nullptr && App->render->camera.x == CAMERA_LIMIT_LVL2)
+	{
+		// Shreder
+		if (shrederCurrentAnimation != nullptr)
+			App->render->Blit(shrederTexture, positionShreder.x, positionShreder.y, &(shrederCurrentAnimation->GetCurrentFrame()), NULL);
+	}
 
 	return update_status::UPDATE_CONTINUE;
 }

@@ -15,6 +15,7 @@
 #include "ModuleSceneLose.h"
 #include "ModuleFonts.h"
 #include "ModuleSceneCharacter.h"
+#include "ModuleSceneCinematic.h"
 
 #include <stdio.h>
 
@@ -143,9 +144,9 @@ bool ModuleHUD::Start()
 	lifeIncrease = App->audio->LoadFx("Assets/FX/01_cowabunga.wav");
 
 	// ----------------------------------------------------------------- FONTS
-	char lookupTable[] = { "0123456789 " };
-	scoreFont = App->fonts->Load("Assets/UI & HUD/fonts.png", lookupTable, 1);
-	lifeFont = App->fonts->Load("Assets/UI & HUD/num_lifes_font.png", lookupTable, 1);
+	char lookupTableNumb[] = { "0123456789 " };
+	scoreFont = App->fonts->Load("Assets/Fonts/fonts.png", lookupTableNumb, 1);
+	lifeFont = App->fonts->Load("Assets/UI & HUD/num_lifes_font.png", lookupTableNumb, 1);
 
 	return ret;
 }
@@ -184,6 +185,21 @@ update_status ModuleHUD::PostUpdate()
 	// Draw UI (NumLifes) --------------------------------------
 	sprintf_s(lifeText, 10, "%3d", lifes);
 
+
+	App->render->Blit(HUDTexture, 80, 0, &(HUDP234.GetCurrentFrame()), 0); // HUD Square Player2,3,4
+
+	App->render->Blit(HUDTexture, 80, 16, &(insertCoinP2.GetCurrentFrame()), 0); // INSERT COIN Player2
+	App->render->Blit(HUDTexture, 151, 16, &(insertCoinP3.GetCurrentFrame()), 0); // INSERT COIN Player3
+	App->render->Blit(HUDTexture, 222, 16, &(insertCoinP4.GetCurrentFrame()), 0); // INSERT COIN Player4
+
+
+	App->fonts->BlitText(45, 8, scoreFont, scoreTextP1); // P1
+	App->fonts->BlitText(116, 8, scoreFont, scoreTextP234); // P2
+	App->fonts->BlitText(187, 8, scoreFont, scoreTextP234); // P3
+	App->fonts->BlitText(258, 8, scoreFont, scoreTextP234); // P4
+
+	
+
 	// -------------------------------------------------------------------------------------------- HUD
 	if (lifes > 0 && App->sceneCharacter->Enabled())
 	{
@@ -207,7 +223,7 @@ update_status ModuleHUD::PostUpdate()
 
 		App->render->Blit(introTexture, (SCREEN_WIDTH / 2) - (konami1989.w / 2), (SCREEN_HEIGHT - konami1989.h), &konami1989, 0); // KONAMI1989
 	}
-	else if (App->scene->Enabled() || App->level2->Enabled())
+	else if (App->scene->Enabled() || App->level2->Enabled() || App->sceneCinematic->Enabled())
 	{
 		App->render->Blit(HUDTexture, 8, 0, &(HUDP1.GetCurrentFrame()), 0); // HUD Square Player1
 		App->render->Blit(HUDTexture, 41, 16, &(lifeP1.GetCurrentFrame()), 0); // Full Life Indicator
@@ -215,17 +231,6 @@ update_status ModuleHUD::PostUpdate()
 	}
 
 
-	App->render->Blit(HUDTexture, 80, 0, &(HUDP234.GetCurrentFrame()), 0); // HUD Square Player2,3,4
-
-	App->render->Blit(HUDTexture, 80, 16, &(insertCoinP2.GetCurrentFrame()), 0); // INSERT COIN Player2
-	App->render->Blit(HUDTexture, 151, 16, &(insertCoinP3.GetCurrentFrame()), 0); // INSERT COIN Player3
-	App->render->Blit(HUDTexture, 222, 16, &(insertCoinP4.GetCurrentFrame()), 0); // INSERT COIN Player4
-
-
-	App->fonts->BlitText(45, 8, scoreFont, scoreTextP1); // P1
-	App->fonts->BlitText(116, 8, scoreFont, scoreTextP234); // P2
-	App->fonts->BlitText(187, 8, scoreFont, scoreTextP234); // P3
-	App->fonts->BlitText(258, 8, scoreFont, scoreTextP234); // P4
 
 	return update_status::UPDATE_CONTINUE;
 }
@@ -234,10 +239,15 @@ void  ModuleHUD::Reset()
 {
 	lifes = 0;
 	scoreP1 = 0;
+	lifeP1.Reset();
 }
 
 bool ModuleHUD::CleanUp()
 {
 	bool ret;
+
+	App->fonts->UnLoad(scoreFont);
+	App->fonts->UnLoad(lifeFont);
+
 	return true;
 }

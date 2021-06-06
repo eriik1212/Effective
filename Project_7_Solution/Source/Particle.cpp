@@ -1,6 +1,7 @@
 #include "Particle.h"
-
+#include "Enemy.h"
 #include "Collider.h"
+
 
 Particle::Particle()
 {
@@ -44,6 +45,7 @@ bool Particle::Update()
 			ret = false;
 
 		// Update the position in the screen
+	
 		position.x += speed.x;
 		position.y += speed.y;
 

@@ -642,7 +642,6 @@ bool ModulePlayer::Start()
 
 	blockAnim = false;
 
-	App->HUD->lifeP1.Reset();
 	AttackQuote.Reset();
 
 	// ----------------------------------------------------------------- LIFE ELEMENTS
@@ -1489,7 +1488,6 @@ update_status ModulePlayer::Update()
 		App->scene->Disable();
 		App->level2->Disable();
 		App->HUD->Disable();
-		App->fonts->UnLoad(-1);
 		App->members->Enable();
 	}
 
@@ -1525,9 +1523,27 @@ update_status ModulePlayer::PostUpdate()
 		}
 		else if (App->level2->Enabled()) // PAINT PLAYER IN LVL2
 		{
-			SDL_Rect rect = currentAnimation->GetCurrentFrame();
-			App->render->Blit(texture, position.x, position.y, &rect);
+			if (App->level2->countDown < 100) {
+				if (App->player->position.y < 66) {
+					SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+					App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+					App->render->Blit(App->level2->aprilTexture, App->level2->background.w / 2 - 50, 85, &(App->level2->aprilCurrentAnimation->GetCurrentFrame()), 1); // April
+				}
+				else
+				{
+					SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+					App->render->Blit(App->level2->aprilTexture, App->level2->background.w / 2 - 50, 85, &(App->level2->aprilCurrentAnimation->GetCurrentFrame()), 1); // April
+					App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+				}
+			}
+			else
+			{
+				SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+				App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+			}
+			
 		}
+
 
 		// After Hits Animations, go back to Idle Anim
 		// HIT AIR
@@ -1690,8 +1706,6 @@ update_status ModulePlayer::PostUpdate()
 			App->enemies->Disable();
 			App->enemies->CleanUp();
 
-			App->fonts->UnLoad(-1);
-
 			App->HUD->Disable();
 
 			App->sceneLose->Enable();
@@ -1734,8 +1748,6 @@ update_status ModulePlayer::PostUpdate()
 			App->enemies->Disable();
 			App->enemies->CleanUp();
 
-			App->fonts->UnLoad(-1);
-
 			App->HUD->Disable();
 
 			App->sceneLose->Enable();
@@ -1758,7 +1770,6 @@ update_status ModulePlayer::PostUpdate()
 	{
 		App->audio->PlayFx(Scream1);
 		App->render->camera.x += 1;
-
 	}
 
 	if (App->scene->Enabled() || App->level2->Enabled())
@@ -1853,8 +1864,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 				App->player->HIT->pendingToDelete = true;
 				App->player->collider->pendingToDelete = true;
 
-				App->fonts->UnLoad(-1);
-
 				App->player->Disable();
 				App->player->CleanUp();
 
@@ -1899,8 +1908,6 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 			{
 				App->player->HIT->pendingToDelete = true;
 				App->player->collider->pendingToDelete = true;
-
-				App->fonts->UnLoad(-1);
 
 				App->player->Disable();
 				App->player->CleanUp();

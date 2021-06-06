@@ -36,12 +36,20 @@ public:
 
 public:
 	SDL_Rect backGround,
-		frontBuildings,
+		backGround2,
+		backGround3,
+		frontBuilding,
+
 		leo,
 		raphael,
 		donatello,
 		michelangelo,
+
 		fireComment,
+		hangOnComment,
+
+		finalDoor,
+
 		drawColorScreen;
 
 	SDL_Texture* cinematicBackground;
@@ -55,7 +63,17 @@ public:
 	Path pathLeo,
 		pathMichelangelo,
 		pathDonatello,
-		pathRaphael;
+		pathRaphael,
+		
+		pathLeo2,
+		pathMichelangelo2,
+		pathDonatello2,
+		pathRaphael2,
+		
+		pathLeo3,
+		pathMichelangelo3,
+		pathDonatello3,
+		pathRaphael3;
 
 	// A ptr to the current animation
 	Animation* splinterCurrentAnim = nullptr;
@@ -71,24 +89,89 @@ public:
 	Animation* fireCurrentAnim = nullptr;
 
 	Animation splinterAnim,
-		donatelloAnim,
-		leoAnim,
-		michelangeloAnim,
-		raphaelAnim,
+		donatelloJumpAnim,
+		leoJumpAnim,
+		michelangeloJumpAnim,
+		raphaelJumpAnim,
 		
-		fireAnim;
+		donatelloFallAnim1,
+		leoFallAnim1,
+		michelangeloFallAnim1,
+		raphaelFallAnim1,
+
+		donatelloFallAnim2,
+		leoFallAnim2,
+		michelangeloFallAnim2,
+		raphaelFallAnim2,
+
+		donatelloFallAnim3,
+		leoFallAnim3,
+		michelangeloFallAnim3,
+		raphaelFallAnim3,
+
+		donatelloFallAnim4,
+		leoFallAnim4,
+		michelangeloFallAnim4,
+		raphaelFallAnim4,
+
+		leoFinalAnim1,
+		michelangeloFinalAnim1,
+		donatelloFinalAnim1,
+		raphaelFinalAnim1,
+
+		leoFinalAnim2,
+		michelangeloFinalAnim2,
+		donatelloFinalAnim2,
+		raphaelFinalAnim2,
+
+		leoFinalAnim3,
+		michelangeloFinalAnim3,
+		donatelloFinalAnim3,
+		raphaelFinalAnim3,
+		
+		fireAnim,
+		secondFireAnim;
 
 	// The current position in the world
 	iPoint positionDonatello,
 		positionLeo,
 		positionMichelangelo,
-		positionRaphael;
+		positionRaphael,
+		
+		positionDonatello2,
+		positionLeo2,
+		positionMichelangelo2,
+		positionRaphael2,
+		
+		positionDonatello3,
+		positionLeo3,
+		positionMichelangelo3,
+		positionRaphael3;
 
 	// Original spawn position. Stored for movement calculations
 	iPoint spawnPosLeo,
 		spawnPosMichelangelo,
 		spawnPosDonatello,
-		spawnPosRaphael;
+		spawnPosRaphael,
+		
+		spawnPosLeo2,
+		spawnPosMichelangelo2,
+		spawnPosDonatello2,
+		spawnPosRaphael2,
+		
+		spawnPosLeo3,
+		spawnPosMichelangelo3,
+		spawnPosDonatello3,
+		spawnPosRaphael3;
+
+	// Sound effects indices
+	uint Fire = 0;
+	uint HangOn = 0;
+
+	// Text
+	uint text = 0;
+	int tmntFont = -1;
+	int numbersFont = -1;
 
 	// Counter for camera movement, audio and intro events
 	int counter;
