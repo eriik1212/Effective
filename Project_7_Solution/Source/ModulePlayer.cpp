@@ -1622,8 +1622,8 @@ update_status ModulePlayer::PostUpdate()
 		//Gets hit
 		else if (hittedBackLowAnimL.loopCount > 0)
 		{
-			idleAnimR.Reset();
-			currentAnimation = &idleAnimR;
+			idleAnimL.Reset();
+			currentAnimation = &idleAnimL;
 		}
 
 		else if (hittedBackLowAnimR.loopCount > 0)
@@ -1806,7 +1806,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->HUD->lifeP1.Update();
 		App->HUD->lifeP1.Update();	
 		updateLifeIndicatorPlayer1(lifesP1, 2);
-
+		//---------------------------------------------------------------pOSAR UNA PILA D'IFS PK EL BOCES ESTIGUI RECONTENTO----------------------
 		if (lastPosition == 1)
 		{
 			
