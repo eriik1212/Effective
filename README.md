@@ -14,7 +14,6 @@ This is our first project as videogame design and developement students at CITM.
 **Player 1**
 - Up, Down, Left, Right (Arrows) - Movement
 - X - Hit
-- Z - Jump
 
 **Additional Controls**
 - Next Screen - Spacebar
