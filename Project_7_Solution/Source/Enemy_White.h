@@ -3,7 +3,7 @@
 
 #include "Enemy.h"
 #include "Path.h"
-#define MAX_LIFE 5     //enemy lifes
+
 class Enemy_White : public Enemy
 {
 public:
@@ -17,7 +17,7 @@ public:
 	float velociti = 1.0f;
 	float time = 4.0f;
 	
-	unsigned short lifes_w[MAX_LIFE];
+	
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step

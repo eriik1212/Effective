@@ -1818,7 +1818,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->HUD->lifeP1.Update();
 		App->HUD->lifeP1.Update();	
 		updateLifeIndicatorPlayer1(lifesP1, 2);
-		//---------------------------------------------------------------pOSAR UNA PILA D'IFS PK EL BOCES ESTIGUI RECONTENTO----------------------
+		
 		if (lastPosition == 1)
 		{
 			

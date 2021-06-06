@@ -144,6 +144,7 @@ bool ModuleScene::Start()
 		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 110);
 		App->enemies->AddEnemy(ENEMY_TYPE::BALL_ENEMY, 495, -75);
 		
+		
 	}
 
 	return ret;

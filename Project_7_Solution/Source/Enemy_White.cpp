@@ -155,6 +155,7 @@ Enemy_White::Enemy_White(int x, int y) : Enemy(x, y)
 
 
 	collider = App->collisions->AddCollider({ 0, 0, 38, 16 }, Collider::Type::ENEMY, (Module*)App->enemies);
+	
 	//HIT = App->collisions->AddCollider({ 200, 122, 18, 16 }, Collider::Type::ENEMY_HIT, (Module*)App->enemies);
 
 	//Enemy must start with max health
@@ -240,7 +241,7 @@ void Enemy_White::Update()
 	}
 	 
 
-	//-------------------------------------------------------------------------------------------------------
+	
 
 	if (coolTime2 >= coolDown && position.y      == App->player->position.y && time <= 0 ||
 		coolTime2 >= coolDown && position.y - 26 == App->player->position.y && time <= 0)
