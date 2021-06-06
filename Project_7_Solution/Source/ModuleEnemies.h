@@ -3,7 +3,7 @@
 
 #include "Module.h"
 
-#define MAX_ENEMIES 4
+#define MAX_ENEMIES 21
 #define MAX_LIFE 5     //enemy lifes
 
 enum class ENEMY_TYPE
