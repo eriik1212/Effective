@@ -215,13 +215,14 @@ void Enemy_Boss::Update()
 			}
 
 		}
+
 		if (position.y > App->player->position.y)
 		{
 			position.y -= velociti;
 			if (position.x + 20 > App->player->position.x)
 			{
 				direcction = 0;
-				currentAnim = &rightAnimB;
+				currentAnim = &leftAnimB;
 			}
 
 
