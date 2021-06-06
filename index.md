@@ -7,7 +7,7 @@ The objective of the game is saving April O'Neil and Splinter, two iconic charac
 The gameplay mechanics are simple: an Horizontal Scrolling Interface System combined with intuitive controls that allow the player to have a complete Movement (Up, Down, Left, Right) and have two action buttons (Jump and Attack). TMNT is a 2D videogame, but due to the complete movement system and the background design, the game generates a false sentation of 3D.
 
 ### Gameplay
-_Here will be our gameplay video when it get's finished._
+[![Watch the video](https://youtu.be/6yHFrnYFqCA)
 
 ### Controls
 ```markdown
@@ -16,7 +16,6 @@ Keyboard controls
 
 - UP, DOWN, LEFT, RIGHT (Arrows) - Movement
 - X - Hit
-- Z - Jump
 
 General Controls
 
@@ -56,5 +55,5 @@ Chising Joaquin Lien Cong
 * Github: [Noche39](https://github.com/Noche39)
 
 ### For more information you can check our [wiki](https://github.com/eriik1212/Effective/wiki).
-### Download our TMNT arcade tribute's [lastest version](https://github.com/eriik1212/Effective/releases/tag/0.5).
+### Download our TMNT arcade tribute's [lastest version](https://github.com/eriik1212/Effective/releases/tag/1.0).
 ### Check our project's repository on [Github](https://github.com/eriik1212/Effective).
