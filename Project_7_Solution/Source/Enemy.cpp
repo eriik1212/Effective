@@ -6,6 +6,7 @@
 #include "ModuleAudio.h"
 #include "ModuleRender.h"
 #include "ModulePlayer.h"
+#include "Particle.h"
 
 
 Enemy::Enemy(int x, int y) : position(x, y)
