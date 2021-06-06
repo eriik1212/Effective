@@ -16,6 +16,8 @@ public:
 	float coolTime2 = 10.0f; //Knife
 	float velociti = 1.0f;
 	float time = 4.0f;
+	
+	
 
 	// The enemy is going to follow the different steps in the path
 	// Position will be updated depending on the speed defined at each step
@@ -47,6 +49,7 @@ private:
 		
 
 	//There are more animations, but for the prtotype we are not including it.
+	
 };
 
 #endif // __ENEMY_MECH_H__

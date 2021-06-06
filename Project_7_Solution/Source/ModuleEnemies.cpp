@@ -167,23 +167,39 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 					enemies[i]->texture = purple;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					enemies[i]->damageFX = enemyDamageFX;
+
+					for (int a = 0; a < MAX_LIFE; ++a) {
+						enemies[i]->lifes[a] = 1;
+					}
 					break;
 				case ENEMY_TYPE::WHITE_ENEMY:
 					enemies[i] = new Enemy_White(info.x, info.y);
 					enemies[i]->texture = white;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					enemies[i]->damageFX = enemyDamageFX;
+					for (int a = 0; a < MAX_LIFE; ++a) {
+						enemies[i]->lifes[a] = 1;
+					}
 					break;
 				case ENEMY_TYPE::ORANGE_ENEMY:
 					enemies[i] = new Enemy_Orange(info.x, info.y);
 					enemies[i]->texture = orange;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					enemies[i]->damageFX = enemyDamageFX;
+
+					for (int a = 0; a < MAX_LIFE; ++a) {
+						enemies[i]->lifes[a] = 1;
+					}
+					break;
 				case ENEMY_TYPE::BOSS_ENEMY:
 					enemies[i] = new Enemy_Boss(info.x, info.y);
 					enemies[i]->texture = boss;
 					enemies[i]->destroyedFx = enemyDestroyedFx;
 					enemies[i]->damageFX = enemyDamageFX;
+
+					for (int a = 0; a < MAX_LIFE; ++a) {
+						enemies[i]->lifes[a] = 1;
+					}
 					break;
 				case ENEMY_TYPE::BALL_ENEMY:
 					enemies[i] = new Enemy_Ball(info.x, info.y);
@@ -193,6 +209,19 @@ void ModuleEnemies::SpawnEnemy(const EnemySpawnpoint& info)
 			}
 
 			break;
+		}
+	}
+}
+void updateLifes(unsigned short* lifes, unsigned short damage)
+{
+
+	for (int i = (MAX_LIFE - 1); i >= 0; --i) {
+
+		if (*(lifes + i) == 0) {
+			++damage;
+		}
+		else if (*(lifes + i) == 1 && i >= (MAX_LIFE - damage)) {
+			*(lifes + i) = 0;
 		}
 	}
 }
@@ -209,8 +238,17 @@ void ModuleEnemies::OnCollision(Collider* c1, Collider* c2)
 			{
 				App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
 			}
+			//---------------------------------------------------------------iNTENT DE VIDES ALS ENEMICS-----------------------------------------------
+			updateLifes(enemies[i]->lifes, 1);
+			if (enemies[i]->lifes[0] == 0)
+			{
 				delete enemies[i];
 				enemies[i] = nullptr;
+			}
+			
+			
+				
+			
 
 			break;
 		}

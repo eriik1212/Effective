@@ -717,6 +717,7 @@ update_status ModulePlayer::Update()
 			currentAnimation = &hitAirAnim1R;
 
 		    App->collisions->matrix[Collider::Type::ENEMY][Collider::Type::PLAYER_SHOT] = true;
+			
 			App->audio->PlayFx(PunchMiss);
 
 			}
@@ -1938,7 +1939,7 @@ void ModulePlayer::OnCollision(Collider* c1, Collider* c2)
 		App->HUD->lifeP1.Update();
 		App->HUD->lifeP1.Update();	
 		updateLifeIndicatorPlayer1(lifesP1, 2);
-		//---------------------------------------------------------------pOSAR UNA PILA D'IFS PK EL BOCES ESTIGUI RECONTENTO----------------------
+		
 		if (lastPosition == 1)
 		{
 			
