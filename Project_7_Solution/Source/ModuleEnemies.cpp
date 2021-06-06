@@ -62,11 +62,11 @@ update_status ModuleEnemies::Update()
 
 update_status ModuleEnemies::PostUpdate()
 {
-	for (uint i = 0; i < MAX_ENEMIES; ++i)
+	/*for (uint i = 0; i < MAX_ENEMIES; ++i)
 	{
 		if (enemies[i] != nullptr)
 			enemies[i]->Draw();
-	}
+	}*/
 
 
 	App->render->Blit(App->player->fireTexture, 0, 162, &(App->player->frontFire.GetCurrentFrame()), 1); // FrontFire animation

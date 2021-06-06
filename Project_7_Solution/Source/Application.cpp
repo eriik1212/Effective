@@ -41,8 +41,8 @@ Application::Application()
 	modules[10] = sceneWin = new ModuleSceneWin(false);
 	modules[11] = sceneLose = new ModuleSceneLose(false);
 
-	modules[12] = player = new ModulePlayer(false);
-	modules[13] = particles = new ModuleParticles(true);
+	modules[12] = particles = new ModuleParticles(true);
+	modules[13] = player = new ModulePlayer(false);
 	modules[14] = enemies = new ModuleEnemies(false);
 
 	modules[15] = HUD = new ModuleHUD(false);

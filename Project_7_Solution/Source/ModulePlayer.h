@@ -142,7 +142,7 @@ public:
 		deathAnimR,
 		deathAnimL;
 
-
+	bool enemyPresence = false;
 
 	// The player's collider
 	Collider* collider = nullptr;

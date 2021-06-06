@@ -14,6 +14,8 @@
 #include "ModuleMembers.h"
 #include "ModuleSceneCharacter.h"
 #include "ModuleHUD.h"
+#include "ModuleEnemies.h"
+#include "Enemy.h"
 
 #include <stdio.h>
 
@@ -1184,6 +1186,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& blockAnim == false)
 	{
 		position.x += speed;
@@ -1202,6 +1206,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& blockAnim == false)
 	{
 
@@ -1222,6 +1228,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& blockAnim == false)
 	{
 		position.x -= speed;
@@ -1240,6 +1248,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& blockAnim == false)
 	{
 		position.x -= speed;
@@ -1258,6 +1268,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& blockAnim == false)
 	{
 		if (currentAnimation != &idleAnimR)
@@ -1274,6 +1286,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& blockAnim == false)
 	{
 		if (currentAnimation != &idleAnimR)
@@ -1290,6 +1304,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& lastPosition == 1
 	&& blockAnim == false)
 	{
@@ -1307,6 +1323,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& lastPosition == 0
 	&& blockAnim == false)
 	{
@@ -1325,6 +1343,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& blockAnim == false)
 	{
 	lastPosition = 1;
@@ -1342,6 +1362,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& blockAnim == false)
 	{
 	lastPosition = 0;
@@ -1361,6 +1383,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& lastPosition == 1
 	&& blockAnim == false)
 	{
@@ -1378,6 +1402,8 @@ update_status ModulePlayer::Update()
 	&& currentAnimation != &hitAirAnim2R
 	&& currentAnimation != &hitAirAnim1L
 	&& currentAnimation != &hitAirAnim2L
+	&& currentAnimation != &hittedBackLowAnimL
+	&& currentAnimation != &hittedBackLowAnimR
 	&& lastPosition == 0
 	&& blockAnim == false)
 	{
@@ -1499,8 +1525,6 @@ update_status ModulePlayer::Update()
 			return update_status::UPDATE_STOP;
 	}
 
-
-
 	return update_status::UPDATE_CONTINUE;
 }
 
@@ -1541,8 +1565,105 @@ update_status ModulePlayer::PostUpdate()
 				SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
 				App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
 			}
-			
+
 		}
+
+		//PAINT ENEMIES AND PLAYER
+		for (uint i = 0; i < MAX_ENEMIES; ++i)
+		{
+			if (App->enemies->enemies[i] != nullptr)
+			{
+				if (position.y <= App->enemies->enemies[i]->position.y)
+				{
+					if (position.y < 100 && App->scene->Enabled()) // PAINT PLAYER & FIRE IN LVL1
+					{
+						SDL_Rect rect = currentAnimation->GetCurrentFrame();
+						App->render->Blit(texture, position.x, position.y, &rect);
+						App->enemies->enemies[i]->Draw();
+						App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
+					}
+					else if (position.y >= 100 && App->scene->Enabled())  // PAINT PLAYER & FIRE IN LVL1
+					{
+						App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
+						SDL_Rect rect = currentAnimation->GetCurrentFrame();
+						App->render->Blit(texture, position.x, position.y, &rect);
+						App->enemies->enemies[i]->Draw();
+					}
+					else if (App->level2->Enabled()) // PAINT PLAYER IN LVL2
+					{
+						if (App->level2->countDown < 100) {
+							if (App->player->position.y < 66) {
+								SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+								App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+								App->enemies->enemies[i]->Draw();
+								App->render->Blit(App->level2->aprilTexture, App->level2->background.w / 2 - 50, 85, &(App->level2->aprilCurrentAnimation->GetCurrentFrame()), 1); // April
+							}
+							else
+							{
+								SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+								App->render->Blit(App->level2->aprilTexture, App->level2->background.w / 2 - 50, 85, &(App->level2->aprilCurrentAnimation->GetCurrentFrame()), 1); // April
+								App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+								App->enemies->enemies[i]->Draw();
+							}
+						}
+						else
+						{
+							SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+							App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+							App->enemies->enemies[i]->Draw();
+						}
+
+					}
+				}
+				else if (position.y > App->enemies->enemies[i]->position.y)
+				{
+
+					if (position.y < 100 && App->scene->Enabled()) // PAINT PLAYER & FIRE IN LVL1
+					{
+						App->enemies->enemies[i]->Draw();
+						SDL_Rect rect = currentAnimation->GetCurrentFrame();
+						App->render->Blit(texture, position.x, position.y, &rect);
+						App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
+					}
+					else if (position.y >= 100 && App->scene->Enabled())  // PAINT PLAYER & FIRE IN LVL1
+					{
+						App->render->Blit(fireTexture, 301, 135, &(smallFire.GetCurrentFrame()), 1); // SmallFire animation
+						App->enemies->enemies[i]->Draw();
+						SDL_Rect rect = currentAnimation->GetCurrentFrame();
+						App->render->Blit(texture, position.x, position.y, &rect);
+					}
+					else if (App->level2->Enabled()) // PAINT PLAYER IN LVL2
+					{
+						if (App->level2->countDown < 100) {
+							if (App->player->position.y < 66) {
+								App->enemies->enemies[i]->Draw();
+								SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+								App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+								App->render->Blit(App->level2->aprilTexture, App->level2->background.w / 2 - 50, 85, &(App->level2->aprilCurrentAnimation->GetCurrentFrame()), 1); // April
+							}
+							else
+							{
+								SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+								App->render->Blit(App->level2->aprilTexture, App->level2->background.w / 2 - 50, 85, &(App->level2->aprilCurrentAnimation->GetCurrentFrame()), 1); // April
+								App->enemies->enemies[i]->Draw();
+								App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+							}
+						}
+						else
+						{
+							App->enemies->enemies[i]->Draw();
+							SDL_Rect rect = App->player->currentAnimation->GetCurrentFrame();
+							App->render->Blit(App->player->texture, App->player->position.x, App->player->position.y, &rect); // Player
+						}
+
+					}
+				}
+			}
+
+		}
+
+
+		
 
 
 		// After Hits Animations, go back to Idle Anim

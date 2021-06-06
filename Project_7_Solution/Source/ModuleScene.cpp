@@ -140,9 +140,9 @@ bool ModuleScene::Start()
 				App->enemies->enemies[i] = nullptr;
 			}
 		}
-		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 400, 52);
+		App->enemies->AddEnemy(ENEMY_TYPE::PURPLE_ENEMY, 200, 52);
 		App->enemies->AddEnemy(ENEMY_TYPE::WHITE_ENEMY, 1150, 110);
-		App->enemies->AddEnemy(ENEMY_TYPE::BALL_ENEMY, 495, -75);
+		//App->enemies->AddEnemy(ENEMY_TYPE::BALL_ENEMY, 495, -75);
 		
 	}
 

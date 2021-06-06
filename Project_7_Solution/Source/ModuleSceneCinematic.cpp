@@ -535,7 +535,7 @@ update_status ModuleSceneCinematic::PostUpdate()
 	}
 
 
-	if (counter == 10)
+	if (counter == 30)
 	{
 		App->audio->PlayFx(Fire);
 	}
@@ -580,7 +580,7 @@ update_status ModuleSceneCinematic::PostUpdate()
 
 	if (counter > 100 && counter < 160)
 	{
-		App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 28, 120, &hangOnComment, NULL); //FireComment
+		App->render->Blit(cinematicBackground, ((SCREEN_WIDTH / 2) - (backGround.w / 2)) + 28, 120, &hangOnComment, NULL); //HangOnComment
 	}
 
 	if (counter > 160)
@@ -594,7 +594,7 @@ update_status ModuleSceneCinematic::PostUpdate()
 		App->render->Blit(cinematicBackground, 56, SCREEN_HEIGHT - 70, &(splinterCurrentAnim->GetCurrentFrame()), NULL);
 
 
-	if (counter == 20)
+	if (counter == 100)
 	{
 		App->audio->PlayFx(HangOn);
 	}
