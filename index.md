@@ -20,6 +20,7 @@ Keyboard controls
 General Controls
 
 - SPACEBAR - Next Screen
+- ENTER - Start
 - R - Restart
 
 Gamepad controls
