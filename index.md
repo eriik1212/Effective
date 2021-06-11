@@ -23,9 +23,6 @@ General Controls
 - ENTER - Start
 - R - Restart
 
-Gamepad controls
-
-Coming soon!
 
 
 ```
