@@ -44,11 +44,11 @@ Jan Carbonell Muñoz
 * Github: [JCarbonell01](https://github.com/JCarbonell01)
 
 Juan de Dios García Salguero
-* Code
+* Code/Q&A
 * Github: [Jedtra](https://github.com/Jedtra) 
 
 Chising Joaquin Lien Cong
-* Art/Q&A
+* Art
 * Github: [Noche39](https://github.com/Noche39)
 
 ### For more information you can check our [wiki](https://github.com/eriik1212/Effective/wiki).
